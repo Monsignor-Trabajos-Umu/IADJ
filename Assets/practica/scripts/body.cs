@@ -5,16 +5,16 @@ using System;
 
 public class Body : MonoBehaviour
 {
-    public float m;
-    public float ev;
-    public float mV;
-    public float o;
-    public float r;
-    public float mO;
-    public float mA;
+    public float masa;
+    public float velocidad;
+    public float vMaxima;
+    public float orientacion;
+    public float rotacion;
+    public float mRotacion;
+    public float mAceleracion;
 
-    public Vector3 vv;
-    public Vector3 a;
+    public Vector3 vVelocidad;
+    public Vector3 vAceleracion;
 
 
     private double DegreeToRadian(double angle)
@@ -47,8 +47,8 @@ public class Body : MonoBehaviour
     }
     public double PositionToAngle()
     {
-       GameObject p1 = GameObject.Find("refencia1");
-       GameObject p2 = GameObject.Find("refencia2");
+        GameObject p1 = GameObject.Find("refencia1");
+        GameObject p2 = GameObject.Find("refencia2");
 
         //Transform.position hace referencia al objeto que lo llama
         Vector3 vPersonaje = transform.position;
