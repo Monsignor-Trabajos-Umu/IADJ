@@ -16,7 +16,6 @@ public class Body : MonoBehaviour
     public Vector3 vVelocidad;
     public Vector3 vAceleracion;
 
-
     private double DegreeToRadian(double angle)
     {
         return Math.PI * angle / 180.0;
