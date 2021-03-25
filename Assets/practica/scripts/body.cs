@@ -8,13 +8,21 @@ public class Body : MonoBehaviour
     public float masa;
     public float velocidad;
     public float vMaxima;
-    public float orientacion;
-    public float rotacion;
     public float mRotacion;
     public float mAceleracion;
 
     public Vector3 vVelocidad;
     public Vector3 vAceleracion;
+    public float rotacion
+    {
+        get => transform.rotation.eulerAngles.y;
+        set
+        {
+            transform.rotation = new Quaternion();
+            transform.Rotate(Vector3.up, value);
+
+        }
+    }
 
     private double DegreeToRadian(double angle)
     {
@@ -58,20 +66,25 @@ public class Body : MonoBehaviour
 
 
     }
-    Vector3 OrientationToAngle()
+    public Vector3 OrientationToVector()
     {
         return transform.TransformDirection(Vector3.forward);
     }
 
-    double MinAngleToRotate(GameObject obj)
+    public double MinAngleToRotate(GameObject obj)
     {
         //Transform.position hace referencia al objeto que lo llama
         Vector3 pObjeto = obj.transform.position;
         Vector3 pYo = transform.position;
         Vector3 vYoObjeto = pObjeto - pYo;
-        Vector3 vYoHeading = OrientationToAngle();
+        Vector3 vYoHeading = OrientationToVector();
 
-        return Vector3.Angle(vYoHeading, vYoObjeto);
+        // Tenemos que calular ahora si el objeto esta a la "izquierda o la derecha "
+        float angle = Vector3.Angle(vYoHeading, vYoObjeto);
+        bool objectIsToTheRight = Vector3.Dot(vYoObjeto, transform.right) > 0;
+        if (!objectIsToTheRight)
+            angle = -angle;
+        return angle;
     }
     // Start is called before the first frame update
     void Start()
@@ -88,16 +101,18 @@ public class Body : MonoBehaviour
 
     // Update is called once per frame
 
+    public void printDebug()
+    {
+        Debug.Log("Orientacion Y " + this.rotacion);
+        Debug.Log("Vector " + OrientationToVector());
 
+    }
 
     void Update()
     {
         float horizontalSpeed = 2.0f;
 
-        Debug.Log("Rotacion " + transform.rotation);
-        Debug.Log("Vector " + OrientationToAngle());
-        Debug.Log("Orientacion objeto 2 " + MinAngleToRotate(GameObject.Find("Ob2")));
-
+        printDebug();
         float h = horizontalSpeed * Input.GetAxis("Mouse X");
         transform.Rotate(0, h, 0);
     }

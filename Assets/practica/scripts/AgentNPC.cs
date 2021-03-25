@@ -1,28 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public struct Steering
-{
-    public float angular;
-    public Vector3 linear;
-
-    public Steering(float newAngular, Vector3 newLinear)
-    {
-        angular = newAngular;
-        linear = newLinear;
-    }
-}
-
-
-public abstract class AgentNPC : Agent
+public class AgentNPC : Agent
 {
     public Steering miSteering;
-    public SteeringBehaviour[] listSteerings;
+    List<SteeringBehaviour> listSteerings = new List<SteeringBehaviour>();
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -34,18 +22,35 @@ public abstract class AgentNPC : Agent
     private void Awake()
     {
         //usar GetComponents<>() para cargar los SteeringBehavior del personaje
-        listSteerings = GetComponents<SteeringBehaviour>();
-        foreach(SteeringBehaviour str in listSteerings)
+        listSteerings = GetComponents<SteeringBehaviour>().ToList<SteeringBehaviour>();
+        foreach (SteeringBehaviour str in listSteerings)
         {
             str.enabled = true;
         }
     }
-     
+
     private void LateUpdate()
     {
         //Recorre la lista construida en Awake() y calcula los Steering de los SteeringBehaviour
+        List<Steering> calculatedStearing = new List<Steering>();
+        foreach (SteeringBehaviour str in listSteerings)
+        {
+            if (str.enabled)
+            {
+                this.steering = str.GetSteering(this);
+            }
+
+        }
 
     }
 
-    public abstract void ApplySteering();
+    public void ApplySteering()
+    {
+        this.vAceleracion = Vector3.zero;
+        this.vVelocidad = this.steering.velocidad;
+        float rAngulo = this.steering.angulo;
+
+        transform.position += this.vVelocidad * Time.deltaTime;
+        this.rotacion += rAngulo * Time.fixedDeltaTime;
+    }
 }
