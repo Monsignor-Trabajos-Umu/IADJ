@@ -63,7 +63,7 @@ public class Body : MonoBehaviour
         return transform.TransformDirection(Vector3.forward);
     }
 
-    double MinAngleToRotate(GameObject obj)
+    public double MinAngleToRotate(GameObject obj)
     {
         //Transform.position hace referencia al objeto que lo llama
         Vector3 pObjeto = obj.transform.position;
