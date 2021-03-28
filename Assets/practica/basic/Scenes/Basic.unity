@@ -725,7 +725,7 @@ MonoBehaviour:
   steering:
     angulo: 0
     velocidad: {x: 0, y: 0, z: 0}
-  dEbUg: 0
+  dEbUg: 1
 --- !u!1 &1293290783134103
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,8 +767,8 @@ MonoBehaviour:
   mAceleracion: 0
   vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
-  rInterior: 1
-  aInterior: 5
+  rInterior: 2
+  aInterior: 10
   steering:
     angulo: 0
     velocidad: {x: 0, y: 0, z: 0}
