@@ -13,6 +13,10 @@ public class Agent : Body
     double aInterior;
     public double AExterior { get => this.aInterior*margen; }
 
+    //Controlador
+    [SerializeField]
+    private Controlador controlador;
+
     //Stearing
     public Steering steering;
 
@@ -20,7 +24,6 @@ public class Agent : Body
 
     private const double margen = 1.1;
 
-  
 
 
 
@@ -34,15 +37,20 @@ public class Agent : Body
         //Gizmos.DrawSphere(transform.position, (float)this.);
         //Gizmos.DrawSphere(transform.position, (float)this.rInterior);
     }
+
+    private void OnMouseDown()
+    {
+        controlador.addSeleccionados(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }
