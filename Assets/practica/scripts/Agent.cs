@@ -40,12 +40,13 @@ public class Agent : Body
 
     private void OnMouseDown()
     {
-        controlador.addSeleccionados(gameObject);
+        controlador.addOquitaSeleccion(gameObject);
     }
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
+        setDefaultColor();
     }
 
     // Update is called once per frame

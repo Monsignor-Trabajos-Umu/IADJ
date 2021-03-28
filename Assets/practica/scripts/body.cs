@@ -13,6 +13,25 @@ public class Body : MonoBehaviour
 
     public Vector3 vVelocidad;
     public Vector3 vAceleracion;
+
+    private Color colorOriginal;
+
+    
+    public void cambiarColor(Color c)
+    {
+        GetComponent<Renderer>().material.color = c;
+    }
+
+    public void ponerColorOriginal()
+    {
+        GetComponent<Renderer>().material.color = colorOriginal;
+    }
+    public void setDefaultColor()
+    {
+        this.colorOriginal = GetComponent<Renderer>().material.color;
+        Debug.Log("color: " + colorOriginal);
+    }
+
     public float rotacion
     {
         get => transform.rotation.eulerAngles.y;
@@ -86,18 +105,6 @@ public class Body : MonoBehaviour
             angle = -angle;
         return angle;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        double acos = PositionToAngle();
-        Debug.Log(acos);
-
-        Debug.Log(transform.forward);
-        Debug.Log(transform.TransformDirection(Vector3.forward));
-        Debug.Log(MinAngleToRotate(GameObject.Find("Ob2")));
-
-
-    }
 
     // Update is called once per frame
 
@@ -108,13 +115,11 @@ public class Body : MonoBehaviour
 
     }
 
+   
+
     void Update()
     {
-        float horizontalSpeed = 2.0f;
-
-        printDebug();
-        float h = horizontalSpeed * Input.GetAxis("Mouse X");
-        transform.Rotate(0, h, 0);
+      
     }
 
 

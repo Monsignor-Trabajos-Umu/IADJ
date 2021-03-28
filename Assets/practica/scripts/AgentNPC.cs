@@ -7,11 +7,7 @@ public class AgentNPC : Agent
 {
     public Steering miSteering;
     List<SteeringBehaviour> listSteerings = new List<SteeringBehaviour>();
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
 
     // Update is called once per frame
     void Update()
