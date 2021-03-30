@@ -106,6 +106,21 @@ public class Body : MonoBehaviour
         return angle;
     }
 
+    public double MinAngleToRotate(Vector3 pObjeto)
+    {
+        //Transform.position hace referencia al objeto que lo llama
+        Vector3 pYo = transform.position;
+        Vector3 vYoObjeto = pObjeto - pYo;
+        Vector3 vYoHeading = OrientationToVector();
+
+        // Tenemos que calular ahora si el objeto esta a la "izquierda o la derecha "
+        float angle = Vector3.Angle(vYoHeading, vYoObjeto);
+        bool objectIsToTheRight = Vector3.Dot(vYoObjeto, transform.right) > 0;
+        if (!objectIsToTheRight)
+            angle = -angle;
+        return angle;
+    }
+
     // Update is called once per frame
 
     public void printDebug()

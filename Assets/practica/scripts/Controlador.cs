@@ -8,11 +8,12 @@ public class Controlador : MonoBehaviour
     private HashSet<GameObject> seleccionados;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         seleccionados = new HashSet<GameObject>();
     }
 
+    public HashSet<GameObject> getSeleccionados { get => seleccionados; }
     public void addOquitaSeleccion(GameObject agente)
     {
         if (seleccionados.Contains(agente))
@@ -40,7 +41,7 @@ public class Controlador : MonoBehaviour
     private void irPosicionRaton()
     {
         // Damos una orden cuando levantemos el botón del ratón.
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(1))
         {
 
             // Comprobamos si el ratón golpea a algo en el escenario.
@@ -83,6 +84,6 @@ public class Controlador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        irPosicionRaton();
     }
 }

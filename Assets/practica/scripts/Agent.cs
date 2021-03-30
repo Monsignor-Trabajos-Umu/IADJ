@@ -14,7 +14,6 @@ public class Agent : Body
     public double AExterior { get => this.aInterior*margen; }
 
     //Controlador
-    [SerializeField]
     private Controlador controlador;
 
     //Stearing
@@ -47,6 +46,7 @@ public class Agent : Body
     public virtual void Start()
     {
         setDefaultColor();
+        this.controlador = GameObject.FindGameObjectWithTag("controlador").GetComponent<Controlador>();
     }
 
     // Update is called once per frame

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - pReferencia1
+  - controlador
   layers:
   - Default
   - TransparentFX
