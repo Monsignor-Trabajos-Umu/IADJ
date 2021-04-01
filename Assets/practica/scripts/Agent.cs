@@ -16,8 +16,6 @@ public class Agent : Body
     //Controlador
     private Controlador controlador;
 
-    //Stearing
-    public Steering steering;
 
     public bool dEbUg = false;
 
@@ -42,6 +40,10 @@ public class Agent : Body
         controlador.addOquitaSeleccion(gameObject);
     }
 
+    public void ArrivedToTarget()
+    {
+        controlador.addOquitaSeleccion(gameObject);
+    }
     // Start is called before the first frame update
     public virtual void Start()
     {

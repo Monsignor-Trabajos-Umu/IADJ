@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class AgentNPC : Agent
 {
     public Steering miSteering;
+   
     List<SteeringBehaviour> listSteerings = new List<SteeringBehaviour>();
+    bool targetExist;
+    private Steering goToTargetSteering;
 
 
     // Update is called once per frame
@@ -23,30 +27,74 @@ public class AgentNPC : Agent
         {
             str.enabled = true;
         }
+        targetExist = false;
+        miSteering = new Steering(0, new Vector3(0, 0, 0));
+        goToTargetSteering = new Steering(0, new Vector3(0, 0, 0));
     }
 
     private void LateUpdate()
     {
+
         //Recorre la lista construida en Awake() y calcula los Steering de los SteeringBehaviour
+       
         List<Steering> calculatedStearing = new List<Steering>();
+        miSteering = new Steering(0, new Vector3(0, 0, 0));
+        goToTargetSteering = new Steering(0, new Vector3(0, 0, 0));
         foreach (SteeringBehaviour str in listSteerings)
         {
             if (str.enabled)
             {
-                this.steering = str.GetSteering(this);
-            }
+                if (str is GoTarget)
+                {
+                    GoTarget temp = (GoTarget)str;
+                    this.targetExist = temp.targetExists;
+                    this.goToTargetSteering = temp.GetSteering(this);
 
+                }
+                else
+                {
+                    Steering temp = str.GetSteering(this);
+                    miSteering.lineal += temp.lineal;
+                    miSteering.angular += temp.angular;
+                }
+              
+            }
         }
+        
 
     }
 
     public void ApplySteering()
     {
-        this.vAceleracion = Vector3.zero;
-        this.vVelocidad = this.steering.velocidad;
-        float rAngulo = this.steering.angulo;
-
-        transform.position += this.vVelocidad * Time.deltaTime;
-        this.rotacion += rAngulo * Time.fixedDeltaTime;
+        if (!targetExist)
+            updateAcelerated(miSteering, Time.deltaTime);
+        else
+            updateNoAcelerated(goToTargetSteering, Time.deltaTime);
     }
+
+
+    private void updateAcelerated(Steering steering, float time)
+    {
+        transform.position = transform.position + this.vVelocidad*time;
+        //this.orientacion = this.orientacion + this.rotacionn * time;
+        this.vVelocidad = this.vVelocidad + steering.lineal * time;
+        this.vAceleracion = steering.lineal;
+        if(this.vVelocidad.magnitude > this.mVelocidad)
+        {
+            this.vVelocidad.Normalize();
+            this.vVelocidad *= this.mVelocidad;
+        }
+        //this.rotacionn = this.rotacionn + steering.angular * time;
+
+        this.orientacion = this.orientacion + steering.angular * time;
+    }
+   
+    private void updateNoAcelerated(Steering steering, float time)
+    {
+        transform.position = transform.position + steering.velocidad * time;
+        this.orientacion = this.orientacion + steering.rotacion * time;
+
+    }
+
+
 }

@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-/*
-public class SeekVelocity : SteeringBehaviour
+
+public class Seek : SteeringBehaviour
 {
     public override Steering GetSteering(AgentNPC miAgente)
     {
         this.steering = new Steering(0, new Vector3(0, 0, 0));
 
-        Vector3 myPosition = miAgente.transform.position;
-        Vector3 targetPosition = this.target.transform.position;
-
-        float distancia = Vector3.Distance(myPosition, targetPosition);
-
+        // Full Aceleration
+        float distancia = Vector3.Distance(miAgente.transform.position, target.transform.position);
         if (distancia > miAgente.rExterior)
-            this.steering.velocidad = Vector3.ClampMagnitude(targetPosition - myPosition,
-                miAgente.mVelocidad);
+        {
+
+            steering.lineal = target.transform.position - miAgente.transform.position;
+            steering.lineal.Normalize();
+            steering.lineal *= miAgente.mAceleracion;
+        }
+        steering.angular = 0;
+      
         double angle = miAgente.MinAngleToRotate(target.gameObject);
 
 
         if (Math.Abs(angle) >= Math.Abs(miAgente.AExterior))
         {
-            this.steering.rotacion = (float)angle;
+            this.steering.angular = (float)angle;
         }
         return this.steering;
     }
@@ -39,4 +42,3 @@ public class SeekVelocity : SteeringBehaviour
 
     }
 }
-*/
