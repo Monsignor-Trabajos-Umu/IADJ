@@ -80,12 +80,16 @@ public class AgentNPC : Agent
         {
             this.vVelocidad = new Vector3(0, 0, 0);
         }
+        if (steering.angular == 0)
+        {
+            this.rotacion = 0;
+        }
 
         transform.position = transform.position + this.vVelocidad * time;
-        this.orientacion = this.orientacion + this.rotacionn * time;
+        this.orientacion = this.orientacion + this.rotacion * time;
 
         this.vVelocidad = this.vVelocidad + steering.lineal * time;
-        this.rotacionn = this.rotacionn + steering.angular * time;
+        this.rotacion = this.rotacion + steering.angular * time;
 
     }
 

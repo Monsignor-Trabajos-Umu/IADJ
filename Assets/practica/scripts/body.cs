@@ -11,27 +11,29 @@ public class Body : MonoBehaviour
     public float velocidad;
     public float mVelocidad;
     // public Vector3 posicion; == transform.position
-    public float orientacion 
-    { 
+    public float orientacion
+    {
         get => transform.rotation.eulerAngles.y;
-        set {
+        set
+        {
             transform.rotation = new Quaternion();
             transform.Rotate(Vector3.up, value);
         }
     }
-    public float rotacionn;
+    public float rotacion;
     public float mRotacion;
+    public float mAngularAceleracion;
     public float mAceleracion;
-    
+
     // Vector
     public Vector3 vVelocidad;
     public Vector3 vAceleracion;
 
-    
+
 
     private Color colorOriginal;
 
-    
+
     public void cambiarColor(Color c)
     {
         GetComponent<Renderer>().material.color = c;
@@ -48,7 +50,7 @@ public class Body : MonoBehaviour
         Debug.Log("color: " + colorOriginal);
     }
 
-   
+
 
     private double DegreeToRadian(double angle)
     {
@@ -137,11 +139,11 @@ public class Body : MonoBehaviour
 
     }
 
-   
+
 
     void Update()
     {
-      
+
     }
 
 

@@ -31,7 +31,7 @@ public class GoTarget : SteeringBehaviour
 
         }
         double angle = miAgente.MinAngleToRotate(targetPosition);
-        if (Math.Abs(angle) >= Math.Abs(miAgente.AExterior))
+        if (Math.Abs(angle) >= Math.Abs(miAgente.aExterior))
         {
             this.steering.rotacion = (float)angle;
         }

@@ -10,8 +10,8 @@ public class Agent : Body
     public double rExterior { get => this.rInterior * margen; }
     //Angulos
     [SerializeField]
-    double aInterior;
-    public double AExterior { get => this.aInterior*margen; }
+    public double aInterior;
+    public double aExterior { get => this.aInterior * margen; }
 
     //Controlador
     private Controlador controlador;
@@ -54,6 +54,6 @@ public class Agent : Body
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
