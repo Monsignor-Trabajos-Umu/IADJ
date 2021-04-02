@@ -7,7 +7,7 @@ using System;
 public class AgentNPC : Agent
 {
     public Steering miSteering;
-   
+
     List<SteeringBehaviour> listSteerings = new List<SteeringBehaviour>();
     bool targetExist;
     private Steering goToTargetSteering;
@@ -36,7 +36,7 @@ public class AgentNPC : Agent
     {
 
         //Recorre la lista construida en Awake() y calcula los Steering de los SteeringBehaviour
-       
+
         List<Steering> calculatedStearing = new List<Steering>();
         miSteering = new Steering(0, new Vector3(0, 0, 0));
         goToTargetSteering = new Steering(0, new Vector3(0, 0, 0));
@@ -57,10 +57,10 @@ public class AgentNPC : Agent
                     miSteering.lineal += temp.lineal;
                     miSteering.angular += temp.angular;
                 }
-              
+
             }
         }
-        
+
 
     }
 
@@ -75,20 +75,20 @@ public class AgentNPC : Agent
 
     private void updateAcelerated(Steering steering, float time)
     {
-        transform.position = transform.position + this.vVelocidad*time;
-        //this.orientacion = this.orientacion + this.rotacionn * time;
-        this.vVelocidad = this.vVelocidad + steering.lineal * time;
-        this.vAceleracion = steering.lineal;
-        if(this.vVelocidad.magnitude > this.mVelocidad)
-        {
-            this.vVelocidad.Normalize();
-            this.vVelocidad *= this.mVelocidad;
-        }
-        //this.rotacionn = this.rotacionn + steering.angular * time;
 
-        this.orientacion = this.orientacion + steering.angular * time;
+        if (Vector3.Distance(steering.lineal, new Vector3(0, 0, 0)) == 0)
+        {
+            this.vVelocidad = new Vector3(0, 0, 0);
+        }
+
+        transform.position = transform.position + this.vVelocidad * time;
+        this.orientacion = this.orientacion + this.rotacionn * time;
+
+        this.vVelocidad = this.vVelocidad + steering.lineal * time;
+        this.rotacionn = this.rotacionn + steering.angular * time;
+
     }
-   
+
     private void updateNoAcelerated(Steering steering, float time)
     {
         transform.position = transform.position + steering.velocidad * time;

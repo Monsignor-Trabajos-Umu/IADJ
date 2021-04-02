@@ -6,7 +6,7 @@ public class Agent : Body
 {
     //Radio
     [SerializeField]
-    double rInterior;
+    public double rInterior;
     public double rExterior { get => this.rInterior * margen; }
     //Angulos
     [SerializeField]
