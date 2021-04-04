@@ -1,13 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class Aling : SteeringBehaviour
+public class AntiAling : SteeringBehaviour
 {
     public override Steering GetSteering(AgentNPC miAgente)
     {
-
         float maxAngularAcceleration = miAgente.mAngularAceleracion;
         float maxRotation = miAgente.mRotacion;
 
@@ -22,12 +21,13 @@ public class Aling : SteeringBehaviour
 
         // Obtenemos la rotacion hacie el objetivo
 
-        float rotation = (float)miAgente.MinAngleToRotate(target.gameObject);
+        float rotation = (float)miAgente.MinAngleToRotate180(target.gameObject);
         float rotationSize = Math.Abs(rotation);
         // Si ya estamos mirando no devolvemos stearing
         if (rotationSize < targetRadius)
             return steering;
         // Si estamos fuera del slowRaidus vamos a maxima rotacion
+
         float targetRotation = (rotationSize < slowRadius) ? maxRotation : maxRotation * rotationSize / slowRadius;
         //Combinamos la velocidad con la direccion
         targetRotation *= rotation / rotationSize;
@@ -47,7 +47,7 @@ public class Aling : SteeringBehaviour
         }
 
         steering.lineal = new Vector3(0, 0, 0);
-        return this.steering;
-    }
 
+        return steering;
+    }
 }

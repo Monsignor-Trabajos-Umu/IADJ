@@ -99,14 +99,8 @@ public class Body : MonoBehaviour
         return transform.TransformDirection(Vector3.forward);
     }
 
-    public double MinAngleToRotate(GameObject obj)
+    private double CalculateAngleToRate(Vector3 vYoHeading, Vector3 vYoObjeto)
     {
-        //Transform.position hace referencia al objeto que lo llama
-        Vector3 pObjeto = obj.transform.position;
-        Vector3 pYo = transform.position;
-        Vector3 vYoObjeto = pObjeto - pYo;
-        Vector3 vYoHeading = OrientationToVector();
-
         // Tenemos que calular ahora si el objeto esta a la "izquierda o la derecha "
         float angle = Vector3.Angle(vYoHeading, vYoObjeto);
         bool objectIsToTheRight = Vector3.Dot(vYoObjeto, transform.right) > 0;
@@ -122,13 +116,34 @@ public class Body : MonoBehaviour
         Vector3 vYoObjeto = pObjeto - pYo;
         Vector3 vYoHeading = OrientationToVector();
 
-        // Tenemos que calular ahora si el objeto esta a la "izquierda o la derecha "
-        float angle = Vector3.Angle(vYoHeading, vYoObjeto);
-        bool objectIsToTheRight = Vector3.Dot(vYoObjeto, transform.right) > 0;
-        if (!objectIsToTheRight)
-            angle = -angle;
-        return angle;
+        return CalculateAngleToRate(vYoHeading, vYoObjeto);
     }
+    public double MinAngleToRotate(GameObject obj)
+    {
+        return MinAngleToRotate(obj.transform.position);
+    }
+
+
+
+    /* Calcula el minimo angulo para darle la "espalda" al objeto
+     *  Es igual que MinAngleToRotate pero aplicamos una matriz de
+     *  transformacion de 180
+     */
+    public double MinAngleToRotate180(GameObject obj)
+    {
+        //Transform.position hace referencia al objeto que lo llama
+        Vector3 pObjeto = obj.transform.position;
+        Vector3 pYo = transform.position;
+        Vector3 vYoObjeto = pObjeto - pYo;
+        vYoObjeto.x *= -1; // -1  0  0 
+        vYoObjeto.y *= 1;  //  0  1  0
+        vYoObjeto.z *= -1; //  0  0 -1
+        Vector3 vYoHeading = OrientationToVector();
+
+        return CalculateAngleToRate(vYoHeading, vYoObjeto);
+    }
+
+
 
     // Update is called once per frame
 
