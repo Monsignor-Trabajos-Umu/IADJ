@@ -10,11 +10,12 @@ public class AgentPlayer : Agent
         Vector3 Velocity = (new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))) * this.mVelocidad;
         transform.Translate(Velocity * Time.deltaTime, Space.World);
         transform.LookAt(transform.position + Velocity);
+        this.vVelocidad = Velocity;
         //this.Orientacion = transform.rotation.eulerAngles.y;
 
     }
     // Start is called before the first frame update
-  
+
 
     // Update is called once per frame
     void Update()
