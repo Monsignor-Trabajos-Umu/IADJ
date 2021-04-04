@@ -5,21 +5,39 @@ using System;
 
 public class Body : MonoBehaviour
 {
+
+    // Escalar 
     public float masa;
     public float velocidad;
-    public float vMaxima;
+    public float mVelocidad;
+    // public Vector3 posicion; == transform.position
+    public float orientacion
+    {
+        get => transform.rotation.eulerAngles.y;
+        set
+        {
+            transform.rotation = new Quaternion();
+            transform.Rotate(Vector3.up, value);
+        }
+    }
+    public float rotacion;
     public float mRotacion;
+    public float mAngularAceleracion;
     public float mAceleracion;
 
+    // Vector
     public Vector3 vVelocidad;
     public Vector3 vAceleracion;
 
+
+
     private Color colorOriginal;
 
-    
+
     public void cambiarColor(Color c)
     {
         GetComponent<Renderer>().material.color = c;
+
     }
 
     public void ponerColorOriginal()
@@ -32,16 +50,7 @@ public class Body : MonoBehaviour
         Debug.Log("color: " + colorOriginal);
     }
 
-    public float rotacion
-    {
-        get => transform.rotation.eulerAngles.y;
-        set
-        {
-            transform.rotation = new Quaternion();
-            transform.Rotate(Vector3.up, value);
 
-        }
-    }
 
     private double DegreeToRadian(double angle)
     {
@@ -90,14 +99,8 @@ public class Body : MonoBehaviour
         return transform.TransformDirection(Vector3.forward);
     }
 
-    public double MinAngleToRotate(GameObject obj)
+    private double CalculateAngleToRate(Vector3 vYoHeading, Vector3 vYoObjeto)
     {
-        //Transform.position hace referencia al objeto que lo llama
-        Vector3 pObjeto = obj.transform.position;
-        Vector3 pYo = transform.position;
-        Vector3 vYoObjeto = pObjeto - pYo;
-        Vector3 vYoHeading = OrientationToVector();
-
         // Tenemos que calular ahora si el objeto esta a la "izquierda o la derecha "
         float angle = Vector3.Angle(vYoHeading, vYoObjeto);
         bool objectIsToTheRight = Vector3.Dot(vYoObjeto, transform.right) > 0;
@@ -113,28 +116,49 @@ public class Body : MonoBehaviour
         Vector3 vYoObjeto = pObjeto - pYo;
         Vector3 vYoHeading = OrientationToVector();
 
-        // Tenemos que calular ahora si el objeto esta a la "izquierda o la derecha "
-        float angle = Vector3.Angle(vYoHeading, vYoObjeto);
-        bool objectIsToTheRight = Vector3.Dot(vYoObjeto, transform.right) > 0;
-        if (!objectIsToTheRight)
-            angle = -angle;
-        return angle;
+        return CalculateAngleToRate(vYoHeading, vYoObjeto);
     }
+    public double MinAngleToRotate(GameObject obj)
+    {
+        return MinAngleToRotate(obj.transform.position);
+    }
+
+
+
+    /* Calcula el minimo angulo para darle la "espalda" al objeto
+     *  Es igual que MinAngleToRotate pero aplicamos una matriz de
+     *  transformacion de 180
+     */
+    public double MinAngleToRotate180(GameObject obj)
+    {
+        //Transform.position hace referencia al objeto que lo llama
+        Vector3 pObjeto = obj.transform.position;
+        Vector3 pYo = transform.position;
+        Vector3 vYoObjeto = pObjeto - pYo;
+        vYoObjeto.x *= -1; // -1  0  0 
+        vYoObjeto.y *= 1;  //  0  1  0
+        vYoObjeto.z *= -1; //  0  0 -1
+        Vector3 vYoHeading = OrientationToVector();
+
+        return CalculateAngleToRate(vYoHeading, vYoObjeto);
+    }
+
+
 
     // Update is called once per frame
 
     public void printDebug()
     {
-        Debug.Log("Orientacion Y " + this.rotacion);
+        Debug.Log("Orientacion Y " + this.orientacion);
         Debug.Log("Vector " + OrientationToVector());
 
     }
 
-   
+
 
     void Update()
     {
-      
+
     }
 
 

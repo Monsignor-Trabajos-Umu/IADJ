@@ -6,18 +6,16 @@ public class Agent : Body
 {
     //Radio
     [SerializeField]
-    double rInterior;
+    public double rInterior;
     public double rExterior { get => this.rInterior * margen; }
     //Angulos
     [SerializeField]
-    double aInterior;
-    public double AExterior { get => this.aInterior*margen; }
+    public double aInterior;
+    public double aExterior { get => this.aInterior * margen; }
 
     //Controlador
     private Controlador controlador;
 
-    //Stearing
-    public Steering steering;
 
     public bool dEbUg = false;
 
@@ -42,6 +40,10 @@ public class Agent : Body
         controlador.addOquitaSeleccion(gameObject);
     }
 
+    public void ArrivedToTarget()
+    {
+        controlador.addOquitaSeleccion(gameObject);
+    }
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -52,6 +54,6 @@ public class Agent : Body
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -20,4 +20,5 @@ public abstract class SteeringBehaviour : MonoBehaviour
 
     //Calcula el Steering para el agente dado en funcion del comportamiento deseado
     public abstract Steering GetSteering(AgentNPC agent);
+
 }

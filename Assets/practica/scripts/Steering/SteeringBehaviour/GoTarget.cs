@@ -6,7 +6,7 @@ using System;
 public class GoTarget : SteeringBehaviour
 {
     Vector3 targetPosition;
-    Boolean targetExists;
+    public bool targetExists;
     public override Steering GetSteering(AgentNPC miAgente)
     {
         this.steering = new Steering(0, new Vector3(0, 0, 0));
@@ -21,18 +21,19 @@ public class GoTarget : SteeringBehaviour
         if (distancia > miAgente.rExterior)
         {
             this.steering.velocidad = Vector3.ClampMagnitude(targetPosition - myPosition,
-                miAgente.vMaxima);
+                miAgente.mVelocidad);
         }
         else
         {
             // Si estamos en la posicion +- ponemos a false el flag
             targetExists = false;
+            miAgente.ArrivedToTarget();
 
         }
         double angle = miAgente.MinAngleToRotate(targetPosition);
-        if (Math.Abs(angle) >= Math.Abs(miAgente.AExterior))
+        if (Math.Abs(angle) >= Math.Abs(miAgente.aExterior))
         {
-            this.steering.angulo = (float)angle;
+            this.steering.rotacion = (float)angle;
         }
         return this.steering;
     }

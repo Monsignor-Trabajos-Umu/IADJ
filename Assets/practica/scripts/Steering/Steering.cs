@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public struct Steering
 {
-    [SerializeField]
-    public float angulo;
-    [SerializeField]
-    public Vector3 velocidad;
-    public Steering(float angulo, Vector3 velocidad)
+    public float angular;// O rotacion
+    public Vector3 lineal; // O velocidad
+
+    public float rotacion { get => angular; set => angular = value; }
+    public Vector3 velocidad { get => lineal; set => lineal = value; }
+
+    public Steering(float angular, Vector3 lineal)
     {
-        this.angulo = angulo;
-        this.velocidad = velocidad;
+        this.angular = angular;
+        this.lineal = lineal;
     }
 
-    public override string ToString() => $"( Angulo = {angulo} | Velocidad = {velocidad})";
+    public override string ToString() => $"( Angular = {angular} | Lineal = {angular})";
 }
