@@ -89,6 +89,7 @@ public class AgentNPC : Agent
         this.orientacion = this.orientacion + this.rotacion * time;
 
         this.vVelocidad = this.vVelocidad + steering.lineal * time;
+        this.vAceleracion = steering.lineal;
         this.rotacion = this.rotacion + steering.angular * time;
 
     }

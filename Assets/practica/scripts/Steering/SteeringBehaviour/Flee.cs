@@ -11,10 +11,9 @@ public class Flee : SteeringBehaviour
 
         // Full Aceleration
 
-        steering.lineal = target.transform.position - miAgente.transform.position;
+        steering.lineal = miAgente.transform.position - target.transform.position;
         steering.lineal.Normalize();
         steering.lineal *= miAgente.mAceleracion;
-        steering.lineal = -steering.lineal; 
 
         steering.angular = 0;
 

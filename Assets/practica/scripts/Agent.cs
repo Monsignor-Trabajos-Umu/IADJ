@@ -18,11 +18,17 @@ public class Agent : Body
 
 
     public bool dEbUg = false;
-
     private const double margen = 1.1;
 
 
 
+    public Agent notSoShallowCopy()
+    {
+        Agent fastAnget = new Agent();
+        fastAnget.transform.position = this.transform.position;
+        fastAnget.orientacion = this.orientacion;
+        return fastAnget;
+    }
 
     private void OnDrawGizmos() // Gizmo: una línea en la dirección del objetivo
     {
