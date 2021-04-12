@@ -10,22 +10,13 @@ public class Flee : SteeringBehaviour
         this.steering = new Steering(0, new Vector3(0, 0, 0));
 
         // Full Aceleration
-
-        steering.lineal = miAgente.transform.position - target.transform.position;
+        Vector3 position = this.usePredicted ? this.predictedPosition : target.transform.position;
+        steering.lineal = miAgente.transform.position - position;
         steering.lineal.Normalize();
         steering.lineal *= miAgente.mAceleracion;
 
         steering.angular = 0;
 
-        /* Anti Aling ?
-            double angle = miAgente.MinAngleToRotate(target.gameObject);
-
-
-            if (Math.Abs(angle) >= Math.Abs(miAgente.AExterior))
-            {
-                this.steering.angular = (float)angle -180;
-            }
-        */
         return this.steering;
     }
 

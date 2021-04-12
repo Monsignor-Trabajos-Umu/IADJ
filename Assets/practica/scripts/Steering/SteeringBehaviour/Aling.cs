@@ -21,8 +21,15 @@ public class Aling : SteeringBehaviour
         this.steering = new Steering(0, new Vector3(0, 0, 0));
 
         // Obtenemos la rotacion hacie el objetivo
-
-        float rotation = (float)miAgente.MinAngleToRotate(target.gameObject);
+        float rotation;
+        if (this.usePredicted)
+        {
+            rotation = this.preditedRotation;
+        }
+        else
+        {
+            rotation = (float)miAgente.MinAngleToRotate(target.gameObject);
+        }
         float rotationSize = Math.Abs(rotation);
         // Si ya estamos mirando no devolvemos stearing
         if (rotationSize < targetRadius)

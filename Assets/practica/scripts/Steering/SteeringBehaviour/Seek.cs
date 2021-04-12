@@ -11,21 +11,14 @@ public class Seek : SteeringBehaviour
 
         // Full Aceleration Seek a tope
 
-        steering.lineal = target.transform.position - miAgente.transform.position;
+
+        Vector3 position = this.usePredicted ? this.predictedPosition : target.transform.position;
+
+        steering.lineal = position - miAgente.transform.position;
         steering.lineal.Normalize();
         steering.lineal *= miAgente.mAceleracion;
-        
+
         steering.angular = 0;
-      
-        /* Aling
-            double angle = miAgente.MinAngleToRotate(target.gameObject);
-
-
-            if (Math.Abs(angle) >= Math.Abs(miAgente.AExterior))
-            {
-                this.steering.angular = (float)angle;
-            }
-        */
         return this.steering;
     }
 

@@ -2883,7 +2883,6 @@ GameObject:
   - component: {fileID: 1956971803}
   - component: {fileID: 1956971802}
   - component: {fileID: 1956971800}
-  - component: {fileID: 1956971801}
   m_Layer: 0
   m_Name: npc3
   m_TagString: Untagged
@@ -2916,31 +2915,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956971798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a4d28adc268b4469ec1a8a71de79b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1293290123713329}
+  target: {fileID: 0}
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
---- !u!114 &1956971801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956971798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffe40e78b7a82b44f86ca87063d1e540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1293290123713329}
-  steering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  maxPrediction: 0.00001
-  explicitTarget: {fileID: 0}
+  wanderOffset: 1
+  wanderRadius: 10
+  wanderRate: 40
+  wanderOrientation: 0
+  maxAcceleration: 0.86
 --- !u!114 &1956971802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2972,11 +2958,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masa: 0
   velocidad: 0
-  mVelocidad: 2
+  mVelocidad: 5
   rotacion: 0
   mRotacion: 360
-  mAngularAceleracion: 90
-  mAceleracion: 1
+  mAngularAceleracion: 180
+  mAceleracion: 5
   vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
   rInterior: 2
@@ -3587,8 +3573,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293290123713328}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54.14, y: 2, z: 53.99}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 54.14042, y: 1.9999996, z: 53.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4665909736848308}

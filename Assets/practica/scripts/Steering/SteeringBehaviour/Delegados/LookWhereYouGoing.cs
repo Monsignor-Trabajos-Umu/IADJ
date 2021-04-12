@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Face : Aling
+public class LookWhereYouGoing : Aling
 {
-    [Range(0.0f, 10.0f)]
-    public float maxPrediction;
+
 
     public override Steering GetSteering(AgentNPC miAgente)
     {
@@ -17,25 +16,14 @@ public class Face : Aling
             return steering;
 
         // TODO
-        //this.preditedOrientation = (float)Math.Atan2(-direction.x, direction.z);
+        Vector3 predictedPosition = target.transform.position + target.vVelocidad;
+        this.preditedRotation = (float)miAgente.MinAngleToRotate(predictedPosition);
         this.usePredicted = true;
 
 
 
 
         return base.GetSteering(miAgente);
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 }

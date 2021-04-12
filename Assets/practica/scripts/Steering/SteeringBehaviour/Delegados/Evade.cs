@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Evade : SteeringBehaviour
+public class Evade : Flee
 {
 
     public float maxPrediction;
-
     public override Steering GetSteering(AgentNPC miAgente)
     {
         // Vamosa  crear un nuevo target en la posicion donde estaria nuestro target
@@ -21,30 +20,14 @@ public class Evade : SteeringBehaviour
         float prediction = (speed <= distance / maxPrediction) ? maxPrediction : distance / speed;
 
         // NO Puedo usar el target porque va asignado a otro objecto
-        //base.target = explicitTarget;
-        // base.target.transform.position += explicitTarget.vVelocidad * prediction;
 
+        this.predictedPosition = target.transform.position;
 
-        this.steering = new Steering(0, new Vector3(0, 0, 0));
+        this.predictedPosition += target.vVelocidad * prediction;
 
-        // Full Aceleration Seek a tope
+        this.usePredicted = true;
 
-        Vector3 position = target.transform.position + target.vVelocidad * prediction;
-
-
-        this.steering = new Steering(0, new Vector3(0, 0, 0));
-
-        // Full Aceleration
-
-        steering.lineal = miAgente.transform.position - position;
-        steering.lineal.Normalize();
-        steering.lineal *= miAgente.mAceleracion;
-
-        steering.angular = 0;
-
-
-
-        return steering;
+        return base.GetSteering(miAgente);
 
     }
 

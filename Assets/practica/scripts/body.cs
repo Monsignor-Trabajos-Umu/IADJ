@@ -20,6 +20,7 @@ public class Body : MonoBehaviour
             transform.Rotate(Vector3.up, value);
         }
     }
+
     public float rotacion;
     public float mRotacion;
     public float mAngularAceleracion;

@@ -85,12 +85,31 @@ public class AgentNPC : Agent
             this.rotacion = 0;
         }
 
+
+
         transform.position = transform.position + this.vVelocidad * time;
         this.orientacion = this.orientacion + this.rotacion * time;
 
         this.vVelocidad = this.vVelocidad + steering.lineal * time;
+
+        // Si vamos mas rapido que la velicidad maxima reducimos
+        if (this.vVelocidad.magnitude > this.mVelocidad)
+        {
+            this.vVelocidad.Normalize();
+            this.vVelocidad *= this.mVelocidad;
+        }
+
         this.vAceleracion = steering.lineal;
+
+        if (this.vAceleracion.magnitude > this.mAceleracion)
+        {
+            this.vAceleracion.Normalize();
+            this.vAceleracion *= this.mAceleracion;
+        }
+        //TODO
         this.rotacion = this.rotacion + steering.angular * time;
+
+
 
     }
 

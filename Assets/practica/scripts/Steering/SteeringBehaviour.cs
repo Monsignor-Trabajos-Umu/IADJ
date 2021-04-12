@@ -5,6 +5,10 @@ using UnityEngine;
 public abstract class SteeringBehaviour : MonoBehaviour
 {
     public Agent target;
+    // Usamos estas dos variables para evitarnos modificar el transform
+    protected Vector3 predictedPosition;
+    protected float preditedRotation = 0f;
+    protected bool usePredicted = false;
     public Steering steering;
     // Start is called before the first frame update
     void Start()
