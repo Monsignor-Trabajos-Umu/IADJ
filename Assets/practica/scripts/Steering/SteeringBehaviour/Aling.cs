@@ -5,6 +5,7 @@ using System;
 
 public class Aling : SteeringBehaviour
 {
+    protected float timeToTarget = 0.1f;
     public override Steering GetSteering(AgentNPC miAgente)
     {
 
@@ -14,8 +15,6 @@ public class Aling : SteeringBehaviour
         // Radio para llegar al objetivo
         float targetRadius = (float)miAgente.aInterior;
         float slowRadius = (float)miAgente.aExterior;
-
-        float timeToTarget = 0.1f;
 
         // Empty Stering
         this.steering = new Steering(0, new Vector3(0, 0, 0));

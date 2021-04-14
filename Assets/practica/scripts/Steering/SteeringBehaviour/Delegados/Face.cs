@@ -5,6 +5,7 @@ using System;
 
 public class Face : Aling
 {
+    // Quiero que mi agente mire hacia delante
     [Range(0.0f, 10.0f)]
     public float maxPrediction;
 

@@ -2922,11 +2922,10 @@ MonoBehaviour:
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  wanderOffset: 1
-  wanderRadius: 10
-  wanderRate: 40
+  wanderRate: 91.8
   wanderOrientation: 0
-  maxAcceleration: 0.86
+  wanderStep: 11.7
+  wanderWait: 10
 --- !u!114 &1956971802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2958,7 +2957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masa: 0
   velocidad: 0
-  mVelocidad: 5
+  mVelocidad: 1
   rotacion: 0
   mRotacion: 360
   mAngularAceleracion: 180
