@@ -6,6 +6,21 @@ using System;
 public class Aling : SteeringBehaviour
 {
     protected float timeToTarget = 0.1f;
+
+    private float mapToRange(float grados)
+    {
+        // Esta rotacion puede ser superior a 360 grados asique la modulo 
+        grados = grados % 360;
+        // Ahora puede estar entre -360 y 360 vamos a hacer que este entre -180 y 180;
+        if (Math.Abs(grados) <= 180)
+            return grados;
+        else
+        {
+            float mapped = Math.Abs(grados) - 360;
+            mapped *= Math.Sign(grados);
+            return mapped;
+        }
+    }
     public override Steering GetSteering(AgentNPC miAgente)
     {
 
@@ -27,14 +42,18 @@ public class Aling : SteeringBehaviour
         }
         else
         {
-            rotation = (float)miAgente.MinAngleToRotate(target.gameObject);
+            // Calculo la rotacion para que mi Agente tenga la misma que el target
+            rotation = target.orientacion - miAgente.orientacion;
+            // Hago que este entre -180 y 180
+            rotation = mapToRange(rotation);
+
         }
         float rotationSize = Math.Abs(rotation);
         // Si ya estamos mirando no devolvemos stearing
         if (rotationSize < targetRadius)
             return steering;
         // Si estamos fuera del slowRaidus vamos a maxima rotacion
-        float targetRotation = (rotationSize < slowRadius) ? maxRotation : maxRotation * rotationSize / slowRadius;
+        float targetRotation = (rotationSize > slowRadius) ? maxRotation : maxRotation * rotationSize / slowRadius;
         //Combinamos la velocidad con la direccion
         targetRotation *= rotation / rotationSize;
 

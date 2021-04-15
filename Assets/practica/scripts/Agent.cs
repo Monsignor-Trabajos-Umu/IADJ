@@ -11,7 +11,17 @@ public class Agent : Body
     //Angulos
     [SerializeField]
     public double aInterior;
-    public double aExterior { get => this.aInterior * margen; }
+    [SerializeField]
+    private double mAExterior = 0;
+    public double aExterior
+    {
+        get
+        {
+            double aTemp = this.aInterior * margen;
+            return (aTemp < mAExterior) ? mAExterior : aTemp;
+
+        }
+    }
 
     //Controlador
     private Controlador controlador;
