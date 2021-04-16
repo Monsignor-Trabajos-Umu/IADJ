@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Agent : Body
 {
+    private const double margen = 1.1;
     //Radio
     [SerializeField]
     public double rInterior;
@@ -25,12 +26,7 @@ public class Agent : Body
 
     //Controlador
     private Controlador controlador;
-
-
     public bool dEbUg = false;
-    private const double margen = 1.1;
-
-
 
     public Agent notSoShallowCopy()
     {

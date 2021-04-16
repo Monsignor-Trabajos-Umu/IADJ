@@ -24,7 +24,7 @@ public class WallAvoidance : Seek
 
 
 
-        Debug.DrawRay(miAgente.transform.position, Quaternion.AngleAxis(30, Vector3.up) * (rayVector.normalized * lookAhead), Color.blue);
+        Debug.DrawRay(miAgente.transform.position, rayVector.normalized * lookAhead, Color.blue);
         RaycastHit hit;
         //Debug.DrawRay(miAgente.transform.position, rayVector, Color.blue);
         if (Physics.Raycast(miAgente.transform.position, rayVector, out hit, lookAhead))

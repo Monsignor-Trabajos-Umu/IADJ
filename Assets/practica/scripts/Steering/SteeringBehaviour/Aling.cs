@@ -47,6 +47,8 @@ public class Aling : SteeringBehaviour
             // Hago que este entre -180 y 180
             rotation = mapToRange(rotation);
 
+
+
         }
         float rotationSize = Math.Abs(rotation);
         // Si ya estamos mirando no devolvemos stearing
@@ -70,7 +72,7 @@ public class Aling : SteeringBehaviour
             steering.angular /= angularAcceleration;
             steering.angular *= maxAngularAcceleration;
         }
-
+        steering.angular = (float)Math.Floor(steering.angular);
         steering.lineal = new Vector3(0, 0, 0);
         return this.steering;
     }

@@ -8,7 +8,8 @@ public class AgentNPC : Agent
 {
     public Steering miSteering;
 
-    List<SteeringBehaviour> listSteerings = new List<SteeringBehaviour>();
+    public BlenderSteering arbitro;
+    public GoTarget goToTarget;
     bool targetExist;
     private Steering goToTargetSteering;
 
@@ -21,12 +22,10 @@ public class AgentNPC : Agent
 
     private void Awake()
     {
-        //usar GetComponents<>() para cargar los SteeringBehavior del personaje
-        listSteerings = GetComponents<SteeringBehaviour>().ToList<SteeringBehaviour>();
-        foreach (SteeringBehaviour str in listSteerings)
-        {
-            str.enabled = true;
-        }
+        //usar GetComponents<>() para cargar el arbitro del personaje
+        arbitro = GetComponent<BlenderSteering>();
+        // El go to target se salta todos los arbitros
+        goToTarget = GetComponent<GoTarget>();
         targetExist = false;
         miSteering = new Steering(0, new Vector3(0, 0, 0));
         goToTargetSteering = new Steering(0, new Vector3(0, 0, 0));
@@ -34,33 +33,13 @@ public class AgentNPC : Agent
 
     private void LateUpdate()
     {
-
-        //Recorre la lista construida en Awake() y calcula los Steering de los SteeringBehaviour
-
-        List<Steering> calculatedStearing = new List<Steering>();
-        miSteering = new Steering(0, new Vector3(0, 0, 0));
-        goToTargetSteering = new Steering(0, new Vector3(0, 0, 0));
-        foreach (SteeringBehaviour str in listSteerings)
+        //Pide el steering a Agente y si hay un target usa ese steering
+        if (goToTarget != null)
         {
-            if (str.enabled)
-            {
-                if (str is GoTarget)
-                {
-                    GoTarget temp = (GoTarget)str;
-                    this.targetExist = temp.targetExists;
-                    this.goToTargetSteering = temp.GetSteering(this);
-
-                }
-                else
-                {
-                    Steering temp = str.GetSteering(this);
-                    miSteering.lineal += temp.lineal;
-                    miSteering.angular += temp.angular;
-                }
-
-            }
+            this.targetExist = goToTarget.targetExists;
+            this.goToTargetSteering = goToTarget.GetSteering(this);
         }
-
+        miSteering = arbitro.GetSteering();
 
     }
 

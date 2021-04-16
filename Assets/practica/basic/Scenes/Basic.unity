@@ -720,6 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1293290123713329}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -751,6 +752,8 @@ MonoBehaviour:
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
 --- !u!65 &391806022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1067,6 +1070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1293290123713329}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -1083,6 +1087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -1115,6 +1120,8 @@ MonoBehaviour:
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
 --- !u!65 &475172124
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1324,6 +1331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1293290123713329}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -1357,6 +1365,8 @@ MonoBehaviour:
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
 --- !u!65 &540035776
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1782,6 +1792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1293290123713329}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -1798,6 +1809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -1830,6 +1842,8 @@ MonoBehaviour:
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
 --- !u!65 &687082506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2998,7 +3012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1418041299
 Transform:
   m_ObjectHideFlags: 0
@@ -3007,7 +3021,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418041298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.64, y: 2.15, z: 63.33}
+  m_LocalPosition: {x: 48.64, y: 1, z: 63.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1483146318}
@@ -3031,11 +3045,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1293290123713329}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  avoidDistance: 5
-  lookAhead: 10
+  avoidDistance: 4
+  lookAhead: 3
 --- !u!114 &1418041301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3064,6 +3079,8 @@ MonoBehaviour:
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
 --- !u!65 &1418041302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3153,6 +3170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -4040,14 +4058,16 @@ GameObject:
   - component: {fileID: 1956971804}
   - component: {fileID: 1956971803}
   - component: {fileID: 1956971802}
+  - component: {fileID: 1956971801}
+  - component: {fileID: 1956971809}
   - component: {fileID: 1956971800}
   m_Layer: 0
-  m_Name: npc3
+  m_Name: Wander
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1956971799
 Transform:
   m_ObjectHideFlags: 0
@@ -4077,13 +4097,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  weight: 1
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  wanderRate: 91.8
+  wanderRate: 88
   wanderOrientation: 0
-  wanderStep: 11.7
-  wanderWait: 10
+  wanderStep: 10
+  wanderWait: 1
+--- !u!114 &1956971801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956971798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
 --- !u!114 &1956971802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4097,6 +4133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  weight: 1
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -4117,18 +4154,20 @@ MonoBehaviour:
   velocidad: 0
   mVelocidad: 1
   rotacion: 0
-  mRotacion: 360
-  mAngularAceleracion: 180
+  mRotacion: 180
+  mAngularAceleracion: 90
   mAceleracion: 5
   vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
   rInterior: 2
-  aInterior: 10
-  mAExterior: 0
+  aInterior: 0.5
+  mAExterior: 25
   dEbUg: 0
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
 --- !u!65 &1956971804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4205,6 +4244,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956971798}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1956971809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956971798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a4d28adc268b4469ec1a8a71de79b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1293290123713329}
+  weight: 0
+  steering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
 --- !u!1 &2071087001
 GameObject:
   m_ObjectHideFlags: 0
@@ -4498,6 +4554,8 @@ MonoBehaviour:
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
 --- !u!114 &1293290783134105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4511,6 +4569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1293290123713329}
+  weight: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}

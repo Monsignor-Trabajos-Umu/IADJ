@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class SteeringBehaviour : MonoBehaviour
 {
     public Agent target;
+    //Peso del SteeringBehaviour
+    public float weight = 1f;
     // Usamos estas dos variables para evitarnos modificar el transform
     protected Vector3 predictedPosition;
     protected float preditedRotation = 0f;
