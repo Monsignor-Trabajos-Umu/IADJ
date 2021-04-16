@@ -72,11 +72,15 @@ public class Wander : Aling
         // Genero la nueva posicion aplicándole una matriz de rotacion on el nuevo angulo
 
 
-        Vector3 targetVector = new Vector3(0, 0, 0);
-        //Vamos a aplicar matriz de rotacion
-        targetVector.x = (float)(Math.Cos(targetOrientation) * forward.x - Math.Sin(targetOrientation) * forward.z);
-        targetVector.y = forward.y;
-        targetVector.z = (float)(Math.Sin(targetOrientation) * forward.x + Math.Cos(targetOrientation) * forward.z);
+        //Vector3 targetVector = new Vector3(0, 0, 0);
+        /*  O Usamos Quaternion.AngleAxis() :/
+            //Vamos a aplicar matriz de rotacion
+            targetVector.x = (float)(Math.Cos(targetOrientation) * forward.x - Math.Sin(targetOrientation) * forward.z);
+            targetVector.y = forward.y;
+            targetVector.z = (float)(Math.Sin(targetOrientation) * forward.x + Math.Cos(targetOrientation) * forward.z);
+        */
+        Vector3 targetVector = Quaternion.AngleAxis((float)targetOrientation, Vector3.up) * forward;
+
         //Normalizamos el vector
         targetVector.Normalize();
 
