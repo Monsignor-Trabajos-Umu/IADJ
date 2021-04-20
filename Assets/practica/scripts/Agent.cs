@@ -1,9 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Agent : Body
 {
+    private const double margen = 1.1;
     //Radio
     [SerializeField]
     public double rInterior;
@@ -11,18 +12,29 @@ public class Agent : Body
     //Angulos
     [SerializeField]
     public double aInterior;
-    public double aExterior { get => this.aInterior * margen; }
+    [SerializeField]
+    private double mAExterior = 0;
+    public double aExterior
+    {
+        get
+        {
+            double aTemp = this.aInterior * margen;
+            return (aTemp < mAExterior) ? mAExterior : aTemp;
+
+        }
+    }
 
     //Controlador
     private Controlador controlador;
-
-
     public bool dEbUg = false;
 
-    private const double margen = 1.1;
-
-
-
+    public Agent notSoShallowCopy()
+    {
+        Agent fastAnget = new Agent();
+        fastAnget.transform.position = this.transform.position;
+        fastAnget.orientacion = this.orientacion;
+        return fastAnget;
+    }
 
     private void OnDrawGizmos() // Gizmo: una línea en la dirección del objetivo
     {
