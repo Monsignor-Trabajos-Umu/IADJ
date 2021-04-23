@@ -18,7 +18,7 @@ public class Cohesion : Seek
         {
             Vector3 direction = target.transform.position - agent.transform.position;
             float distance = direction.magnitude;
-            if (distance > threshold)
+            if (distance < threshold)
             {
                 centerOfMas += target.transform.position;
                 count++;
@@ -32,10 +32,11 @@ public class Cohesion : Seek
             centerOfMas /= count;
             usePredicted = true;
             predictedPosition = centerOfMas;
-            return base.GetSteering(agent);
+            steering = base.GetSteering(agent);
         }
 
-
+        if (debug)
+            Debug.DrawRay(transform.position, steering.lineal, Color.red);
         return steering;
     }
 

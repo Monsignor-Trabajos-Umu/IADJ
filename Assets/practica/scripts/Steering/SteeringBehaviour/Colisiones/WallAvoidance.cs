@@ -11,10 +11,6 @@ public class WallAvoidance : Seek
     // Distancia del rayo
     public float lookAhead;
 
-
-
-
-
     public override Steering GetSteering(AgentNPC miAgente)
     {
         // Calculamos el target para delegarlo a seek
@@ -23,8 +19,8 @@ public class WallAvoidance : Seek
 
 
 
-
-        Debug.DrawRay(miAgente.transform.position, rayVector.normalized * lookAhead, Color.blue);
+        if (debug)
+            Debug.DrawRay(miAgente.transform.position, rayVector.normalized * lookAhead, Color.blue);
         RaycastHit hit;
         //Debug.DrawRay(miAgente.transform.position, rayVector, Color.blue);
         if (Physics.Raycast(miAgente.transform.position, rayVector, out hit, lookAhead))
@@ -36,10 +32,11 @@ public class WallAvoidance : Seek
 
             this.predictedPosition = hit.point + normalPared * avoidDistance;
             this.usePredicted = true;
-
-            Debug.DrawLine(miAgente.transform.position, hit.point, Color.red);
-            Debug.DrawRay(hit.point, normalPared * avoidDistance, Color.green);
-
+            if (debug)
+            {
+                Debug.DrawLine(miAgente.transform.position, hit.point, Color.red);
+                Debug.DrawRay(hit.point, normalPared * avoidDistance, Color.green);
+            }
 
             steering = base.GetSteering(miAgente);
 

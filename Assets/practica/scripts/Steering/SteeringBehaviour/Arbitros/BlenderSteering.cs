@@ -21,7 +21,7 @@ public struct BehaviorAndWeight
 public class BlenderSteering : MonoBehaviour
 {
 
-
+    [SerializeField]
     List<SteeringBehaviour> listSteerings;
     List<BehaviorAndWeight> behaviors;
     AgentNPC agente;
@@ -76,7 +76,7 @@ public class BlenderSteering : MonoBehaviour
         steering.angular = (steering.angular > agente.mAngularAceleracion) ? (steering.angular * agente.mAngularAceleracion) / Math.Abs(steering.angular) : steering.angular;
 
 
-        Debug.DrawRay(agente.transform.position, steering.lineal, Color.white);
+        //Debug.DrawRay(agente.transform.position, steering.lineal, Color.white);
         this.debugSteering = steering;
         return steering;
     }

@@ -12,6 +12,8 @@ public abstract class SteeringBehaviour : MonoBehaviour
     protected float preditedRotation = 0f;
     protected bool usePredicted = false;
     public Steering steering;
+    [SerializeField]
+    protected bool debug = false;
     // Start is called before the first frame update
     void Start()
     {

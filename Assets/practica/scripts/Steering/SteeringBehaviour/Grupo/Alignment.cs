@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public class Alignments : SteeringBehaviour
+public class Alignment : SteeringBehaviour
 {
     [SerializeField]
     List<Agent> targets;
@@ -19,10 +19,11 @@ public class Alignments : SteeringBehaviour
             Vector3 direction = target.transform.position - agent.transform.position;
             float distance = direction.magnitude;
             // Si estoy lo suficientemente cerca
-            if (distance > threshold)
+            if (distance < threshold)
             {
                 // Calcular aceleracion
                 velocidades += target.vVelocidad;
+                count++;
 
             }
 
@@ -40,6 +41,8 @@ public class Alignments : SteeringBehaviour
             steering.lineal *= agent.mAceleracion;
         }
 
+        if (debug)
+            Debug.DrawRay(transform.position, steering.lineal, Color.blue);
         return steering;
 
     }

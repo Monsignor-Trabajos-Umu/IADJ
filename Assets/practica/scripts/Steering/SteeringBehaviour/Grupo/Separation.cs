@@ -15,10 +15,11 @@ public class Separation : SteeringBehaviour
         Steering steering = new Steering(0, new Vector3(0, 0, 0));
         foreach (Agent target in targets)
         {
-            Vector3 direction = target.transform.position - agent.transform.position;
+            Vector3 direction = agent.transform.position - target.transform.position;
             float distance = direction.magnitude;
-            if (distance > threshold)
+            if (distance < threshold)
             {
+                //decayCoefficient = (float)agent.rExterior;
                 // Fuerza de la repulsion
                 float strenght = Mathf.Min(decayCoefficient /
                     (distance * distance), agent.mAceleracion);
@@ -31,6 +32,8 @@ public class Separation : SteeringBehaviour
 
         steering.lineal.Normalize();
         steering.lineal *= agent.mAceleracion;
+        if (debug)
+            Debug.DrawRay(transform.position, steering.lineal, Color.green);
         return steering;
     }
     private void Start()

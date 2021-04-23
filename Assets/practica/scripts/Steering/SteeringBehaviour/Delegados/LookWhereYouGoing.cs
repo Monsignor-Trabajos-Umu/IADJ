@@ -6,17 +6,12 @@ using System;
 public class LookWhereYouGoing : Aling
 {
 
-
+    // Quiero que mi agente mire hacia delante es decir hacia donde tiene su vector velocidad
     public override Steering GetSteering(AgentNPC miAgente)
     {
         steering = new Steering(0, new Vector3(0, 0, 0));
         // Vamosa  crear un nuevo target en la posicion donde estaria nuestro target
-        Vector3 direction = target.transform.position - miAgente.transform.position;
-        if (Math.Round(direction.magnitude) == 0)
-            return steering;
-
-        // TODO
-        Vector3 predictedPosition = target.transform.position + target.vVelocidad;
+        Vector3 predictedPosition = miAgente.transform.position + miAgente.vVelocidad;
         this.preditedRotation = (float)miAgente.MinAngleToRotate(predictedPosition);
         this.usePredicted = true;
 
