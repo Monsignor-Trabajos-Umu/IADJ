@@ -99,5 +99,10 @@ public class AgentNPC : Agent
 
     }
 
+    //Cada agente define una heuristica (Manhattan, Euclidea,...) que se usará en pathfinding
+    public float heuristica()
+    {
+        return 0;
+    }
 
 }
