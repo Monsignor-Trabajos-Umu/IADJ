@@ -27,6 +27,8 @@ public class BlenderSteering : MonoBehaviour
     AgentNPC agente;
     [SerializeField]
     Steering debugSteering;
+    [SerializeField]
+    bool debugGreen = false;
 
     private void Awake()
     {
@@ -75,14 +77,24 @@ public class BlenderSteering : MonoBehaviour
         steering.lineal = (steering.lineal.magnitude > agente.mAceleracion) ? steering.lineal.normalized * agente.mAceleracion : steering.lineal;
         steering.angular = (steering.angular > agente.mAngularAceleracion) ? (steering.angular * agente.mAngularAceleracion) / Math.Abs(steering.angular) : steering.angular;
 
+        steering = filtroSteering(steering);
+        if (debugGreen)
+        {
+            Debug.DrawRay(agente.transform.position, steering.lineal, Color.green);
+            this.debugSteering = steering;
+        }
 
-        //Debug.DrawRay(agente.transform.position, steering.lineal, Color.white);
-        this.debugSteering = steering;
+
         return steering;
     }
 
 
-
+    private Steering filtroSteering(Steering steering)
+    {
+        //Eliminamos el steering eje y
+        steering.lineal.y = 0;
+        return steering;
+    }
 
 
 

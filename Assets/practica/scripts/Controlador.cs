@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class Controlador : MonoBehaviour
 {
 
     private HashSet<GameObject> seleccionados;
+
+
+    private int accion = 0;
+
+    private Color cSelecionado = new Color(1, 0, 0);
 
     // Start is called before the first frame update
     void Awake()
@@ -18,17 +23,16 @@ public class Controlador : MonoBehaviour
     {
         if (seleccionados.Contains(agente))
             quitarSeleccionados(agente);
-        else  
+        else
             addSeleccionados(agente);
     }
-    
+
 
     private void addSeleccionados(GameObject agente)
     {
         seleccionados.Add(agente);
         Debug.Log("seleccionados: " + seleccionados.Count);
-        Color c = new Color(1, 0, 0);
-        agente.GetComponent<Agent>().cambiarColor(c);
+        agente.GetComponent<Agent>().cambiarColor(cSelecionado);
     }
 
     private void quitarSeleccionados(GameObject agente)
@@ -36,6 +40,16 @@ public class Controlador : MonoBehaviour
         seleccionados.Remove(agente);
         Debug.Log("quitar seleccionados: " + seleccionados.Count);
         agente.GetComponent<Agent>().ponerColorOriginal();
+    }
+
+    private void actualizaColor(GameObject agente, Color c)
+    {
+        agente.GetComponent<Agent>().cambiarColor(c);
+    }
+    public void accionTermianda(GameObject agente)
+    {
+        this.accion = 0;
+        agente.GetComponent<Agent>().cambiarColor(cSelecionado);
     }
 
     private void irPosicionRaton()
@@ -81,9 +95,30 @@ public class Controlador : MonoBehaviour
         }
     }
 
+
+
+    private void FormacionLinea()
+    {
+
+    }
     // Update is called once per frame
     void Update()
     {
-        irPosicionRaton();
+        if (Input.GetKeyDown(KeyCode.G))
+            this.accion = (this.accion == 1) ? 0 : 1;
+        if (Input.GetKeyDown(KeyCode.L))
+            this.accion = (this.accion == 2) ? 0 : 2;
+
+        if (this.accion == 1)
+        {
+            this.seleccionados.ToList().ForEach(g => this.actualizaColor(g, Color.magenta));
+            irPosicionRaton();
+        }
+        if (this.accion == 2)
+        {
+            this.seleccionados.ToList().ForEach(g => this.actualizaColor(g, Color.yellow));
+        }
+
+
     }
 }
