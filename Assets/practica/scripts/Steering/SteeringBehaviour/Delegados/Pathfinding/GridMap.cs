@@ -3,44 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Clase de GridMap basado en Grid cuadrado
-public class GridMap: MonoBehaviour
+public class GridMap
 {
-    
     public int ancho;
     public int alto;
     public float cellSize;
     public int[,] mapa;
+    Vector3 posicionOrigen;
 
     Nodo[,] grid;
 
-    public GridMap(int anchura, int altura, float tamCelda)
+    public GridMap(int anchura, int altura, float tamCelda, Vector3 origen)
     {
         ancho = anchura;
         alto = altura;
         mapa = new int[anchura, altura];
         cellSize = tamCelda;
+        posicionOrigen = origen;
 
-        for(int i = 0; i < mapa.GetLength(0); i++)
-        {
-            for (int j = 0; j < mapa.GetLength(1); j++)
-            {
-                Debug.Log(i + ", " + j);
-
-            }
-        }
         dibujarCasilla(Color.white);
     }
 
     public Vector3 getWorldPosition(Vector3 casilla)
     {
         //Del plano (u,v) al mundo (x,y) -> (x,y) = longitud del cuadrado * (u,v)
-        return new Vector3(casilla.x, casilla.y, casilla.z)*cellSize;
+        return new Vector3(casilla.x + posicionOrigen.x, casilla.y + posicionOrigen.y, casilla.z + posicionOrigen.z)*cellSize;
     }
 
-    public Vector3 getWorldPosition(int x, int y)
+    public Vector3 getWorldPosition(int x, int z)
     {
         //Del plano (u,v) al mundo (x,y) -> (x,y) = longitud del cuadrado * (u,v)
-        return new Vector3(x,y) * cellSize;
+        return new Vector3(x,1,z) * cellSize;
+    }
+
+    public void setValor(Vector3 worldPos, int valor)
+    {
+        int x, z;
+        getCasilla(worldPos, out x, out z);
+        setValor(x, z, valor);
+    }
+
+    public void setValor(int x, int z, int valor)
+    {
+        if (x >= 0 && z >= 0 && x < ancho && z < alto)
+        {
+            mapa[x, z] = valor;
+
+            Debug.Log("Valor de la casilla (" + x + "," + z + ") actualizado a: " + valor);
+        }
+           
+    }
+
+    public int getValor(Vector3 worldPos)
+    {
+        int x, z;
+        getCasilla(worldPos, out x, out z);
+        return getValor(x, z);
+    }
+
+    public int getValor(int x, int z)
+    {
+        if (x >= 0 && z >= 0 && x < ancho && z < alto)
+        {
+            Debug.Log("Valor de la casilla (" + x + "," + z);
+            return mapa[x, z];
+            
+        }
+        return -1;
+    }
+
+    private void getCasilla(Vector3 worldPos, out int x, out int z)
+    {
+        x = Mathf.FloorToInt((worldPos.x - posicionOrigen.x)/ cellSize);
+        z = Mathf.FloorToInt((worldPos.z - posicionOrigen.z)/ cellSize);
     }
 
     public Vector3 getCellPosition(Vector3 posicionMundo)
@@ -58,22 +93,11 @@ public class GridMap: MonoBehaviour
             {
                 Debug.DrawLine(getWorldPosition(i, j), getWorldPosition(i, j + 1), color, cellSize);
                 Debug.DrawLine(getWorldPosition(i, j), getWorldPosition(i + 1, j), color, cellSize);
-                Vector3 v = getWorldPosition(i, j);
         
             }
         }
         Debug.DrawLine(getWorldPosition(0, alto), getWorldPosition(ancho, alto), color, cellSize);
         Debug.DrawLine(getWorldPosition(ancho, 0), getWorldPosition(ancho, alto), color, cellSize);
-    }
-    public void cambiarValor(int x, int y, int valor)
-    {
-        if(x >= 0 && y >= 0 && x < ancho && y < alto)
-            mapa[x, y] = valor;
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(ancho, 1 , alto));
     }
 
 }

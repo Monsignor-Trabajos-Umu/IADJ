@@ -13,7 +13,6 @@ public class GoTarget : SteeringBehaviour
         if (!targetExists)
             return this.steering;
 
-
         Vector3 myPosition = miAgente.transform.position;
 
         float distancia = Vector3.Distance(myPosition, targetPosition);
