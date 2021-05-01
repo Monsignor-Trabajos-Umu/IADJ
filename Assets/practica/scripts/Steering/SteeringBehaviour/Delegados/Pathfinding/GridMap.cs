@@ -11,7 +11,7 @@ public class GridMap
     public int[,] mapa;
     Vector3 posicionOrigen;
 
-    Nodo[,] grid;
+    Node[,] grid;
 
     public GridMap(int anchura, int altura, float tamCelda, Vector3 origen)
     {
