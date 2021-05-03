@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.Linq;
 public class Pathfinding : MonoBehaviour
 {
     private Transform actual;
@@ -13,13 +12,14 @@ public class Pathfinding : MonoBehaviour
     [SerializeField] private Transform target;
     private Node targetNode;
 
-    private readonly List<Node> todosLosNodos = new List<Node>();
+    private List<Node> todosLosNodos;
 
     private void Awake()
     {
         startNode = grid.GetNodeFromWorldPoint(transform.position);
         targetNode = grid.GetNodeFromWorldPoint(target.position);
         Debug.Log("Transfrom pathfinding" + transform.position);
+        todosLosNodos = new List<Node>();
     }
 
 
@@ -47,38 +47,27 @@ public class Pathfinding : MonoBehaviour
         grid.path.Add(nodoActual);
         todosLosNodos.Remove(startNode);
 
-
-        // Creamos un set con los open
-        var neigbours = new HashSet<Node>();
-
         // Flag por si tarda mucho
         var count = 0;
         //Mientras que queden nodos en el open
-        while (count < 400 && nodoActual != targetNode || todosLosNodos.Count == 0)
+        while (nodoActual != targetNode )
         {
             count++;
             // Cogemos los vecinos
-            grid.GetNeigbours(nodoActual).ForEach(n => neigbours.Add(n));
-            //Debug.LogError("N vecinos " + neigbours.Count);
-            if (neigbours.Count == 0)
-            {
-                Debug.LogError("No hay vecinos :(");
-                return;
-            }
-
+            var neigbours = grid.GetNeigbours(nodoActual);
             // Actualizamos el gCost de los vecinos
             neigbours.ForEach(n => n.gCost = GetDistance(nodoActual, n));
             // Cogemos el que tenga menor valor
             var minimo = neigbours.OrderByDescending(v => v.fCost).Last();
             // Actualizamos h a fMinimo si fMinimo es superior a h
-            if (minimo.fCost > nodoActual.hCost)
-                nodoActual.hCost = minimo.fCost;
-            //nodoActual.hCost = minimo.fCost > nodoActual.hCost ? minimo.fCost : nodoActual.hCost;
+            nodoActual.hCost = minimo.fCost > nodoActual.hCost ? minimo.fCost : nodoActual.hCost;
             // Vamos al nodo
-            //Debug.Log("Yendo a =>" + nodoActual);
+            Debug.Log("Yendo a =>" + nodoActual);
             nodoActual = minimo;
             grid.path.Add(nodoActual);
             todosLosNodos.Remove(nodoActual);
+
+            
         }
     }
 
