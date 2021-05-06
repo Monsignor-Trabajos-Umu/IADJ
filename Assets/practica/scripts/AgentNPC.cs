@@ -99,5 +99,20 @@ public class AgentNPC : Agent
 
     }
 
-
+    private void DesactivaSteering()
+    {
+        var steerings = this.GetComponents<SteeringBehaviour>();
+        foreach (var steering in steerings)
+        {
+            steering.enabled = false;
+        }
+    }
+    private void ActivaSteering()
+    {
+        var steerings = this.GetComponents<SteeringBehaviour>();
+        foreach (var steering in steerings)
+        {
+            steering.enabled = true;
+        }
+    }
 }
