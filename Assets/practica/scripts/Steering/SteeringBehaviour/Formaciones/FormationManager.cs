@@ -6,7 +6,7 @@ public class FormationManager : MonoBehaviour
 {
     //Lista de ranuras
     [SerializeField]
-    List<SlotAssigment> slotAssigments = new();
+    List<SlotAssigment> slotAssigments = new List<SlotAssigment>();
 
     // Posicion y orientacion para evitar los derapes
     Vector3 driftOffset;
@@ -70,7 +70,7 @@ public class FormationManager : MonoBehaviour
         }
 
         suma /= k;
-
+        return new Vector3();
 
     }
     // Start is called before the first frame update
