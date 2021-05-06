@@ -5,14 +5,13 @@ using System;
 
 public class GoTarget : SteeringBehaviour
 {
-    Vector3 targetPosition;
+    protected Vector3 targetPosition;
     public bool targetExists;
     public override Steering GetSteering(AgentNPC miAgente)
     {
         this.steering = new Steering(0, new Vector3(0, 0, 0));
         if (!targetExists)
             return this.steering;
-
 
         Vector3 myPosition = miAgente.transform.position;
 
