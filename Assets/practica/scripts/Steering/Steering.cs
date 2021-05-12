@@ -17,6 +17,12 @@ public struct Steering
         this.angular = angular;
         this.lineal = lineal;
     }
+    public Steering(float angular)
+    {
+        this.angular = angular;
+        this.lineal = new Vector3(0, 0, 0);
+    }
+
 
     public override string ToString() => $"( Angular = {angular} | Lineal = {angular})";
 }
