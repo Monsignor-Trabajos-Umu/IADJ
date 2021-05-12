@@ -8,6 +8,15 @@ TagManager:
   - pReferencia1
   - controlador
   - flock
+  - symbol_O
+  - target
+  - agent
+  - symbol_X
+  - puntoInteres
+  - puntoCurativo
+  - base
+  - equipoA
+  - equipoB
   layers:
   - Default
   - TransparentFX

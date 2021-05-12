@@ -5,7 +5,7 @@ using System;
 
 public class GoTarget : SteeringBehaviour
 {
-    Vector3 targetPosition;
+    public Vector3 targetPosition;
     public bool targetExists;
     public override Steering GetSteering(AgentNPC miAgente)
     {

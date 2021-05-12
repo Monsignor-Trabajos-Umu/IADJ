@@ -79,7 +79,7 @@ public class Controlador : MonoBehaviour
         var selecionados = getSeleccionados.ToList().GetRange(0, 4);
         var lider = selecionados[0];
         var peloton = selecionados.GetRange(1, 4);
-        foreach (var solado in peloton) solado.SendMessage("DesactivaSteering");
+        foreach (var soldado in peloton) soldado.SendMessage("DesactivaSteering");
     }
 
     private void RealizaAccion()
