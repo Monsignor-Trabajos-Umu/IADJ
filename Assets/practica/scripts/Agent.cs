@@ -54,7 +54,8 @@ public class Agent : Body
 
     public void ArrivedToTarget()
     {
-        controlador.addOquitaSeleccion(gameObject);
+
+        controlador.accionTermianda(gameObject);
     }
     // Start is called before the first frame update
     public virtual void Start()

@@ -65,7 +65,7 @@ public class AgentNPC : Agent
         }
 
 
-
+        //Debug.DrawRay(transform.position, this.vVelocidad, Color.white);
         transform.position = transform.position + this.vVelocidad * time;
         this.orientacion = this.orientacion + this.rotacion * time;
 
@@ -99,10 +99,20 @@ public class AgentNPC : Agent
 
     }
 
-    //Cada agente define una heuristica (Manhattan, Euclidea,...) que se usará en pathfinding
-    public float heuristica()
+    private void DesactivaSteering()
     {
-        return 0;
+        var steerings = this.GetComponents<SteeringBehaviour>();
+        foreach (var steering in steerings)
+        {
+            steering.enabled = false;
+        }
     }
-
+    private void ActivaSteering()
+    {
+        var steerings = this.GetComponents<SteeringBehaviour>();
+        foreach (var steering in steerings)
+        {
+            steering.enabled = true;
+        }
+    }
 }

@@ -31,7 +31,7 @@ public class Wander : Aling
     [Range(0.0f, 180f)]
     public float wanderRate;
     // Wander orientation
-    public float wanderOrientation;
+    public float wanderOrientation = 0;
     // Wander step
     [Range(0.0f, 50f)]
     public float wanderStep;
@@ -47,6 +47,7 @@ public class Wander : Aling
     {
         float wanderWaitCounter = wanderWait * 60;
         this.timeToTarget = wanderWait;
+
         if (targetExists && wanderPrivateCounter <= wanderWaitCounter)
         {
             // Calculo la minima rotacion para llegar a ese punto ,
@@ -54,10 +55,12 @@ public class Wander : Aling
             this.preditedRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
             this.usePredicted = true;
             steering = base.GetSteering(miAgente);
-
-
             steering.lineal = miAgente.mAceleracion * miAgente.OrientationToVector();
             wanderPrivateCounter++;
+
+            //Debug
+            if (debug)
+                Debug.DrawRay(transform.position, steering.lineal, Color.blue);
             return steering;
         }
 
@@ -97,6 +100,10 @@ public class Wander : Aling
         steering.lineal = miAgente.mAceleracion * miAgente.OrientationToVector();
         targetExists = true;
         wanderPrivateCounter = 0;
+
+        if (debug)
+            Debug.DrawRay(transform.position, steering.lineal, Color.blue);
+
         return steering;
 
     }

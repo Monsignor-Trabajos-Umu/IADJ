@@ -8,6 +8,16 @@ TagManager:
   - pReferencia1
   - controlador
   - grid
+  - flock
+  - symbol_O
+  - target
+  - agent
+  - symbol_X
+  - puntoInteres
+  - puntoCurativo
+  - base
+  - equipoA
+  - equipoB
   layers:
   - Default
   - TransparentFX
@@ -18,7 +28,8 @@ TagManager:
   - 
   - 
   - paredes
-  - 
+  - wander
+  - flock
   - 
   - 
   - 
