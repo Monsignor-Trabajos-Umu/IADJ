@@ -31,7 +31,6 @@ public class Body : MonoBehaviour
     public Vector3 vAceleracion;
 
 
-
     private Color colorOriginal;
 
 

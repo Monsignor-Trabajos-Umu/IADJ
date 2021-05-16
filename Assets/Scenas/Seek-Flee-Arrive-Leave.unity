@@ -921,6 +921,9 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   arbitro: {fileID: 0}
   goToTarget: {fileID: 0}
+  vida: 0
+  alcance: 0
+  "da\xF1o": 0
 --- !u!54 &23457019375682706
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1919,7 +1922,7 @@ GameObject:
   - component: {fileID: 2741451111571471645}
   - component: {fileID: 2750220448614262735}
   - component: {fileID: 2780631037671686685}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1973,7 +1976,7 @@ GameObject:
   - component: {fileID: 2740768455169555773}
   - component: {fileID: 2750673883246915141}
   - component: {fileID: 2781482468901626993}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2288,6 +2291,9 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   arbitro: {fileID: 0}
   goToTarget: {fileID: 0}
+  vida: 0
+  alcance: 0
+  "da\xF1o": 0
 --- !u!4 &9175289921763913756
 Transform:
   m_ObjectHideFlags: 0

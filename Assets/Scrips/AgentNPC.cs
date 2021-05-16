@@ -13,6 +13,9 @@ public class AgentNPC : Agent
     bool targetExist;
     private Steering goToTargetSteering;
 
+    public int vida; //Vida del NPC
+    public int alcance; //Max de casillas de distancia para golpear
+    public int daño; //daño de la unidad por hit
 
     // Update is called once per frame
     void Update()
