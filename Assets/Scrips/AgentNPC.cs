@@ -17,10 +17,16 @@ public class AgentNPC : Agent
     public int alcance; //Max de casillas de distancia para golpear
     public int daño; //daño de la unidad por hit
 
+
+    //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
+    public int mejorTerreno = 0;
+    public int peorTerreno = 1;
+
     // Update is called once per frame
     void Update()
     {
         ApplySteering();
+        //ActualizarVelocidad();
     }
 
     private void Awake()
@@ -32,6 +38,15 @@ public class AgentNPC : Agent
         targetExist = false;
         miSteering = new Steering(0, new Vector3(0, 0, 0));
         goToTargetSteering = new Steering(0, new Vector3(0, 0, 0));
+    }
+
+    private void ActualizarVelocidad()
+    {
+        /*Si el terreno de nuestros pies es mejor Terreno entonces
+         * mejoramos la velocidad máxima del personaje multiplicando por 1.5
+         * , y si es el peor terreno entonces la reducimos a la mitad
+        */
+
     }
 
     private void LateUpdate()
@@ -117,5 +132,51 @@ public class AgentNPC : Agent
         {
             steering.enabled = true;
         }
+    }
+
+    //Elimina al personaje y lo hace reaparecer en base tras un tiempo para ir despues al punto de muerte.
+    protected void Morir()
+    {
+        gameObject.GetComponent<Renderer>().enabled = false;
+        StartCoroutine("respawn");
+    }
+
+    protected void Atacar(GameObject objetivo)
+    {
+
+    }
+
+    protected void Huir()
+    {
+        GameObject[] fuentes = GameObject.FindGameObjectsWithTag("puntoCurativo");
+        float distanciaMinima = Mathf.Infinity;
+        GameObject fuenteProxima;
+        foreach(GameObject fuente in fuentes) {
+            var aux = fuente.transform.position - transform.position;
+            if(distanciaMinima > aux.magnitude)
+            {
+                distanciaMinima = aux.magnitude;
+                fuenteProxima = fuente;
+            }
+        }
+        //Aplicar un Pathfinding a una casilla al lado de una fuente próxima
+    }
+
+    IEnumerator respawn()
+    {
+        yield return new WaitForSeconds(2);
+        GameObject cuartel;
+        if (tag == "equipoRojo")
+        {
+            cuartel = GameObject.FindWithTag("baseRoja");
+            
+        }
+        else
+        {
+            cuartel = GameObject.FindWithTag("baseAzul");
+        }
+        gameObject.transform.position = cuartel.transform.position + new Vector3(0, 0, -50);
+        gameObject.GetComponent<Renderer>().enabled = true;
+        yield return new WaitForSeconds(5);
     }
 }

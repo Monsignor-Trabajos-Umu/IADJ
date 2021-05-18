@@ -22,7 +22,11 @@ public struct Steering
         this.angular = angular;
         this.lineal = new Vector3(0, 0, 0);
     }
-
+    public Steering(Vector3 lineal)
+    {
+        this.angular = 0;
+        this.lineal = lineal;
+    }
 
     public override string ToString() => $"( Angular = {angular} | Lineal = {angular})";
 }

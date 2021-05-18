@@ -15,9 +15,10 @@ TagManager:
   - symbol_X
   - puntoInteres
   - puntoCurativo
-  - base
-  - equipoA
-  - equipoB
+  - equipoRojo
+  - equipoAzul
+  - baseRoja
+  - baseAzul
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,6 @@ TagManager:
   - paredes
   - wander
   - flock
-  - 
   - 
   - 
   - 

@@ -14,6 +14,15 @@ public class FormationManager : MonoBehaviour
     // Patron
     FormationPattern patter;
 
+    /*
+     * Punto C.2 del Bloque 1:
+     * Si al menos uno de los personajes seleccionados no está en formación, 
+     * los que estén  en  formación  (si  los  hay)  romperán  la  formación 
+     * y  todos  se  dirigirán  al punto de destino
+     * 
+     * Se puede asumir que, si con estructura fija tenemos más NPC de los necesarios,
+     * que vayan directamente al punto sin necesidad de hacer la formación
+     */
 
     public void UpdateSlotAssignments()
     {

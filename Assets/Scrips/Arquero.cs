@@ -5,7 +5,8 @@ using UnityEngine;
 public class Arquero : AgentNPC
 {
     public Chebychev heuristica = new Chebychev();
-    
+
+
     public Arquero() : base()
     {
         vida = 50;

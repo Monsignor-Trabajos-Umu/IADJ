@@ -60,6 +60,11 @@ public class GridChungo : MonoBehaviour
         return getGrid[x, z];
     }
 
+    public Vector3 GetWorldPointFromNode(Node nodo)
+    {
+        return nodo.worldPosition;
+    }
+
     public List<Node> GetNeigbours(Node node)
     {
         var neightBours = new List<Node>();
@@ -86,7 +91,7 @@ public class GridChungo : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSizeX, 1, gridWorldSizeZ));
-        Debug.Log("Path size " + path.Count);
+        //Debug.Log("Path size " + path.Count);
         if (getGrid != null)
             foreach (var n in getGrid)
             {
