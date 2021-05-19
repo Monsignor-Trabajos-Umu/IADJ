@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 674196780}
   - component: {fileID: 674196779}
   - component: {fileID: 674196786}
+  - component: {fileID: 674196787}
   m_Layer: 0
   m_Name: Interpose
   m_TagString: Untagged
@@ -650,6 +651,24 @@ MonoBehaviour:
   debug: 0
   agenteA: {fileID: 1293290573642253}
   agenteB: {fileID: 1252455289}
+--- !u!114 &674196787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674196778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d909eeef21d1e594d9e3701518fd73fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1707059179}
+  weight: 1
+  steering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  debug: 0
 --- !u!1 &990893423
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,9 +42,8 @@ public class Interpose : Arrive
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(midPoint, 2);
 
-        Gizmos.color = Color.red;
-        Vector3 v = this.gameObject.GetComponent<AgentNPC>().vVelocidad;
-        Vector3 dot = Vector3.Cross(this.gameObject.transform.position , v);
-        Gizmos.DrawLine(this.gameObject.transform.position, dot);
+        Gizmos.color = Color.white;
+        Vector3 v = gameObject.GetComponent<AgentNPC>().OrientationToVector();
+        Gizmos.DrawLine(transform.position, transform.position +v);
     }
 }
