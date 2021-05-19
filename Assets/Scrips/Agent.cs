@@ -28,6 +28,7 @@ public class Agent : Body
     private Controlador controlador;
     public bool dEbUg = false;
 
+
     public Agent notSoShallowCopy()
     {
         Agent fastAnget = new Agent();
