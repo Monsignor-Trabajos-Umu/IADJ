@@ -10,6 +10,10 @@ public class Body : MonoBehaviour
     public float masa;
     public float velocidad;
     public float mVelocidad;
+    public double vidaMaxima = 100; //Vida Máxima. Por defecto 100 puntos de salud
+    public double vida = 100; //Vida actual. Por defecto se inicializa al valor de la vida máxima
+    public int alcance = 1; //Max de casillas de distancia para golpear. Por defecto vale 1
+    public int daño = 2; //daño de la unidad por hit. Por defecto vale 2
     // public Vector3 posicion; == transform.position
     public float orientacion
     {
@@ -143,7 +147,14 @@ public class Body : MonoBehaviour
         return CalculateAngleToRate(vYoHeading, vYoObjeto);
     }
 
-
+    //Cura una cantidad de vida al personaje si no tiene la vida al máximo
+    public void Curar(double cantidad)
+    {
+        if(vida < vidaMaxima)
+        {
+            vida += cantidad;
+        }
+    }
 
     // Update is called once per frame
 

@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 303754052}
   - component: {fileID: 303754051}
   - component: {fileID: 303754050}
+  - component: {fileID: 303754054}
   m_Layer: 0
   m_Name: FuenteNorte
   m_TagString: puntoCurativo
@@ -279,6 +280,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &303754054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303754049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622a4388f3622aa4096f3c272c41713a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radioCuracion: 100
+  curaSeg: 0.05
 --- !u!1 &381668423
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +453,10 @@ MonoBehaviour:
   masa: 0
   velocidad: 0
   mVelocidad: 5
+  vidaMaxima: 100
+  vida: 1
+  alcance: 2
+  "da\xF1o": 1
   rotacion: 0
   mRotacion: 90
   mAngularAceleracion: 10
@@ -453,9 +472,6 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   arbitro: {fileID: 399829250}
   goToTarget: {fileID: 0}
-  vida: 0
-  alcance: 0
-  "da\xF1o": 0
   mejorTerreno: 0
   peorTerreno: 1
 --- !u!114 &399829250
@@ -778,6 +794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSizeX: 1000
   gridWorldSizeZ: 1000
+  mostrarMapa: 0
   nodeRaidus: 10
 --- !u!1 &1026414723
 GameObject:
@@ -857,7 +874,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026414723}
   m_LocalRotation: {x: 0.38152757, y: -0.59555626, z: 0.38199583, w: 0.59483504}
-  m_LocalPosition: {x: 322.4741, y: 98.119934, z: 486.04984}
+  m_LocalPosition: {x: 225, y: 143, z: 715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1290,6 +1307,7 @@ GameObject:
   - component: {fileID: 1872695723}
   - component: {fileID: 1872695722}
   - component: {fileID: 1872695721}
+  - component: {fileID: 1872695725}
   m_Layer: 0
   m_Name: FuenteSur
   m_TagString: puntoCurativo
@@ -1374,6 +1392,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1872695725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872695720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622a4388f3622aa4096f3c272c41713a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radioCuracion: 3
+  curaSeg: 0.05
 --- !u!1 &1170655434097847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,7 +1567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293290721504549}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0.00000028088027}
-  m_LocalPosition: {x: 281, y: 7.73, z: 486}
+  m_LocalPosition: {x: 170, y: 7.73, z: 716}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4369854248865095}

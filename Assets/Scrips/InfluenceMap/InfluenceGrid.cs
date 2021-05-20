@@ -8,7 +8,7 @@ public class InfluenceGrid : MonoBehaviour
     private int gridSizeX, gridSizeZ;
     [SerializeField] public float gridWorldSizeX;
     [SerializeField] public float gridWorldSizeZ;
-
+    [SerializeField] public bool mostrarMapa = false;
 
     private float nodeDiameter;
     [SerializeField] private float nodeRaidus;
@@ -89,17 +89,20 @@ public class InfluenceGrid : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSizeX, 1, gridWorldSizeZ));
-        if (getGrid != null)
-            foreach (var n in getGrid)
-            {
-                n.calcularColor();
-                Gizmos.color = n.color;
-                if (path != null)
-                    if (path.Contains(n))
-                        Gizmos.color = Color.black;
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
+        if (mostrarMapa)
+        {
+            Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSizeX, 1, gridWorldSizeZ));
+            if (getGrid != null)
+                foreach (var n in getGrid)
+                {
+                    n.calcularColor();
+                    Gizmos.color = n.color;
+                    if (path != null)
+                        if (path.Contains(n))
+                            Gizmos.color = Color.black;
+                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
 
-            }
+                }
+        }
     }
 }

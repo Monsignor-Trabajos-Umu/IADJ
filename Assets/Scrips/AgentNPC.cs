@@ -13,13 +13,6 @@ public class AgentNPC : Agent
     bool targetExist;
     private Steering goToTargetSteering;
 
-
-
-    public int vida; //Vida del NPC
-    public int alcance; //Max de casillas de distancia para golpear
-    public int daño; //daño de la unidad por hit
-
-
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
     public int peorTerreno = 1;
@@ -136,7 +129,8 @@ public class AgentNPC : Agent
         }
     }
 
-    //Elimina al personaje y lo hace reaparecer en base tras un tiempo para ir despues al punto de muerte.
+    /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
+    para ir despues al punto de muerte.*/
     protected void Morir()
     {
         gameObject.GetComponent<Renderer>().enabled = false;
@@ -148,6 +142,7 @@ public class AgentNPC : Agent
 
     }
 
+    //Se busca la fuente mas cercana para ir hacia ella
     protected void Huir()
     {
         GameObject[] fuentes = GameObject.FindGameObjectsWithTag("puntoCurativo");
