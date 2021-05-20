@@ -603,7 +603,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471666425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 849, y: 25, z: 850}
+  m_LocalPosition: {x: 848, y: 25, z: 852}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
@@ -794,8 +794,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSizeX: 1000
   gridWorldSizeZ: 1000
-  mostrarMapa: 0
-  nodeRaidus: 10
+  mostrarMapa: 1
+  nodeRaidus: 15
 --- !u!1 &1026414723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,7 +1058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375434922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -48,15 +48,16 @@ public class InfluenceGrid : MonoBehaviour
     public NodoI GetNodeFromWorldPoint(Vector3 worldPosition)
     {
         // Le sumo la mitad por si es negativo
-        var pX = (worldPosition.x + gridWorldSizeX / 2) / gridWorldSizeX;
-        var pZ = (worldPosition.z + gridWorldSizeZ / 2) / gridWorldSizeZ;
+        var pX = (worldPosition.x) / gridWorldSizeX;
+        var pZ = (worldPosition.z) / gridWorldSizeZ;
         pX = Mathf.Clamp01(pX);
         pZ = Mathf.Clamp01(pZ);
 
-        var x = Mathf.RoundToInt((gridSizeX - 1) * pX);
-        var z = Mathf.RoundToInt((gridSizeZ - 1) * pZ);
+        var x = Mathf.RoundToInt((gridSizeX) * pX);
+        var z = Mathf.RoundToInt((gridSizeZ) * pZ);
         return getGrid[x, z];
     }
+
 
     public List<NodoI> GetNeigbours(NodoI node)
     {

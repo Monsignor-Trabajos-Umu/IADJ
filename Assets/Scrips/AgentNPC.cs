@@ -139,7 +139,18 @@ public class AgentNPC : Agent
 
     protected void Atacar(GameObject objetivo)
     {
+        //Nos acercamos al objetivo hasta estar a el número de casillas necesarias
 
+        //Lanzamos el ataque
+
+        //Nos quedamos quietos durante un espacio de tiempo por haber atacado. 
+    }
+
+    //El personaje recibe el daño. Si ese daño deja su vida a 0 o menos, entonces lo mata
+    protected void RecibirDaño(float cantidad)
+    {
+        vida -= cantidad;
+        if (vida < 0) Morir();
     }
 
     //Se busca la fuente mas cercana para ir hacia ella
@@ -172,7 +183,11 @@ public class AgentNPC : Agent
         {
             cuartel = GameObject.FindWithTag("baseAzul");
         }
+        //Hacemos que spawnee al lado de su base
         gameObject.transform.position = cuartel.transform.position + new Vector3(0, 0, -50);
+        //Recuperamos su vida
+        vida = vidaMaxima;
+        //Hacemos que vuelva a ser visible
         gameObject.GetComponent<Renderer>().enabled = true;
         yield return new WaitForSeconds(5);
     }
