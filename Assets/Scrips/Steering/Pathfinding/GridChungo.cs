@@ -7,7 +7,7 @@ public class GridChungo : MonoBehaviour
     private int gridSizeX, gridSizeZ;
     [SerializeField] private float gridWorldSizeX;
     [SerializeField] private float gridWorldSizeZ;
-
+    [SerializeField] public Terrain terreno;
 
     private float nodeDiameter;
     [SerializeField] private float nodeRaidus;

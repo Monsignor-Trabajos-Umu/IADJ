@@ -78,7 +78,7 @@ public class AgentNPC : Agent
         }
 
 
-        //Debug.DrawRay(transform.position, this.vVelocidad, Color.white);
+        Debug.DrawRay(transform.position, this.vVelocidad, Color.white);
         transform.position = transform.position + this.vVelocidad * time;
         this.orientacion = this.orientacion + this.rotacion * time;
 

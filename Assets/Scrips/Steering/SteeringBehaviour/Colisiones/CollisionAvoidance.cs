@@ -13,7 +13,7 @@ public class CollisionAvoidance : SteeringBehaviour
     {
         colisiones = GameObject.FindObjectsOfType<Agent>();
         tiempoMasCerca = Mathf.Infinity;
-        Steering steering = new Steering(0, new Vector3(0,0,0));
+        Steering steering = new Steering(0, new Vector3(0,0,20));
 
         if (colisiones.Length == 0) return steering;
         /*
@@ -29,19 +29,18 @@ public class CollisionAvoidance : SteeringBehaviour
          */
         Vector3 relativePos;
 
-        Agent objetivo = null;
-
-        Vector3 firstRelativePos = colisiones[0].transform.position - miAgente.transform.position;
+        Agent firstTarget = ColisionMasCercana();
+        Vector3 firstRelativePos = firstTarget.transform.position - miAgente.transform.position;
         float firstDistance = firstRelativePos.magnitude;
-        Vector3 firstRelativeVel = colisiones[0].vAceleracion - miAgente.vAceleracion;
+        Vector3 firstRelativeVel = firstTarget.vVelocidad - miAgente.vVelocidad;
         var timeToCollision = Vector3.Dot(firstRelativePos, firstRelativeVel) / (firstRelativeVel.magnitude * firstRelativeVel.magnitude);
         float firstMinSeparation = firstDistance - firstRelativeVel.magnitude * timeToCollision;
-
+        firstTarget = null;
  
         foreach(Agent obj in colisiones)
         {
             relativePos = obj.transform.position - miAgente.transform.position;
-            Vector3 relativeVel = obj.vAceleracion - miAgente.vAceleracion;
+            Vector3 relativeVel = obj.vVelocidad - miAgente.vVelocidad;
             var relativeSpeed = relativeVel.magnitude;
             timeToCollision = Vector3.Dot(relativePos, relativeVel) / (relativeSpeed * relativeSpeed);
             float distancia = relativePos.magnitude;
@@ -53,25 +52,27 @@ public class CollisionAvoidance : SteeringBehaviour
             {
                 Debug.Log("Nuevo Objetivo" + obj.name);
                 tiempoMasCerca = timeToCollision;
-                objetivo = obj;
+                firstTarget = obj;
                 firstMinSeparation = minSeparacion;
                 firstDistance = distancia;
                 firstRelativePos = relativePos;
                 firstRelativeVel = relativeVel;
             }
         }
-        
-        if(objetivo == null)
+        //Parte 2: Calculamos el steering
+        if(firstTarget == null)
         {
             return steering;
         }
 
         if(firstMinSeparation <= 0 || firstDistance < 2 * miAgente.rExterior)
         {
-            relativePos = objetivo.transform.position - miAgente.transform.position;
+            Debug.Log("Choque");
+            relativePos = firstTarget.transform.position - miAgente.transform.position;
         }
         else
         {
+            Debug.Log("No Choque");
             relativePos = firstRelativePos + firstRelativeVel * tiempoMasCerca;
         }
 
@@ -81,4 +82,19 @@ public class CollisionAvoidance : SteeringBehaviour
 
     }
 
+    private Agent ColisionMasCercana()
+    {
+        float distance = Mathf.Infinity;
+        Agent aux = null;
+        foreach(Agent g in colisiones)
+        {
+            float d = Vector3.Distance(g.transform.position,gameObject.transform.position);
+            if (distance > d)
+            {
+                distance = d;
+                aux = g;
+            }
+        }
+        return aux;
+    }
 }
