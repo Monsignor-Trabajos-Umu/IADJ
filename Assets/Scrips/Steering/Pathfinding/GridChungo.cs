@@ -7,6 +7,7 @@ public class GridChungo : MonoBehaviour
     private int gridSizeX, gridSizeZ;
     [SerializeField] private float gridWorldSizeX;
     [SerializeField] private float gridWorldSizeZ;
+    //Booleano para saber si el terreno es el de Unity o no.
     [SerializeField] public Terrain terreno;
 
     private float nodeDiameter;
@@ -41,7 +42,20 @@ public class GridChungo : MonoBehaviour
             var worldPoint = pInicial + Vector3.right * (x * nodeDiameter + nodeRaidus) +
                              Vector3.forward * (z * nodeDiameter + nodeRaidus);
             worldPoint.y = transform.position.y;
-            var pared = Physics.CheckSphere(worldPoint, nodeRaidus, paredesLayerMask);
+            bool pared = false;
+            if (terreno != null && terreno.gameObject.activeSelf)
+            {
+                var control = FindObjectOfType<Controlador>();
+                int i = control.getLayerTerreno(worldPoint, terreno);
+                    Debug.Log(i);
+                //Se comprueba si es el valor del layer de las montañas
+                if (i == 1)
+                    pared = true;
+            }
+            else
+            {
+                pared = Physics.CheckSphere(worldPoint, nodeRaidus, paredesLayerMask);
+            }
             this.getGrid[x, z] = new Node(pared, worldPoint, x, z);
         }
     }

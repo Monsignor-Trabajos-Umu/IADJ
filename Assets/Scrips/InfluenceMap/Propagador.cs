@@ -27,6 +27,7 @@ public class Propagador : MonoBehaviour, IPropagator
     // Use this for initialization
     void Start()
     {
-        mapa.RegisterPropagator(this);
+        if (mapa != null && mapa.gameObject.activeSelf) 
+            mapa.RegisterPropagator(this);
     }
 }

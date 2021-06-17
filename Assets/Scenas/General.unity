@@ -497,20 +497,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &399829248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293290721504549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87ef77eec50ba5f46a1ebdd8612c6bf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surfaceIndex: 0
-  terrain: {fileID: 1375434924}
 --- !u!114 &399829249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,7 +711,7 @@ MonoBehaviour:
   rInterior: 45
   aInterior: 45
   mAExterior: 45
-  dEbUg: 1
+  dEbUg: 0
 --- !u!1 &576995627
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,7 +851,7 @@ MonoBehaviour:
   rInterior: 45
   aInterior: 45
   mAExterior: 45
-  dEbUg: 1
+  dEbUg: 0
 --- !u!1 &589110566
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &589110567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,7 +928,7 @@ GameObject:
   - component: {fileID: 728459734}
   - component: {fileID: 728459733}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasGameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1205,6 +1191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1297666636}
   - component: {fileID: 1297666635}
+  - component: {fileID: 1297666637}
   m_Layer: 0
   m_Name: Controlador
   m_TagString: controlador
@@ -1238,6 +1225,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1297666637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297666634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ef77eec50ba5f46a1ebdd8612c6bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceIndex: 0
+  terrain: {fileID: 1375434924}
 --- !u!1 &1322355959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,6 +1283,7 @@ GameObject:
   - component: {fileID: 1375434925}
   - component: {fileID: 1375434924}
   - component: {fileID: 1375434923}
+  - component: {fileID: 1375434926}
   m_Layer: 0
   m_Name: Suelo
   m_TagString: Untagged
@@ -1347,6 +1349,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1375434926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375434922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ef77eec50ba5f46a1ebdd8612c6bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceIndex: 0
+  terrain: {fileID: 1375434924}
 --- !u!1 &1561315061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,7 +1458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1614586658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1457,7 +1473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSizeX: 950
   gridWorldSizeZ: 950
-  terreno: {fileID: 0}
+  terreno: {fileID: 1375434924}
   nodeRaidus: 10
   paredesLayerMask:
     serializedVersion: 2
@@ -1866,7 +1882,6 @@ GameObject:
   - component: {fileID: 23024127004541053}
   - component: {fileID: 1630574122}
   - component: {fileID: 1630574118}
-  - component: {fileID: 399829248}
   - component: {fileID: 399829249}
   - component: {fileID: 399829250}
   - component: {fileID: 1293290721504550}

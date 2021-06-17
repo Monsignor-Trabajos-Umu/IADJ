@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSizeX: 100
   gridWorldSizeZ: 100
+  terreno: {fileID: 0}
   nodeRaidus: 1
   paredesLayerMask:
     serializedVersion: 2
@@ -2608,6 +2609,10 @@ MonoBehaviour:
   masa: 2
   velocidad: 30
   mVelocidad: 2
+  vidaMaxima: 100
+  vida: 2
+  alcance: 1
+  "da\xF1o": 2
   rotacion: 0
   mRotacion: 2
   mAngularAceleracion: 0
@@ -2623,9 +2628,6 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   arbitro: {fileID: 7046650390553723062}
   goToTarget: {fileID: 0}
-  vida: 2
-  alcance: 1
-  "da\xF1o": 2
   mejorTerreno: 0
   peorTerreno: 1
 --- !u!114 &7046650390553723064
@@ -2749,7 +2751,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7046650390553723061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: 1.25, z: -19}
+  m_LocalPosition: {x: 6.8, y: 1.25, z: 6}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 7052268204924854321}

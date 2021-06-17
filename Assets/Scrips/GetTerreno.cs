@@ -10,7 +10,7 @@ public class GetTerreno : MonoBehaviour
      public Terrain terrain;
      private TerrainData terrainData;
      private Vector3 terrainPos;
- 
+    /*
      // Use this for initialization
      void Start () {
      
@@ -28,16 +28,19 @@ public class GetTerreno : MonoBehaviour
      void OnGUI () {
          GUI.Box(new Rect( 100, 100, 200, 25 ), "index: "+surfaceIndex.ToString()+", name: "+terrainData.splatPrototypes[surfaceIndex].texture.name);
      }
-     
-     private float[] GetTextureix(Vector3 WorldPos){
-         // returns an array containing the relative mix of textures
-         // on the main terrain at this world position.
-  
-         // The number of values in the array will equal the number
-         // of textures added to the terrain.
-         
-         // calculate which splat map cell the worldPos falls within (ignoring y)
-         int mapX = (int)(((WorldPos.x - terrainPos.x) / terrainData.size.x) * terrainData.alphamapWidth);
+     */
+     private float[] GetTextureix(Vector3 WorldPos, Terrain t){
+        terrain = Terrain.activeTerrain;
+        terrainData = terrain.terrainData;
+        terrainPos = terrain.transform.position;
+        // returns an array containing the relative mix of textures
+        // on the main terrain at this world position.
+
+        // The number of values in the array will equal the number
+        // of textures added to the terrain.
+
+        // calculate which splat map cell the worldPos falls within (ignoring y)
+        int mapX = (int)(((WorldPos.x - terrainPos.x) / terrainData.size.x) * terrainData.alphamapWidth);
          int mapZ = (int)(((WorldPos.z - terrainPos.z) / terrainData.size.z) * terrainData.alphamapHeight);
          
          // get the splat data for this cell as a 1x1xN 3d array (where N = number of textures)
@@ -52,10 +55,10 @@ public class GetTerreno : MonoBehaviour
          return cellix;
      }
      
-     private int GetainTexture(Vector3 WorldPos){
+     public int GetainTexture(Vector3 WorldPos, Terrain t){
          // returns the zero-based index of the most dominant texture
          // on the main terrain at this world position.
-         float[] mix = GetTextureix(WorldPos);
+         float[] mix = GetTextureix(WorldPos, t);
          
          float maxix = 0;
          int maxIndex = 0;

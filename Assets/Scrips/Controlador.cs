@@ -132,4 +132,12 @@ public class Controlador : MonoBehaviour
         if (accion != 0)
             RealizaAccion();
     }
+
+    public int getLayerTerreno(Vector3 worldPos, Terrain t)
+    {
+        int index = 0;
+        var scriptTerreno = FindObjectOfType<GetTerreno>();
+        index = scriptTerreno.GetainTexture(worldPos, t);
+        return index;
+    }
 }
