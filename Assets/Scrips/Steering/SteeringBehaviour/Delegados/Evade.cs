@@ -21,9 +21,9 @@ public class Evade : Flee
 
         // NO Puedo usar el target porque va asignado a otro objecto
 
-        this.predictedPosition = target.transform.position;
+        this.predictedDirection = target.transform.position;
 
-        this.predictedPosition += target.vVelocidad * prediction;
+        this.predictedDirection += target.vVelocidad * prediction;
 
         this.usePredicted = true;
 

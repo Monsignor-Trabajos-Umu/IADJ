@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 
 
-[System.Serializable]
+[Serializable]
 public struct BehaviorAndWeight
 {
     public Steering behavior;
@@ -36,7 +36,7 @@ public class BlenderSteering : MonoBehaviour
         behaviors = new List<BehaviorAndWeight>();
         agente = GetComponent<AgentNPC>();
         //usar GetComponents<>() para cargar los SteeringBehavior del personaje
-        listSteerings = GetComponents<SteeringBehaviour>().ToList<SteeringBehaviour>();
+        listSteerings = GetComponents<SteeringBehaviour>().ToList();
         foreach (SteeringBehaviour str in listSteerings)
         {
             str.enabled = true;
@@ -93,6 +93,14 @@ public class BlenderSteering : MonoBehaviour
     {
         //Eliminamos el steering eje y
         steering.lineal.y = 0;
+
+        // No tiene sentido 0,000001 de acelearcion
+        steering.lineal.x  = (float)(Math.Round(steering.lineal.x, 4));
+        steering.lineal.z  = (float)(Math.Round(steering.lineal.z, 4));
+
+        // Para los angulos con dos decimales es mas que suficiente
+        steering.angular  = (float)(Math.Round(steering.angular, 2));
+        
         return steering;
     }
 

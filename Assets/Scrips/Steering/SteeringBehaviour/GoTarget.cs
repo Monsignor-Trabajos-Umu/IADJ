@@ -12,7 +12,7 @@ public class GoTarget : SteeringBehaviour
     {
         this.steering = new Steering(0, new Vector3(0, 0, 0));
         if (!targetExists)
-            return returnDebuged(Color.red);
+            return this.steering;
 
         Vector3 myPosition = miAgente.transform.position;
 
@@ -35,7 +35,7 @@ public class GoTarget : SteeringBehaviour
         {
             this.steering.rotacion = (float)angle;
         }
-        return base.returnDebuged(Color.red);
+        return base.steering;
     }
 
 

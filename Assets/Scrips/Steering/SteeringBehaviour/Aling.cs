@@ -38,7 +38,7 @@ public class Aling : SteeringBehaviour
         float rotation;
         if (this.usePredicted)
         {
-            rotation = this.preditedRotation;
+            rotation = this.predictedRotation;
         }
         else
         {

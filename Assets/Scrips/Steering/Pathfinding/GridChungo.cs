@@ -15,10 +15,10 @@ public class GridChungo : MonoBehaviour
     [SerializeField] private LayerMask paredesLayerMask;
 
 
-    public List<Node> path=new List<Node>();
+    public List<Node> path = new List<Node>();
 
     //Uso un array en vez de una lista porque es mas rapido buscar
-    [field: SerializeField] public Node[,] getGrid { get;  set; }
+    [field: SerializeField] public Node[,] getGrid { get; set; }
 
 
     public void Awake()
@@ -83,21 +83,21 @@ public class GridChungo : MonoBehaviour
     {
         var neightBours = new List<Node>();
         for (var x = -1; x <= 1; x++)
-        for (var z = -1; z <= 1; z++)
-        {
-            if (x == 0 && z == 0) continue;
-            // pNeigboursX/Z son las posiciones en el grid de los nodos
-            var pNeigboursX = node.gridX + x;
-            var pNeigboursZ = node.gridY + z;
-            // Ahora hay que comprobar que esos nodos existen
-            // Es decir que estan dentro del grid
-            if (pNeigboursX >= 0 && pNeigboursX < gridSizeX &&
-                pNeigboursZ >= 0 && pNeigboursZ < gridSizeZ)
+            for (var z = -1; z <= 1; z++)
             {
-                var nodo = getGrid[pNeigboursX, pNeigboursZ];
-                if (!nodo.pared) neightBours.Add(nodo);
+                if (x == 0 && z == 0) continue;
+                // pNeigboursX/Z son las posiciones en el grid de los nodos
+                var pNeigboursX = node.gridX + x;
+                var pNeigboursZ = node.gridY + z;
+                // Ahora hay que comprobar que esos nodos existen
+                // Es decir que estan dentro del grid
+                if (pNeigboursX >= 0 && pNeigboursX < gridSizeX &&
+                    pNeigboursZ >= 0 && pNeigboursZ < gridSizeZ)
+                {
+                    var nodo = getGrid[pNeigboursX, pNeigboursZ];
+                    if (!nodo.pared) neightBours.Add(nodo);
+                }
             }
-        }
 
         return neightBours;
     }

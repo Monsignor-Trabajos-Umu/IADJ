@@ -8,8 +8,8 @@ public abstract class SteeringBehaviour : MonoBehaviour
     //Peso del SteeringBehaviour
     public float weight = 1f;
     // Usamos estas dos variables para evitarnos modificar el transform
-    protected Vector3 predictedPosition;
-    protected float preditedRotation = 0f;
+    protected Vector3 predictedDirection;
+    protected float predictedRotation = 0f;
     protected bool usePredicted = false;
     public Steering steering;
     [SerializeField]
@@ -17,7 +17,7 @@ public abstract class SteeringBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
@@ -30,11 +30,10 @@ public abstract class SteeringBehaviour : MonoBehaviour
     public abstract Steering GetSteering(AgentNPC agent);
 
 
-    protected Steering returnDebuged(Color c)
-    {
-        if (debug)
-            Debug.DrawRay(transform.position, steering.lineal, c);
-        return this.steering;
-    }
 
+    private void OnDrawGizmos()
+    {
+        if (!debug) return;
+        Gizmos.DrawRay(transform.position, steering.lineal);
+    }
 }

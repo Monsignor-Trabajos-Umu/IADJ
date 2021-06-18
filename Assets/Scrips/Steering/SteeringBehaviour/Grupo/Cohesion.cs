@@ -31,7 +31,7 @@ public class Cohesion : Seek
         {
             centerOfMas /= count;
             usePredicted = true;
-            predictedPosition = centerOfMas;
+            predictedDirection = centerOfMas;
             steering = base.GetSteering(agent);
         }
 

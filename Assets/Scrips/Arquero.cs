@@ -11,7 +11,7 @@ public class Arquero : AgentNPC
     {
         vida = 50;
         alcance = 2;
-        daño = 10;
+        daÃ±o = 10;
     }
     // Start is called before the first frame update
     public Heuristic GetHeuristic()

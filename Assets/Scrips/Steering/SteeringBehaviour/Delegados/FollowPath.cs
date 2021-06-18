@@ -34,7 +34,7 @@ public class FollowPath : Arrive
             if (currentNode + 1 == nodes.Count())
             {
                 this.usePredicted = true;
-                this.predictedPosition = targetPosition - agent.transform.position;
+                this.predictedDirection = targetPosition - agent.transform.position;
                 steering = base.GetSteering(agent);
             }
             else

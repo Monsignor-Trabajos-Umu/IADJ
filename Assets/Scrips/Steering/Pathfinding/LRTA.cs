@@ -1,22 +1,24 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class LRTA : SteeringBehaviour
+public class LRTA : Arrive
 {
-    private Transform actual;
+    private bool atFinalTarget;
+
     [SerializeField] private GridChungo grid;
 
     [SerializeField] private Heuristic heuristic;
-    private Node startNode;
 
     [SerializeField] private Transform objetivo;
+
+    private Node startNode;
     private Node targetNode;
 
-    private List<Node> todosLosNodos;
 
-    public bool targetExists;
+    private Node tempObjetive;
+
+    private List<Node> todosLosNodos;
 
     private void Awake()
     {
@@ -42,28 +44,52 @@ public class LRTA : SteeringBehaviour
         Debug.Log("Numero nodos ->" + todosLosNodos.Count);
         Debug.Log("Nodo Entrada ->" + startNode);
         Debug.Log("Nodo salida ->" + targetNode);
-        CalculatePath();
+
+        // Start values
+        usePredicted = true;
+        atFinalTarget = false;
     }
 
-    private Node CalculatePath()
+    private bool AtNode(Vector3 aPosition, Node oNode, double error)
+    {
+        var aNode = grid.GetNodeFromWorldPoint(aPosition);
+        // Si el nodo es el mismo d
+        if (aNode.Equals(oNode)) return true;
+        // Si estamos en el margen error
+        return (oNode.worldPosition - aPosition).magnitude < error;
+    }
+
+
+    private bool AtFinal(Vector3 aPosition, double error)
+    {
+        // Speed up
+        if (atFinalTarget) return true;
+        
+        // Si mi actual es mi objetivo ya hemos llegado
+        atFinalTarget = AtNode(aPosition, targetNode, error);
+        return atFinalTarget;
+    }
+
+
+    private Node CalculatePathToTargetNode(Node actual)
     {
         //Avanzo al primer nodo
-        var nodoActual = startNode;
-        Debug.Log("Avanzo a  ->" + startNode);
-        grid.path.Add(nodoActual);
-        todosLosNodos.Remove(startNode);
+
+
+        grid.path.Add(actual);
+        // Pudo revisitar un nodo ya visitado todosLosNodos.Remove(startNode);
         //Mientras que queden nodos en el open
-        var neigbours = grid.GetNeigbours(nodoActual);
+        var neigbours = grid.GetNeigbours(actual);
         // Actualizamos el gCost de los vecinos
-        neigbours.ForEach(n => n.gCost = GetDistance(nodoActual, n));
+        neigbours.ForEach(n => n.gCost = GetDistance(actual, n));
         // Cogemos el que tenga menor valor
         var minimo = neigbours.OrderByDescending(v => v.fCost).Last();
         // Actualizamos h a fMinimo si fMinimo es superior a h
-        nodoActual.hCost = minimo.fCost > nodoActual.hCost ? minimo.fCost : nodoActual.hCost;
-        // Vamos al nodo
-        Debug.Log("Yendo a =>" + nodoActual);
-        nodoActual = minimo;
-        return nodoActual;
+        actual.hCost = minimo.fCost > actual.hCost ? minimo.fCost : actual.hCost;
+        // Vamos al nodo objetivo
+        var objetivo = minimo;
+        Debug.Log($"Voy de [{actual.gridX},{actual.gridY}] a [{objetivo.gridX},{objetivo.gridY}]");
+        return objetivo;
     }
 
     /*
@@ -81,29 +107,38 @@ public class LRTA : SteeringBehaviour
 
     public override Steering GetSteering(AgentNPC miAgente)
     {
-        this.steering = new Steering(0, new Vector3(0, 0, 0));
-        if (!targetExists)
-            return returnDebuged(Color.red);
+        var currentPosition = miAgente.transform.position;
+        var currentNode = grid.GetNodeFromWorldPoint(currentPosition);
+        var error = miAgente.rInterior;
+        steering = new Steering(0, new Vector3(0, 0, 0));
+        if (AtFinal(currentPosition, error)) return steering;
 
-        Node movimiento = CalculatePath();
-        float distancia = Vector3.Distance(miAgente.transform.position, movimiento.worldPosition);
-        // Comprobamos si estamos en la posicion +-
-        if (distancia > miAgente.rInterior)
+        // Si existe ya un objetivo temporal vamos a el.
+        if (tempObjetive != null)
         {
-            this.steering.velocidad = Vector3.ClampMagnitude(movimiento.worldPosition - miAgente.transform.position,
-                miAgente.mVelocidad);
+            //Debug.Log($"Distancia {Vector3.Distance(currentPosition, tempObjetive.worldPosition)} Error {error}");
+            // Si estamos lo suficientemente cerca vamos al siguiente nodo 
+            //Vector3.Distance(currentPosition, tempObjetive.worldPosition) <= error
+            Debug.Log(
+                $"Estoy\t[{currentNode.gridX},{currentNode.gridY}]");
+            if (AtNode(currentPosition,tempObjetive,error))
+            {
+               
+                // Como tenemos un error tenemos que suponer que nuestro nodo actual no es la
+                // posicion sino nuestro objetivo
+                Debug.Log($"He yegado al objetivo a[{tempObjetive.gridX},{tempObjetive.gridY}]");
+                tempObjetive = CalculatePathToTargetNode(tempObjetive);
+            }
+            Debug.Log($"Voy a  [{tempObjetive.gridX},{tempObjetive.gridY}]");
+            // Sino Vamos al nodo objetivo
+            predictedDirection = tempObjetive.worldPosition - currentPosition;
+            return base.GetSteering(miAgente);
         }
-        else
-        {
-            // Si estamos en la posicion +- ponemos a false el flag
-            targetExists = false;
-            miAgente.ArrivedToTarget();
-        }
-        double angle = miAgente.MinAngleToRotate(movimiento.worldPosition);
-        if (Math.Abs(angle) >= Math.Abs(miAgente.aExterior))
-        {
-            this.steering.rotacion = (float)angle;
-        }
+
+        // Solo se ejecuta la primera vez.
+        tempObjetive = CalculatePathToTargetNode(grid.GetNodeFromWorldPoint(currentPosition));
+
+
         return steering;
     }
 }

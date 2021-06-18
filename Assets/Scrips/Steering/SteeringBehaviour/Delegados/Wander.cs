@@ -52,7 +52,7 @@ public class Wander : Aling
         {
             // Calculo la minima rotacion para llegar a ese punto ,
             // si puede que sea rebundante pero mentalmente me resulta mas claro.
-            this.preditedRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
+            this.predictedRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
             this.usePredicted = true;
             steering = base.GetSteering(miAgente);
             steering.lineal = miAgente.mAceleracion * miAgente.OrientationToVector();
@@ -92,7 +92,7 @@ public class Wander : Aling
 
         // Calculo la minima rotacion para llegar a ese punto ,
         // si puede que sea rebundante pero mentalmente me resulta mas claro.
-        this.preditedRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
+        this.predictedRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
         this.usePredicted = true;
         steering = base.GetSteering(miAgente);
 

@@ -19,8 +19,8 @@ public class Arrive : SteeringBehaviour
 
         // Empty Stering
         this.steering = new Steering(0, new Vector3(0, 0, 0));
-        // Si exite ya una dirrecion predecidad usamos esa sino la calculamos
-        Vector3 direction = this.usePredicted ? this.predictedPosition : target.transform.position - miAgente.transform.position;
+        // Si existe ya una direcion predecida usamos esa sino la calculamos
+        Vector3 direction = this.usePredicted ? this.predictedDirection : target.transform.position - miAgente.transform.position;
         float distance = direction.magnitude;
         // Si ya hemos llegado no devolvemos stearing
         if (distance < targetRadius)

@@ -11,7 +11,7 @@ public class Soldado : AgentNPC
     {
         vida = 100;
         alcance = 1;
-        daño = 20;
+        daÃ±o = 20;
     }
 
     public Heuristic GetHeuristic()

@@ -1,24 +1,20 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System;
 
 public class AgentNPC : Agent
 {
-    public Steering miSteering;
-
     public BlenderSteering arbitro;
     public GoTarget goToTarget;
-    bool targetExist;
     private Steering goToTargetSteering;
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
+    public Steering miSteering;
     public int peorTerreno = 1;
+    private bool targetExist;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         ApplySteering();
         //ActualizarVelocidad();
@@ -41,7 +37,6 @@ public class AgentNPC : Agent
          * mejoramos la velocidad máxima del personaje multiplicando por 1.5
          * , y si es el peor terreno entonces la reducimos a la mitad
         */
-
     }
 
     private void LateUpdate()
@@ -49,11 +44,11 @@ public class AgentNPC : Agent
         //Pide el steering a Agente y si hay un target usa ese steering
         if (goToTarget != null)
         {
-            this.targetExist = goToTarget.targetExists;
-            this.goToTargetSteering = goToTarget.GetSteering(this);
+            targetExist = goToTarget.targetExists;
+            goToTargetSteering = goToTarget.GetSteering(this);
         }
-        miSteering = arbitro.GetSteering();
 
+        miSteering = arbitro.GetSteering();
     }
 
     public void ApplySteering()
@@ -67,66 +62,54 @@ public class AgentNPC : Agent
 
     private void updateAcelerated(Steering steering, float time)
     {
+        if (Mathf.Approximately(Vector3.Distance(steering.lineal, new Vector3(0, 0, 0)), 0))
+            vVelocidad = new Vector3(0, 0, 0);
 
-        if (Vector3.Distance(steering.lineal, new Vector3(0, 0, 0)) == 0)
-        {
-            this.vVelocidad = new Vector3(0, 0, 0);
-        }
-        if (steering.angular == 0)
-        {
-            this.rotacion = 0;
-        }
+        if (Mathf.Approximately(steering.angular, 0))
+            rotacion = 0;
 
 
-        Debug.DrawRay(transform.position, this.vVelocidad, Color.white);
-        transform.position = transform.position + this.vVelocidad * time;
-        this.orientacion = this.orientacion + this.rotacion * time;
+        Debug.DrawRay(transform.position, vVelocidad, Color.white);
+        transform.position += vVelocidad * time;
+        orientacion += rotacion * time;
 
-        this.vVelocidad = this.vVelocidad + steering.lineal * time;
+        vVelocidad += steering.lineal * time;
 
         // Si vamos mas rapido que la velicidad maxima reducimos
-        if (this.vVelocidad.magnitude > this.mVelocidad)
+        if (vVelocidad.magnitude > mVelocidad)
         {
-            this.vVelocidad.Normalize();
-            this.vVelocidad *= this.mVelocidad;
+            vVelocidad.Normalize();
+            vVelocidad *= mVelocidad;
         }
 
-        this.vAceleracion = steering.lineal;
+        vAceleracion = steering.lineal;
 
-        if (this.vAceleracion.magnitude > this.mAceleracion)
+        if (vAceleracion.magnitude > mAceleracion)
         {
-            this.vAceleracion.Normalize();
-            this.vAceleracion *= this.mAceleracion;
+            vAceleracion.Normalize();
+            vAceleracion *= mAceleracion;
         }
+
         //TODO
-        this.rotacion = this.rotacion + steering.angular * time;
-
-
-
+        rotacion += steering.angular * time;
     }
 
     private void updateNoAcelerated(Steering steering, float time)
     {
         transform.position = transform.position + steering.velocidad * time;
-        this.orientacion = this.orientacion + steering.rotacion * time;
-
+        orientacion = orientacion + steering.rotacion * time;
     }
 
     private void DesactivaSteering()
     {
-        var steerings = this.GetComponents<SteeringBehaviour>();
-        foreach (var steering in steerings)
-        {
-            steering.enabled = false;
-        }
+        var steerings = GetComponents<SteeringBehaviour>();
+        foreach (var steering in steerings) steering.enabled = false;
     }
+
     private void ActivaSteering()
     {
-        var steerings = this.GetComponents<SteeringBehaviour>();
-        foreach (var steering in steerings)
-        {
-            steering.enabled = true;
-        }
+        var steerings = GetComponents<SteeringBehaviour>();
+        foreach (var steering in steerings) steering.enabled = true;
     }
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
@@ -156,12 +139,13 @@ public class AgentNPC : Agent
     //Se busca la fuente mas cercana para ir hacia ella
     protected void Huir()
     {
-        GameObject[] fuentes = GameObject.FindGameObjectsWithTag("puntoCurativo");
-        float distanciaMinima = Mathf.Infinity;
+        var fuentes = GameObject.FindGameObjectsWithTag("puntoCurativo");
+        var distanciaMinima = Mathf.Infinity;
         GameObject fuenteProxima;
-        foreach(GameObject fuente in fuentes) {
+        foreach (var fuente in fuentes)
+        {
             var aux = fuente.transform.position - transform.position;
-            if(distanciaMinima > aux.magnitude)
+            if (distanciaMinima > aux.magnitude)
             {
                 distanciaMinima = aux.magnitude;
                 fuenteProxima = fuente;
@@ -170,19 +154,15 @@ public class AgentNPC : Agent
         //Aplicar un Pathfinding a una casilla al lado de una fuente próxima
     }
 
-    IEnumerator respawn()
+    private IEnumerator respawn()
     {
         yield return new WaitForSeconds(2);
         GameObject cuartel;
         if (tag == "equipoRojo")
-        {
             cuartel = GameObject.FindWithTag("baseRoja");
-            
-        }
         else
-        {
             cuartel = GameObject.FindWithTag("baseAzul");
-        }
+
         //Hacemos que spawnee al lado de su base
         gameObject.transform.position = cuartel.transform.position + new Vector3(0, 0, -50);
         //Recuperamos su vida

@@ -11,7 +11,7 @@ public class Tanque : AgentNPC
     {
         vida = 250;
         alcance = 1;
-        daño = 5;
+        daÃ±o = 5;
     }
 
     public Heuristic GetHeuristic()
