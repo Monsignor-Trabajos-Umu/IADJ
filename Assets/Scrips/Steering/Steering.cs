@@ -27,6 +27,7 @@ public struct Steering
         this.angular = 0;
         this.lineal = lineal;
     }
+   
 
     public override string ToString() => $"( Angular = {angular} | Lineal = {angular})";
 }

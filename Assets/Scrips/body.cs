@@ -38,22 +38,44 @@ public class Body : MonoBehaviour
     private Color colorOriginal;
 
 
-    public void cambiarColor(Color c)
+    public void SetColor(Color c)
     {
         GetComponent<Renderer>().material.color = c;
 
     }
 
-    public void ponerColorOriginal()
+    public void SetDefaultColor()
     {
-        GetComponent<Renderer>().material.color = colorOriginal;
+        SetColor(colorOriginal);
     }
-    public void setDefaultColor()
+    public void SaveDefaultColor()
     {
         this.colorOriginal = GetComponent<Renderer>().material.color;
         Debug.Log("color: " + colorOriginal);
     }
 
+
+
+    protected void SetColorSelected()
+    {
+        SetColor(Color.blue);
+    }
+    protected void SetColorNormal()
+    {
+        SetDefaultColor();
+    }
+
+    protected void SetColorWaiting()
+    {
+        SetColor(Color.white);
+    }
+    protected void SetColorGoToTarget()
+    {
+        SetColor(Color.red);
+    }
+    
+
+        
 
 
     private double DegreeToRadian(double angle)
@@ -164,13 +186,7 @@ public class Body : MonoBehaviour
         Debug.Log("Vector " + OrientationToVector());
 
     }
-
-
-
-    void Update()
-    {
-
-    }
+    
 
 
 }

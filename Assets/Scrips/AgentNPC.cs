@@ -1,35 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class AgentNPC : Agent
 {
+    private Steering ActionSteering;
     public BlenderSteering arbitro;
     public GoTarget goToTarget;
-    private Steering goToTargetSteering;
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
     public Steering miSteering;
     public int peorTerreno = 1;
-    private bool targetExist;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        ApplySteering();
-        //ActualizarVelocidad();
-    }
 
-    private void Awake()
+    // Builders 
+
+
+    protected override void Start()
     {
+        base.Start();
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<BlenderSteering>();
         // El go to target se salta todos los arbitros
         goToTarget = GetComponent<GoTarget>();
-        targetExist = false;
         miSteering = new Steering(0, new Vector3(0, 0, 0));
-        goToTargetSteering = new Steering(0, new Vector3(0, 0, 0));
+        ActionSteering = new Steering(0, new Vector3(0, 0, 0));
     }
+
 
     private void ActualizarVelocidad()
     {
@@ -39,28 +37,8 @@ public class AgentNPC : Agent
         */
     }
 
-    private void LateUpdate()
-    {
-        //Pide el steering a Agente y si hay un target usa ese steering
-        if (goToTarget != null)
-        {
-            targetExist = goToTarget.targetExists;
-            goToTargetSteering = goToTarget.GetSteering(this);
-        }
 
-        miSteering = arbitro.GetSteering();
-    }
-
-    public void ApplySteering()
-    {
-        if (!targetExist)
-            updateAcelerated(miSteering, Time.deltaTime);
-        else
-            updateNoAcelerated(goToTargetSteering, Time.deltaTime);
-    }
-
-
-    private void updateAcelerated(Steering steering, float time)
+    private void UpdateAccelerated(Steering steering, float time)
     {
         if (Mathf.Approximately(Vector3.Distance(steering.lineal, new Vector3(0, 0, 0)), 0))
             vVelocidad = new Vector3(0, 0, 0);
@@ -94,7 +72,7 @@ public class AgentNPC : Agent
         rotacion += steering.angular * time;
     }
 
-    private void updateNoAcelerated(Steering steering, float time)
+    private void UpdateNoAccelerated(Steering steering, float time)
     {
         transform.position = transform.position + steering.velocidad * time;
         orientacion = orientacion + steering.rotacion * time;
@@ -170,5 +148,42 @@ public class AgentNPC : Agent
         //Hacemos que vuelva a ser visible
         gameObject.GetComponent<Renderer>().enabled = true;
         yield return new WaitForSeconds(5);
+    }
+
+
+    private void ApplySteering()
+    {
+        if (state != State.Action)
+        {
+            UpdateAccelerated(miSteering, Time.deltaTime);
+            return;
+        }
+
+        if (cAction == CAction.None) UpdateAccelerated(miSteering, Time.deltaTime);
+        else UpdateNoAccelerated(ActionSteering, Time.deltaTime);
+    }
+
+
+    protected override void Update()
+    {
+        // Actualiza el color si hay un cambio de estado
+        base.Update();
+        // Si estamos esperando nos quedamos quietos
+        if (state != State.Waiting) ApplySteering();
+        //ActualizarVelocidad();
+    }
+
+    // Los Steering se actualizan se usen o no otra cosa es que los guardemos
+    private void LateUpdate()
+    {
+        if (state == State.Action)
+            ActionSteering = cAction switch
+            {
+                CAction.None => new Steering(0, new Vector3(0, 0, 0)),
+                CAction.GoToTarget => goToTarget.GetSteering(this),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        else
+            miSteering = arbitro.GetSteering();
     }
 }

@@ -4,53 +4,41 @@ using UnityEngine;
 
 public class Controlador : MonoBehaviour
 {
-    private readonly Color cSelecionado = new Color(1, 0, 0);
-    private int accion;
+    private int action;
+    public HashSet<Agent> GetSelected { get; private set; }
 
-    public HashSet<GameObject> getSeleccionados { get; private set; }
-
-    // Start is called before the first frame update
+    // Builders
     private void Awake()
     {
-        getSeleccionados = new HashSet<GameObject>();
+        GetSelected = new HashSet<Agent>(); //Creamos la lista de seleccionados
     }
 
-    public void addOquitaSeleccion(GameObject agente)
+    public void AddOrRemoveFromSelected(Agent agente)
     {
-        if (getSeleccionados.Contains(agente))
-            quitarSeleccionados(agente);
+        if (GetSelected.Contains(agente))
+            RemoveFromSelected(agente);
         else
-            addSeleccionados(agente);
+            AddToSelected(agente);
     }
 
 
-    private void addSeleccionados(GameObject agente)
+    private void AddToSelected(Agent agente)
     {
-        getSeleccionados.Add(agente);
-        Debug.Log("seleccionados: " + getSeleccionados.Count);
-        agente.GetComponent<Agent>().cambiarColor(cSelecionado);
+        GetSelected.Add(agente);
+        Debug.Log("seleccionados: " + GetSelected.Count);
+        agente.MakeState(State.Selected);
     }
 
-    private void quitarSeleccionados(GameObject agente)
+    private void RemoveFromSelected(Agent agente)
     {
-        getSeleccionados.Remove(agente);
-        Debug.Log("quitar seleccionados: " + getSeleccionados.Count);
-        agente.GetComponent<Agent>().ponerColorOriginal();
+        GetSelected.Remove(agente);
+        Debug.Log("quitar seleccionados: " + GetSelected.Count);
+        agente.MakeState(State.Normal);
         //TODO reactivar steering
     }
 
-    private void actualizaColor(GameObject agente, Color c)
-    {
-        agente.GetComponent<Agent>().cambiarColor(c);
-    }
 
-    public void accionTermianda(GameObject agente)
-    {
-        accion = 0;
-        agente.GetComponent<Agent>().cambiarColor(cSelecionado);
-    }
-
-    private void irPosicionRaton()
+    private void GotoMousePosition()
     {
         // Damos una orden cuando levantemos el botón del ratón.
         if (Input.GetMouseButtonUp(1))
@@ -65,9 +53,9 @@ public class Controlador : MonoBehaviour
                 {
                     var newTarget = hitInfo.point;
 
-                    foreach (var character in getSeleccionados)
-                        // Llama al método denominado "NewTarget" en TODOS y cada uno de los MonoBehaviour de este game object (npc)
-                        character.SendMessage("NewTarget", newTarget);
+                    foreach (var agente in GetSelected)
+                        // Llamamos al Action del Agente
+                        agente.GoToTarget(newTarget);
                 }
         }
     }
@@ -76,18 +64,18 @@ public class Controlador : MonoBehaviour
     private void FormarCuadrado()
     {
         Debug.Log("Formando Cuadrado");
-        var selecionados = getSeleccionados.ToList().GetRange(0, 4);
+        var selecionados = GetSelected.ToList().GetRange(0, 4);
         var lider = selecionados[0];
         var peloton = selecionados.GetRange(1, 4);
         foreach (var soldado in peloton) soldado.SendMessage("DesactivaSteering");
     }
 
-    private void RealizaAccion()
+    private void MakeAction()
     {
-        switch (accion)
+        switch (action)
         {
             case 1:
-                irPosicionRaton();
+                GotoMousePosition();
                 break;
             case 2:
                 FormarCuadrado();
@@ -95,47 +83,42 @@ public class Controlador : MonoBehaviour
         }
     }
 
-    private void ResetAccion()
-    {
-        if (accion == 2)
-        {
-            Debug.Log("Deformando");
-            getSeleccionados.ToList().ForEach(o => o.SendMessage("ActivaSteering"));
-        }
-
-        accion = 0;
-        getSeleccionados.ToList().ForEach(accionTermianda);
-    }
+   
 
     // Update is called once per frame
+    /**
+     * Si hago click sobre un personaje lo selecciono
+     * Si pulso R los pongo en estado defecto normal
+     * Si pulso G quiero hacer un Go to
+     */
     private void Update()
     {
-        // Veo si quiero resetearlos
+        // R -> Reset
         if (Input.GetKeyDown(KeyCode.R))
         {
-            ResetAccion();
+            GetSelected.ToList().ForEach(RemoveFromSelected);
             return;
         }
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            getSeleccionados.ToList().ForEach(g => actualizaColor(g, Color.magenta));
-            accion = 1;
+            GetSelected.ToList().ForEach(agente => agente.MakeState(State.Waiting));
+            action = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            getSeleccionados.ToList().ForEach(g => actualizaColor(g, Color.yellow));
-            accion = 2;
-        }
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    GetSelected.ToList().ForEach(g => actualizaColor(g, Color.yellow));
+        //    cAction = 2;
+        //}
 
-        if (accion != 0)
-            RealizaAccion();
+        if (action != 0)
+            MakeAction();
     }
 
-    public int getLayerTerreno(Vector3 worldPos, Terrain t)
+    public int GetTerrainLayer(Vector3 worldPos, Terrain t)
     {
-        int index = 0;
+        var index = 0;
         var scriptTerreno = FindObjectOfType<GetTerreno>();
         index = scriptTerreno.GetainTexture(worldPos, t);
         return index;

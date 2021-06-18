@@ -779,7 +779,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132022202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.5, y: 1.25, z: -32.7}
+  m_LocalPosition: {x: -7, y: 1.25, z: -20.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2623,12 +2623,12 @@ MonoBehaviour:
   aInterior: 0
   mAExterior: 2
   dEbUg: 0
-  miSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
   arbitro: {fileID: 7046650390553723062}
   goToTarget: {fileID: 0}
   mejorTerreno: 0
+  miSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
   peorTerreno: 1
 --- !u!114 &7046650390553723064
 MonoBehaviour:
@@ -2651,7 +2651,6 @@ MonoBehaviour:
   grid: {fileID: 84023166}
   heuristic: {fileID: 7046650390553723065}
   objetivo: {fileID: 1132022203}
-  targetExists: 1
 --- !u!114 &7046650390553723065
 MonoBehaviour:
   m_ObjectHideFlags: 0

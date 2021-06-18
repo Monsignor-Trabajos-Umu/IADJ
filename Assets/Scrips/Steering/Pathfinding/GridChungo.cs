@@ -46,7 +46,7 @@ public class GridChungo : MonoBehaviour
             if (terreno != null && terreno.gameObject.activeSelf)
             {
                 var control = FindObjectOfType<Controlador>();
-                int i = control.getLayerTerreno(worldPoint, terreno);
+                int i = control.GetTerrainLayer(worldPoint, terreno);
                     Debug.Log(i);
                 //Se comprueba si es el valor del layer de las montañas
                 if (i == 1)
