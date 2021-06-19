@@ -94,7 +94,7 @@ public class BlenderSteering : MonoBehaviour
         //Eliminamos el steering eje y
         steering.lineal.y = 0;
 
-        // No tiene sentido 0,000001 de acelearcion
+        // No tiene sentido 0,000001 de aceleracion
         steering.lineal.x  = (float)(Math.Round(steering.lineal.x, 4));
         steering.lineal.z  = (float)(Math.Round(steering.lineal.z, 4));
 
