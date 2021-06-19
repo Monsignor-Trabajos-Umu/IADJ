@@ -34,7 +34,7 @@ public class Evade : Flee
     // Start is called before the first frame update
     void Start()
     {
-
+        grupo = Grupo.COLISIONES;
     }
 
     // Update is called once per frame

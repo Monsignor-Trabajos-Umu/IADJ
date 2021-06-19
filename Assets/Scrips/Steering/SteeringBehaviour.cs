@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Grupo{
+    COLISIONES = 0,
+    PERSECUCION = 1,
+    SEPARACION = 2
+};
+
 public abstract class SteeringBehaviour : MonoBehaviour
 {
+    public Grupo grupo;
     public Agent target;
     //Peso del SteeringBehaviour
     public float weight = 1f;
@@ -18,6 +25,11 @@ public abstract class SteeringBehaviour : MonoBehaviour
     //Calcula el Steering para el agente dado en funcion del comportamiento deseado
     public abstract Steering GetSteering(AgentNPC agent);
 
+
+    private void Awake()
+    {
+        grupo = Grupo.PERSECUCION;
+    }
     public void UsePredicted(Vector3 predictedDirection,float predictedRotation =0f)
     {
         this.usePredicted = true;

@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class CollisionAvoidance : SteeringBehaviour
 {
-
+   
     //Lista de potenciales objetivos de colision;
     public Agent[] colisiones;
     private float tiempoMasCerca;
+
+    private void Start()
+    {
+        grupo = Grupo.COLISIONES;
+    }
 
     public override Steering GetSteering(AgentNPC miAgente)
     {

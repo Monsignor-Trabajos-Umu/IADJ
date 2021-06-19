@@ -30,5 +30,8 @@ public class VelocityMatch : SteeringBehaviour
         steering.angular = 0;
         return this.steering;
     }
-
+    private void Start()
+    {
+        grupo = Grupo.SEPARACION;
+    }
 }

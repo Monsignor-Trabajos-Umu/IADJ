@@ -52,5 +52,6 @@ public class Alignment : SteeringBehaviour
         this.targets = GameObject.FindGameObjectsWithTag("flock")
                         .Select(target => target.GetComponent<Agent>())
                         .ToList(); ;
+        grupo = Grupo.SEPARACION;
     }
 }

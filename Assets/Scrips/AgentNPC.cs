@@ -5,7 +5,7 @@ using UnityEngine;
 public class AgentNPC : Agent
 {
     private Steering actionSteering;
-    public BlenderSteering arbitro;
+    public ArbitroSteering arbitro;
     public GoTarget goToTarget;
     
     // Path OffSet
