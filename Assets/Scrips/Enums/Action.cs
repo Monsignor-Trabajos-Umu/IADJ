@@ -1,6 +1,8 @@
 public enum CAction
 {
     None,
-    GoToTarget
+    GoToTarget,
+    FormationBoss,
+    FormationSoldier
     
 }

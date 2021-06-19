@@ -14,22 +14,21 @@ public abstract class SteeringBehaviour : MonoBehaviour
     public Steering steering;
     [SerializeField]
     protected bool debug = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    
     //Calcula el Steering para el agente dado en funcion del comportamiento deseado
     public abstract Steering GetSteering(AgentNPC agent);
 
-
+    public void UsePredicted(Vector3 predictedDirection,float predictedRotation =0f)
+    {
+        this.usePredicted = true;
+        this.predictedDirection = predictedDirection;
+        this.predictedRotation = predictedRotation;
+    }
+    public void UsePredicted(float predictedRotation)
+    {
+        this.usePredicted = true;
+        this.predictedRotation = predictedRotation;
+    }
 
     private void OnDrawGizmos()
     {

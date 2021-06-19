@@ -55,7 +55,7 @@ public class Body : MonoBehaviour
     }
 
 
-
+    #region SetColors 
     protected void SetColorSelected()
     {
         SetColor(Color.blue);
@@ -71,9 +71,24 @@ public class Body : MonoBehaviour
     }
     protected void SetColorGoToTarget()
     {
+
         SetColor(Color.red);
     }
     
+    protected void SetColorBoss()
+    {
+
+        SetColor(Color.white);
+    }
+    protected void SetColorSoldier()
+    {
+
+        SetColor(Color.black);
+    }
+
+    
+    #endregion
+   
 
         
 

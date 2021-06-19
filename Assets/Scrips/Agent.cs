@@ -20,7 +20,7 @@ public class Agent : Body
     [SerializeField] public double rInterior;
 
     // State para las ordenes y Action para las acciones
-    protected State state = State.Normal;
+    public State state = State.Normal;
     protected CAction cAction = CAction.None;
 
     public double rExterior => rInterior * margen;
@@ -84,7 +84,9 @@ public class Agent : Body
     {
         MakeState(State.Waiting);
         cAction = CAction.None;
+        controlador.Done();
     }
+
 
     // Solo cambiamos el color
     private void UpdateColor()
@@ -101,7 +103,23 @@ public class Agent : Body
                 SetColorWaiting();
                 break;
             case State.Action:
-                SetColorGoToTarget();
+                switch (cAction)
+                {
+                    case CAction.None:
+                        break;
+                    case CAction.GoToTarget:
+                        SetColorGoToTarget();
+                        break;
+                    case CAction.FormationBoss:
+                        SetColorBoss();
+                        break;
+                    case CAction.FormationSoldier:
+                        SetColorSoldier();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+               
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Aling : SteeringBehaviour
+public class Align : SteeringBehaviour
 {
     protected float timeToTarget = 0.1f;
 
-    private float mapToRange(float grados)
+    public float MapToRange(float grados)
     {
         // Esta rotacion puede ser superior a 360 grados asique la modulo 
         grados = grados % 360;
@@ -16,7 +16,7 @@ public class Aling : SteeringBehaviour
             return grados;
         else
         {
-            float mapped = Math.Abs(grados) - 360;
+            var mapped = Math.Abs(grados) - 360;
             mapped *= Math.Sign(grados);
             return mapped;
         }
@@ -45,7 +45,7 @@ public class Aling : SteeringBehaviour
             // Calculo la rotacion para que mi Agente tenga la misma que el target
             rotation = target.orientacion - miAgente.orientacion;
             // Hago que este entre -180 y 180
-            rotation = mapToRange(rotation);
+            rotation = MapToRange(rotation);
 
 
 

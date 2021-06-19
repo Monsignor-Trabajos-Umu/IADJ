@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class LookWhereYouGoing : Aling
+public class LookWhereYouGoing : Align
 {
 
     // Quiero que mi agente mire hacia delante es decir hacia donde tiene su vector velocidad

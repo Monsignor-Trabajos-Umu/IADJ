@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AntiAling : SteeringBehaviour
+public class AntiAlign : SteeringBehaviour
 {
     public override Steering GetSteering(AgentNPC miAgente)
     {

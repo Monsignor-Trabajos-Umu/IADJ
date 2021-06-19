@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class AgentNPC : Agent
 {
-    private Steering ActionSteering;
+    private Steering actionSteering;
     public BlenderSteering arbitro;
     public GoTarget goToTarget;
+    public FormationOffset formationOffset;
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
     public Steering miSteering;
-    public int peorTerreno = 1;
 
+
+    // Path OffSet
+    public Formation formation;
+    public int peorTerreno = 1;
 
     // Builders 
 
@@ -25,7 +29,7 @@ public class AgentNPC : Agent
         // El go to target se salta todos los arbitros
         goToTarget = GetComponent<GoTarget>();
         miSteering = new Steering(0, new Vector3(0, 0, 0));
-        ActionSteering = new Steering(0, new Vector3(0, 0, 0));
+        actionSteering = new Steering(0, new Vector3(0, 0, 0));
     }
 
 
@@ -78,16 +82,26 @@ public class AgentNPC : Agent
         orientacion = orientacion + steering.rotacion * time;
     }
 
-    private void DesactivaSteering()
+    /**
+     * Formaciones Fijas
+     */
+    public void BecomeLeader(Formation newFormation)
     {
-        var steerings = GetComponents<SteeringBehaviour>();
-        foreach (var steering in steerings) steering.enabled = false;
+        MakeState(State.Action);
+        cAction = CAction.FormationBoss;
+        formation = newFormation;
+
     }
 
-    private void ActivaSteering()
+    public void BecomeSoldier(Formation newFormation)
     {
-        var steerings = GetComponents<SteeringBehaviour>();
-        foreach (var steering in steerings) steering.enabled = true;
+        MakeState(State.Action);
+        cAction = CAction.FormationSoldier;
+        formation = newFormation;
+    }
+
+    public void ArrivedToTargetPathOffSet()
+    {
     }
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
@@ -160,7 +174,7 @@ public class AgentNPC : Agent
         }
 
         if (cAction == CAction.None) UpdateAccelerated(miSteering, Time.deltaTime);
-        else UpdateNoAccelerated(ActionSteering, Time.deltaTime);
+        else UpdateNoAccelerated(actionSteering, Time.deltaTime);
     }
 
 
@@ -177,10 +191,11 @@ public class AgentNPC : Agent
     private void LateUpdate()
     {
         if (state == State.Action)
-            ActionSteering = cAction switch
+            actionSteering = cAction switch
             {
                 CAction.None => new Steering(0, new Vector3(0, 0, 0)),
                 CAction.GoToTarget => goToTarget.GetSteering(this),
+                CAction.FormationSoldier => 
                 _ => throw new ArgumentOutOfRangeException()
             };
         else

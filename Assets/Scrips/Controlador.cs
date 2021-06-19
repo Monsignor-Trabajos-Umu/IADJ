@@ -12,7 +12,11 @@ public class Controlador : MonoBehaviour
     {
         GetSelected = new HashSet<Agent>(); //Creamos la lista de seleccionados
     }
-
+    //Hemos terminado la acción
+    public void Done()
+    {
+        action = 0;
+    }
     public void AddOrRemoveFromSelected(Agent agente)
     {
         if (GetSelected.Contains(agente))
@@ -61,13 +65,27 @@ public class Controlador : MonoBehaviour
     }
 
 
-    private void FormarCuadrado()
+    private void MakeLine(List<AgentNPC> selected)
     {
         Debug.Log("Formando Cuadrado");
-        var selecionados = GetSelected.ToList().GetRange(0, 4);
-        var lider = selecionados[0];
-        var peloton = selecionados.GetRange(1, 4);
-        foreach (var soldado in peloton) soldado.SendMessage("DesactivaSteering");
+        selected.ForEach(agent => agent.MakeState(State.Waiting));
+        
+        var leader = selected[0];
+        var soldiers = selected.GetRange(1, 4);
+
+        var formation = new Formation(leader);
+        leader.BecomeLeader(formation);
+
+        var spacing = 5f;
+        soldiers.ForEach(agentNpc =>
+        {
+            formation.soldier.Add(agentNpc,new Steering(0,new Vector3(spacing,0,0)));
+            spacing += 5;
+            agentNpc.BecomeSoldier(formation);
+        });
+
+      
+
     }
 
     private void MakeAction()
@@ -77,13 +95,9 @@ public class Controlador : MonoBehaviour
             case 1:
                 GotoMousePosition();
                 break;
-            case 2:
-                FormarCuadrado();
-                break;
         }
     }
 
-   
 
     // Update is called once per frame
     /**
@@ -97,20 +111,26 @@ public class Controlador : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             GetSelected.ToList().ForEach(RemoveFromSelected);
+            Done();
             return;
         }
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            GetSelected.ToList().ForEach(agente => agente.MakeState(State.Waiting));
+            GetSelected.Where(agente => agente.state != State.Waiting).
+                ToList().
+                ForEach(agent => agent.MakeState(State.Waiting));
             action = 1;
         }
 
-        //if (Input.GetKeyDown(KeyCode.H))
-        //{
-        //    GetSelected.ToList().ForEach(g => actualizaColor(g, Color.yellow));
-        //    cAction = 2;
-        //}
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            var selected = GetSelected.Where(p => p is AgentNPC).Cast<AgentNPC>().ToList()
+                .GetRange(0, 4);
+          
+            MakeLine(selected);
+            
+        }
 
         if (action != 0)
             MakeAction();

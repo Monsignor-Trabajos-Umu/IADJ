@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Wander : Aling
+public class Wander : Align
 {
     // https://answers.unity.com/questions/421968/normal-distribution-random.html
     public static float RandomGaussian(float minValue = 0.0f, float maxValue = 1.0f)
