@@ -594,7 +594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033400051}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 109.4, z: -34.05}
+  m_LocalPosition: {x: 0, y: 23.4, z: 14.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1249,7 +1249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23457019375682711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 2, z: 10}
+  m_LocalPosition: {x: 2.58, y: 2, z: 11.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 23457019298678373}
@@ -1274,8 +1274,8 @@ GameObject:
   - component: {fileID: 23457019375682706}
   - component: {fileID: 23457019375682707}
   - component: {fileID: 23457019375682713}
-  - component: {fileID: 23457019375682712}
   - component: {fileID: 23457019375682704}
+  - component: {fileID: 23457019375682712}
   - component: {fileID: 23457019375682714}
   m_Layer: 0
   m_Name: Flee
@@ -1296,7 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a657bed861bf8478b1b3f421d03491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grupo: 0
+  grupo: 1
   target: {fileID: 781002767837107761}
   weight: 1
   steering:
@@ -1312,11 +1312,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 23457019375682711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
+  m_Script: {fileID: 11500000, guid: d6f417490d9f441458d4b3db139add8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
-  listSteerings: []
+  debugGreen: 1
+  ordenMayor: 0
   debugSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -1686,7 +1686,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781002767837107760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 13.5}
+  m_LocalPosition: {x: 1.19, y: 1, z: 16.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 775364890264499892}

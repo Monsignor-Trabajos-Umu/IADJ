@@ -21,10 +21,6 @@ public class PrioritySteering : ArbitroSteering
     [SerializeField]
     Steering debugSteering;
 
-    [SerializeField]
-    public Grupo primeraOpcion = Grupo.COLISIONES;
-    [SerializeField]
-    public Grupo segundaOpcion = Grupo.PERSECUCION;
     private void Awake()
     {
         dicGrupos = new Dictionary<Grupo, Steering>();
@@ -60,6 +56,8 @@ public class PrioritySteering : ArbitroSteering
 
     private void LateUpdate()
     {
+        dicGrupos.Clear();
+
         Steering aux = BlenderCalc(listColisiones);
         dicGrupos.Add(Grupo.COLISIONES, aux);
 

@@ -31,7 +31,7 @@ public class AgentNPC : Agent
      
 
         //usar GetComponents<>() para cargar el arbitro del personaje
-        arbitro = GetComponent<BlenderSteering>();
+        arbitro = GetComponent<ArbitroSteering>();
         // El go to target se salta todos los arbitros
         goToTarget = GetComponent<GoTarget>();
         miSteering = new Steering(0, new Vector3(0, 0, 0));

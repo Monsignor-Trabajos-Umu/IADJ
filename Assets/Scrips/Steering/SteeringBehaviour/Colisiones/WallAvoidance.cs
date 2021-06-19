@@ -11,6 +11,11 @@ public class WallAvoidance : Seek
     // Distancia del rayo
     public float lookAhead;
 
+    private void Start()
+    {
+        grupo = Grupo.COLISIONES;
+    }
+
     public override Steering GetSteering(AgentNPC miAgente)
     {
         // Calculamos el target para delegarlo a seek
