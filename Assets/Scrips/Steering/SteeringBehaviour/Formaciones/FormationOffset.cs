@@ -7,26 +7,27 @@ public class FormationOffset : SteeringBehaviour
 {
     
     private Formation formation;
-    private bool makeFormation;
     private Align align;
     private Arrive arrive;
     public override Steering GetSteering(AgentNPC miAgente)
     {
+
+
+
         this.steering = new Steering(0, new Vector3(0, 0, 0));
-        if (!makeFormation)
+        if (formation.state != FormationState.MakingFormation)
             return this.steering;
 
         Vector3 myPosition = miAgente.transform.position;
         var leader = formation.leader;
-        var offSet = formation.soldier[miAgente];
-        var newPosition = leader.transform.position + offSet.lineal;
+        var newOffset = formation.GetGlobalPosition(miAgente);
+        var newDirection = newOffset.lineal - myPosition;
 
-        arrive.UsePredicted(newPosition);
-        steering.lineal = arrive.GetSteering(miAgente).lineal;
-
+       
 
 
-        var rotation = leader.orientacion - miAgente.orientacion + offSet.angular;
+
+        var rotation = leader.orientacion - miAgente.orientacion + newOffset.angular;
         // Hago que este entre -180 y 180
         rotation = align.MapToRange(rotation);
 
@@ -35,25 +36,18 @@ public class FormationOffset : SteeringBehaviour
 
 
         // Comprobamos si estamos en la posicion +-
-        if (direction.magnitude > miAgente.rExterior)
+        if (newDirection.magnitude > miAgente.rInterior)
         {
-            base.usePredicted = true;
-            base.predictedDirection = direction;
-            return base.GetSteering(miAgente);
+            arrive.UsePredicted(newDirection);
+            steering.lineal = arrive.GetSteering(miAgente).lineal;
         }
         else
         {
-            // Si estamos en la posicion +- ponemos a false el flag
-            makeFormation = false;
-            miAgente.ArrivedToTarget();
+            //miAgente.ArrivedToTargetPathOffSet();
 
         }
-        double angle = miAgente.MinAngleToRotate(targetPosition);
-        if (Math.Abs(angle) >= Math.Abs(miAgente.aExterior))
-        {
-            this.steering.rotacion = (float)angle;
-        }
-        return base.steering;
+
+        return this.steering;
     }
 
     void Start()
@@ -62,10 +56,10 @@ public class FormationOffset : SteeringBehaviour
         arrive = gameObject.AddComponent<Arrive>();
     }
 
-    public void NewTarget(Vector3 newTarget)
+    public void SetFormation(Formation formation)
     {
-        this.targetPosition = newTarget;
-        this.makeFormation = true;
+        this.formation = formation;
     }
+
 
 }

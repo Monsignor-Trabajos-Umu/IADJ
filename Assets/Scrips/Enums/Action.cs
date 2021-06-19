@@ -2,7 +2,7 @@ public enum CAction
 {
     None,
     GoToTarget,
-    FormationBoss,
+    FormationLeader,
     FormationSoldier
-    
+
 }

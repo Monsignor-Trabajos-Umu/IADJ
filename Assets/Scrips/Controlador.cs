@@ -68,15 +68,18 @@ public class Controlador : MonoBehaviour
     private void MakeLine(List<AgentNPC> selected)
     {
         Debug.Log("Formando Cuadrado");
+
+
         selected.ForEach(agent => agent.MakeState(State.Waiting));
         
         var leader = selected[0];
-        var soldiers = selected.GetRange(1, 4);
+        var soldiers = selected.GetRange(1, 3);
 
         var formation = new Formation(leader);
         leader.BecomeLeader(formation);
 
         var spacing = 5f;
+
         soldiers.ForEach(agentNpc =>
         {
             formation.soldier.Add(agentNpc,new Steering(0,new Vector3(spacing,0,0)));
@@ -84,7 +87,8 @@ public class Controlador : MonoBehaviour
             agentNpc.BecomeSoldier(formation);
         });
 
-      
+       formation.MakeFormation();
+
 
     }
 
@@ -104,6 +108,7 @@ public class Controlador : MonoBehaviour
      * Si hago click sobre un personaje lo selecciono
      * Si pulso R los pongo en estado defecto normal
      * Si pulso G quiero hacer un Go to
+     * Si pulso L quiero hacer una Formación linea
      */
     private void Update()
     {
@@ -123,7 +128,7 @@ public class Controlador : MonoBehaviour
             action = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             var selected = GetSelected.Where(p => p is AgentNPC).Cast<AgentNPC>().ToList()
                 .GetRange(0, 4);

@@ -7,6 +7,9 @@ public class AgentNPC : Agent
     private Steering actionSteering;
     public BlenderSteering arbitro;
     public GoTarget goToTarget;
+    
+    // Path OffSet
+    public Formation formation;
     public FormationOffset formationOffset;
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
@@ -14,8 +17,7 @@ public class AgentNPC : Agent
     public Steering miSteering;
 
 
-    // Path OffSet
-    public Formation formation;
+
     public int peorTerreno = 1;
 
     // Builders 
@@ -24,6 +26,10 @@ public class AgentNPC : Agent
     protected override void Start()
     {
         base.Start();
+
+        formationOffset = gameObject.AddComponent<FormationOffset>();
+     
+
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<BlenderSteering>();
         // El go to target se salta todos los arbitros
@@ -88,8 +94,9 @@ public class AgentNPC : Agent
     public void BecomeLeader(Formation newFormation)
     {
         MakeState(State.Action);
-        cAction = CAction.FormationBoss;
+        cAction = CAction.FormationLeader;
         formation = newFormation;
+        formationOffset.SetFormation(newFormation);
 
     }
 
@@ -98,11 +105,15 @@ public class AgentNPC : Agent
         MakeState(State.Action);
         cAction = CAction.FormationSoldier;
         formation = newFormation;
-    }
+        formationOffset.SetFormation(newFormation); }
 
     public void ArrivedToTargetPathOffSet()
     {
+        formation.state = FormationState.Waiting;
+
     }
+
+   
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
     para ir despues al punto de muerte.*/
@@ -172,9 +183,24 @@ public class AgentNPC : Agent
             UpdateAccelerated(miSteering, Time.deltaTime);
             return;
         }
-
-        if (cAction == CAction.None) UpdateAccelerated(miSteering, Time.deltaTime);
-        else UpdateNoAccelerated(actionSteering, Time.deltaTime);
+        
+        switch (cAction)
+        {
+            case CAction.None:
+                UpdateAccelerated(actionSteering, Time.deltaTime);
+                break;
+            case CAction.GoToTarget:
+                UpdateNoAccelerated(actionSteering, Time.deltaTime);
+                break;
+            case CAction.FormationLeader:
+                UpdateAccelerated(actionSteering,Time.deltaTime);
+                break;
+            case CAction.FormationSoldier:
+                UpdateAccelerated(actionSteering,Time.deltaTime);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
 
@@ -195,7 +221,11 @@ public class AgentNPC : Agent
             {
                 CAction.None => new Steering(0, new Vector3(0, 0, 0)),
                 CAction.GoToTarget => goToTarget.GetSteering(this),
-                CAction.FormationSoldier => 
+                CAction.FormationLeader =>  (formation.state == FormationState.MakingFormation)? 
+                                            goToTarget.GetSteering(this):
+                                            arbitro.GetSteering(), 
+                                            // TODO Usar un arbitro para esto
+                CAction.FormationSoldier => formationOffset.GetSteering(this),
                 _ => throw new ArgumentOutOfRangeException()
             };
         else

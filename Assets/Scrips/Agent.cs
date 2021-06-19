@@ -21,7 +21,7 @@ public class Agent : Body
 
     // State para las ordenes y Action para las acciones
     public State state = State.Normal;
-    protected CAction cAction = CAction.None;
+    public CAction cAction = CAction.None;
 
     public double rExterior => rInterior * margen;
 
@@ -110,7 +110,7 @@ public class Agent : Body
                     case CAction.GoToTarget:
                         SetColorGoToTarget();
                         break;
-                    case CAction.FormationBoss:
+                    case CAction.FormationLeader:
                         SetColorBoss();
                         break;
                     case CAction.FormationSoldier:
