@@ -5,20 +5,8 @@ using System;
 using System.Linq;
 
 
-[Serializable]
-public struct BehaviorAndWeight
-{
-    public Steering behavior;
-    public float weight;
 
-    public BehaviorAndWeight(Steering behavior, float weight)
-    {
-        this.behavior = behavior;
-        this.weight = weight;
-    }
-}
-
-public class BlenderSteering : MonoBehaviour
+public class BlenderSteering : ArbitroSteering
 {
 
     [SerializeField]
@@ -27,8 +15,7 @@ public class BlenderSteering : MonoBehaviour
     AgentNPC agente;
     [SerializeField]
     Steering debugSteering;
-    [SerializeField]
-    bool debugGreen = false;
+
 
     private void Awake()
     {
@@ -63,7 +50,7 @@ public class BlenderSteering : MonoBehaviour
 
 
 
-    public Steering GetSteering()
+    override public Steering GetSteering()
     {
         Steering steering = new Steering(0, new Vector3(0, 0, 0));
 

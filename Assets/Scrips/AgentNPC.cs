@@ -5,19 +5,13 @@ using UnityEngine;
 public class AgentNPC : Agent
 {
     private Steering actionSteering;
-
-    private bool alreadyWaiting;
-    public BlenderSteering arbitro;
-
-    // Estados
-    public CAction cAction = CAction.None; //  Action para las acciones
-
-
+    public GoTarget goToTarget;
+    public ArbitroSteering arbitro;
     private Controlador controlador;
-
+    public CAction cAction = CAction.None; //  Action para las acciones
+    private bool alreadyWaiting;
     public Formation formation;
     public FormationOffset formationOffset;
-    public GoTarget goToTarget;
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
@@ -42,7 +36,7 @@ public class AgentNPC : Agent
 
 
         //usar GetComponents<>() para cargar el arbitro del personaje
-        arbitro = GetComponent<BlenderSteering>();
+        arbitro = GetComponent<ArbitroSteering>();
         // El go to target se salta todos los arbitros
         goToTarget = GetComponent<GoTarget>();
         miSteering = new Steering(0, new Vector3(0, 0, 0));

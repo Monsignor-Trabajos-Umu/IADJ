@@ -594,7 +594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033400051}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 109.4, z: -34.05}
+  m_LocalPosition: {x: 0, y: 23.4, z: 14.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1189,21 +1189,29 @@ MonoBehaviour:
   masa: 0
   velocidad: 0
   mVelocidad: 5
+  vidaMaxima: 100
+  vida: 100
+  alcance: 1
+  "da\xF1o": 2
   rotacion: 0
   mRotacion: 360
   mAngularAceleracion: 180
   mAceleracion: 5
   vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
-  rInterior: 5
   aInterior: 1
-  mAExterior: 10
   dEbUg: 0
+  rInterior: 5
+  state: 0
+  cAction: 0
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
+  formationOffset: {fileID: 0}
+  mejorTerreno: 0
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  arbitro: {fileID: 0}
-  goToTarget: {fileID: 0}
+  peorTerreno: 1
 --- !u!54 &23457019375682706
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1241,7 +1249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23457019375682711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 2, z: 10}
+  m_LocalPosition: {x: 2.58, y: 2, z: 11.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 23457019298678373}
@@ -1266,8 +1274,9 @@ GameObject:
   - component: {fileID: 23457019375682706}
   - component: {fileID: 23457019375682707}
   - component: {fileID: 23457019375682713}
-  - component: {fileID: 23457019375682712}
   - component: {fileID: 23457019375682704}
+  - component: {fileID: 23457019375682712}
+  - component: {fileID: 23457019375682714}
   m_Layer: 0
   m_Name: Flee
   m_TagString: Untagged
@@ -1287,6 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a657bed861bf8478b1b3f421d03491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grupo: 1
   target: {fileID: 781002767837107761}
   weight: 1
   steering:
@@ -1302,14 +1312,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 23457019375682711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
+  m_Script: {fileID: 11500000, guid: d6f417490d9f441458d4b3db139add8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listSteerings: []
+  debugGreen: 1
+  ordenMayor: 0
   debugSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debugGreen: 0
+--- !u!114 &23457019375682714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23457019375682711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683af856a1c44204fa06f17dcf24589b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grupo: 0
+  target: {fileID: 0}
+  weight: 4
+  steering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  debug: 1
+  avoidDistance: 2
+  lookAhead: 2
 --- !u!33 &23457019375682716
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1655,7 +1686,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781002767837107760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 13.5}
+  m_LocalPosition: {x: 1.19, y: 1, z: 16.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 775364890264499892}
@@ -1864,16 +1895,21 @@ MonoBehaviour:
   masa: 1
   velocidad: 1
   mVelocidad: 20
+  vidaMaxima: 100
+  vida: 100
+  alcance: 1
+  "da\xF1o": 2
   rotacion: 1
   mRotacion: 1
   mAngularAceleracion: 1
   mAceleracion: 5
   vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
-  rInterior: 2
   aInterior: 0
-  mAExterior: 0
   dEbUg: 1
+  rInterior: 2
+  state: 0
+  cAction: 0
 --- !u!114 &781002767837107762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2667,21 +2703,29 @@ MonoBehaviour:
   masa: 0
   velocidad: 0
   mVelocidad: 5
+  vidaMaxima: 100
+  vida: 100
+  alcance: 1
+  "da\xF1o": 2
   rotacion: 0
   mRotacion: 360
   mAngularAceleracion: 180
   mAceleracion: 5
   vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
-  rInterior: 5
   aInterior: 1
-  mAExterior: 10
   dEbUg: 0
+  rInterior: 5
+  state: 0
+  cAction: 0
+  arbitro: {fileID: 0}
+  goToTarget: {fileID: 0}
+  formationOffset: {fileID: 0}
+  mejorTerreno: 0
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  arbitro: {fileID: 0}
-  goToTarget: {fileID: 0}
+  peorTerreno: 1
 --- !u!4 &9175289921763913756
 Transform:
   m_ObjectHideFlags: 0
@@ -2736,6 +2780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc1f88977c1a78478cd255c223b8592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grupo: 0
   target: {fileID: 781002767837107761}
   weight: 1
   steering:
@@ -2754,11 +2799,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugGreen: 0
   listSteerings: []
   debugSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debugGreen: 0
 --- !u!20 &9175289921938436845
 Camera:
   m_ObjectHideFlags: 0
