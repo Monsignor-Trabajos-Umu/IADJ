@@ -38,7 +38,7 @@ public class Alignment : SteeringBehaviour
             // Normalizamos y la convertimos en aceleracion
 
             steering.lineal = velocidades.normalized;
-            steering.lineal *= agent.mAceleracion;
+            steering.lineal *= agent.mAcceleration;
         }
 
         if (debug)

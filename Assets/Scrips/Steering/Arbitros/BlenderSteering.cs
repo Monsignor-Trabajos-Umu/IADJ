@@ -74,8 +74,8 @@ public class BlenderSteering : MonoBehaviour
             steering.angular += behavior.weight * behavior.behavior.angular;
             steering.lineal += behavior.weight * behavior.behavior.lineal;
         }
-        steering.lineal = (steering.lineal.magnitude > agente.mAceleracion) ? steering.lineal.normalized * agente.mAceleracion : steering.lineal;
-        steering.angular = (steering.angular > agente.mAngularAceleracion) ? (steering.angular * agente.mAngularAceleracion) / Math.Abs(steering.angular) : steering.angular;
+        steering.lineal = (steering.lineal.magnitude > agente.mAcceleration) ? steering.lineal.normalized * agente.mAcceleration : steering.lineal;
+        steering.angular = (steering.angular > agente.mAngularAcceleration) ? (steering.angular * agente.mAngularAcceleration) / Math.Abs(steering.angular) : steering.angular;
 
         steering = filtroSteering(steering);
         if (debugGreen)

@@ -8,12 +8,12 @@ public class Arrive : SteeringBehaviour
     public override Steering GetSteering(AgentNPC miAgente)
     {
 
-        float maxAccelerarion = miAgente.mAceleracion;
-        float maxSpeed = miAgente.mVelocidad;
+        float maxAccelerarion = miAgente.mAcceleration;
+        float maxSpeed = miAgente.mVelocity;
 
         // Radio para llegar al objetivo
         float targetRadius = (float)miAgente.rInterior;
-        float slowRadius = (float)miAgente.rExterior;
+        float slowRadius = (float)miAgente.RExterior;
 
         float timeToTarget = 0.1f;
 

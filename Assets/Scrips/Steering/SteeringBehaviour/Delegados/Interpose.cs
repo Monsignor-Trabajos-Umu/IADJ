@@ -25,7 +25,7 @@ public class Interpose : Arrive
         midPoint = (agenteA.transform.position + agenteB.transform.position) / 2;
 
 
-        float timeToReachMidPoint = Vector3.Distance(agent.transform.position, midPoint) / agent.mVelocidad;
+        float timeToReachMidPoint = Vector3.Distance(agent.transform.position, midPoint) / agent.mVelocity;
 
         //Posiciones de los objetivos a futuro
         Vector3 posA = agenteA.transform.position + agenteA.vVelocidad * timeToReachMidPoint;

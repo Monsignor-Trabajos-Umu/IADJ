@@ -16,7 +16,7 @@ public class Seek : SteeringBehaviour
 
         steering.lineal = position - miAgente.transform.position;
         steering.lineal.Normalize();
-        steering.lineal *= miAgente.mAceleracion;
+        steering.lineal *= miAgente.mAcceleration;
 
         steering.angular = 0;
         return this.steering;

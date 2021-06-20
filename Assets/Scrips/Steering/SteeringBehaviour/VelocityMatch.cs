@@ -8,7 +8,7 @@ public class VelocityMatch : SteeringBehaviour
     public override Steering GetSteering(AgentNPC miAgente)
     {
 
-        float maxAccelerarion = miAgente.mAceleracion;
+        float maxAccelerarion = miAgente.mAcceleration;
 
         float timeToTarget = 0.1f;
 

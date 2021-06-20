@@ -7,7 +7,7 @@ public class AgentPlayer : Agent
 
     void mover()
     {
-        Vector3 Velocity = (new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))) * this.mVelocidad;
+        Vector3 Velocity = (new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))) * this.mVelocity;
         transform.Translate(Velocity * Time.deltaTime, Space.World);
         transform.LookAt(transform.position + Velocity);
         this.vVelocidad = Velocity;
@@ -18,9 +18,8 @@ public class AgentPlayer : Agent
 
 
     // Update is called once per frame
-    protected override void Update()
+    protected void Update()
     {
-        base.Update();
         mover();
         //printDebug();
     }

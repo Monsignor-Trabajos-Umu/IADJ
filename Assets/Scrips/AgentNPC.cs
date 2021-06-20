@@ -5,20 +5,29 @@ using UnityEngine;
 public class AgentNPC : Agent
 {
     private Steering actionSteering;
+
+    private bool alreadyWaiting;
     public BlenderSteering arbitro;
-    public GoTarget goToTarget;
-    
-    // Path OffSet
+
+    // Estados
+    public CAction cAction = CAction.None; //  Action para las acciones
+
+
+    private Controlador controlador;
+
     public Formation formation;
     public FormationOffset formationOffset;
+    public GoTarget goToTarget;
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
     public Steering miSteering;
-
-
-
     public int peorTerreno = 1;
+    public bool selected;
+    public State state = State.Normal; // State para las ordenes
+    private bool stateChanged;
+    private bool InFormation => formation != null;
+
 
     // Builders 
 
@@ -26,9 +35,11 @@ public class AgentNPC : Agent
     protected override void Start()
     {
         base.Start();
+        SaveOriginalColor();
+        controlador = GameObject.FindGameObjectWithTag("controlador").GetComponent<Controlador>();
 
         formationOffset = gameObject.AddComponent<FormationOffset>();
-     
+
 
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<BlenderSteering>();
@@ -39,14 +50,184 @@ public class AgentNPC : Agent
     }
 
 
-    private void ActualizarVelocidad()
+    #region SetColors
+
+    private void UpdateColor()
     {
-        /*Si el terreno de nuestros pies es mejor Terreno entonces
-         * mejoramos la velocidad máxima del personaje multiplicando por 1.5
-         * , y si es el peor terreno entonces la reducimos a la mitad
-        */
+        void SetColorSelected() => SetColor(Color.white);
+
+        void SetColorWaiting() => SetColorHeadBand(Color.red);
+
+        void SetColorGoToTarget() => SetColorHeadBand(Color.green);
+
+        void SetColorForming() => SetColorHeadBand(Color.black);
+
+        void SetColorBoss() => SetHat(HatsTypes.Police);
+
+        void SetColorSoldier() => SetHat(HatsTypes.CowBoy);
+
+
+        // Solo cambiamos el color de la banda 
+
+        if (!stateChanged) return;
+        Debug.Log(
+            $"State {state} | Action {cAction} | Formation {InFormation} | Selected {selected}");
+        ResetVisualStatus(); //Reseteamos lo visual
+        switch (state)
+        {
+            case State.Normal:
+                break;
+            case State.Waiting:
+                SetColorWaiting();
+                break;
+            case State.Action:
+                switch (cAction)
+                {
+                    case CAction.None:
+                        break;
+                    case CAction.GoToTarget:
+                        SetColorGoToTarget();
+                        break;
+                    case CAction.Forming:
+                        SetColorForming();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        if (ImLeader()) SetColorBoss();
+        if (ImSoldier()) SetColorSoldier();
+        if (selected) SetColorSelected();
+        stateChanged = false;
     }
 
+    #endregion
+
+
+    private void OnMouseDown() => controlador.AddOrRemoveFromSelected(this);
+
+
+    #region Estados
+
+    internal void AddToSelected()
+    {
+        selected = true;
+        stateChanged = true;
+
+        if (InFormation)
+        {
+            var resto = formation.GetRest(this);
+            resto.ForEach(npc => controlador.AddToSelected(npc));
+        }
+    }
+
+    internal void RemoveFromSelected()
+    {
+        selected = false;
+        stateChanged = true;
+
+        if (InFormation)
+        {
+            var resto = formation.GetRest(this);
+            resto.ForEach(npc => controlador.RemoveFromSelected(npc));
+        }
+    }
+
+    public void ChangeState(State nextState)
+    {
+        stateChanged = true;
+        var oldState = state;
+        state = nextState;
+        Debug.Log($"Estado cambiado de {oldState} a {state}");
+    }
+
+    public void ChangeAction(CAction action)
+    {
+        stateChanged = true;
+        var oldState = cAction;
+        cAction = action;
+        Debug.Log($"Action cambiado de {oldState} a {cAction}");
+    }
+
+    public void ResetStateAction()
+    {
+        ChangeAction(CAction.None);
+        ChangeState(State.Normal);
+
+        if (formation != null)
+        {
+            Debug.Log("Disolviendo la formación");
+            formation.DissolveFormation();
+            formation = null;
+        }
+    }
+
+    #endregion
+
+
+    #region Formaciones
+
+    private bool ImLeader() => InFormation && formation.ImLeader(this);
+
+    private bool ImSoldier() => InFormation && formation.ImSoldier(this);
+
+    public void BecameLeader(Formation newFormation) => formation = newFormation;
+
+    public void BecameSoldier(Formation newFormation)
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.Forming);
+
+        formation = newFormation;
+        formationOffset.SetFormation(newFormation);
+    }
+
+    #endregion
+
+
+    #region Steering
+
+    private void ApplySteering()
+    {
+        if (state != State.Action)
+        {
+            UpdateAccelerated(miSteering, Time.deltaTime);
+            return;
+        }
+
+
+        switch (cAction)
+        {
+            case CAction.None:
+                break;
+            case CAction.GoToTarget:
+                UpdateNoAccelerated(actionSteering, Time.deltaTime);
+                break;
+            case CAction.Forming:
+                UpdateAccelerated(actionSteering, Time.deltaTime);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    // TODO esperar un rato de vez en cuando
+    private Steering GetGoToTargetSteering() => goToTarget.GetSteering(this);
+
+    private Steering GetFormingSteering() => formationOffset.GetSteering(this);
+
+    #endregion
+
+    /**
+     * ALL UPDATE METHODS
+     */
+
+    #region Update
 
     private void UpdateAccelerated(Steering steering, float time)
     {
@@ -64,18 +245,18 @@ public class AgentNPC : Agent
         vVelocidad += steering.lineal * time;
 
         // Si vamos mas rapido que la velicidad maxima reducimos
-        if (vVelocidad.magnitude > mVelocidad)
+        if (vVelocidad.magnitude > mVelocity)
         {
             vVelocidad.Normalize();
-            vVelocidad *= mVelocidad;
+            vVelocidad *= mVelocity;
         }
 
         vAceleracion = steering.lineal;
 
-        if (vAceleracion.magnitude > mAceleracion)
+        if (vAceleracion.magnitude > mAcceleration)
         {
             vAceleracion.Normalize();
-            vAceleracion *= mAceleracion;
+            vAceleracion *= mAcceleration;
         }
 
         //TODO
@@ -88,32 +269,100 @@ public class AgentNPC : Agent
         orientacion = orientacion + steering.rotacion * time;
     }
 
-    /**
-     * Formaciones Fijas
-     */
-    public void BecomeLeader(Formation newFormation)
+    private void ActualizarVelocidad()
     {
-        MakeState(State.Action);
-        cAction = CAction.FormationLeader;
-        formation = newFormation;
-        formationOffset.SetFormation(newFormation);
-
+        /*Si el terreno de nuestros pies es mejor Terreno entonces
+         * mejoramos la velocidad máxima del personaje multiplicando por 1.5
+         * , y si es el peor terreno entonces la reducimos a la mitad
+        */
     }
 
-    public void BecomeSoldier(Formation newFormation)
+    protected void Update()
     {
-        MakeState(State.Action);
-        cAction = CAction.FormationSoldier;
-        formation = newFormation;
-        formationOffset.SetFormation(newFormation); }
+        // Actualiza el color si hay un cambio de estado
+        UpdateColor();
+        // Si estamos esperando nos quedamos quietos
+        if (state != State.Waiting) ApplySteering();
 
-    public void ArrivedToTargetPathOffSet()
-    {
-        formation.state = FormationState.Waiting;
 
+        // Compruebo si mi formacion esta lista para pasar a wander
+
+        if (!alreadyWaiting && InFormation && formation.ImLeader(this) &&
+            formation.IsFormationDone())
+            StartCoroutine(WaitBeforeFinishing(5));
+        ;
     }
 
-   
+    // Los Steering se actualizan se usen o no otra cosa es que los guardemos
+    private void LateUpdate()
+    {
+        if (state == State.Action)
+            actionSteering = cAction switch
+            {
+                CAction.None => new Steering(0, new Vector3(0, 0, 0)),
+                CAction.GoToTarget => GetGoToTargetSteering(),
+                CAction.Forming => GetFormingSteering(),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        else
+            miSteering = arbitro.GetSteering();
+    }
+
+    #endregion
+
+
+    #region Actions
+
+    public void GoToTarget(Vector3 newPoint)
+    {
+        // TODO Check if im in a group
+
+        if (InFormation)
+        {
+            if (formation.ImSoldier(this))
+            {// Si soy un soldado no hago nada
+                ChangeState(State.Action);
+                ChangeAction(CAction.Forming);
+                return;
+            }
+        }
+        // Soy el boss 
+        ChangeState(State.Action);
+        ChangeAction(CAction.GoToTarget);
+
+        goToTarget.NewTarget(newPoint);
+    }
+
+
+    public void ArrivedToTarget()
+    {
+        ChangeAction(CAction.None);
+        ChangeState(State.Waiting);
+        StartCoroutine(WaitBeforeFinishing(5));
+    }
+
+
+    private IEnumerator WaitBeforeFinishing(float secondsToWait)
+    {
+        alreadyWaiting = true;
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        yield return new WaitForSeconds(secondsToWait);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        ChangeState(State.Normal);
+        controlador.ActionFinished(this);
+        alreadyWaiting = false;
+    }
+
+    #endregion
+
+    // Set and update diferent colors.
+
+
+    #region Actions Segunda parte
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
     para ir despues al punto de muerte.*/
@@ -175,60 +424,5 @@ public class AgentNPC : Agent
         yield return new WaitForSeconds(5);
     }
 
-
-    private void ApplySteering()
-    {
-        if (state != State.Action)
-        {
-            UpdateAccelerated(miSteering, Time.deltaTime);
-            return;
-        }
-        
-        switch (cAction)
-        {
-            case CAction.None:
-                UpdateAccelerated(actionSteering, Time.deltaTime);
-                break;
-            case CAction.GoToTarget:
-                UpdateNoAccelerated(actionSteering, Time.deltaTime);
-                break;
-            case CAction.FormationLeader:
-                UpdateAccelerated(actionSteering,Time.deltaTime);
-                break;
-            case CAction.FormationSoldier:
-                UpdateAccelerated(actionSteering,Time.deltaTime);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-
-    protected override void Update()
-    {
-        // Actualiza el color si hay un cambio de estado
-        base.Update();
-        // Si estamos esperando nos quedamos quietos
-        if (state != State.Waiting) ApplySteering();
-        //ActualizarVelocidad();
-    }
-
-    // Los Steering se actualizan se usen o no otra cosa es que los guardemos
-    private void LateUpdate()
-    {
-        if (state == State.Action)
-            actionSteering = cAction switch
-            {
-                CAction.None => new Steering(0, new Vector3(0, 0, 0)),
-                CAction.GoToTarget => goToTarget.GetSteering(this),
-                CAction.FormationLeader =>  (formation.state == FormationState.MakingFormation)? 
-                                            goToTarget.GetSteering(this):
-                                            arbitro.GetSteering(), 
-                                            // TODO Usar un arbitro para esto
-                CAction.FormationSoldier => formationOffset.GetSteering(this),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        else
-            miSteering = arbitro.GetSteering();
-    }
+    #endregion
 }

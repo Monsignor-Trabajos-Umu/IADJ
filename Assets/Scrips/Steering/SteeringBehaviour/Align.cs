@@ -24,12 +24,12 @@ public class Align : SteeringBehaviour
     public override Steering GetSteering(AgentNPC miAgente)
     {
 
-        float maxAngularAcceleration = miAgente.mAngularAceleracion;
-        float maxRotation = miAgente.mRotacion;
+        float maxAngularAcceleration = miAgente.mAngularAcceleration;
+        float maxRotation = miAgente.mRotation;
 
         // Radio para llegar al objetivo
         float targetRadius = (float)miAgente.aInterior;
-        float slowRadius = (float)miAgente.aExterior;
+        float slowRadius = (float)miAgente.AExterior;
 
         // Empty Stering
         this.steering = new Steering(0, new Vector3(0, 0, 0));

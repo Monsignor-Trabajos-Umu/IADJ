@@ -1,19 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using System;
 
 public class Body : MonoBehaviour
 {
+    public int alcance = 1; //Max de casillas de distancia para golpear. Por defecto vale 1
+    private GameObject currentHat;
+    public int daño = 2; //daño de la unidad por hit. Por defecto vale 2
+    private GameObject fatherHats;
+    private GameObject headBands;
+
+
+    public float mAcceleration;
+    public float mAngularAcceleration;
 
     // Escalar 
     public float masa;
+    public float mRotation;
+    public float mVelocity;
+
+    // Visual clues
+    private Color originalBandColor;
+    private Color originalColor;
+
+
+    public float rotacion;
+    public Vector3 vAceleracion;
     public float velocidad;
-    public float mVelocidad;
-    public double vidaMaxima = 100; //Vida Máxima. Por defecto 100 puntos de salud
     public double vida = 100; //Vida actual. Por defecto se inicializa al valor de la vida máxima
-    public int alcance = 1; //Max de casillas de distancia para golpear. Por defecto vale 1
-    public int daño = 2; //daño de la unidad por hit. Por defecto vale 2
+    public double vidaMaxima = 100; //Vida Máxima. Por defecto 100 puntos de salud
+
+    // Vector
+    public Vector3 vVelocidad;
+
     // public Vector3 posicion; == transform.position
     public float orientacion
     {
@@ -25,78 +43,91 @@ public class Body : MonoBehaviour
         }
     }
 
-    public float rotacion;
-    public float mRotacion;
-    public float mAngularAceleracion;
-    public float mAceleracion;
 
-    // Vector
-    public Vector3 vVelocidad;
-    public Vector3 vAceleracion;
+    // Start
+    protected virtual void Start()
+    {
+        var temp = transform.Find("pc/Hats");
+        fatherHats = temp.gameObject;
+
+        temp = transform.Find("pc/Headband");
+        headBands = temp.gameObject;
+    }
 
 
-    private Color colorOriginal;
-
-
-    public void SetColor(Color c)
+    protected void SetColor(Color c)
     {
         GetComponent<Renderer>().material.color = c;
-
     }
 
-    public void SetDefaultColor()
+    protected void SetColorHeadBand(Color c)
     {
-        SetColor(colorOriginal);
+        headBands.GetComponent<Renderer>().material.color = c;
     }
-    public void SaveDefaultColor()
+
+    protected void SaveOriginalColor()
     {
-        this.colorOriginal = GetComponent<Renderer>().material.color;
-        Debug.Log("color: " + colorOriginal);
+        originalColor = GetComponent<Renderer>().material.color;
+        originalBandColor = headBands.GetComponent<Renderer>().material
+            .color;
+        Debug.Log($"Color original {originalColor} Banda {originalBandColor}");
     }
 
-
-    #region SetColors 
-    protected void SetColorSelected()
+    protected void ResetVisualStatus()
     {
-        SetColor(Color.blue);
+        SetColor(originalColor);
+        SetColorHeadBand(originalBandColor);
+        SetHat(HatsTypes.None);
     }
-    protected void SetColorNormal()
+
+    protected void SetHat(HatsTypes hat)
     {
-        SetDefaultColor();
+        void EnableHat(string path)
+        {
+            //Debug.Log($"Enabling hat {path}");
+            var temp = fatherHats.transform.Find(path);
+            currentHat = temp.gameObject;
+            currentHat.SetActive(true);
+        }
+
+        void Unload()
+        {
+            //Debug.Log("Disabling hats");
+            if (currentHat != null) currentHat.SetActive(false);
+        }
+
+
+        const string none = "NONE";
+        var newPath = none;
+        newPath = hat switch
+        {
+            HatsTypes.None => none,
+            HatsTypes.CowBoy => "CowboyHat",
+            HatsTypes.Crown => "Crown",
+            HatsTypes.Magician => "MagicianHat",
+            HatsTypes.Miner => "MinerHat",
+            HatsTypes.Mustache => "Mustache",
+            HatsTypes.Pajama => "PajamaHat",
+            HatsTypes.Pillbox => "PillboxHat",
+            HatsTypes.Police => "PoliceCap",
+            HatsTypes.Shower => "ShowerCap",
+            HatsTypes.Sombrero => "Sombrero",
+            HatsTypes.Viking => "VikingHelmet",
+            _ => throw new NotImplementedException()
+        };
+
+        if (newPath == none)
+            Unload();
+        else
+            EnableHat(newPath);
     }
-
-    protected void SetColorWaiting()
-    {
-        SetColor(Color.white);
-    }
-    protected void SetColorGoToTarget()
-    {
-
-        SetColor(Color.red);
-    }
-    
-    protected void SetColorBoss()
-    {
-
-        SetColor(Color.white);
-    }
-    protected void SetColorSoldier()
-    {
-
-        SetColor(Color.black);
-    }
-
-    
-    #endregion
-   
-
-        
 
 
     private double DegreeToRadian(double angle)
     {
         return Math.PI * angle / 180.0;
     }
+
     private double RadianToDegree(double angle)
     {
         return angle * (180.0 / Math.PI);
@@ -107,34 +138,33 @@ public class Body : MonoBehaviour
      */
     private double Angulo3PuntosGrados(Vector3 vPersonaje, Vector3 v1, Vector3 v2)
     {
+        var v1Personaje = vPersonaje - v1;
+        var v12 = v2 - v1;
+        var v1pDotv12 = Vector3.Dot(v1Personaje, v12);
 
-        Vector3 v1Personaje = vPersonaje - v1;
-        Vector3 v12 = v2 - v1;
-        float v1pDotv12 = Vector3.Dot(v1Personaje, v12);
-
-        float lv1Personaje = v1Personaje.magnitude;
-        float lv12 = v12.magnitude;
+        var lv1Personaje = v1Personaje.magnitude;
+        var lv12 = v12.magnitude;
 
         double cos = v1pDotv12 / (lv1Personaje * lv12);
 
-        double acos = Math.Acos(cos);
+        var acos = Math.Acos(cos);
 
         return RadianToDegree(acos);
     }
+
     public double PositionToAngle()
     {
-        GameObject p1 = GameObject.Find("refencia1");
-        GameObject p2 = GameObject.Find("refencia2");
+        var p1 = GameObject.Find("refencia1");
+        var p2 = GameObject.Find("refencia2");
 
         //Transform.position hace referencia al objeto que lo llama
-        Vector3 vPersonaje = transform.position;
-        Vector3 v1 = p1.transform.position;
-        Vector3 v2 = p2.transform.position;
+        var vPersonaje = transform.position;
+        var v1 = p1.transform.position;
+        var v2 = p2.transform.position;
 
         return Angulo3PuntosGrados(vPersonaje, v1, v2);
-
-
     }
+
     public Vector3 OrientationToVector()
     {
         return transform.TransformDirection(Vector3.forward);
@@ -143,8 +173,8 @@ public class Body : MonoBehaviour
     private double CalculateAngleToRate(Vector3 vYoHeading, Vector3 vYoObjeto)
     {
         // Tenemos que calular ahora si el objeto esta a la "izquierda o la derecha "
-        float angle = Vector3.Angle(vYoHeading, vYoObjeto);
-        bool objectIsToTheRight = Vector3.Dot(vYoObjeto, transform.right) > 0;
+        var angle = Vector3.Angle(vYoHeading, vYoObjeto);
+        var objectIsToTheRight = Vector3.Dot(vYoObjeto, transform.right) > 0;
         if (!objectIsToTheRight)
             angle = -angle;
         return angle;
@@ -153,17 +183,17 @@ public class Body : MonoBehaviour
     public double MinAngleToRotate(Vector3 pObjeto)
     {
         //Transform.position hace referencia al objeto que lo llama
-        Vector3 pYo = transform.position;
-        Vector3 vYoObjeto = pObjeto - pYo;
-        Vector3 vYoHeading = OrientationToVector();
+        var pYo = transform.position;
+        var vYoObjeto = pObjeto - pYo;
+        var vYoHeading = OrientationToVector();
 
         return CalculateAngleToRate(vYoHeading, vYoObjeto);
     }
+
     public double MinAngleToRotate(GameObject obj)
     {
         return MinAngleToRotate(obj.transform.position);
     }
-
 
 
     /* Calcula el minimo angulo para darle la "espalda" al objeto
@@ -173,13 +203,13 @@ public class Body : MonoBehaviour
     public double MinAngleToRotate180(GameObject obj)
     {
         //Transform.position hace referencia al objeto que lo llama
-        Vector3 pObjeto = obj.transform.position;
-        Vector3 pYo = transform.position;
-        Vector3 vYoObjeto = pObjeto - pYo;
+        var pObjeto = obj.transform.position;
+        var pYo = transform.position;
+        var vYoObjeto = pObjeto - pYo;
         vYoObjeto.x *= -1; // -1  0  0 
-        vYoObjeto.y *= 1;  //  0  1  0
+        vYoObjeto.y *= 1; //  0  1  0
         vYoObjeto.z *= -1; //  0  0 -1
-        Vector3 vYoHeading = OrientationToVector();
+        var vYoHeading = OrientationToVector();
 
         return CalculateAngleToRate(vYoHeading, vYoObjeto);
     }
@@ -187,21 +217,14 @@ public class Body : MonoBehaviour
     //Cura una cantidad de vida al personaje si no tiene la vida al máximo
     public void Curar(double cantidad)
     {
-        if(vida < vidaMaxima)
-        {
-            vida += cantidad;
-        }
+        if (vida < vidaMaxima) vida += cantidad;
     }
 
     // Update is called once per frame
 
     public void printDebug()
     {
-        Debug.Log("Orientacion Y " + this.orientacion);
+        Debug.Log("Orientacion Y " + orientacion);
         Debug.Log("Vector " + OrientationToVector());
-
     }
-    
-
-
 }

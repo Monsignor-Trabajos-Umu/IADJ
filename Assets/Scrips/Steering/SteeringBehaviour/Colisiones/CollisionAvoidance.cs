@@ -46,7 +46,7 @@ public class CollisionAvoidance : SteeringBehaviour
             float distancia = relativePos.magnitude;
             var minSeparacion = distancia - relativeSpeed * timeToCollision;
 
-            if (minSeparacion > 2 * miAgente.rExterior) continue;
+            if (minSeparacion > 2 * miAgente.RExterior) continue;
 
             if(timeToCollision > 0 && timeToCollision < tiempoMasCerca)
             {
@@ -65,7 +65,7 @@ public class CollisionAvoidance : SteeringBehaviour
             return steering;
         }
 
-        if(firstMinSeparation <= 0 || firstDistance < 2 * miAgente.rExterior)
+        if(firstMinSeparation <= 0 || firstDistance < 2 * miAgente.RExterior)
         {
             Debug.Log("Choque");
             relativePos = firstTarget.transform.position - miAgente.transform.position;
@@ -77,7 +77,7 @@ public class CollisionAvoidance : SteeringBehaviour
         }
 
         relativePos = relativePos.normalized;
-        steering.lineal = relativePos * miAgente.mAceleracion;
+        steering.lineal = relativePos * miAgente.mAcceleration;
         return steering;
 
     }
