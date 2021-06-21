@@ -7,12 +7,12 @@ public class AntiAlign : SteeringBehaviour
 {
     public override Steering GetSteering(AgentNPC miAgente)
     {
-        float maxAngularAcceleration = miAgente.mAngularAceleracion;
-        float maxRotation = miAgente.mRotacion;
+        float maxAngularAcceleration = miAgente.mAngularAcceleration;
+        float maxRotation = miAgente.mRotation;
 
         // Radio para llegar al objetivo
         float targetRadius = (float)miAgente.aInterior;
-        float slowRadius = (float)miAgente.aExterior;
+        float slowRadius = (float)miAgente.AExterior;
 
         float timeToTarget = 0.1f;
 

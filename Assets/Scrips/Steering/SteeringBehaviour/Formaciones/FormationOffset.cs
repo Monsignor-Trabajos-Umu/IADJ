@@ -12,21 +12,15 @@ public class FormationOffset : SteeringBehaviour
     public override Steering GetSteering(AgentNPC miAgente)
     {
 
-
-
         this.steering = new Steering(0, new Vector3(0, 0, 0));
-        if (formation.state != FormationState.MakingFormation)
-            return this.steering;
+        if (!formation.formationReady) return steering;
 
         Vector3 myPosition = miAgente.transform.position;
         var leader = formation.leader;
         var newOffset = formation.GetGlobalPosition(miAgente);
         var newDirection = newOffset.lineal - myPosition;
 
-       
-
-
-
+        
         var rotation = leader.orientacion - miAgente.orientacion + newOffset.angular;
         // Hago que este entre -180 y 180
         rotation = align.MapToRange(rotation);
@@ -34,17 +28,14 @@ public class FormationOffset : SteeringBehaviour
         align.UsePredicted(rotation);
         steering.angular = align.GetSteering(miAgente).angular;
 
+        // Arrive ya se encarga de parrar si estamos lo suficientemente cerca
+        arrive.UsePredicted(newDirection); 
+        steering.lineal = arrive.GetSteering(miAgente).lineal;
 
-        // Comprobamos si estamos en la posicion +-
-        if (newDirection.magnitude > miAgente.rInterior)
+        // Si ya he llegado a mi sitio se lo hago saver a la formacion
+        if (steering.lineal.Equals(new Vector3(0, 0, 0)))
         {
-            arrive.UsePredicted(newDirection);
-            steering.lineal = arrive.GetSteering(miAgente).lineal;
-        }
-        else
-        {
-            //miAgente.ArrivedToTargetPathOffSet();
-
+            formation.ImInPosition(miAgente);
         }
 
         return this.steering;

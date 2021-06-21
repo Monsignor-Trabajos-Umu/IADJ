@@ -18,10 +18,10 @@ public class GoTarget : SteeringBehaviour
 
         float distancia = Vector3.Distance(myPosition, targetPosition);
         // Comprobamos si estamos en la posicion +-
-        if (distancia > miAgente.rExterior)
+        if (distancia > miAgente.RExterior)
         {
             this.steering.velocidad = Vector3.ClampMagnitude(targetPosition - myPosition,
-                miAgente.mVelocidad);
+                miAgente.mVelocity);
         }
         else
         {
@@ -31,7 +31,7 @@ public class GoTarget : SteeringBehaviour
 
         }
         double angle = miAgente.MinAngleToRotate(targetPosition);
-        if (Math.Abs(angle) >= Math.Abs(miAgente.aExterior))
+        if (Math.Abs(angle) >= Math.Abs(miAgente.AExterior))
         {
             this.steering.rotacion = (float)angle;
         }

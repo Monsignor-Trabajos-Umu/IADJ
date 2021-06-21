@@ -42,7 +42,7 @@ public class FollowPath : Arrive
                 // Si no hacemos un seek
                 steering.lineal = targetPosition - agent.transform.position;
                 steering.lineal.Normalize();
-                steering.lineal *= agent.mAceleracion;
+                steering.lineal *= agent.mAcceleration;
 
             }
 

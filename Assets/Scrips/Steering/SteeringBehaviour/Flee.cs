@@ -13,7 +13,7 @@ public class Flee : SteeringBehaviour
         Vector3 position = this.usePredicted ? this.predictedDirection : target.transform.position;
         steering.lineal = miAgente.transform.position - position;
         steering.lineal.Normalize();
-        steering.lineal *= miAgente.mAceleracion;
+        steering.lineal *= miAgente.mAcceleration;
 
         steering.angular = 0;
 

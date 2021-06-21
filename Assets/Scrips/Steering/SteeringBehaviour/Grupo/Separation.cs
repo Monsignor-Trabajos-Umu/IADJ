@@ -19,10 +19,10 @@ public class Separation : SteeringBehaviour
             float distance = direction.magnitude;
             if (distance < threshold)
             {
-                //decayCoefficient = (float)agent.rExterior;
+                //decayCoefficient = (float)agent.RExterior;
                 // Fuerza de la repulsion
                 float strenght = Mathf.Min(decayCoefficient /
-                    (distance * distance), agent.mAceleracion);
+                    (distance * distance), agent.mAcceleration);
                 // Añadimos la aceleracion;
                 direction.Normalize();
                 steering.lineal += strenght * direction;
@@ -31,7 +31,7 @@ public class Separation : SteeringBehaviour
         // Convertimos velocidad en aceleracion | limitamos la aceleracion
 
         steering.lineal.Normalize();
-        steering.lineal *= agent.mAceleracion;
+        steering.lineal *= agent.mAcceleration;
         if (debug)
             Debug.DrawRay(transform.position, steering.lineal, Color.green);
         return steering;

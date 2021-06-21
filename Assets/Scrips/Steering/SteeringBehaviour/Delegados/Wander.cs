@@ -55,7 +55,7 @@ public class Wander : Align
             this.predictedRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
             this.usePredicted = true;
             steering = base.GetSteering(miAgente);
-            steering.lineal = miAgente.mAceleracion * miAgente.OrientationToVector();
+            steering.lineal = miAgente.mAcceleration * miAgente.OrientationToVector();
             wanderPrivateCounter++;
 
             //Debug
@@ -97,7 +97,7 @@ public class Wander : Align
         steering = base.GetSteering(miAgente);
 
 
-        steering.lineal = miAgente.mAceleracion * miAgente.OrientationToVector();
+        steering.lineal = miAgente.mAcceleration * miAgente.OrientationToVector();
         targetExists = true;
         wanderPrivateCounter = 0;
 

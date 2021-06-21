@@ -14,9 +14,9 @@ public class SeekVelocity : SteeringBehaviour
 
         float distancia = Vector3.Distance(myPosition, targetPosition);
 
-        if (distancia > miAgente.rExterior)
+        if (distancia > miAgente.RExterior)
             this.steering.velocidad = Vector3.ClampMagnitude(targetPosition - myPosition,
-                miAgente.mVelocidad);
+                miAgente.mVelocity);
         double angle = miAgente.MinAngleToRotate(target.gameObject);
 
 
