@@ -47,10 +47,10 @@ public class Body : MonoBehaviour
     // Start
     protected virtual void Start()
     {
-        var temp = transform.Find("pc/Hats");
+        var temp = transform.Find("Hats");
         fatherHats = temp.gameObject;
 
-        temp = transform.Find("pc/Headband");
+        temp = transform.Find("Headband");
         headBands = temp.gameObject;
     }
 
