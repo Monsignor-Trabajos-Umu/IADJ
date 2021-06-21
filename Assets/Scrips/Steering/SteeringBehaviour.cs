@@ -8,6 +8,7 @@ public enum Grupo{
     SEPARACION = 2
 };
 
+
 public abstract class SteeringBehaviour : MonoBehaviour
 {
     public Grupo grupo;
@@ -46,5 +47,12 @@ public abstract class SteeringBehaviour : MonoBehaviour
     {
         if (!debug) return;
         Gizmos.DrawRay(transform.position, steering.lineal);
+    }
+
+    // 
+    protected static Steering RemoveY(Steering steering)
+    {
+        steering.lineal.y = 0;
+        return steering;
     }
 }
