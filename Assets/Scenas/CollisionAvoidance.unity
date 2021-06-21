@@ -2099,6 +2099,7 @@ GameObject:
   - component: {fileID: 798301933}
   - component: {fileID: 798301932}
   - component: {fileID: 798301931}
+  - component: {fileID: 798301930}
   m_Layer: 0
   m_Name: AgentCube_Blue (1)
   m_TagString: Untagged
@@ -2106,7 +2107,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &798301931
+--- !u!114 &798301930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2114,6 +2115,25 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798301929}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc1f88977c1a78478cd255c223b8592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grupo: 1
+  target: {fileID: 856084978}
+  weight: 1
+  steering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  debug: 0
+--- !u!114 &798301931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798301929}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
   m_Name: 
@@ -6383,6 +6403,7 @@ GameObject:
   - component: {fileID: 3038182833133005833}
   - component: {fileID: 3038182833133005834}
   - component: {fileID: 3038182833133005835}
+  - component: {fileID: 3038182833133005836}
   m_Layer: 0
   m_Name: AgentCube_Blue
   m_TagString: Untagged
@@ -6439,7 +6460,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3038182833133005832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
+  m_Script: {fileID: 11500000, guid: d6f417490d9f441458d4b3db139add8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debugGreen: 0
@@ -6454,7 +6475,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3038182833133005832}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
   m_Name: 
@@ -6467,6 +6488,25 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   debug: 1
   colisiones: []
+--- !u!114 &3038182833133005836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038182833133005832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc1f88977c1a78478cd255c223b8592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grupo: 1
+  target: {fileID: 2135229751}
+  weight: 1
+  steering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  debug: 0
 --- !u!1 &3038568614945587198
 GameObject:
   m_ObjectHideFlags: 0
