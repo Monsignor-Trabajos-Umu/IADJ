@@ -15,6 +15,7 @@ public class Seek : SteeringBehaviour
         Vector3 position = this.usePredicted ? this.predictedDirection : target.transform.position;
 
         steering.lineal = position - miAgente.transform.position;
+        steering = RemoveY(steering);
         steering.lineal.Normalize();
         steering.lineal *= miAgente.mAcceleration;
 

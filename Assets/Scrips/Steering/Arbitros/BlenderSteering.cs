@@ -23,10 +23,11 @@ public class BlenderSteering : ArbitroSteering
         behaviors = new List<BehaviorAndWeight>();
         agente = GetComponent<AgentNPC>();
         //usar GetComponents<>() para cargar los SteeringBehavior del personaje
-        listSteerings = GetComponents<SteeringBehaviour>().ToList();
+        listSteerings = GetComponents<SteeringBehaviour>().Where(ste => ste.isActiveAndEnabled)
+            .ToList();
         foreach (SteeringBehaviour str in listSteerings)
         {
-            str.enabled = true;
+            //str.enabled = true;
         }
     }
 
@@ -61,14 +62,20 @@ public class BlenderSteering : ArbitroSteering
             steering.angular += behavior.weight * behavior.behavior.angular;
             steering.lineal += behavior.weight * behavior.behavior.lineal;
         }
+
+
+        steering = filtroYSteering(steering);
+
         steering.lineal = (steering.lineal.magnitude > agente.mAcceleration) ? steering.lineal.normalized * agente.mAcceleration : steering.lineal;
         steering.angular = (steering.angular > agente.mAngularAcceleration) ? (steering.angular * agente.mAngularAcceleration) / Math.Abs(steering.angular) : steering.angular;
 
-        steering = filtroSteering(steering);
+        steering = RoundSteering(steering);
+        this.debugSteering = steering;
+
         if (debugGreen)
         {
             Debug.DrawRay(agente.transform.position, steering.lineal, Color.green);
-            this.debugSteering = steering;
+           
         }
 
 
@@ -76,18 +83,23 @@ public class BlenderSteering : ArbitroSteering
     }
 
 
-    private Steering filtroSteering(Steering steering)
+    private Steering filtroYSteering(Steering steering)
     {
-        //Eliminamos el steering eje y
         steering.lineal.y = 0;
+        return steering;
+    }
 
+
+    private Steering RoundSteering(Steering steering)
+    {
+        Debug.Log($"PreFiltre {steering.lineal} {steering.angular}");
         // No tiene sentido 0,000001 de aceleracion
         steering.lineal.x  = (float)(Math.Round(steering.lineal.x, 6));
         steering.lineal.z  = (float)(Math.Round(steering.lineal.z, 6));
 
         // Para los angulos con dos decimales es mas que suficiente
         steering.angular  = (float)(Math.Round(steering.angular, 2));
-        
+        Debug.Log($"Post {steering.lineal} {steering.angular}");
         return steering;
     }
 
