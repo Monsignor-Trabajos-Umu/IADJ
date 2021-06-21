@@ -92,14 +92,14 @@ public class BlenderSteering : ArbitroSteering
 
     private Steering RoundSteering(Steering steering)
     {
-        Debug.Log($"PreFiltre {steering.lineal} {steering.angular}");
+        //Debug.Log($"PreFiltre {steering.lineal} {steering.angular}");
         // No tiene sentido 0,000001 de aceleracion
         steering.lineal.x  = (float)(Math.Round(steering.lineal.x, 6));
         steering.lineal.z  = (float)(Math.Round(steering.lineal.z, 6));
 
         // Para los angulos con dos decimales es mas que suficiente
         steering.angular  = (float)(Math.Round(steering.angular, 2));
-        Debug.Log($"Post {steering.lineal} {steering.angular}");
+        //Debug.Log($"Post {steering.lineal} {steering.angular}");
         return steering;
     }
 
