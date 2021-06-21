@@ -18,13 +18,14 @@ public class CollisionAvoidance : SteeringBehaviour
     {
         colisiones = GameObject.FindObjectsOfType<Agent>();
         tiempoMasCerca = Mathf.Infinity;
-        Steering steering = new Steering(0, new Vector3(0,0,0));
+        
+        this.steering = new Steering(0, new Vector3(0,0,0));
 
         Agent firstTarget = ColisionMasCercana();
         Vector3 firstRelativePos = firstTarget.transform.position - miAgente.transform.position;
         float firstDistance = firstRelativePos.magnitude;
         Vector3 firstRelativeVel = firstTarget.vVelocidad - miAgente.vVelocidad;
-        var timeToCollision = Vector3.Dot(firstRelativePos, firstRelativeVel) / (firstRelativeVel.magnitude * firstRelativeVel.magnitude);
+        var timeToCollision = -Vector3.Dot(firstRelativePos, firstRelativeVel) / (firstRelativeVel.magnitude * firstRelativeVel.magnitude);
         float firstMinSeparation = firstDistance - firstRelativeVel.magnitude * timeToCollision;
         firstTarget = null;
  
@@ -34,7 +35,7 @@ public class CollisionAvoidance : SteeringBehaviour
             relativePos = obj.transform.position - miAgente.transform.position;
             Vector3 relativeVel = obj.vVelocidad - miAgente.vVelocidad;
             float relativeSpeed = relativeVel.magnitude;
-            timeToCollision = Vector3.Dot(relativePos, relativeVel) / (relativeSpeed * relativeSpeed);
+            timeToCollision = -Vector3.Dot(relativePos, relativeVel) / (relativeSpeed * relativeSpeed);
 
             //Comprobar si habrá colisión
             float distancia = relativePos.magnitude;
@@ -72,8 +73,13 @@ public class CollisionAvoidance : SteeringBehaviour
             relativePos = firstRelativePos + firstRelativeVel * tiempoMasCerca;
         }
 
+        //Vector3 aux = firstTarget.transform.position + (relativePos - firstTarget.transform.position);
+        //aux = aux * ((float) firstTarget.RExterior + 2);
+
         relativePos = relativePos.normalized;
         steering.lineal = relativePos * miAgente.mAcceleration;
+        Debug.DrawLine(this.transform.position, steering.lineal, Color.cyan);
+        //Debug.DrawRay(this.transform.position, steering.lineal, Color.green);
         return steering;
 
     }

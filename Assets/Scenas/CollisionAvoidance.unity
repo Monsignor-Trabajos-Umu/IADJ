@@ -2156,11 +2156,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 2
   "da\xF1o": 2
-  mAcceleration: 20
+  mAcceleration: 5
   mAngularAcceleration: 45
   masa: 2
   mRotation: 90
-  mVelocity: 20
+  mVelocity: 5
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -2345,7 +2345,7 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 4
   aInterior: 2
-  dEbUg: 1
+  dEbUg: 0
   rInterior: 4
   goToTarget: {fileID: 0}
   arbitro: {fileID: 856084977}
@@ -6403,11 +6403,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 2
   "da\xF1o": 2
-  mAcceleration: 100
+  mAcceleration: 5
   mAngularAcceleration: 45
   masa: 2
   mRotation: 180
-  mVelocity: 100
+  mVelocity: 5
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -6553,7 +6553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3038182833133005832}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0.00000028088027}
-  m_LocalPosition: {x: -6.3, y: 1.0000079, z: 2.5}
+  m_LocalPosition: {x: -6.3, y: 1.0000079, z: -13.5}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 3036223667897338986}
