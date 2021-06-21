@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1016489455}
-  m_IndirectSpecularColor: {r: 0.18263894, g: 0.22835018, b: 0.30714685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18384144, g: 0.22907959, b: 0.3036644, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1284,6 +1284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da5fa030a8d18d4eb616e1d988ed712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 0
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -1305,6 +1306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -1363,16 +1365,16 @@ MonoBehaviour:
   dEbUg: 0
   rInterior: 1
   goToTarget: {fileID: 0}
-  arbitro: {fileID: 0}
-  cAction: 0
   formationOffset: {fileID: 0}
-  mejorTerreno: 0
+  arbitro: {fileID: 0}
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  peorTerreno: 1
   selected: 0
   state: 0
+  cAction: 0
+  mejorTerreno: 0
+  peorTerreno: 1
 --- !u!65 &412050531
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3951,13 +3953,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016489454}
-  m_LocalRotation: {x: 0.31598538, y: -0.3596048, z: 0.13088542, w: 0.8681629}
+  m_LocalRotation: {x: 0.24169198, y: -0.14626022, z: 0.1982947, w: 0.9385479}
   m_LocalPosition: {x: 101.8, y: 33.4, z: 39.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 40, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.776, y: -12.004, z: 20.545}
 --- !u!4 &1054406964
 Transform:
   m_ObjectHideFlags: 0
@@ -5182,6 +5184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da5fa030a8d18d4eb616e1d988ed712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 0
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -5203,6 +5206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -5261,16 +5265,16 @@ MonoBehaviour:
   dEbUg: 0
   rInterior: 1
   goToTarget: {fileID: 0}
-  arbitro: {fileID: 0}
-  cAction: 0
   formationOffset: {fileID: 0}
-  mejorTerreno: 0
+  arbitro: {fileID: 0}
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  peorTerreno: 1
   selected: 0
   state: 0
+  cAction: 0
+  mejorTerreno: 0
+  peorTerreno: 1
 --- !u!65 &1291764372
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5572,6 +5576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -5595,6 +5600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da5fa030a8d18d4eb616e1d988ed712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 0
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -5651,16 +5657,16 @@ MonoBehaviour:
   dEbUg: 0
   rInterior: 1
   goToTarget: {fileID: 0}
-  arbitro: {fileID: 0}
-  cAction: 0
   formationOffset: {fileID: 0}
-  mejorTerreno: 0
+  arbitro: {fileID: 0}
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  peorTerreno: 1
   selected: 0
   state: 0
+  cAction: 0
+  mejorTerreno: 0
+  peorTerreno: 1
 --- !u!65 &1322178457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6809,6 +6815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da5fa030a8d18d4eb616e1d988ed712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 0
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -6830,6 +6837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -6888,16 +6896,16 @@ MonoBehaviour:
   dEbUg: 0
   rInterior: 1
   goToTarget: {fileID: 0}
-  arbitro: {fileID: 0}
-  cAction: 0
   formationOffset: {fileID: 0}
-  mejorTerreno: 0
+  arbitro: {fileID: 0}
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  peorTerreno: 1
   selected: 0
   state: 0
+  cAction: 0
+  mejorTerreno: 0
+  peorTerreno: 1
 --- !u!65 &1540152470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7550,6 +7558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da5fa030a8d18d4eb616e1d988ed712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 0
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -7571,6 +7580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -7629,16 +7639,16 @@ MonoBehaviour:
   dEbUg: 0
   rInterior: 1
   goToTarget: {fileID: 0}
-  arbitro: {fileID: 0}
-  cAction: 0
   formationOffset: {fileID: 0}
-  mejorTerreno: 0
+  arbitro: {fileID: 0}
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  peorTerreno: 1
   selected: 0
   state: 0
+  cAction: 0
+  mejorTerreno: 0
+  peorTerreno: 1
 --- !u!65 &1758904633
 BoxCollider:
   m_ObjectHideFlags: 0
