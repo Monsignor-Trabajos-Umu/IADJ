@@ -23,11 +23,11 @@ public class BlenderSteering : ArbitroSteering
         behaviors = new List<BehaviorAndWeight>();
         agente = GetComponent<AgentNPC>();
         //usar GetComponents<>() para cargar los SteeringBehavior del personaje
-        listSteerings = GetComponents<SteeringBehaviour>().Where(ste => ste.isActiveAndEnabled)
+        listSteerings = GetComponents<SteeringBehaviour>().Where(ste => ste.useReferee)
             .ToList();
         foreach (SteeringBehaviour str in listSteerings)
         {
-            //str.enabled = true;
+            str.enabled = true;
         }
     }
 

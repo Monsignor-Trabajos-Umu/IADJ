@@ -1689,21 +1689,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 2
   "da\xF1o": 2
-  mAcceleration: 0
-  mAngularAcceleration: 0
+  mAcceleration: 2
+  mAngularAcceleration: 30
   masa: 2
-  mRotation: 0
-  mVelocity: 0
+  mRotation: 90
+  mVelocity: 4
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 4
+  mAExterior: 1.5
+  aInterior: 1
   dEbUg: 0
-  rInterior: 4
+  rInterior: 2
   goToTarget: {fileID: 0}
   arbitro: {fileID: 674196779}
   cAction: 0
@@ -1824,8 +1824,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8968033ac2040ed43bc82608bf5f4dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
   grupo: 0
-  target: {fileID: 1707059179}
+  target: {fileID: 0}
   weight: 1
   steering:
     angular: 0
@@ -1845,8 +1846,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d909eeef21d1e594d9e3701518fd73fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
   grupo: 0
-  target: {fileID: 1707059179}
+  target: {fileID: 674196780}
   weight: 1
   steering:
     angular: 0
@@ -2572,6 +2574,7 @@ GameObject:
   - component: {fileID: 1252455289}
   - component: {fileID: 1252455288}
   - component: {fileID: 1252455295}
+  - component: {fileID: 1252455296}
   m_Layer: 0
   m_Name: AgentB
   m_TagString: Untagged
@@ -2610,11 +2613,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 2
   "da\xF1o": 2
-  mAcceleration: 0
-  mAngularAcceleration: 0
+  mAcceleration: 2
+  mAngularAcceleration: 30
   masa: 2
-  mRotation: 0
-  mVelocity: 0
+  mRotation: 90
+  mVelocity: 4
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -2625,7 +2628,7 @@ MonoBehaviour:
   aInterior: 4
   dEbUg: 0
   rInterior: 4
-  goToTarget: {fileID: 0}
+  goToTarget: {fileID: 1252455296}
   arbitro: {fileID: 1252455288}
   cAction: 0
   formationOffset: {fileID: 0}
@@ -2731,7 +2734,7 @@ Transform:
   - {fileID: 1596581382}
   - {fileID: 1103895309}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
 --- !u!114 &1252455295
 MonoBehaviour:
@@ -2745,6 +2748,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
+  grupo: 0
+  target: {fileID: 0}
+  weight: 10
+  steering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  debug: 0
+  wanderRate: 110.6
+  wanderOrientation: 0
+  wanderStep: 40.5
+  wanderWait: 10
+--- !u!114 &1252455296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252455287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da5fa030a8d18d4eb616e1d988ed712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useReferee: 0
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -2752,10 +2780,8 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   debug: 0
-  wanderRate: 100
-  wanderOrientation: 3
-  wanderStep: 21.5
-  wanderWait: 2.2
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetExists: 0
 --- !u!1 &1407586985
 GameObject:
   m_ObjectHideFlags: 0
@@ -3710,66 +3736,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677344768}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1707059178
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1707059180}
-  - component: {fileID: 1707059179}
-  m_Layer: 0
-  m_Name: target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1707059179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707059178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 910583acafdcb1d44a359fa0a7626b4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alcance: 1
-  "da\xF1o": 2
-  mAcceleration: 0
-  mAngularAcceleration: 0
-  masa: 0
-  mRotation: 0
-  mVelocity: 0
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 100
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 0
-  aInterior: 0
-  dEbUg: 0
-  rInterior: 0
---- !u!4 &1707059180
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707059178}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1765560595
 GameObject:
   m_ObjectHideFlags: 0
@@ -4474,11 +4440,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 2
   "da\xF1o": 2
-  mAcceleration: 0
-  mAngularAcceleration: 0
+  mAcceleration: 2
+  mAngularAcceleration: 30
   masa: 2
-  mRotation: 0
-  mVelocity: 0
+  mRotation: 90
+  mVelocity: 4
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -4529,6 +4495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 1
   grupo: 0
   target: {fileID: 0}
   weight: 1
@@ -4653,7 +4620,7 @@ Transform:
   - {fileID: 4109178145999394}
   - {fileID: 1576881301}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
 --- !u!4 &4606123417215034
 Transform:

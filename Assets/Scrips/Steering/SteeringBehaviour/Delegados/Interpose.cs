@@ -32,10 +32,7 @@ public class Interpose : Arrive
         Vector3 posB = agenteB.transform.position + agenteB.vVelocidad * timeToReachMidPoint;
         midPoint = (posA + posB) / 2;
 
-        target.transform.position = midPoint;
-
-        var direction = agent.transform.position - midPoint;
-        direction = RemoveY(direction);
+        var direction = midPoint - agent.transform.position;
 
         UseCustomDirectionAndRotation(direction);
 

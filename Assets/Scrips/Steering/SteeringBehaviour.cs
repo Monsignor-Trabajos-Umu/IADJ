@@ -11,6 +11,7 @@ public enum Grupo{
 
 public abstract class SteeringBehaviour : MonoBehaviour
 {
+    public bool useReferee;
     public Grupo grupo;
     public Agent target;
     //Peso del SteeringBehaviour
@@ -22,6 +23,8 @@ public abstract class SteeringBehaviour : MonoBehaviour
     public Steering steering;
     [SerializeField]
     protected bool debug = false;
+
+   
     
     //Calcula el Steering para el agente dado en funcion del comportamiento deseado
     public abstract Steering GetSteering(AgentNPC agent);
