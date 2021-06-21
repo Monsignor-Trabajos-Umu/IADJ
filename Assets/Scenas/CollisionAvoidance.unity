@@ -6425,11 +6425,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 2
   "da\xF1o": 2
-  mAcceleration: 2
+  mAcceleration: 100
   mAngularAcceleration: 45
   masa: 2
-  mRotation: 0
-  mVelocity: 2
+  mRotation: 180
+  mVelocity: 100
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -6464,7 +6464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugGreen: 0
-  listSteerings: []
+  ordenMayor: 0
   debugSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -6475,7 +6475,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3038182833133005832}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
   m_Name: 

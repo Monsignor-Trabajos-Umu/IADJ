@@ -82,8 +82,8 @@ public class BlenderSteering : ArbitroSteering
         steering.lineal.y = 0;
 
         // No tiene sentido 0,000001 de aceleracion
-        steering.lineal.x  = (float)(Math.Round(steering.lineal.x, 4));
-        steering.lineal.z  = (float)(Math.Round(steering.lineal.z, 4));
+        steering.lineal.x  = (float)(Math.Round(steering.lineal.x, 6));
+        steering.lineal.z  = (float)(Math.Round(steering.lineal.z, 6));
 
         // Para los angulos con dos decimales es mas que suficiente
         steering.angular  = (float)(Math.Round(steering.angular, 2));
