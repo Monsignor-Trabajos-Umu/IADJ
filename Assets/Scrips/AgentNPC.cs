@@ -225,14 +225,14 @@ public class AgentNPC : Agent
 
     private void UpdateAccelerated(Steering steering, float time)
     {
-        Debug.Log($"PreFiltre {vVelocidad} {rotacion}");
+        //Debug.Log($"PreFiltre {vVelocidad} {rotacion}");
         if (steering.lineal == new Vector3(0,0,0))
             vVelocidad = new Vector3(0, 0, 0);
 
         if (Mathf.Approximately(steering.angular, 0))
             rotacion = 0;
 
-        Debug.Log($"PostFiltre {vVelocidad} {rotacion}");
+        //Debug.Log($"PostFiltre {vVelocidad} {rotacion}");
         Debug.DrawRay(transform.position, vVelocidad, Color.white);
         transform.position += vVelocidad * time;
         orientacion += rotacion * time;

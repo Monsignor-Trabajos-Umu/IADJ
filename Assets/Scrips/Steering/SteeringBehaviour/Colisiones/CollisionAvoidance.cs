@@ -8,7 +8,7 @@ public class CollisionAvoidance : SteeringBehaviour
     //Lista de potenciales objetivos de colision;
     public Agent[] colisiones;
     private float tiempoMasCerca;
-
+    Vector3 relativePos;
     private void Start()
     {
         grupo = Grupo.COLISIONES;
@@ -18,21 +18,7 @@ public class CollisionAvoidance : SteeringBehaviour
     {
         colisiones = GameObject.FindObjectsOfType<Agent>();
         tiempoMasCerca = Mathf.Infinity;
-        Steering steering = new Steering(0, new Vector3(0,0,20));
-
-        if (colisiones.Length == 0) return steering;
-        /*
-         * TiempoMasCerca= - (posicionRelativaTarget*TargetVelocidadRelativa)/|TargetVelocidadRelativa|^2
-         * TargetVelocidadRelativa = vt - vc
-         * posicionRelativaTarget = pt - pc
-         * 
-         * Si TiempoMasCerca es negativo entonces el personaje ya se aparta del objetivo y no se 
-         * necesita hacer ninguna acción
-         * 
-         * posicionPersonajeColision = posicionPersonaje + velocidadPersonaje*TiempoMasCerca
-         * posicionObjetivoColision = posicionObjetivo + velocidadObjetivo*TiempoMasCerca
-         */
-        Vector3 relativePos;
+        Steering steering = new Steering(0, new Vector3(0,0,0));
 
         Agent firstTarget = ColisionMasCercana();
         Vector3 firstRelativePos = firstTarget.transform.position - miAgente.transform.position;
@@ -44,14 +30,19 @@ public class CollisionAvoidance : SteeringBehaviour
  
         foreach(Agent obj in colisiones)
         {
+            //Calcular el tiempo de colision
             relativePos = obj.transform.position - miAgente.transform.position;
             Vector3 relativeVel = obj.vVelocidad - miAgente.vVelocidad;
-            var relativeSpeed = relativeVel.magnitude;
+            float relativeSpeed = relativeVel.magnitude;
             timeToCollision = Vector3.Dot(relativePos, relativeVel) / (relativeSpeed * relativeSpeed);
-            float distancia = relativePos.magnitude;
-            var minSeparacion = distancia - relativeSpeed * timeToCollision;
 
-            if (minSeparacion > 2 * miAgente.RExterior) continue;
+            //Comprobar si habrá colisión
+            float distancia = relativePos.magnitude;
+            float minSeparacion = distancia - relativeSpeed * timeToCollision;
+
+            if (minSeparacion > 2 * miAgente.RExterior)
+                continue;
+
 
             if(timeToCollision > 0 && timeToCollision < tiempoMasCerca)
             {
