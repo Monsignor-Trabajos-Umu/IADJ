@@ -33,8 +33,8 @@ public class FollowPath : Arrive
             // Estamos en el penultimo vamos a hacer un Arrive al ultimo
             if (currentNode + 1 == nodes.Count())
             {
-                this.usePredicted = true;
-                this.predictedDirection = targetPosition - agent.transform.position;
+                this.useCustom = true;
+                this.customDirection = targetPosition - agent.transform.position;
                 steering = base.GetSteering(agent);
             }
             else

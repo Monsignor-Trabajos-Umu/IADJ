@@ -46,7 +46,7 @@ public class LRTA : Arrive
         Debug.Log("Nodo salida ->" + targetNode);
 
         // Start values
-        usePredicted = true;
+        useCustom = true;
         atFinalTarget = false;
     }
 
@@ -131,7 +131,7 @@ public class LRTA : Arrive
             }
             Debug.Log($"Voy a  [{tempObjetive.gridX},{tempObjetive.gridY}]");
             // Sino Vamos al nodo objetivo
-            predictedDirection = tempObjetive.worldPosition - currentPosition;
+            customDirection = tempObjetive.worldPosition - currentPosition;
             return base.GetSteering(miAgente);
         }
 

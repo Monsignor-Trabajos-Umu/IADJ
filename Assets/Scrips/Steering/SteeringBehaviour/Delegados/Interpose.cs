@@ -33,6 +33,12 @@ public class Interpose : Arrive
         midPoint = (posA + posB) / 2;
 
         target.transform.position = midPoint;
+
+        var direction = agent.transform.position - midPoint;
+        direction = RemoveY(direction);
+
+        UseCustomDirectionAndRotation(direction);
+
         return base.GetSteering(agent);
     }
 

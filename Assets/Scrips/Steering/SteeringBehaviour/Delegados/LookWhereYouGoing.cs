@@ -12,8 +12,8 @@ public class LookWhereYouGoing : Align
         steering = new Steering(0, new Vector3(0, 0, 0));
         // Vamosa  crear un nuevo target en la posicion donde estaria nuestro target
         Vector3 predictedPosition = miAgente.transform.position + miAgente.vVelocidad;
-        this.predictedRotation = (float)miAgente.MinAngleToRotate(predictedPosition);
-        this.usePredicted = true;
+        this.customRotation = (float)miAgente.MinAngleToRotate(predictedPosition);
+        this.useCustom = true;
 
 
 
