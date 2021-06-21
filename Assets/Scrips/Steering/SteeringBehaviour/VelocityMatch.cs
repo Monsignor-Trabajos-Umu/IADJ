@@ -18,6 +18,7 @@ public class VelocityMatch : SteeringBehaviour
         // Obtenemos la rotacion hacie el objetivo
 
         steering.lineal = this.target.vVelocidad - miAgente.vVelocidad;
+        steering.lineal = RemoveY(steering.lineal); // Filtramos la y 
         steering.lineal /= timeToTarget;
 
         // Si vamos muy rapido la normalizamos

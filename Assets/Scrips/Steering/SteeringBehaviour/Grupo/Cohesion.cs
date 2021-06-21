@@ -30,8 +30,8 @@ public class Cohesion : Seek
         if (count > 0)
         {
             centerOfMas /= count;
-            usePredicted = true;
-            predictedDirection = centerOfMas;
+            useCustom = true;
+            customDirection = centerOfMas;
             steering = base.GetSteering(agent);
         }
 

@@ -16,9 +16,9 @@ public abstract class SteeringBehaviour : MonoBehaviour
     //Peso del SteeringBehaviour
     public float weight = 1f;
     // Usamos estas dos variables para evitarnos modificar el transform
-    protected Vector3 predictedDirection;
-    protected float predictedRotation = 0f;
-    protected bool usePredicted = false;
+    protected Vector3 customDirection;
+    protected float customRotation = 0f;
+    protected bool useCustom = false;
     public Steering steering;
     [SerializeField]
     protected bool debug = false;
@@ -31,16 +31,16 @@ public abstract class SteeringBehaviour : MonoBehaviour
     {
         grupo = Grupo.PERSECUCION;
     }
-    public void UsePredicted(Vector3 predictedDirection,float predictedRotation =0f)
+    public void UseCustomDirectionAndRotation(Vector3 predictedDirection,float predictedRotation =0f)
     {
-        this.usePredicted = true;
-        this.predictedDirection = predictedDirection;
-        this.predictedRotation = predictedRotation;
+        this.useCustom = true;
+        this.customDirection = predictedDirection;
+        this.customRotation = predictedRotation;
     }
-    public void UsePredicted(float predictedRotation)
+    public void UseCustomRotation(float predictedRotation)
     {
-        this.usePredicted = true;
-        this.predictedRotation = predictedRotation;
+        this.useCustom = true;
+        this.customRotation = predictedRotation;
     }
 
     private void OnDrawGizmos()
@@ -50,9 +50,9 @@ public abstract class SteeringBehaviour : MonoBehaviour
     }
 
     // 
-    protected static Steering RemoveY(Steering steering)
+    protected static Vector3 RemoveY(Vector3 steering)
     {
-        steering.lineal.y = 0;
+        steering.y = 0;
         return steering;
     }
 }

@@ -36,9 +36,9 @@ public class Align : SteeringBehaviour
 
         // Obtenemos la rotacion hacie el objetivo
         float rotation;
-        if (this.usePredicted)
+        if (this.useCustom)
         {
-            rotation = this.predictedRotation;
+            rotation = this.customRotation;
         }
         else
         {

@@ -21,11 +21,11 @@ public class Evade : Flee
 
         // NO Puedo usar el target porque va asignado a otro objecto
 
-        this.predictedDirection = target.transform.position;
+        this.customDirection = target.transform.position;
 
-        this.predictedDirection += target.vVelocidad * prediction;
+        this.customDirection += target.vVelocidad * prediction;
 
-        this.usePredicted = true;
+        this.useCustom = true;
 
         return base.GetSteering(miAgente);
 

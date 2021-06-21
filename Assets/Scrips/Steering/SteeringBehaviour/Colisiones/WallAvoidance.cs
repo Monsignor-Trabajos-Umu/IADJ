@@ -35,8 +35,8 @@ public class WallAvoidance : Seek
 
 
 
-            this.predictedDirection = hit.point + normalPared * avoidDistance;
-            this.usePredicted = true;
+            this.customDirection = hit.point + normalPared * avoidDistance;
+            this.useCustom = true;
             if (debug)
             {
                 Debug.DrawLine(miAgente.transform.position, hit.point, Color.red);

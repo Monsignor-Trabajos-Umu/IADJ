@@ -52,8 +52,8 @@ public class Wander : Align
         {
             // Calculo la minima rotacion para llegar a ese punto ,
             // si puede que sea rebundante pero mentalmente me resulta mas claro.
-            this.predictedRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
-            this.usePredicted = true;
+            this.customRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
+            this.useCustom = true;
             steering = base.GetSteering(miAgente);
             steering.lineal = miAgente.mAcceleration * miAgente.OrientationToVector();
             wanderPrivateCounter++;
@@ -92,8 +92,8 @@ public class Wander : Align
 
         // Calculo la minima rotacion para llegar a ese punto ,
         // si puede que sea rebundante pero mentalmente me resulta mas claro.
-        this.predictedRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
-        this.usePredicted = true;
+        this.customRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
+        this.useCustom = true;
         steering = base.GetSteering(miAgente);
 
 

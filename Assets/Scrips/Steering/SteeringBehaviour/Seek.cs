@@ -12,10 +12,10 @@ public class Seek : SteeringBehaviour
         // Full Aceleration Seek a tope
 
 
-        Vector3 position = this.usePredicted ? this.predictedDirection : target.transform.position;
+        Vector3 position = this.useCustom ? this.customDirection : target.transform.position;
 
         steering.lineal = position - miAgente.transform.position;
-        steering = RemoveY(steering);
+        steering.lineal = RemoveY(steering.lineal); // Filtramos la y
         steering.lineal.Normalize();
         steering.lineal *= miAgente.mAcceleration;
 

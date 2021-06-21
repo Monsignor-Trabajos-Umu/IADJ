@@ -25,11 +25,11 @@ public class FormationOffset : SteeringBehaviour
         // Hago que este entre -180 y 180
         rotation = align.MapToRange(rotation);
 
-        align.UsePredicted(rotation);
+        align.UseCustomRotation(rotation);
         steering.angular = align.GetSteering(miAgente).angular;
 
         // Arrive ya se encarga de parrar si estamos lo suficientemente cerca
-        arrive.UsePredicted(newDirection); 
+        arrive.UseCustomDirectionAndRotation(newDirection); 
         steering.lineal = arrive.GetSteering(miAgente).lineal;
 
         // Si ya he llegado a mi sitio se lo hago saver a la formacion
