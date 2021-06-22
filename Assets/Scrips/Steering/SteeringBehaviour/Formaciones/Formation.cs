@@ -71,10 +71,23 @@ public class Formation
         return GetRank(agentNpc) == FormationRank.Soldier;
     }
 
-
+    // Cuando todos estén en posición le decimos al líder que se espere para moverse.
     public void ImInPosition(AgentNPC agentNpc)
     {
         formationDone[agentNpc] = true;
+
+        if (IsFormationDone())
+        {
+            leader.WaitBeforeMoving();
+        }
+    }
+    // Los solados ya no están en posición porque el líder se ha movido
+    public void WaitForSoldiers()
+    {
+        foreach (var key in formationDone.Keys.ToList())
+            formationDone[key] = false;
+
+        leader.WaitInAFuture(); // Le decimos al líder que espere a los soldados en un futuro
     }
 
     public bool IsFormationDone() => !formationDone.Values.Contains(false);

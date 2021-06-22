@@ -87,19 +87,46 @@ public class Controlador : MonoBehaviour
         });
 
         var leader = selected[0];
-        var soldiers = selected.GetRange(1, 3);
+        var soldiers = selected.GetRange(1, 4);
         var formation = new Formation(leader);
-        var spacing = 5f;
 
-        soldiers.ForEach(agentNpc =>
-        {
-            formation.soldiers.Add(agentNpc, new Steering(0, new Vector3(spacing, 0, 0)));
-            spacing += 5;
-        });
+        // Left 
+
+        formation.soldiers.Add(soldiers[0], new Steering(0, new Vector3(-10, 0, 0)));
+        formation.soldiers.Add(soldiers[1], new Steering(0, new Vector3(-5, 0, 0)));
+        // Yo
+        formation.soldiers.Add(soldiers[2], new Steering(0, new Vector3(5, 0, 0)));
+        formation.soldiers.Add(soldiers[3], new Steering(0, new Vector3(10, 0, 0)));
+
 
         formation.MakeFormation();
     }
 
+
+    private static void MakeCross(List<AgentNPC> selected)
+    {
+        Debug.Log("Formando Cuadrado");
+        selected.ForEach(agent =>
+        {
+            agent.ResetStateAction();
+            agent.ChangeState(State.Waiting);
+        });
+
+        var leader = selected[0];
+        var soldiers = selected.GetRange(1, 4);
+        var formation = new Formation(leader);
+
+        // Left 
+
+        formation.soldiers.Add(soldiers[0], new Steering(0, new Vector3(-10, 0, -10)));
+        formation.soldiers.Add(soldiers[1], new Steering(0, new Vector3(-10, 0, 10)));
+        // Yo
+        formation.soldiers.Add(soldiers[2], new Steering(0, new Vector3(10, 0, -10)));
+        formation.soldiers.Add(soldiers[3], new Steering(0, new Vector3(10, 0, 10)));
+
+
+        formation.MakeFormation();
+    }
 
     private void MakeAction()
     {
@@ -151,15 +178,27 @@ public class Controlador : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L)) // MakeLine
         {
-            if (GetSelected.Count < 4) return;
+            if (GetSelected.Count < 5) return;
 
-            var selected = GetSelected.ToList().GetRange(0, 4);
+            var selected = GetSelected.ToList().GetRange(0, 5);
 
             MakeLine(selected);
         }
 
+        if (Input.GetKeyDown(KeyCode.X)) // Make cross
+        {
+            if (GetSelected.Count < 5) return;
+
+            var selected = GetSelected.ToList().GetRange(0, 5);
+
+            MakeCross(selected);
+        }
+
         if (action != 0)
             MakeAction();
+
+
+         
     }
 
     public int GetTerrainLayer(Vector3 worldPos, Terrain t)

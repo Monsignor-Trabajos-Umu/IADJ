@@ -1,27 +1,40 @@
 ﻿using System;
 using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class AgentNPC : Agent
 {
-    private Steering actionSteering;
-    public GoTarget goToTarget;
-    public ArbitroSteering arbitro;
+
+
+
+    // SteeringBehaviour
+    public GoTarget goToTarget; // Go to target
+    public FormationOffset formationOffset; // Me dice mi posicion si es formacion
+
+
+    // Steerings
+    public ArbitroSteering arbitro; // Asigna mis steerings.
+    private Steering actionSteering; // Steering de la accion el go to el formar etc
+    public Steering miSteering; // Steering por defecto que me da mi arbitro
+
+    // Controller
     private Controlador controlador;
-    public CAction cAction = CAction.None; //  Action para las acciones
-    private bool alreadyWaiting;
+    public bool selected; // Si estoy seleccionado
+    private bool alreadyWaiting; // Si estoy esperando para mandar un mensaje al controlador
+
+    // Formaciones
     public Formation formation;
-    public FormationOffset formationOffset;
+    private bool InFormation => formation != null; // Si estoy en formacion
+    // Estados
+    public State state = State.Normal; // State para las ordenes
+    public CAction cAction = CAction.None; //  Action para las acciones
+    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
+
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
-    public Steering miSteering;
     public int peorTerreno = 1;
-    public bool selected;
-    public State state = State.Normal; // State para las ordenes
-    private bool stateChanged;
-    private bool InFormation => formation != null;
-
 
     // Builders 
 
@@ -181,6 +194,52 @@ public class AgentNPC : Agent
         formationOffset.SetFormation(newFormation);
     }
 
+
+
+    private bool willWait = false;
+    public void WaitInAFuture() 
+    {
+        if (!formation.ImLeader(this)) throw new Exception("No eres el líder");
+        if (willWait) return;
+        IEnumerator Timer(float secondsToWait)
+        {
+            alreadyWaiting = true;
+            Debug.Log("Started WaitInAFuture at timestamp : " + Time.time);
+            yield return new WaitForSeconds(secondsToWait);
+            Debug.Log("Finished WaitInAFuture at timestamp : " + Time.time);
+            ChangeState(State.Waiting);  // Pasados X segundos nos esperamos a los soldados.
+            willWait = false;
+        }
+
+        StartCoroutine(Timer(10));
+    }
+
+
+    public void WaitBeforeMoving()
+    {
+        if (!formation.ImLeader(this)) throw new Exception("No eres el líder");
+        if (alreadyWaiting) return; // Si ya estamos esperando no hacemos nada
+        IEnumerator Timer(float secondsToWait)
+        {
+            alreadyWaiting = true;
+            //Print the time of when the function is first called.
+            Debug.Log("Started WaitBeforeMoving at timestamp : " + Time.time);
+
+            yield return new WaitForSeconds(secondsToWait);
+
+            //After we have waited 5 seconds print the time again.
+            Debug.Log("Finished WaitBeforeMoving at timestamp : " + Time.time);
+            ChangeState(State.Normal); // Ya te puedes mover líder
+            controlador.ActionFinished(this); // Le decimos al controlador que la accion ya esta terminada
+            formation.WaitForSoldiers(); // Le decimos a la formacion que espere a los soldados
+            alreadyWaiting = false;
+        }
+
+        StartCoroutine(Timer(5));
+    }
+
+    
+
     #endregion
 
 
@@ -283,13 +342,6 @@ public class AgentNPC : Agent
         // Si estamos esperando nos quedamos quietos
         if (state != State.Waiting) ApplySteering();
 
-
-        // Compruebo si mi formacion esta lista para pasar a wander
-
-        if (!alreadyWaiting && InFormation && formation.ImLeader(this) &&
-            formation.IsFormationDone())
-            StartCoroutine(WaitBeforeFinishing(5));
-        ;
     }
 
     // Los Steering se actualizan se usen o no otra cosa es que los guardemos

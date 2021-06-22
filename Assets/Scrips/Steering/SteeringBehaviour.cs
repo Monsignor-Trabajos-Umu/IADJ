@@ -11,8 +11,12 @@ public enum Grupo{
 
 public abstract class SteeringBehaviour : MonoBehaviour
 {
-    public Grupo grupo;
-    public Agent target;
+
+    public bool useReferee; // Flag para que mi arbitros lo tengan en cuenta
+
+    public Grupo grupo; // Grupo para el arbitro grupal
+    public Agent target; // Target si existe
+
     //Peso del SteeringBehaviour
     public float weight = 1f;
     // Usamos estas dos variables para evitarnos modificar el transform
@@ -22,6 +26,8 @@ public abstract class SteeringBehaviour : MonoBehaviour
     public Steering steering;
     [SerializeField]
     protected bool debug = false;
+
+   
     
     //Calcula el Steering para el agente dado en funcion del comportamiento deseado
     public abstract Steering GetSteering(AgentNPC agent);
