@@ -509,28 +509,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masa: 0
-  velocidad: 0
-  mVelocidad: 5
-  vidaMaxima: 100
-  vida: 1
   alcance: 2
   "da\xF1o": 1
+  mAcceleration: 0
+  mAngularAcceleration: 0
+  masa: 0
+  mRotation: 0
+  mVelocity: 0
   rotacion: 0
-  mRotacion: 90
-  mAngularAceleracion: 10
-  mAceleracion: 5
-  vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
-  rInterior: 4
-  aInterior: 15
+  velocidad: 0
+  vida: 1
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 20
+  aInterior: 15
   dEbUg: 0
+  rInterior: 4
+  goToTarget: {fileID: 0}
+  formationOffset: {fileID: 0}
+  arbitro: {fileID: 399829250}
   miSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  arbitro: {fileID: 399829250}
-  goToTarget: {fileID: 0}
+  selected: 0
+  state: 0
+  cAction: 0
   mejorTerreno: 0
   peorTerreno: 1
 --- !u!114 &399829250
@@ -545,11 +549,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugGreen: 0
   listSteerings: []
   debugSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debugGreen: 0
 --- !u!114 &399829251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,6 +566,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useReferee: 0
+  grupo: 0
   target: {fileID: 0}
   weight: 1
   steering:
@@ -695,23 +701,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910583acafdcb1d44a359fa0a7626b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masa: 0
-  velocidad: 0
-  mVelocidad: 0
-  vidaMaxima: 300
-  vida: 300
   alcance: 0
   "da\xF1o": 0
+  mAcceleration: 0
+  mAngularAcceleration: 0
+  masa: 0
+  mRotation: 0
+  mVelocity: 0
   rotacion: 0
-  mRotacion: 0
-  mAngularAceleracion: 0
-  mAceleracion: 0
-  vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
-  rInterior: 45
-  aInterior: 45
+  velocidad: 0
+  vida: 300
+  vidaMaxima: 300
+  vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 45
+  aInterior: 45
   dEbUg: 0
+  rInterior: 45
 --- !u!1 &576995627
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,23 +841,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910583acafdcb1d44a359fa0a7626b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masa: 0
-  velocidad: 0
-  mVelocidad: 0
-  vidaMaxima: 300
-  vida: 300
   alcance: 0
   "da\xF1o": 0
+  mAcceleration: 0
+  mAngularAcceleration: 0
+  masa: 0
+  mRotation: 0
+  mVelocity: 0
   rotacion: 0
-  mRotacion: 0
-  mAngularAceleracion: 0
-  mAceleracion: 0
-  vVelocidad: {x: 0, y: 0, z: 0}
   vAceleracion: {x: 0, y: 0, z: 0}
-  rInterior: 45
-  aInterior: 45
+  velocidad: 0
+  vida: 300
+  vidaMaxima: 300
+  vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 45
+  aInterior: 45
   dEbUg: 0
+  rInterior: 45
 --- !u!1 &589110566
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &589110567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,7 +919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSizeX: 1000
   gridWorldSizeZ: 1000
-  mostrarMapa: 1
+  mostrarMapa: 0
   nodeRaidus: 15
 --- !u!1 &728459732
 GameObject:
