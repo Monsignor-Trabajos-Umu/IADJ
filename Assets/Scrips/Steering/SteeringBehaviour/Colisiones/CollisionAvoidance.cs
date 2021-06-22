@@ -9,7 +9,7 @@ public class CollisionAvoidance : SteeringBehaviour
     //Lista de potenciales objetivos de colision;
     public List<Agent> colisiones;
     private float tiempoMasCerca;
-
+    Vector3 relativePos;
     private void Start()
     {
         steeringGroup = SteeringGroup.Collision;
@@ -30,7 +30,7 @@ public class CollisionAvoidance : SteeringBehaviour
          * posicionRelativaTarget = pt - pc
          * 
          * Si TiempoMasCerca es negativo entonces el personaje ya se aparta del objetivo y no se 
-         * necesita hacer ninguna acción
+         * necesita hacer ninguna acciï¿½n
          * 
          * posicionPersonajeColision = posicionPersonaje + velocidadPersonaje*TiempoMasCerca
          * posicionObjetivoColision = posicionObjetivo + velocidadObjetivo*TiempoMasCerca
@@ -41,20 +41,25 @@ public class CollisionAvoidance : SteeringBehaviour
         Vector3 firstRelativePos = firstTarget.transform.position - miAgente.transform.position;
         float firstDistance = firstRelativePos.magnitude;
         Vector3 firstRelativeVel = firstTarget.vVelocidad - miAgente.vVelocidad;
-        var timeToCollision = Vector3.Dot(firstRelativePos, firstRelativeVel) / (firstRelativeVel.magnitude * firstRelativeVel.magnitude);
+        var timeToCollision = -Vector3.Dot(firstRelativePos, firstRelativeVel) / (firstRelativeVel.magnitude * firstRelativeVel.magnitude);
         float firstMinSeparation = firstDistance - firstRelativeVel.magnitude * timeToCollision;
         firstTarget = null;
  
         foreach(Agent obj in colisiones)
         {
+            //Calcular el tiempo de colision
             relativePos = obj.transform.position - miAgente.transform.position;
             Vector3 relativeVel = obj.vVelocidad - miAgente.vVelocidad;
-            var relativeSpeed = relativeVel.magnitude;
-            timeToCollision = Vector3.Dot(relativePos, relativeVel) / (relativeSpeed * relativeSpeed);
-            float distancia = relativePos.magnitude;
-            var minSeparacion = distancia - relativeSpeed * timeToCollision;
+            float relativeSpeed = relativeVel.magnitude;
+            timeToCollision = -Vector3.Dot(relativePos, relativeVel) / (relativeSpeed * relativeSpeed);
 
-            if (minSeparacion > 2 * miAgente.RExterior) continue;
+            //Comprobar si habrï¿½ colisiï¿½n
+            float distancia = relativePos.magnitude;
+            float minSeparacion = distancia - relativeSpeed * timeToCollision;
+
+            if (minSeparacion > 2 * miAgente.RExterior)
+                continue;
+
 
             if(timeToCollision > 0 && timeToCollision < tiempoMasCerca)
             {
@@ -84,8 +89,13 @@ public class CollisionAvoidance : SteeringBehaviour
             relativePos = firstRelativePos + firstRelativeVel * tiempoMasCerca;
         }
 
+        //Vector3 aux = firstTarget.transform.position + (relativePos - firstTarget.transform.position);
+        //aux = aux * ((float) firstTarget.RExterior + 2);
+
         relativePos = relativePos.normalized;
         steering.lineal = relativePos * miAgente.mAcceleration;
+        Debug.DrawLine(this.transform.position, steering.lineal, Color.cyan);
+        //Debug.DrawRay(this.transform.position, steering.lineal, Color.green);
         return steering;
 
     }

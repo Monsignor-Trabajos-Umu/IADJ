@@ -2098,7 +2098,6 @@ GameObject:
   - component: {fileID: 798301934}
   - component: {fileID: 798301933}
   - component: {fileID: 798301932}
-  - component: {fileID: 798301931}
   - component: {fileID: 798301930}
   m_Layer: 0
   m_Name: AgentCube_Blue (1)
@@ -2126,26 +2125,6 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   debug: 0
---- !u!114 &798301931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798301929}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grupo: 0
-  target: {fileID: 0}
-  weight: 1
-  steering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  debug: 1
-  colisiones: []
 --- !u!114 &798301932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2177,11 +2156,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 2
   "da\xF1o": 2
-  mAcceleration: 2
+  mAcceleration: 5
   mAngularAcceleration: 45
   masa: 2
   mRotation: 90
-  mVelocity: 2
+  mVelocity: 5
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -2366,7 +2345,7 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 4
   aInterior: 2
-  dEbUg: 1
+  dEbUg: 0
   rInterior: 4
   goToTarget: {fileID: 0}
   arbitro: {fileID: 856084977}
@@ -6403,7 +6382,6 @@ GameObject:
   - component: {fileID: 3038182833133005833}
   - component: {fileID: 3038182833133005834}
   - component: {fileID: 3038182833133005835}
-  - component: {fileID: 3038182833133005836}
   m_Layer: 0
   m_Name: AgentCube_Blue
   m_TagString: Untagged
@@ -6425,11 +6403,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 2
   "da\xF1o": 2
-  mAcceleration: 100
+  mAcceleration: 5
   mAngularAcceleration: 45
   masa: 2
   mRotation: 180
-  mVelocity: 100
+  mVelocity: 5
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -6488,25 +6466,6 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   debug: 1
   colisiones: []
---- !u!114 &3038182833133005836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3038182833133005832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc1f88977c1a78478cd255c223b8592, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grupo: 1
-  target: {fileID: 2135229751}
-  weight: 1
-  steering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  debug: 0
 --- !u!1 &3038568614945587198
 GameObject:
   m_ObjectHideFlags: 0
@@ -6594,7 +6553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3038182833133005832}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0.00000028088027}
-  m_LocalPosition: {x: -6.3, y: 1.0000079, z: 2.5}
+  m_LocalPosition: {x: -6.3, y: 1.0000079, z: -13.5}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 3036223667897338986}
