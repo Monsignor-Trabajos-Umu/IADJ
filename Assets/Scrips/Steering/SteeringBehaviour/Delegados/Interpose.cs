@@ -39,8 +39,9 @@ public class Interpose : Arrive
         return base.GetSteering(agent);
     }
 
-    private void OnDrawGizmos()
+    protected override void OnDrawGizmos()
     {
+        base.OnDrawGizmos();
         Gizmos.DrawLine(agenteA.transform.position, agenteB.transform.position);
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(midPoint, 2);

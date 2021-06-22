@@ -94,7 +94,7 @@ public class CollisionAvoidance : SteeringBehaviour
 
         relativePos = relativePos.normalized;
         steering.lineal = relativePos * miAgente.mAcceleration;
-        Debug.DrawLine(this.transform.position, steering.lineal, Color.cyan);
+        //if(debug) Debug.DrawLine(this.transform.position, steering.lineal, Color.red);
         //Debug.DrawRay(this.transform.position, steering.lineal, Color.green);
         return steering;
 

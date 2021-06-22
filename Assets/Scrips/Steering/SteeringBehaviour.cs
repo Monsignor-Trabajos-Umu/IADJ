@@ -38,9 +38,10 @@ public abstract class SteeringBehaviour : MonoBehaviour
         customRotation = predictedRotation;
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if (!debug) return;
+        Gizmos.color = Color.white;
         Gizmos.DrawRay(transform.position, steering.lineal);
     }
 

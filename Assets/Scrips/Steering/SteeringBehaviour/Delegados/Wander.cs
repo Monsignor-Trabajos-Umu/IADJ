@@ -58,9 +58,6 @@ public class Wander : Align
             steering.lineal = miAgente.mAcceleration * miAgente.OrientationToVector();
             wanderPrivateCounter++;
 
-            //Debug
-            if (debug)
-                Debug.DrawRay(transform.position, steering.lineal, Color.blue);
             return steering;
         }
 
@@ -101,12 +98,15 @@ public class Wander : Align
         targetExists = true;
         wanderPrivateCounter = 0;
 
-        if (debug)
-            Debug.DrawRay(transform.position, steering.lineal, Color.blue);
-
+        
         return steering;
 
     }
 
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawSphere(targetPoint, 2);
+    }
 }
 

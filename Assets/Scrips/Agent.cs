@@ -8,7 +8,7 @@ public class Agent : Body
     //Angulos
     [SerializeField] public double aInterior;
 
-    public bool dEbUg = false;
+    [SerializeField] protected bool debug = false;
 
 
     //Radio
@@ -37,10 +37,11 @@ public class Agent : Body
     }
 
 
-    private void OnDrawGizmos() // Gizmo: una línea en la dirección del objetivo
+    protected virtual void OnDrawGizmos() // Gizmo: una línea en la dirección del objetivo
     {
-        if (dEbUg)
-            Gizmos.DrawSphere(transform.position, (float) rInterior);
+        if (!debug) return;
+
+        Gizmos.DrawSphere(transform.position, (float) rInterior);
         //Gizmos.DrawSphere(transform.position, (float)this.RExterior);
         //Gizmos.DrawSphere(transform.position, (float)this.);
         //Gizmos.DrawSphere(transform.position, (float)this.rInterior);

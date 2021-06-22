@@ -270,7 +270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &160494247
 Transform:
   m_ObjectHideFlags: 0
@@ -361,18 +361,17 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 0
   aInterior: 0.5
-  dEbUg: 0
+  debug: 0
   rInterior: 1
   arbitro: {fileID: 0}
+  cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
-  cAction: 0
   mejorTerreno: 0
   peorTerreno: 1
-  debug: 0
+  selected: 0
+  state: 0
 --- !u!114 &160494251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4496,7 +4495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -4504,10 +4503,10 @@ MonoBehaviour:
   target: {fileID: 0}
   useReferee: 1
   weight: 5
-  wanderRate: 92.5
+  wanderRate: 45.1
   wanderOrientation: 0
-  wanderStep: 18
-  wanderWait: 6.01
+  wanderStep: 7
+  wanderWait: 10
 --- !u!114 &1322178453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4520,7 +4519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -4541,7 +4540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 1
+  debugGreen: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -4566,7 +4565,7 @@ MonoBehaviour:
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
-  mVelocity: 5
+  mVelocity: 2
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -4575,18 +4574,17 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 0
   aInterior: 0.5
-  dEbUg: 0
+  debug: 1
   rInterior: 1
   arbitro: {fileID: 0}
+  cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
-  cAction: 0
   mejorTerreno: 0
   peorTerreno: 1
-  debug: 0
+  selected: 0
+  state: 0
 --- !u!65 &1322178457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5498,7 +5496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1503490887
 Transform:
   m_ObjectHideFlags: 0
@@ -5589,18 +5587,17 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 0
   aInterior: 0.5
-  dEbUg: 0
+  debug: 0
   rInterior: 1
   arbitro: {fileID: 0}
+  cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
-  cAction: 0
   mejorTerreno: 0
   peorTerreno: 1
-  debug: 0
+  selected: 0
+  state: 0
 --- !u!114 &1503490891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6957,7 +6954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1801314609
 Transform:
   m_ObjectHideFlags: 0
@@ -7048,18 +7045,17 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 0
   aInterior: 0.5
-  dEbUg: 0
+  debug: 0
   rInterior: 1
   arbitro: {fileID: 0}
+  cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
-  cAction: 0
   mejorTerreno: 0
   peorTerreno: 1
-  debug: 0
+  selected: 0
+  state: 0
 --- !u!114 &1801314613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8523,7 +8519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2122945411
 Transform:
   m_ObjectHideFlags: 0
@@ -8614,18 +8610,17 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 0
   aInterior: 0.5
-  dEbUg: 0
+  debug: 0
   rInterior: 1
   arbitro: {fileID: 0}
+  cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
-  cAction: 0
   mejorTerreno: 0
   peorTerreno: 1
-  debug: 0
+  selected: 0
+  state: 0
 --- !u!114 &2122945415
 MonoBehaviour:
   m_ObjectHideFlags: 0

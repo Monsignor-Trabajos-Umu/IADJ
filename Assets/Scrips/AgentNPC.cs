@@ -1,33 +1,34 @@
 ﻿using System;
 using System.Collections;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class AgentNPC : Agent
 {
+    private bool alreadyWaiting; // Si estoy esperando para mandar un mensaje al controlador
 
 
     // Steerings
     public ArbitroSteering arbitro; // Asigna mis steerings.
-    public Steering finalSteering;
+    public CAction cAction = CAction.None; //  Action para las acciones
 
     // Controller
     private Controlador controlador;
-    public bool selected; // Si estoy seleccionado
-    private bool alreadyWaiting; // Si estoy esperando para mandar un mensaje al controlador
+    public Steering finalSteering;
 
     // Formaciones
     public Formation formation;
-    private bool InFormation => formation != null; // Si estoy en formacion
-    // Estados
-    public State state = State.Normal; // State para las ordenes
-    public CAction cAction = CAction.None; //  Action para las acciones
-    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
 
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
     public int peorTerreno = 1;
+
+    public bool selected; // Si estoy seleccionado
+
+    // Estados
+    public State state = State.Normal; // State para las ordenes
+    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
+    private bool InFormation => formation != null; // Si estoy en formacion
 
     // Builders 
 
@@ -104,6 +105,50 @@ public class AgentNPC : Agent
 
 
     private void OnMouseDown() => controlador.AddOrRemoveFromSelected(this);
+
+
+    #region Steering
+
+    private void ApplySteering()
+    {
+        if (state != State.Action)
+        {
+            UpdateAccelerated(finalSteering, Time.deltaTime);
+            return;
+        }
+
+
+        switch (cAction)
+        {
+            case CAction.None:
+                break;
+            case CAction.GoToTarget:
+                UpdateNoAccelerated(finalSteering, Time.deltaTime);
+                break;
+            case CAction.Forming:
+                UpdateAccelerated(finalSteering, Time.deltaTime);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    // TODO esperar un rato de vez en cuando
+
+    #endregion
+
+
+    /*
+     * Modo debug
+     */
+    protected override void OnDrawGizmos()
+    {
+        if (!debug) return;
+        //Pintamos el vector de acceleracion
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, finalSteering.lineal);
+        //Gizmos.DrawRay(transform.position, steering.lineal);
+    }
 
 
     #region Estados
@@ -184,19 +229,20 @@ public class AgentNPC : Agent
     }
 
 
+    private bool willWait;
 
-    private bool willWait = false;
-    public void MoveABitBeforeWaiting() 
+    public void MoveABitBeforeWaiting()
     {
         if (!formation.ImLeader(this)) throw new Exception("No eres el líder");
         if (willWait) return;
+
         IEnumerator Timer(float secondsToWait)
         {
             alreadyWaiting = true;
             Debug.Log($"Will wait in {secondsToWait} seconds ");
             yield return new WaitForSeconds(secondsToWait);
             Debug.Log("Im waiting");
-            ChangeState(State.Waiting);  // Pasados X segundos nos esperamos a los soldados.
+            ChangeState(State.Waiting); // Pasados X segundos nos esperamos a los soldados.
             willWait = false;
         }
 
@@ -208,6 +254,7 @@ public class AgentNPC : Agent
     {
         if (!formation.ImLeader(this)) throw new Exception("No eres el líder");
         if (alreadyWaiting) return; // Si ya estamos esperando no hacemos nada
+
         IEnumerator Timer(float secondsToWait)
         {
             alreadyWaiting = true;
@@ -217,49 +264,16 @@ public class AgentNPC : Agent
             yield return new WaitForSeconds(secondsToWait);
 
             //After we have waited 5 seconds print the time again.
-            Debug.Log($"Im moving");
+            Debug.Log("Im moving");
             ChangeState(State.Normal); // Ya te puedes mover líder
-            controlador.ActionFinished(this); // Le decimos al controlador que la accion ya esta terminada
+            controlador
+                .ActionFinished(this); // Le decimos al controlador que la accion ya esta terminada
             formation.WaitForSoldiers(); // Le decimos a la formacion que espere a los soldados
             alreadyWaiting = false;
         }
 
         StartCoroutine(Timer(10));
     }
-
-    
-
-    #endregion
-
-
-    #region Steering
-
-    private void ApplySteering()
-    {
-        if (state != State.Action)
-        {
-            UpdateAccelerated(finalSteering, Time.deltaTime);
-            return;
-        }
-
-
-        switch (cAction)
-        {
-            case CAction.None:
-                break;
-            case CAction.GoToTarget:
-                UpdateNoAccelerated(finalSteering, Time.deltaTime);
-                break;
-            case CAction.Forming:
-                UpdateAccelerated(finalSteering, Time.deltaTime);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    // TODO esperar un rato de vez en cuando
- 
 
     #endregion
 
@@ -272,14 +286,18 @@ public class AgentNPC : Agent
     private void UpdateAccelerated(Steering steering, float time)
     {
         //Debug.Log($"PreFiltre {vVelocidad} {rotacion}");
-        if (steering.lineal == new Vector3(0,0,0))
+        if (steering.lineal == new Vector3(0, 0, 0))
             vVelocidad = new Vector3(0, 0, 0);
 
         if (Mathf.Approximately(steering.angular, 0))
             rotacion = 0;
 
         //Debug.Log($"PostFiltre {vVelocidad} {rotacion}");
-        Debug.DrawRay(transform.position, vVelocidad, Color.white);
+        //Debug.DrawRay(transform.position, vVelocidad, Color.white);
+
+        if (debug) Debug.DrawRay(transform.position, vVelocidad, Color.magenta);
+
+
         transform.position += vVelocidad * time;
         orientacion += rotacion * time;
 
@@ -303,6 +321,16 @@ public class AgentNPC : Agent
         // TODO si rotamos demasiado reducirmos
         rotacion += steering.angular * time;
 
+
+        // Si rotamos muy rápido la normalizamos
+        var angularAcceleration = Math.Abs(rotacion);
+        if (angularAcceleration > mAngularAcceleration)
+        {
+            rotacion /= angularAcceleration;
+            rotacion *= mAngularAcceleration;
+        }
+
+        rotacion = (float) Math.Floor(rotacion);
 
 
         velocidad = vVelocidad.magnitude;
@@ -328,7 +356,6 @@ public class AgentNPC : Agent
         UpdateColor();
         // Si estamos esperando nos quedamos quietos
         if (state != State.Waiting) ApplySteering();
-
     }
 
     // Los Steering se actualizan se usen o no otra cosa es que los guardemos
@@ -347,14 +374,14 @@ public class AgentNPC : Agent
         // TODO Check if im in a group
 
         if (InFormation)
-        {
             if (formation.ImSoldier(this))
-            {// Si soy un soldado no hago nada
+            {
+                // Si soy un soldado no hago nada
                 ChangeState(State.Action);
                 ChangeAction(CAction.Forming);
                 return;
             }
-        }
+
         // Soy el boss 
         ChangeState(State.Action);
         ChangeAction(CAction.GoToTarget);
@@ -453,20 +480,4 @@ public class AgentNPC : Agent
     }
 
     #endregion
-
-
-
-    /*
-     * Modo debug
-     */
-    [SerializeField] private bool debug;
-    private void OnDrawGizmos()
-    {
-    
-        if (!debug) return;
-        // Pintamos el vector de acceleracion
-        //Gizmos.DrawRay(transform.position, );
-        //Gizmos.DrawRay(transform.position, steering.lineal);
-    }
-
 }
