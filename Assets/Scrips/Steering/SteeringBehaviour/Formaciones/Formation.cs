@@ -4,8 +4,8 @@ using System.Linq;
 
 public class Formation
 {
-    public bool deletingFormation;
-    private readonly Dictionary<AgentNPC, bool> formationDone;
+    private bool deletingFormation;
+    private Dictionary<AgentNPC, bool> formationDone;
     public bool formationReady;
     public AgentNPC leader;
     public Dictionary<AgentNPC, Steering> soldiers;
@@ -78,7 +78,7 @@ public class Formation
 
         if (IsFormationDone())
         {
-            leader.WaitBeforeMoving();
+            leader.AllInPositionWaitABitMore();
         }
     }
     // Los solados ya no están en posición porque el líder se ha movido
@@ -87,7 +87,7 @@ public class Formation
         foreach (var key in formationDone.Keys.ToList())
             formationDone[key] = false;
 
-        leader.WaitInAFuture(); // Le decimos al líder que espere a los soldados en un futuro
+        leader.MoveABitBeforeWaiting(); // Le decimos al líder que espere a los soldados en un futuro
     }
 
     public bool IsFormationDone() => !formationDone.Values.Contains(false);

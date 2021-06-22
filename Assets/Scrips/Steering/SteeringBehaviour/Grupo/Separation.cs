@@ -42,6 +42,6 @@ public class Separation : SteeringBehaviour
                         .Select(target => target.GetComponent<Agent>())
                         .ToList(); ;
 
-        grupo = Grupo.SEPARACION;
+        steeringGroup = SteeringGroup.Distance;
     }
 }

@@ -13,7 +13,7 @@ public class WallAvoidance : Seek
 
     private void Start()
     {
-        grupo = Grupo.COLISIONES;
+        steeringGroup = SteeringGroup.Collision;
     }
 
     public override Steering GetSteering(AgentNPC miAgente)

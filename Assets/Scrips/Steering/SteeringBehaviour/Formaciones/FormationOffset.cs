@@ -5,7 +5,7 @@ using System;
 
 public class FormationOffset : SteeringBehaviour
 {
-    
+    [SerializeField]
     private Formation formation;
     private Align align;
     private Arrive arrive;
@@ -13,9 +13,12 @@ public class FormationOffset : SteeringBehaviour
     {
 
         this.steering = new Steering(0, new Vector3(0, 0, 0));
-        if (!formation.formationReady) return steering;
+        if (formation == null || !formation.formationReady)
+        {
+            return steering;
+        }
 
-        Vector3 myPosition = miAgente.transform.position;
+        var myPosition = miAgente.transform.position;
         var leader = formation.leader;
         var newOffset = formation.GetGlobalPosition(miAgente);
         var newDirection = newOffset.lineal - myPosition;
@@ -45,11 +48,13 @@ public class FormationOffset : SteeringBehaviour
     {
         align = gameObject.AddComponent<Align>();
         arrive = gameObject.AddComponent<Arrive>();
+        steeringGroup = SteeringGroup.Formation;
+
     }
 
-    public void SetFormation(Formation formation)
-    {
-        this.formation = formation;
+    public void SetFormation(Formation newFormation) 
+    { 
+        formation = newFormation;
     }
 
 

@@ -26,7 +26,7 @@ public class Seek : SteeringBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grupo = Grupo.PERSECUCION;
+        steeringGroup = SteeringGroup.Pursuit;
     }
 
     // Update is called once per frame

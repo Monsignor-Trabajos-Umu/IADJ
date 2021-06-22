@@ -33,6 +33,6 @@ public class VelocityMatch : SteeringBehaviour
     }
     private void Start()
     {
-        grupo = Grupo.SEPARACION;
+        steeringGroup = SteeringGroup.Distance;
     }
 }

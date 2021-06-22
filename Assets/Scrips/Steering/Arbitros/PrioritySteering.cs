@@ -1,151 +1,161 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+
+public enum SteeringGroup
+{
+    Collision = 0,
+    Formation = 1,
+    Pursuit = 2,
+    Distance = 3
+}
 
 public class PrioritySteering : ArbitroSteering
 {
-    List<SteeringBehaviour> listSteerings;
-    List<SteeringBehaviour> listColisiones;
-    List<SteeringBehaviour> listSeparacion;
-    List<SteeringBehaviour> listPersecucion;
+    private const double Epsilon = 0.05;
 
-    Dictionary<Grupo, Steering> dicGrupos;
+    [SerializeField] private List<SteeringBehaviour> collisionList;
 
-    [SerializeField]
-    public bool ordenMayor;
+    [SerializeField] private List<SteeringBehaviour> distanceList;
 
-    double epsilon = 0.05;
-    AgentNPC agente;
-    [SerializeField]
-    Steering debugSteering;
+    [SerializeField] private List<SteeringBehaviour> formationList;
 
-    private void Awake()
+    [SerializeField] private Dictionary<SteeringGroup, Steering> groupDict;
+
+    [SerializeField] private bool ordenMayor;
+
+    [SerializeField] private List<SteeringBehaviour> pursuitList;
+
+
+    [SerializeField] private SteeringGroup steeringGroupFormationOffset; // Deberia ser Formation
+
+    protected override void Awake()
     {
-        dicGrupos = new Dictionary<Grupo, Steering>();
+        base.Awake();
 
-        //Lista de steerings
-        listSteerings = new List<SteeringBehaviour>();
-        listColisiones = new List<SteeringBehaviour>();
-        listSeparacion = new List<SteeringBehaviour>();
-        listPersecucion = new List<SteeringBehaviour>();
-        //Lista de steerings con sus prioridades
+        formationOffset.steeringGroup = steeringGroupFormationOffset;
 
-        agente = GetComponent<AgentNPC>();
+
+        //Lista de Steering
+        groupDict = new Dictionary<SteeringGroup, Steering>();
+        collisionList = new List<SteeringBehaviour>();
+        formationList = new List<SteeringBehaviour>();
+        distanceList = new List<SteeringBehaviour>();
+        pursuitList = new List<SteeringBehaviour>();
+        //Lista de Steering con sus prioridades
+
         //usar GetComponents<>() para cargar los SteeringBehavior del personaje
-        listSteerings = GetComponents<SteeringBehaviour>().ToList();
-        foreach (SteeringBehaviour str in listSteerings)
-        {
-            str.enabled = true;
-            switch (str.grupo)
+        foreach (var str in steeringList)
+            switch (str.steeringGroup)
             {
-                case Grupo.COLISIONES:
-                    listColisiones.Add(str);
+                case SteeringGroup.Collision:
+                    collisionList.Add(str);
                     break;
-                case Grupo.SEPARACION:
-                    listSeparacion.Add(str);
+                case SteeringGroup.Formation:
+                    formationList.Add(str);
                     break;
-                default:
-                    listPersecucion.Add(str);
+                case SteeringGroup.Pursuit:
+                    pursuitList.Add(str);
                     break;
-            }
-        }
+                case SteeringGroup.Distance:
+                    distanceList.Add(str);
+                    break;
 
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
     }
 
     private void LateUpdate()
     {
-        dicGrupos.Clear();
+        groupDict.Clear();
 
-        Steering aux = BlenderCalc(listColisiones);
-        dicGrupos.Add(Grupo.COLISIONES, aux);
+        var aux = BlenderCalc(collisionList);
+        groupDict.Add(SteeringGroup.Collision, aux);
 
-        aux = BlenderCalc(listPersecucion);
-        dicGrupos.Add(Grupo.PERSECUCION, aux);
+        aux = BlenderCalc(formationList);
+        groupDict.Add(SteeringGroup.Formation, aux);
 
-        aux = BlenderCalc(listSeparacion);
-        dicGrupos.Add(Grupo.SEPARACION, aux);
+        aux = BlenderCalc(pursuitList);
+        groupDict.Add(SteeringGroup.Pursuit, aux);
+
+        aux = BlenderCalc(distanceList);
+        groupDict.Add(SteeringGroup.Distance, aux);
     }
 
 
-
-    public override Steering GetSteering()
+    protected override Steering GetSteering()
     {
-        Steering steering = new Steering(0, new Vector3(0, 0, 0));
+        finalSteering = new Steering(0, new Vector3(0, 0, 0));
 
-        IEnumerable<Steering> listas = new List<Steering>();
+        IEnumerable<Steering> listas;
         if (ordenMayor)
-        {
-            listas = from pair in dicGrupos
-                         orderby pair.Key descending
-                         select pair.Value;
-        }
+            listas =
+                from pair in groupDict
+                orderby pair.Key descending
+                select pair.Value;
         else
+            listas =
+                from pair in groupDict
+                orderby pair.Key
+                select pair.Value;
+
+        foreach (var grupo in listas)
         {
-            listas = from pair in dicGrupos
-                         orderby pair.Key ascending
-                         select pair.Value;
+            finalSteering = grupo;
+            if (grupo.lineal.magnitude > Epsilon || Math.Abs(grupo.angular) > Epsilon)
+                return finalSteering;
         }
 
-        foreach (var grupo in listas){
-            steering = grupo;
-            if (grupo.lineal.magnitude > epsilon || Math.Abs(grupo.angular) > epsilon)
-                return steering;
-        }
-        return steering;
+        return finalSteering;
     }
 
 
-
-    Steering BlenderCalc(List<SteeringBehaviour> steerings)
+    private Steering BlenderCalc(IEnumerable<SteeringBehaviour> steering)
     {
-        List<BehaviorAndWeight> aux = new List<BehaviorAndWeight>();
+        var aux = new List<BehaviorAndWeight>();
 
-        foreach (SteeringBehaviour str in steerings)
-        {
+        foreach (var str in steering)
             if (str.enabled)
             {
-                Steering temp = str.GetSteering(agente);
+                var temp = str.GetSteering(agent);
                 aux.Add(new BehaviorAndWeight(temp, str.weight));
             }
-        }
-        Steering resultado = Blender(aux);
+
+        var resultado = Blender(aux);
         return resultado;
     }
 
 
-    public Steering Blender(List<BehaviorAndWeight> behaviors)
+    private Steering Blender(List<BehaviorAndWeight> behaviors)
     {
-        Steering steering = new Steering(0, new Vector3(0, 0, 0));
+        var steering = new Steering(0, new Vector3(0, 0, 0));
 
         // Full Aceleration Seek a tope
 
-        foreach (BehaviorAndWeight behavior in behaviors)
+        foreach (var behavior in behaviors)
         {
             steering.angular += behavior.weight * behavior.behavior.angular;
             steering.lineal += behavior.weight * behavior.behavior.lineal;
         }
-        steering.lineal = (steering.lineal.magnitude > agente.mAcceleration) ? steering.lineal.normalized * agente.mAcceleration : steering.lineal;
-        steering.angular = (steering.angular > agente.mAngularAcceleration) ? (steering.angular * agente.mAngularAcceleration) / Math.Abs(steering.angular) : steering.angular;
 
-        steering = filtroSteering(steering);
+        steering = FilterYFromSteering(steering);
+        steering.lineal = steering.lineal.magnitude > agent.mAcceleration
+            ? steering.lineal.normalized * agent.mAcceleration
+            : steering.lineal;
 
-        return steering;
-    }
+        // Si rotamos muy rápido la normalizamos
+        var angularAcceleration = Math.Abs(steering.angular);
+        if (angularAcceleration > agent.mAngularAcceleration)
+        {
+            steering.angular /= angularAcceleration;
+            steering.angular *= agent.mAngularAcceleration;
+        }
+        steering.angular = (float)Math.Floor(steering.angular);
 
-    private Steering filtroSteering(Steering steering)
-    {
-        //Eliminamos el steering eje y
-        steering.lineal.y = 0;
+        steering = RoundSteering(steering);
 
-        // No tiene sentido 0,000001 de aceleracion
-        steering.lineal.x  = (float)(Math.Round(steering.lineal.x, 4));
-        steering.lineal.z  = (float)(Math.Round(steering.lineal.z, 4));
-
-        // Para los angulos con dos decimales es mas que suficiente
-        steering.angular  = (float)(Math.Round(steering.angular, 2));
-        
         return steering;
     }
 }

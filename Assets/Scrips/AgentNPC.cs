@@ -7,16 +7,9 @@ public class AgentNPC : Agent
 {
 
 
-
-    // SteeringBehaviour
-    public GoTarget goToTarget; // Go to target
-    public FormationOffset formationOffset; // Me dice mi posicion si es formacion
-
-
     // Steerings
     public ArbitroSteering arbitro; // Asigna mis steerings.
-    private Steering actionSteering; // Steering de la accion el go to el formar etc
-    public Steering miSteering; // Steering por defecto que me da mi arbitro
+    public Steering finalSteering;
 
     // Controller
     private Controlador controlador;
@@ -45,15 +38,9 @@ public class AgentNPC : Agent
         SaveOriginalColor();
         controlador = GameObject.FindGameObjectWithTag("controlador").GetComponent<Controlador>();
 
-        formationOffset = gameObject.AddComponent<FormationOffset>();
-
-
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<ArbitroSteering>();
-        // El go to target se salta todos los arbitros
-        goToTarget = GetComponent<GoTarget>();
-        miSteering = new Steering(0, new Vector3(0, 0, 0));
-        actionSteering = new Steering(0, new Vector3(0, 0, 0));
+        finalSteering = new Steering(0, new Vector3(0, 0, 0));
     }
 
 
@@ -169,7 +156,9 @@ public class AgentNPC : Agent
         if (formation != null)
         {
             Debug.Log("Disolviendo la formación");
+
             formation.DissolveFormation();
+            arbitro.RestoreWeight();
             formation = null;
         }
     }
@@ -191,31 +180,31 @@ public class AgentNPC : Agent
         ChangeAction(CAction.Forming);
 
         formation = newFormation;
-        formationOffset.SetFormation(newFormation);
+        arbitro.SetFormation(newFormation);
     }
 
 
 
     private bool willWait = false;
-    public void WaitInAFuture() 
+    public void MoveABitBeforeWaiting() 
     {
         if (!formation.ImLeader(this)) throw new Exception("No eres el líder");
         if (willWait) return;
         IEnumerator Timer(float secondsToWait)
         {
             alreadyWaiting = true;
-            Debug.Log("Started WaitInAFuture at timestamp : " + Time.time);
+            Debug.Log($"Will wait in {secondsToWait} seconds ");
             yield return new WaitForSeconds(secondsToWait);
-            Debug.Log("Finished WaitInAFuture at timestamp : " + Time.time);
+            Debug.Log("Im waiting");
             ChangeState(State.Waiting);  // Pasados X segundos nos esperamos a los soldados.
             willWait = false;
         }
 
-        StartCoroutine(Timer(10));
+        StartCoroutine(Timer(5));
     }
 
 
-    public void WaitBeforeMoving()
+    public void AllInPositionWaitABitMore()
     {
         if (!formation.ImLeader(this)) throw new Exception("No eres el líder");
         if (alreadyWaiting) return; // Si ya estamos esperando no hacemos nada
@@ -223,19 +212,19 @@ public class AgentNPC : Agent
         {
             alreadyWaiting = true;
             //Print the time of when the function is first called.
-            Debug.Log("Started WaitBeforeMoving at timestamp : " + Time.time);
+            Debug.Log($"Will move in {secondsToWait} seconds");
 
             yield return new WaitForSeconds(secondsToWait);
 
             //After we have waited 5 seconds print the time again.
-            Debug.Log("Finished WaitBeforeMoving at timestamp : " + Time.time);
+            Debug.Log($"Im moving");
             ChangeState(State.Normal); // Ya te puedes mover líder
             controlador.ActionFinished(this); // Le decimos al controlador que la accion ya esta terminada
             formation.WaitForSoldiers(); // Le decimos a la formacion que espere a los soldados
             alreadyWaiting = false;
         }
 
-        StartCoroutine(Timer(5));
+        StartCoroutine(Timer(10));
     }
 
     
@@ -249,7 +238,7 @@ public class AgentNPC : Agent
     {
         if (state != State.Action)
         {
-            UpdateAccelerated(miSteering, Time.deltaTime);
+            UpdateAccelerated(finalSteering, Time.deltaTime);
             return;
         }
 
@@ -259,10 +248,10 @@ public class AgentNPC : Agent
             case CAction.None:
                 break;
             case CAction.GoToTarget:
-                UpdateNoAccelerated(actionSteering, Time.deltaTime);
+                UpdateNoAccelerated(finalSteering, Time.deltaTime);
                 break;
             case CAction.Forming:
-                UpdateAccelerated(actionSteering, Time.deltaTime);
+                UpdateAccelerated(finalSteering, Time.deltaTime);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -270,9 +259,7 @@ public class AgentNPC : Agent
     }
 
     // TODO esperar un rato de vez en cuando
-    private Steering GetGoToTargetSteering() => goToTarget.GetSteering(this);
-
-    private Steering GetFormingSteering() => formationOffset.GetSteering(this);
+ 
 
     #endregion
 
@@ -347,16 +334,7 @@ public class AgentNPC : Agent
     // Los Steering se actualizan se usen o no otra cosa es que los guardemos
     private void LateUpdate()
     {
-        if (state == State.Action)
-            actionSteering = cAction switch
-            {
-                CAction.None => new Steering(0, new Vector3(0, 0, 0)),
-                CAction.GoToTarget => GetGoToTargetSteering(),
-                CAction.Forming => GetFormingSteering(),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        else
-            miSteering = arbitro.GetSteering();
+        finalSteering = arbitro.GetFinalSteering(state, cAction);
     }
 
     #endregion
@@ -380,8 +358,7 @@ public class AgentNPC : Agent
         // Soy el boss 
         ChangeState(State.Action);
         ChangeAction(CAction.GoToTarget);
-
-        goToTarget.NewTarget(newPoint);
+        arbitro.SetNewTarget(newPoint);
     }
 
 
@@ -476,4 +453,20 @@ public class AgentNPC : Agent
     }
 
     #endregion
+
+
+
+    /*
+     * Modo debug
+     */
+    [SerializeField] private bool debug;
+    private void OnDrawGizmos()
+    {
+    
+        if (!debug) return;
+        // Pintamos el vector de acceleracion
+        //Gizmos.DrawRay(transform.position, );
+        //Gizmos.DrawRay(transform.position, steering.lineal);
+    }
+
 }

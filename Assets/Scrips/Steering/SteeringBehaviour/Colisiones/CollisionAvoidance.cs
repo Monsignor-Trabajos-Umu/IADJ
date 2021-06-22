@@ -1,26 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CollisionAvoidance : SteeringBehaviour
 {
    
     //Lista de potenciales objetivos de colision;
-    public Agent[] colisiones;
+    public List<Agent> colisiones;
     private float tiempoMasCerca;
 
     private void Start()
     {
-        grupo = Grupo.COLISIONES;
+        steeringGroup = SteeringGroup.Collision;
+        colisiones = new List<Agent>();
     }
 
     public override Steering GetSteering(AgentNPC miAgente)
     {
-        colisiones = GameObject.FindObjectsOfType<Agent>();
-        tiempoMasCerca = Mathf.Infinity;
-        Steering steering = new Steering(0, new Vector3(0,0,20));
+        colisiones = FindObjectsOfType<Agent>().Where(agent =>agent!= miAgente ).ToList();
 
-        if (colisiones.Length == 0) return steering;
+        tiempoMasCerca = Mathf.Infinity;
+        steering = new Steering(0, new Vector3(0,0,0));
+
+        if (colisiones.Count == 0) return steering;
         /*
          * TiempoMasCerca= - (posicionRelativaTarget*TargetVelocidadRelativa)/|TargetVelocidadRelativa|^2
          * TargetVelocidadRelativa = vt - vc
