@@ -7,8 +7,8 @@ public abstract class ArbitroSteering : MonoBehaviour
 {
     protected AgentNPC agent; //Mi agenteNPC que llama al getSteering
 
-    public bool debugGreen = false;
-
+    [SerializeField] protected bool debug = false; //Debug flag
+    
     [SerializeField] protected Steering finalSteering;
 
     protected FormationOffset formationOffset; // Me dice mi posicion si es formacion
@@ -93,5 +93,13 @@ public abstract class ArbitroSteering : MonoBehaviour
         steering.angular = (float) Math.Round(steering.angular, 2);
         //Debug.Log($"Post {steering.lineal} {steering.angular}");
         return steering;
+    }
+
+
+    protected virtual void OnDrawGizmos()
+    {
+        if (!debug) return;
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawRay(transform.position, finalSteering.lineal);
     }
 }

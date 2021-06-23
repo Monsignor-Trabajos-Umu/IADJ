@@ -30,12 +30,16 @@ public class AgentNPC : Agent
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
     private bool InFormation => formation != null; // Si estoy en formacion
 
-    // Builders 
+    // Actuadores
+
+    [SerializeField] private BaseActuator actuator;
 
 
     protected override void Start()
     {
         base.Start();
+        if (actuator == null)
+            actuator = gameObject.AddComponent(typeof(FilterActuator)) as FilterActuator;
         SaveOriginalColor();
         controlador = GameObject.FindGameObjectWithTag("controlador").GetComponent<Controlador>();
 
@@ -133,7 +137,6 @@ public class AgentNPC : Agent
         }
     }
 
-    // TODO esperar un rato de vez en cuando
 
     #endregion
 
@@ -286,11 +289,15 @@ public class AgentNPC : Agent
 
     private void UpdateAccelerated(Steering steering, float time)
     {
+        var act = actuator.Act(steering,base.OrientationToVector());
+
+
+
         //Debug.Log($"PreFiltre {vVelocidad} {rotacion}");
-        if (steering.lineal == new Vector3(0, 0, 0))
+        if (act.lineal == new Vector3(0, 0, 0))
             vVelocidad = new Vector3(0, 0, 0);
 
-        if (Mathf.Approximately(steering.angular, 0))
+        if (Mathf.Approximately(act.angular, 0))
             rotacion = 0;
 
         //Debug.Log($"PostFiltre {vVelocidad} {rotacion}");
@@ -302,7 +309,7 @@ public class AgentNPC : Agent
         transform.position += vVelocidad * time;
         orientacion += rotacion * time;
 
-        vVelocidad += steering.lineal * time;
+        vVelocidad += act.lineal * time;
 
         // Si vamos mas rapido que la velicidad maxima reducimos
         if (vVelocidad.magnitude > mVelocity)
@@ -311,7 +318,7 @@ public class AgentNPC : Agent
             vVelocidad *= mVelocity;
         }
 
-        vAceleracion = steering.lineal;
+        vAceleracion = act.lineal;
 
         if (vAceleracion.magnitude > mAcceleration)
         {
@@ -320,18 +327,18 @@ public class AgentNPC : Agent
         }
 
         // TODO si rotamos demasiado reducirmos
-        rotacion += steering.angular * time;
+        rotacion += act.angular * time;
 
 
-        // Si rotamos muy rápido la normalizamos
-        var angularAcceleration = Math.Abs(rotacion);
-        if (angularAcceleration > mAngularAcceleration)
-        {
-            rotacion /= angularAcceleration;
-            rotacion *= mAngularAcceleration;
-        }
+        //// Si rotamos muy rápido la normalizamos
+        //var angularAcceleration = Math.Abs(rotacion);
+        //if (angularAcceleration > mAngularAcceleration)
+        //{
+        //    rotacion /= angularAcceleration;
+        //    rotacion *= mAngularAcceleration;
+        //}
 
-        rotacion = (float) Math.Floor(rotacion);
+        //rotacion = (float) Math.Floor(rotacion);
 
 
         velocidad = vVelocidad.magnitude;
