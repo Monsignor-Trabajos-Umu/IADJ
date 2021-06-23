@@ -105,6 +105,7 @@ public class Wander : Align
 
     protected override void OnDrawGizmos()
     {
+        if(!debug) return;
         base.OnDrawGizmos();
         Gizmos.DrawSphere(targetPoint, 2);
     }

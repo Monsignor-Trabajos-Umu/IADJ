@@ -38,7 +38,13 @@ public class FormationOffset : SteeringBehaviour
         // Si ya he llegado a mi sitio se lo hago saver a la formacion
         if (steering.lineal.Equals(new Vector3(0, 0, 0)))
         {
+            //Debug.Log($"{miAgente.name} esta en posicion");
             formation.ImInPosition(miAgente);
+        }
+        else
+        {
+            formation.ImNotInPosition(miAgente);
+            //Debug.Log($"{miAgente.name} NO esta en posicion");
         }
 
         return this.steering;

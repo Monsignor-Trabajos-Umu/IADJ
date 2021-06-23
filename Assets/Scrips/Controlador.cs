@@ -118,11 +118,11 @@ public class Controlador : MonoBehaviour
 
         // Left 
 
-        formation.soldiers.Add(soldiers[0], new Steering(0, new Vector3(-10, 0, -10)));
-        formation.soldiers.Add(soldiers[1], new Steering(0, new Vector3(-10, 0, 10)));
+        formation.soldiers.Add(soldiers[0], new Steering(0, new Vector3(-5, 0, -5)));
+        formation.soldiers.Add(soldiers[1], new Steering(0, new Vector3(-5, 0, 5)));
         // Yo
-        formation.soldiers.Add(soldiers[2], new Steering(0, new Vector3(10, 0, -10)));
-        formation.soldiers.Add(soldiers[3], new Steering(0, new Vector3(10, 0, 10)));
+        formation.soldiers.Add(soldiers[2], new Steering(0, new Vector3(5, 0, -5)));
+        formation.soldiers.Add(soldiers[3], new Steering(0, new Vector3(5, 0, 5)));
 
 
         formation.MakeFormation();

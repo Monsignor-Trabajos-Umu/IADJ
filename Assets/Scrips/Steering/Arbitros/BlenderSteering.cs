@@ -20,7 +20,7 @@ public class BlenderSteering : ArbitroSteering
     [SerializeField] private List<BehaviorAndWeight> behaviors;
 
 
-    [SerializeField] private float weightFormationOffset;
+    [SerializeField] private float weightFormationOffset=1;
 
 
     protected override void Awake()

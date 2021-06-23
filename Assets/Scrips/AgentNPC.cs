@@ -238,7 +238,7 @@ public class AgentNPC : Agent
 
         IEnumerator Timer(float secondsToWait)
         {
-            alreadyWaiting = true;
+            willWait = true;
             Debug.Log($"Will wait in {secondsToWait} seconds ");
             yield return new WaitForSeconds(secondsToWait);
             Debug.Log("Im waiting");
@@ -267,8 +267,9 @@ public class AgentNPC : Agent
             Debug.Log("Im moving");
             ChangeState(State.Normal); // Ya te puedes mover líder
             controlador
-                .ActionFinished(this); // Le decimos al controlador que la accion ya esta terminada
-            formation.WaitForSoldiers(); // Le decimos a la formacion que espere a los soldados
+                .ActionFinished(this);
+            // Le decimos al controlador que la accion ya esta terminada
+            formation?.WaitForSoldiers(); // Le decimos a la formacion que espere a los soldados
             alreadyWaiting = false;
         }
 

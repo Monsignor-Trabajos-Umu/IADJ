@@ -260,9 +260,8 @@ GameObject:
   - component: {fileID: 160494254}
   - component: {fileID: 160494253}
   - component: {fileID: 160494252}
-  - component: {fileID: 160494251}
-  - component: {fileID: 160494250}
   - component: {fileID: 160494249}
+  - component: {fileID: 160494250}
   - component: {fileID: 160494248}
   m_Layer: 0
   m_Name: 3
@@ -270,7 +269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &160494247
 Transform:
   m_ObjectHideFlags: 0
@@ -279,7 +278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160494246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.55, y: 8.23, z: 72.07}
+  m_LocalPosition: {x: 55.55, y: 8.23, z: 71.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1977825819}
@@ -303,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -333,7 +332,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringList: []
   behaviors: []
-  weightFormationOffset: 10
+  weightFormationOffset: 1
 --- !u!114 &160494250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,14 +351,14 @@ MonoBehaviour:
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
-  mVelocity: 5
+  mVelocity: 2
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 0
+  mAExterior: 0.5
   aInterior: 0.5
   debug: 0
   rInterior: 1
@@ -372,27 +371,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
---- !u!114 &160494251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160494246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 1
-  steering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  steeringGroup: 0
-  target: {fileID: 0}
-  useReferee: 1
-  weight: 20
-  colisiones: []
 --- !u!65 &160494252
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1267,7 +1245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508ae6a032c4040428713e84629b1e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 1322178451}
+  player: {fileID: 1322178456}
   SmoothFactor: 0.5
 --- !u!114 &532658118
 MonoBehaviour:
@@ -4454,7 +4432,6 @@ GameObject:
   - component: {fileID: 1322178457}
   - component: {fileID: 1322178453}
   - component: {fileID: 1322178456}
-  - component: {fileID: 1322178454}
   - component: {fileID: 1322178452}
   m_Layer: 0
   m_Name: 1
@@ -4516,37 +4493,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1322178450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
-  steering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  steeringGroup: 0
-  target: {fileID: 0}
-  useReferee: 1
-  weight: 20
-  colisiones: []
---- !u!114 &1322178454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322178450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
+  debugGreen: 1
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringList: []
   behaviors: []
-  weightFormationOffset: 10
+  weightFormationOffset: 1
 --- !u!114 &1322178456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4572,9 +4528,9 @@ MonoBehaviour:
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 0
+  mAExterior: 0.5
   aInterior: 0.5
-  debug: 1
+  debug: 0
   rInterior: 1
   arbitro: {fileID: 0}
   cAction: 0
@@ -5486,9 +5442,8 @@ GameObject:
   - component: {fileID: 1503490894}
   - component: {fileID: 1503490893}
   - component: {fileID: 1503490892}
-  - component: {fileID: 1503490891}
-  - component: {fileID: 1503490890}
   - component: {fileID: 1503490889}
+  - component: {fileID: 1503490890}
   - component: {fileID: 1503490888}
   m_Layer: 0
   m_Name: 2
@@ -5496,7 +5451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1503490887
 Transform:
   m_ObjectHideFlags: 0
@@ -5505,7 +5460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503490886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.55, y: 8.23, z: 66.48}
+  m_LocalPosition: {x: 55.55, y: 8.23, z: 65.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1510222655}
@@ -5529,7 +5484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -5559,7 +5514,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringList: []
   behaviors: []
-  weightFormationOffset: 10
+  weightFormationOffset: 1
 --- !u!114 &1503490890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5578,14 +5533,14 @@ MonoBehaviour:
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
-  mVelocity: 5
+  mVelocity: 2
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 0
+  mAExterior: 0.5
   aInterior: 0.5
   debug: 0
   rInterior: 1
@@ -5598,27 +5553,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
---- !u!114 &1503490891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503490886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 1
-  steering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  steeringGroup: 0
-  target: {fileID: 0}
-  useReferee: 1
-  weight: 20
-  colisiones: []
 --- !u!65 &1503490892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6944,9 +6878,8 @@ GameObject:
   - component: {fileID: 1801314616}
   - component: {fileID: 1801314615}
   - component: {fileID: 1801314614}
-  - component: {fileID: 1801314613}
-  - component: {fileID: 1801314612}
   - component: {fileID: 1801314611}
+  - component: {fileID: 1801314612}
   - component: {fileID: 1801314610}
   m_Layer: 0
   m_Name: 4
@@ -6954,7 +6887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1801314609
 Transform:
   m_ObjectHideFlags: 0
@@ -6987,7 +6920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -7017,7 +6950,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringList: []
   behaviors: []
-  weightFormationOffset: 10
+  weightFormationOffset: 1
 --- !u!114 &1801314612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7036,14 +6969,14 @@ MonoBehaviour:
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
-  mVelocity: 5
+  mVelocity: 2
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 0
+  mAExterior: 0.5
   aInterior: 0.5
   debug: 0
   rInterior: 1
@@ -7056,27 +6989,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
---- !u!114 &1801314613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801314608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 1
-  steering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  steeringGroup: 0
-  target: {fileID: 0}
-  useReferee: 1
-  weight: 20
-  colisiones: []
 --- !u!65 &1801314614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8509,9 +8421,8 @@ GameObject:
   - component: {fileID: 2122945418}
   - component: {fileID: 2122945417}
   - component: {fileID: 2122945416}
-  - component: {fileID: 2122945415}
-  - component: {fileID: 2122945414}
   - component: {fileID: 2122945413}
+  - component: {fileID: 2122945414}
   - component: {fileID: 2122945412}
   m_Layer: 0
   m_Name: 5
@@ -8519,7 +8430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2122945411
 Transform:
   m_ObjectHideFlags: 0
@@ -8528,7 +8439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122945410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.23, y: 8.23, z: 66.48}
+  m_LocalPosition: {x: 49.23, y: 8.23, z: 69.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1675421347}
@@ -8552,7 +8463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -8582,7 +8493,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringList: []
   behaviors: []
-  weightFormationOffset: 10
+  weightFormationOffset: 1
 --- !u!114 &2122945414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8601,14 +8512,14 @@ MonoBehaviour:
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
-  mVelocity: 5
+  mVelocity: 2
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 0
+  mAExterior: 0.5
   aInterior: 0.5
   debug: 0
   rInterior: 1
@@ -8621,27 +8532,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
---- !u!114 &2122945415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122945410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf69fa5a1289c6b4f8eca9cc3832465f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 1
-  steering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  steeringGroup: 0
-  target: {fileID: 0}
-  useReferee: 1
-  weight: 20
-  colisiones: []
 --- !u!65 &2122945416
 BoxCollider:
   m_ObjectHideFlags: 0

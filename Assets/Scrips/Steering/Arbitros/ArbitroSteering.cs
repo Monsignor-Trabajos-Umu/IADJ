@@ -15,9 +15,9 @@ public abstract class ArbitroSteering : MonoBehaviour
 
     // SteeringBehaviour necesarios
     private GoTarget goToTarget; // Go to target
+    private Dictionary<SteeringBehaviour, float> savedWeightDictionary;
 
     [SerializeField] protected List<SteeringBehaviour> steeringList; // Lista con todos los steering
-    private Dictionary<SteeringBehaviour, float> savedWeightDictionary;
 
     // Usamos Awake para crer los steering necesarios antes de cualquier Start
     protected virtual void Awake()
@@ -37,19 +37,20 @@ public abstract class ArbitroSteering : MonoBehaviour
         foreach (var str in steeringList) str.enabled = true;
     }
 
-   
 
     public void SetFormation(Formation newFormation)
     {
         // Si hay mas steering no le hacemos caso menos los de colision
         steeringList.ForEach(behaviour =>
         {
-            if (behaviour.steeringGroup != SteeringGroup.Formation)
+            if (behaviour.steeringGroup != SteeringGroup.Formation &&
+                behaviour.steeringGroup != SteeringGroup.Collision)
             {
                 savedWeightDictionary[behaviour] = behaviour.weight;
                 behaviour.weight = 0;
-            };
-           
+            }
+
+            ;
         });
         formationOffset.SetFormation(newFormation);
     }

@@ -81,6 +81,12 @@ public class Formation
             leader.AllInPositionWaitABitMore();
         }
     }
+
+    // El soldado no esta en posición
+
+    public void ImNotInPosition(AgentNPC agentNpc) =>formationDone[agentNpc] = false;
+
+
     // Los solados ya no están en posición porque el líder se ha movido
     public void WaitForSoldiers()
     {
