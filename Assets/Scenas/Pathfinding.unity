@@ -3573,21 +3573,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 1
   "da\xF1o": 2
-  mAcceleration: 0
+  mAcceleration: 2
   mAngularAcceleration: 0
   masa: 2
   mRotation: 0
-  mVelocity: 0
+  mVelocity: 2
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 30
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 2
-  aInterior: 0
+  mAExterior: 1
+  aInterior: 0.5
   debug: 0
-  rInterior: 2
+  rInterior: 1
   arbitro: {fileID: 7046650390553723062}
   cAction: 0
   finalSteering:
@@ -3615,7 +3615,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
   target: {fileID: 0}
-  useReferee: 0
+  useReferee: 1
   weight: 1
   grid: {fileID: 84023166}
   heuristic: {fileID: 7046650390553723065}

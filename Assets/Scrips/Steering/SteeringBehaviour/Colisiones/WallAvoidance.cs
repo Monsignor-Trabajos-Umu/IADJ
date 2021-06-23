@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 
 public class WallAvoidance : Seek
 {
-
     // Distancia minima a la pared
     public float avoidDistance;
+
     // Distancia del rayo
-    public float lookAhead;
+    [SerializeField] private float leftWhiskerSize;
+    [SerializeField] private float midWhiskerSize;
+    [SerializeField] private float rightWhiskerSize;
+
 
     private void Start()
     {
@@ -19,37 +19,78 @@ public class WallAvoidance : Seek
     public override Steering GetSteering(AgentNPC miAgente)
     {
         // Calculamos el target para delegarlo a seek
-        this.steering = new Steering(0, new Vector3(0, 0, 0));
-        Vector3 rayVector = miAgente.vVelocidad;
+        steering = new Steering(0, new Vector3(0, 0, 0));
+        var miAgentePosition = miAgente.transform.position;
+        var rayVector = miAgente.vVelocidad.normalized;
+        var middleVector = rayVector * midWhiskerSize;
+        var leftVector = Quaternion.AngleAxis(-15f, Vector3.up) * rayVector * leftWhiskerSize;
+        var rightVector = Quaternion.AngleAxis(15f, Vector3.up) * rayVector * rightWhiskerSize;
 
 
+        var midWhiskerHit = Physics.Raycast(miAgentePosition, middleVector,
+            out var midHit, midWhiskerSize);
+        var leftWhiskerHit = Physics.Raycast(miAgentePosition, leftVector,
+            out var leftHit, leftWhiskerSize);
+        var rightWhiskerHit =
+            Physics.Raycast(miAgentePosition, rightVector, out var rightHit,
+                rightWhiskerSize);
 
         if (debug)
-            Debug.DrawRay(miAgente.transform.position, rayVector.normalized * lookAhead, Color.blue);
-        RaycastHit hit;
-        //Debug.DrawRay(miAgente.transform.position, rayVector, Color.blue);
-        if (Physics.Raycast(miAgente.transform.position, rayVector, out hit, lookAhead))
         {
-            Vector3 miAgenteHit = hit.point - miAgente.transform.position;
-            Vector3 normalPared = Vector3.Reflect(miAgenteHit, hit.normal);
-
-
-
-            this.customDirection = hit.point + normalPared * avoidDistance;
-            this.useCustom = true;
-            if (debug)
-            {
-                Debug.DrawLine(miAgente.transform.position, hit.point, Color.red);
-                Debug.DrawRay(hit.point, normalPared * avoidDistance, Color.green);
-            }
-
-            steering = base.GetSteering(miAgente);
-
+            //Pinto los tres bigotes
+            Debug.DrawRay(miAgente.transform.position, leftVector,
+                Color.yellow);
+            Debug.DrawRay(miAgente.transform.position, middleVector,
+                Color.blue);
+            Debug.DrawRay(miAgente.transform.position, rightVector,
+                Color.yellow);
         }
+
+
+        if (midWhiskerHit == leftWhiskerHit == rightWhiskerHit == false) return steering;
+
+
+        var newTargetPoint = new Vector3(0, 0, 0);
+        var hitPoint = new Vector3(0, 0, 0);
+
+        var localTarget = new Vector3(0, 0, 0);
+        int hits = 0;
+
+        if (midWhiskerHit)
+        {
+            hitPoint = midHit.point;
+            newTargetPoint = midHit.point + midHit.normal * avoidDistance;
+            localTarget += miAgente.transform.InverseTransformPoint(newTargetPoint);
+            hits++;
+        }
+        if (leftWhiskerHit)
+        {
+            
+            hitPoint = leftHit.point;
+            newTargetPoint = leftHit.point + leftHit.normal * avoidDistance;
+            localTarget += miAgente.transform.InverseTransformPoint(newTargetPoint);
+            hits++;
+        }
+
+        if(rightWhiskerHit)
+        {
+            hitPoint = rightHit.point;
+            newTargetPoint = rightHit.point + rightHit.normal * avoidDistance;
+            localTarget += miAgente.transform.InverseTransformPoint(newTargetPoint);
+            hits++;
+        }
+
+        newTargetPoint = miAgente.transform.TransformPoint(localTarget / hits);
+        UseCustomDirectionAndRotation(newTargetPoint - miAgentePosition);
+
+        steering = base.GetSteering(miAgente);
+        if (debug)
+        {
+            // Si hay hit 
+            Debug.DrawLine(hitPoint, newTargetPoint, Color.red); // Hit a la pared
+            Debug.DrawLine(miAgentePosition, hitPoint, Color.green);
+        }
+
         return steering;
-
-
     }
-
-
 }

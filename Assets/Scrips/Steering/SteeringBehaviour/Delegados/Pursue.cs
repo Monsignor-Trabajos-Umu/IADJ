@@ -1,45 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 
 public class Pursue : Seek
 {
-    [Range(0.0f, 10.0f)]
-    public float maxPrediction;
+    [SerializeField] [Range(0.0f, 10.0f)] private float maxPrediction;
+
     public override Steering GetSteering(AgentNPC miAgente)
     {
-        // Vamosa  crear un nuevo target en la posicion donde estaria nuestro target
-        Vector3 direction = target.transform.position - miAgente.transform.position;
-        float distance = direction.magnitude;
+        // Vamos a  crear un nuevo target en la posicion donde estaria nuestro target
+        var direction = target.transform.position - miAgente.transform.position;
+        var distance = direction.magnitude;
 
         // Current Speed
-        float speed = miAgente.vVelocidad.magnitude;
+        var speed = miAgente.vVelocidad.magnitude;
 
         // Si la velocidad es muy pequeña vamos a darle un predicion 
-        float prediction = (speed <= distance / maxPrediction) ? maxPrediction : distance / speed;
+        var predictedSpeed = speed <= distance / maxPrediction
+            ? maxPrediction
+            : distance / speed;
 
         // NO Puedo usar el target porque va asignado a otro objecto
 
-        this.customDirection = target.transform.position;
+        var predictedTargetPosition =
+            target.transform.position + target.vVelocidad * predictedSpeed;
 
-        this.customDirection += target.vVelocidad * prediction;
-
-        this.useCustom = true;
+        UseCustomDirectionAndRotation(predictedTargetPosition -
+                                      miAgente.transform.position);
 
         return base.GetSteering(miAgente);
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

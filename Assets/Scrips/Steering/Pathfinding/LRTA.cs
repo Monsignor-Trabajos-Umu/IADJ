@@ -109,7 +109,7 @@ public class LRTA : Arrive
     {
         var currentPosition = miAgente.transform.position;
         var currentNode = grid.GetNodeFromWorldPoint(currentPosition);
-        var error = miAgente.rInterior;
+        var error = miAgente.RExterior;
         steering = new Steering(0, new Vector3(0, 0, 0));
         if (AtFinal(currentPosition, error)) return steering;
 
