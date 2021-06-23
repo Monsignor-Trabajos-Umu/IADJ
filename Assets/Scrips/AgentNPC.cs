@@ -322,7 +322,7 @@ public class AgentNPC : Agent
         // TODO si rotamos demasiado reducirmos
         rotacion += steering.angular * time;
 
-
+        /*
         // Si rotamos muy rápido la normalizamos
         var angularAcceleration = Math.Abs(rotacion);
         if (angularAcceleration > mAngularAcceleration)
@@ -332,7 +332,7 @@ public class AgentNPC : Agent
         }
 
         rotacion = (float) Math.Floor(rotacion);
-
+        */
 
         velocidad = vVelocidad.magnitude;
     }
