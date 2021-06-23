@@ -340,7 +340,6 @@ public class AgentNPC : Agent
 
         //rotacion = (float) Math.Floor(rotacion);
 
-
         velocidad = vVelocidad.magnitude;
     }
 
