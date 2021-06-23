@@ -41,13 +41,16 @@ public class Interpose : Arrive
 
     protected override void OnDrawGizmos()
     {
-        base.OnDrawGizmos();
-        Gizmos.DrawLine(agenteA.transform.position, agenteB.transform.position);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(midPoint, 2);
+        if (debug)
+        {
+            base.OnDrawGizmos();
+            Gizmos.DrawLine(agenteA.transform.position, agenteB.transform.position);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(midPoint, 2);
 
-        Gizmos.color = Color.white;
-        Vector3 v = gameObject.GetComponent<AgentNPC>().OrientationToVector();
-        Gizmos.DrawLine(transform.position, transform.position +v);
+            Gizmos.color = Color.white;
+            Vector3 v = gameObject.GetComponent<AgentNPC>().OrientationToVector();
+            Gizmos.DrawLine(transform.position, transform.position + v);
+        }
     }
 }

@@ -1242,7 +1242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132022202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 1.25, z: -20.6}
+  m_LocalPosition: {x: -7, y: 1.25, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3573,11 +3573,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 1
   "da\xF1o": 2
-  mAcceleration: 0
+  mAcceleration: 2
   mAngularAcceleration: 0
   masa: 2
   mRotation: 0
-  mVelocity: 0
+  mVelocity: 3
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 30
@@ -3615,7 +3615,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
   target: {fileID: 0}
-  useReferee: 0
+  useReferee: 1
   weight: 1
   grid: {fileID: 84023166}
   heuristic: {fileID: 7046650390553723065}

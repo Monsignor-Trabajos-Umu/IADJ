@@ -89,12 +89,12 @@ public class CollisionAvoidance : SteeringBehaviour
             relativePos = firstRelativePos + firstRelativeVel * tiempoMasCerca;
         }
 
-        //Vector3 aux = firstTarget.transform.position + (relativePos - firstTarget.transform.position);
-        //aux = aux * ((float) firstTarget.RExterior + 2);
+        Vector3 aux = firstTarget.transform.position + (relativePos - firstTarget.transform.position);
+        aux = aux * ((float) firstTarget.RExterior + 2);
 
-        relativePos = relativePos.normalized;
-        steering.lineal = relativePos * miAgente.mAcceleration;
-        //if(debug) Debug.DrawLine(this.transform.position, steering.lineal, Color.red);
+        relativePos = aux.normalized;
+        steering.lineal = -relativePos * miAgente.mAcceleration;
+        //if(debug) Debug.DrawLine(this.transform.position, relativePos, Color.cyan);
         //Debug.DrawRay(this.transform.position, steering.lineal, Color.green);
         return steering;
 

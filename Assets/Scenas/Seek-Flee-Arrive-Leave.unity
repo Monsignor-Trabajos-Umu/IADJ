@@ -3794,11 +3794,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 0
   "da\xF1o": 0
-  mAcceleration: 0
+  mAcceleration: 2
   mAngularAcceleration: 0
   masa: 0
   mRotation: 0
-  mVelocity: 0
+  mVelocity: 2
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -3855,7 +3855,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23457019375682711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 2, z: 10}
+  m_LocalPosition: {x: 3.4, y: 2, z: -0.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 23457019298678373}
@@ -3880,9 +3880,9 @@ GameObject:
   - component: {fileID: 23457019375682717}
   - component: {fileID: 23457019375682706}
   - component: {fileID: 23457019375682707}
+  - component: {fileID: 23457019375682704}
   - component: {fileID: 23457019375682713}
   - component: {fileID: 23457019375682712}
-  - component: {fileID: 23457019375682704}
   m_Layer: 0
   m_Name: Flee
   m_TagString: Untagged
@@ -3908,7 +3908,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
   target: {fileID: 781002767837107761}
-  useReferee: 0
+  useReferee: 1
   weight: 1
 --- !u!114 &23457019375682713
 MonoBehaviour:
@@ -4375,11 +4375,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 1
   "da\xF1o": 2
-  mAcceleration: 0
+  mAcceleration: 2
   mAngularAcceleration: 0
   masa: 1
   mRotation: 0
-  mVelocity: 0
+  mVelocity: 2
   rotacion: 1
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 1
@@ -5179,11 +5179,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alcance: 0
   "da\xF1o": 0
-  mAcceleration: 0
+  mAcceleration: 2
   mAngularAcceleration: 0
   masa: 0
   mRotation: 0
-  mVelocity: 0
+  mVelocity: 2
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
@@ -5264,7 +5264,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
   target: {fileID: 781002767837107761}
-  useReferee: 0
+  useReferee: 1
   weight: 1
 --- !u!114 &9175289921763913759
 MonoBehaviour:
