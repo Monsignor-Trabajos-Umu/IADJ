@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Body : MonoBehaviour
 {
-    public int alcance = 1; //Max de casillas de distancia para golpear. Por defecto vale 1
+    public int
+        alcance = 1; //Max de casillas de distancia para golpear. Por defecto vale 1
+
     private GameObject currentHat;
     public int daño = 2; //daño de la unidad por hit. Por defecto vale 2
     private GameObject fatherHats;
@@ -26,7 +28,10 @@ public class Body : MonoBehaviour
     public float rotacion;
     public Vector3 vAceleracion;
     public float velocidad;
-    public double vida = 100; //Vida actual. Por defecto se inicializa al valor de la vida máxima
+
+    public double
+        vida = 100; //Vida actual. Por defecto se inicializa al valor de la vida máxima
+
     public double vidaMaxima = 100; //Vida Máxima. Por defecto 100 puntos de salud
 
     // Vector
@@ -47,11 +52,18 @@ public class Body : MonoBehaviour
     // Start
     protected virtual void Start()
     {
-        var temp = transform.Find("Hats");
-        fatherHats = temp.gameObject;
+        try
+        {
+            var temp = transform.Find("Hats");
+            fatherHats = temp.gameObject;
 
-        temp = transform.Find("Headband");
-        headBands = temp.gameObject;
+            temp = transform.Find("Headband");
+            headBands = temp.gameObject;
+        }
+        catch (Exception)
+        {
+            Debug.LogWarning("No hay hats ");
+        }
     }
 
 
@@ -123,15 +135,9 @@ public class Body : MonoBehaviour
     }
 
 
-    private double DegreeToRadian(double angle)
-    {
-        return Math.PI * angle / 180.0;
-    }
+    private double DegreeToRadian(double angle) => Math.PI * angle / 180.0;
 
-    private double RadianToDegree(double angle)
-    {
-        return angle * (180.0 / Math.PI);
-    }
+    private double RadianToDegree(double angle) => angle * (180.0 / Math.PI);
 
     /* Calcula el angulo A entre 3 puntos
      *  
@@ -165,10 +171,7 @@ public class Body : MonoBehaviour
         return Angulo3PuntosGrados(vPersonaje, v1, v2);
     }
 
-    public Vector3 OrientationToVector()
-    {
-        return transform.TransformDirection(Vector3.forward);
-    }
+    public Vector3 OrientationToVector() => transform.TransformDirection(Vector3.forward);
 
     private double CalculateAngleToRate(Vector3 vYoHeading, Vector3 vYoObjeto)
     {
@@ -190,10 +193,8 @@ public class Body : MonoBehaviour
         return CalculateAngleToRate(vYoHeading, vYoObjeto);
     }
 
-    public double MinAngleToRotate(GameObject obj)
-    {
-        return MinAngleToRotate(obj.transform.position);
-    }
+    public double MinAngleToRotate(GameObject obj) =>
+        MinAngleToRotate(obj.transform.position);
 
     public double MinAngleToRotateVector(Vector3 direction)
     {

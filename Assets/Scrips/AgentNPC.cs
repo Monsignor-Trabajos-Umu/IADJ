@@ -376,7 +376,7 @@ public class AgentNPC : Agent
 
     public void GoToTarget(Vector3 newPoint)
     {
-        // TODO Check if im in a group
+        
 
         if (InFormation)
             if (formation.ImSoldier(this))
@@ -413,7 +413,7 @@ public class AgentNPC : Agent
         //After we have waited 5 seconds print the time again.
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
         ChangeState(State.Normal);
-        controlador.ActionFinished(this);
+        //controlador.ActionFinished(this);
         alreadyWaiting = false;
     }
 

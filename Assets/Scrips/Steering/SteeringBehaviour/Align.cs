@@ -11,7 +11,8 @@ public class Align : SteeringBehaviour
     {
         // Esta rotacion puede ser superior a 360 grados asique la modulo 
         grados = grados % 360;
-        // Ahora puede estar entre -360 y 360 vamos a hacer que este entre -180 y 180;
+        // Ahora puede estar entre -360 y 360 vamos a hacer que este entre -
+        // y 180;
         if (Math.Abs(grados) <= 180)
             return grados;
         else
