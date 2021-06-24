@@ -1691,6 +1691,7 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
+  actuator: {fileID: 0}
 --- !u!65 &391806022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1781,7 +1782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
+  debug: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -2267,6 +2268,7 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
+  actuator: {fileID: 0}
 --- !u!65 &475172124
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2569,6 +2571,10 @@ MonoBehaviour:
   target: {fileID: 1293290123713329}
   useReferee: 0
   weight: 0
+  distance: 0
+  direction: {x: 0, y: 0, z: 0}
+  targetSpeed: 0
+  targetVelocity: {x: 0, y: 0, z: 0}
   radio: 4.88
   currentNode: 0
 --- !u!114 &540035775
@@ -2609,6 +2615,7 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
+  actuator: {fileID: 0}
 --- !u!65 &540035776
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3422,7 +3429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
+  debug: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -3467,6 +3474,7 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
+  actuator: {fileID: 0}
 --- !u!65 &687082506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6000,7 +6008,9 @@ MonoBehaviour:
   useReferee: 0
   weight: 0
   avoidDistance: 4
-  lookAhead: 3
+  leftWhiskerSize: 0
+  midWhiskerSize: 0
+  rightWhiskerSize: 0
 --- !u!114 &1418041301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6039,6 +6049,7 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
+  actuator: {fileID: 0}
 --- !u!65 &1418041302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7015,7 +7026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508ae6a032c4040428713e84629b1e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 4521296947566792}
+  player: {fileID: 1293290123713329}
   SmoothFactor: 0.5
 --- !u!1 &1733489587
 GameObject:
@@ -7581,6 +7592,7 @@ GameObject:
   - component: {fileID: 1956971801}
   - component: {fileID: 1956971809}
   - component: {fileID: 1956971800}
+  - component: {fileID: 1956971808}
   m_Layer: 0
   m_Name: Wander
   m_TagString: Untagged
@@ -7640,7 +7652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
+  debug: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
@@ -7707,6 +7719,7 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
+  actuator: {fileID: 1956971808}
 --- !u!65 &1956971804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7785,6 +7798,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956971798}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1956971808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956971798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1956971809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8537,6 +8562,7 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
+  actuator: {fileID: 0}
 --- !u!114 &1293290783134105
 MonoBehaviour:
   m_ObjectHideFlags: 0
