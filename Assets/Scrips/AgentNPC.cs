@@ -290,7 +290,7 @@ public class AgentNPC : Agent
     private void UpdateAccelerated(Steering steering, float time)
     {
         //OrientationToVector() devuelve el vector hacia donde apunta
-        var act = actuator.Act(steering,base.OrientationToVector());
+        var act = actuator.Act(steering,this);
 
         //Debug.Log($"PreFiltre {vVelocidad} {rotacion}");
         if (act.lineal == new Vector3(0, 0, 0))
@@ -328,8 +328,7 @@ public class AgentNPC : Agent
         // TODO si rotamos demasiado reducirmos
         rotacion += act.angular * time;
 
-
-        //// Si rotamos muy rápido la normalizamos
+        // Si rotamos muy rápido la normalizamos
         //var angularAcceleration = Math.Abs(rotacion);
         //if (angularAcceleration > mAngularAcceleration)
         //{

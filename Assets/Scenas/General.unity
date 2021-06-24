@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -524,19 +524,18 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 20
   aInterior: 15
-  dEbUg: 0
+  debug: 0
   rInterior: 4
-  goToTarget: {fileID: 0}
-  formationOffset: {fileID: 0}
   arbitro: {fileID: 399829250}
-  miSteering:
+  cAction: 0
+  finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
-  cAction: 0
   mejorTerreno: 0
   peorTerreno: 1
+  selected: 0
+  state: 0
+  actuator: {fileID: 0}
 --- !u!114 &399829250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,11 +548,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
-  listSteerings: []
-  debugSteering:
+  debug: 0
+  finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  steeringList: []
+  behaviors: []
+  weightFormationOffset: 1
 --- !u!114 &399829251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,14 +567,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useReferee: 0
-  grupo: 0
-  target: {fileID: 0}
-  weight: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debug: 0
+  steeringGroup: 2
+  target: {fileID: 0}
+  useReferee: 0
+  weight: 1
   wanderRate: 46.8
   wanderOrientation: 0
   wanderStep: 10.6
@@ -716,7 +717,7 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 45
   aInterior: 45
-  dEbUg: 0
+  debug: 0
   rInterior: 45
 --- !u!1 &576995627
 GameObject:
@@ -856,7 +857,7 @@ MonoBehaviour:
   vVelocidad: {x: 0, y: 0, z: 0}
   mAExterior: 45
   aInterior: 45
-  dEbUg: 0
+  debug: 0
   rInterior: 45
 --- !u!1 &589110566
 GameObject:
@@ -919,7 +920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSizeX: 1000
   gridWorldSizeZ: 1000
-  mostrarMapa: 0
+  mostrarMapa: 1
   nodeRaidus: 15
 --- !u!1 &728459732
 GameObject:
@@ -1484,6 +1485,7 @@ MonoBehaviour:
   paredesLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  debug: 0
 --- !u!4 &1614586659
 Transform:
   m_ObjectHideFlags: 0

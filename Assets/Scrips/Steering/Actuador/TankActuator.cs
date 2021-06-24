@@ -12,16 +12,30 @@ public class TankActuator : BaseActuator
 
     //steering indica el vector hacia donde esta el destino
     //direccion indica hacia donde se mira
-    public override Steering Act(Steering steering, Vector3 direccion)
+    public override Steering Act(Steering steering, AgentNPC agenteNPC)
     {
         Steering acted = new Steering(0, new Vector3(0, 0, 0));
-
-        var angulo = Vector3.Angle(steering.lineal, direccion);
-
-        if (angulo>0)
+        
+        //Si velocidad es ~0 se gira
+        if (steering.lineal.magnitude < 0.01)
         {
-            acted.angular = angulo;
+            acted.angular = steering.angular;
+            return acted;
         }
+        var angulo = agenteNPC.MinAngleToRotateVector(steering.lineal);
+
+        Debug.Log("Angulo es " + angulo);
+
+        //Si estamos mirando objetivo avanzamos. Dejamos unos angulos de error
+        if (angulo < 5f)
+        {
+            acted.lineal = steering.lineal;
+            return acted;
+        }
+
+        //Si angulo es mayor de 5, se quiere mover en diagonal
+        //primero devolvemos el angulo
+        acted.angular = (float) angulo;
         return acted;
 
     }

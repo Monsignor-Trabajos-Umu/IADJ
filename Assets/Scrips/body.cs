@@ -195,6 +195,14 @@ public class Body : MonoBehaviour
         return MinAngleToRotate(obj.transform.position);
     }
 
+    public double MinAngleToRotateVector(Vector3 direction)
+    {
+        //Transform.position hace referencia al objeto que lo llama
+        var vYoObjeto = direction;
+        var vYoHeading = OrientationToVector();
+
+        return CalculateAngleToRate(vYoHeading, vYoObjeto);
+    }
 
     /* Calcula el minimo angulo para darle la "espalda" al objeto
      *  Es igual que MinAngleToRotate pero aplicamos una matriz de

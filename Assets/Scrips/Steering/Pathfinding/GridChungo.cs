@@ -20,6 +20,7 @@ public class GridChungo : MonoBehaviour
     //Uso un array en vez de una lista porque es mas rapido buscar
     [field: SerializeField] public Node[,] getGrid { get; set; }
 
+    [SerializeField] private bool debug;
 
     public void Awake()
     {
@@ -29,6 +30,9 @@ public class GridChungo : MonoBehaviour
         CreateGrid();
     }
 
+    //array de x por x donde cada casilla es un nodo
+    // si el nodo hace colision con una pared o montañas es un terreno por donde no podemos pasar
+    // Nodo tiene la propiedad de que no se puede atravesar
     private void CreateGrid()
     {
         // Creamos el array de Nodes
@@ -60,7 +64,7 @@ public class GridChungo : MonoBehaviour
         }
     }
 
-
+    //Obtenemos nodo a partir de un vector posicion
     public Node GetNodeFromWorldPoint(Vector3 worldPosition)
     {
         // Le sumo la mitad por si es negativo
@@ -104,6 +108,7 @@ public class GridChungo : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!debug) return;
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSizeX, 1, gridWorldSizeZ));
         //Debug.Log("Path size " + path.Count);
         if (getGrid != null)

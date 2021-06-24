@@ -2268,6 +2268,7 @@ GameObject:
   - component: {fileID: 829903685}
   - component: {fileID: 829903691}
   - component: {fileID: 829903684}
+  - component: {fileID: 829903692}
   m_Layer: 0
   m_Name: Seek-FilterActuator
   m_TagString: Untagged
@@ -2343,7 +2344,7 @@ MonoBehaviour:
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
-  mRotation: 0
+  mRotation: 180
   mVelocity: 5
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
@@ -2413,7 +2414,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
+  - {fileID: 2100000, guid: 24d747a0dff25ac478d0cb3ecfcd5633, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2461,6 +2462,26 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
   target: {fileID: 1423621678}
+  useReferee: 1
+  weight: 1
+--- !u!114 &829903692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829903682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64771cef24f53849a06e6d7e49ebf88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  steering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  steeringGroup: 2
+  target: {fileID: 0}
   useReferee: 1
   weight: 1
 --- !u!1 &865358678
@@ -3520,7 +3541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1215115179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3589,7 +3610,7 @@ MonoBehaviour:
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
-  mRotation: 0
+  mRotation: 180
   mVelocity: 5
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
