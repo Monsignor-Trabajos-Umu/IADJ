@@ -10,13 +10,18 @@ public class TankActuator : BaseActuator
 {
     public override Steering Act(Steering steering) => throw new System.NotImplementedException();
 
-    public override Steering Act(Steering steering, Vector3 angulo)
+    //steering indica el vector hacia donde esta el destino
+    //direccion indica hacia donde se mira
+    public override Steering Act(Steering steering, Vector3 direccion)
     {
         Steering acted = new Steering(0, new Vector3(0, 0, 0));
-        //if (rotared)
-        //{
-        //    acted.angular
-        //}
+
+        var angulo = Vector3.Angle(steering.lineal, direccion);
+
+        if (angulo>0)
+        {
+            acted.angular = angulo;
+        }
         return acted;
 
     }
