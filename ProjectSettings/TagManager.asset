@@ -4,22 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ground
-  - pReferencia1
   - controlador
-  - grid
-  - flock
-  - symbol_O
-  - target
-  - agent
-  - symbol_X
-  - puntoInteres
-  - puntoCurativo
-  - equipoRojo
-  - equipoAzul
-  - baseRoja
-  - baseAzul
-  - WallCircle
+  - pReferencia1
+  - ground
   layers:
   - Default
   - TransparentFX
@@ -29,9 +16,9 @@ TagManager:
   - UI
   - 
   - 
-  - paredes
-  - wander
-  - flock
+  - Ground
+  - Players
+  - PostProcessing
   - 
   - 
   - 
