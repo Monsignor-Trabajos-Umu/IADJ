@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// El mismo filtro de ArbitroSteering
+// El actuador elimina la componente Y del steering
 public class FilterActuator : BaseActuator
 {
     public override Steering Act(Steering steering)

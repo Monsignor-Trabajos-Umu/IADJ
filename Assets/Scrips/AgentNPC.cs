@@ -289,9 +289,8 @@ public class AgentNPC : Agent
 
     private void UpdateAccelerated(Steering steering, float time)
     {
+        //OrientationToVector() devuelve el vector hacia donde apunta
         var act = actuator.Act(steering,base.OrientationToVector());
-
-
 
         //Debug.Log($"PreFiltre {vVelocidad} {rotacion}");
         if (act.lineal == new Vector3(0, 0, 0))
