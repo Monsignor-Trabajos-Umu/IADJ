@@ -19,6 +19,7 @@ TagManager:
   - equipoAzul
   - baseRoja
   - baseAzul
+  - WallCircle
   layers:
   - Default
   - TransparentFX
