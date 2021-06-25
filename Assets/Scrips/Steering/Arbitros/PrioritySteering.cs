@@ -13,6 +13,15 @@ public enum SteeringGroup
 
 public class PrioritySteering : ArbitroSteering
 {
+    /** Arbitro usando prioridades por defecto el orden es:
+     *
+     *  - Collision
+     *  - Formation
+     *  - Pursuit
+     *  - Distance
+     *
+     *
+    */
     private const double Epsilon = 0.05;
 
     [SerializeField] private List<SteeringBehaviour> collisionList;

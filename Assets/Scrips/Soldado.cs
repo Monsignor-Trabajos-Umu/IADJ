@@ -7,15 +7,13 @@ public class Soldado : AgentNPC
     public Manhattan heuristica = new Manhattan();
     // Start is called before the first frame update
 
-    public Soldado() : base()
+    protected override void Start()
     {
+        base.Start();
         vida = 100;
         alcance = 1;
         daño = 20;
     }
 
-    public Heuristic GetHeuristic()
-    {
-        return heuristica;
-    }
+    public Heuristic GetHeuristic() => heuristica;
 }

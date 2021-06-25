@@ -8,25 +8,24 @@ public class AgentNPC : Agent
 
     [SerializeField] private BaseActuator actuator;
 
-
     // Steerings
-    public ArbitroSteering arbitro; // Asigna mis steerings.
+    [SerializeField] private ArbitroSteering arbitro; // Asigna mis steerings.
 
     // Estados
-    public CAction cAction = CAction.None; //  Action para las acciones
+    [SerializeField] private CAction cAction = CAction.None; //  Action para las acciones
 
     // Controller
     private Controlador controlador;
-    public Steering finalSteering;
+    [SerializeField] private Steering finalSteering;
 
     // Formaciones
-    public Formation formation;
+    [SerializeField] private Formation formation;
 
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
-    public int mejorTerreno = 0;
-    private Formation needToRemakeFormacion;
-    public int peorTerreno = 1;
+    [SerializeField] private readonly int mejorTerreno = 0;
+    [SerializeField] private readonly int peorTerreno = 1;
+
     public bool selected; // Si estoy seleccionado
     public State state = State.Normal; // State para las ordenes
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
@@ -356,20 +355,20 @@ public class AgentNPC : Agent
          * mejoramos la velocidad máxima del personaje multiplicando por 1.5
          * , y si es el peor terreno entonces la reducimos a la mitad
         */
-        Terrain terreno = FindObjectOfType<Terrain>();
+        var terreno = FindObjectOfType<Terrain>();
         if (terreno != null)
         {
-            int indice = controlador.GetTerrainLayer(this.transform.position, terreno);
-            if(indice == mejorTerreno)
+            var indice = controlador.GetTerrainLayer(transform.position, terreno);
+            if (indice == mejorTerreno)
             {
-                this.mVelocity = (float)(baseVelocity * 1.5);
+                mVelocity = (float) (baseVelocity * 1.5);
                 Debug.Log("Aumento Velocidad");
             }
             else
             {
                 if (indice == peorTerreno)
                 {
-                    this.mVelocity = (float)(baseVelocity / 1.5);
+                    mVelocity = (float) (baseVelocity / 1.5);
                     Debug.Log("Disminuyo Velocidad");
                 }
                 else
@@ -378,7 +377,6 @@ public class AgentNPC : Agent
                 }
             }
         }
-        
     }
 
     protected void Update()
@@ -388,7 +386,6 @@ public class AgentNPC : Agent
         UpdateColor();
         // Si estamos esperando nos quedamos quietos
         if (state != State.Waiting) ApplySteering();
-
     }
 
     // Los Steering se actualizan se usen o no otra cosa es que los guardemos

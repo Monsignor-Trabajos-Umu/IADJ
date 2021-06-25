@@ -6,13 +6,16 @@ public class Arquero : AgentNPC
 {
     public Chebychev heuristica = new Chebychev();
 
-
-    public Arquero() : base()
+    protected override void Start()
     {
+        base.Start();
         vida = 50;
         alcance = 2;
         daño = 10;
     }
+
+
+
     // Start is called before the first frame update
     public Heuristic GetHeuristic()
     {

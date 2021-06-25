@@ -6,7 +6,7 @@ public class MoveCamera : MonoBehaviour
 
     [SerializeField] private bool mouse;
 
-    [SerializeField] private float speed;
+    [SerializeField] private float speed=5;
 
     // Update is called once per frame
     private void Update()

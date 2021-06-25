@@ -7,15 +7,13 @@ public class Tanque : AgentNPC
     public Euclidea heuristica = new Euclidea();
     // Start is called before the first frame update
 
-    public Tanque() : base()
+    protected override void Start()
     {
+        base.Start();
         vida = 250;
         alcance = 1;
         daño = 5;
     }
 
-    public Heuristic GetHeuristic()
-    {
-        return heuristica;
-    }
+    public Heuristic GetHeuristic() => heuristica;
 }
