@@ -412,8 +412,8 @@ public class AgentNPC : Agent
 
         //After we have waited 5 seconds print the time again.
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-        ChangeState(State.Normal);
-        //controlador.ActionFinished(this);
+        ChangeState(State.Normal); 
+        controlador.ActionFinished(this);
         alreadyWaiting = false;
     }
 

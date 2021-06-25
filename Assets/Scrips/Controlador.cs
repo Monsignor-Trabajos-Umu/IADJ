@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Controlador : MonoBehaviour
 {
@@ -14,7 +15,11 @@ public class Controlador : MonoBehaviour
     //Hemos terminado la acción
     public void Done() => action = CAction.None;
 
-    public void ActionFinished(AgentNPC agent) => RemoveFromSelected(agent);
+    public void ActionFinished(AgentNPC agent)
+    { 
+        Debug.Log($"{agent.name} ha terminado");
+        //RemoveFromSelected(agent);
+    } 
 
     public void AddOrRemoveFromSelected(AgentNPC agent)
     {
@@ -67,11 +72,35 @@ public class Controlador : MonoBehaviour
             // Si lo que golpea es un punto del terreno entonces da la orden a todas las unidades NPC
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("ground"))
             {
-                var newTarget = hitInfo.point;
+                var center = hitInfo.point;
 
-                foreach (var agente in GetSelected.Where(agente => agente.state == State.Waiting))
-                    // Llamamos al Action del Agente
-                    agente.GoToTarget(newTarget);
+                var agentNpcs = GetSelected.Where(agente => agente.state == State.Waiting);
+                var numberOfAgents = agentNpcs.Count();
+
+                // Tenemos que colocar a los agentes al rededor de un punto para ello
+                // Calculamos cuanto serioa mas menos la circurferencia
+                // Todos los personajes tienen el mismo tamaño
+  
+                if (numberOfAgents <=0) return;
+
+                var sizeBox = agentNpcs.First().GetComponent<BoxCollider>().size;
+                var agentDiameter = (sizeBox.x > sizeBox.y ? sizeBox.x : sizeBox.y) * 2;
+                
+              
+                
+
+                var radio = agentDiameter * numberOfAgents / (2 * Math.PI);
+                foreach (var agente in agentNpcs.Select((value, index) => new { value, index }))
+                {
+                    // Use x.value and x.index in here
+                    var angle = agente.index * (2 * Math.PI / numberOfAgents);
+                    var x = (float) (center.x + Math.Cos(angle) * radio);
+                    var z = (float) (center.z + Math.Sin(angle) * radio);
+                    var newTarget = new Vector3(x, center.y, +z);
+                    agente.value.GoToTarget(newTarget);
+                }
+
+                    
                 Done();
             }
     }
