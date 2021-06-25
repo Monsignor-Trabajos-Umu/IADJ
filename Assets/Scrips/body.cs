@@ -19,7 +19,7 @@ public class Body : MonoBehaviour
     public float masa;
     public float mRotation;
     public float mVelocity;
-
+    public float baseVelocity;
     // Visual clues
     private Color originalBandColor;
     private Color originalColor;
@@ -52,6 +52,7 @@ public class Body : MonoBehaviour
     // Start
     protected virtual void Start()
     {
+        baseVelocity = mVelocity;
         try
         {
             var temp = transform.Find("Hats");

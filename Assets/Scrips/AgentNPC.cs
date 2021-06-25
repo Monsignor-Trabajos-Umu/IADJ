@@ -353,6 +353,29 @@ public class AgentNPC : Agent
          * mejoramos la velocidad máxima del personaje multiplicando por 1.5
          * , y si es el peor terreno entonces la reducimos a la mitad
         */
+        Terrain terreno = FindObjectOfType<Terrain>();
+        if (terreno != null)
+        {
+            int indice = controlador.GetTerrainLayer(this.transform.position, terreno);
+            if(indice == mejorTerreno)
+            {
+                this.mVelocity = (float)(baseVelocity * 1.5);
+                Debug.Log("Aumento Velocidad");
+            }
+            else
+            {
+                if (indice == peorTerreno)
+                {
+                    this.mVelocity = (float)(baseVelocity / 1.5);
+                    Debug.Log("Disminuyo Velocidad");
+                }
+                else
+                {
+                    mVelocity = baseVelocity;
+                }
+            }
+        }
+        
     }
 
     protected void Update()
@@ -361,12 +384,14 @@ public class AgentNPC : Agent
         UpdateColor();
         // Si estamos esperando nos quedamos quietos
         if (state != State.Waiting) ApplySteering();
+
     }
 
     // Los Steering se actualizan se usen o no otra cosa es que los guardemos
     private void LateUpdate()
     {
         finalSteering = arbitro.GetFinalSteering(state, cAction);
+        ActualizarVelocidad();
     }
 
     #endregion
