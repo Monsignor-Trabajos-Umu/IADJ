@@ -89,7 +89,7 @@ public class Controlador : MonoBehaviour
               
                 
 
-                var radio = agentDiameter * numberOfAgents / (2 * Math.PI);
+                var radio = (agentDiameter * numberOfAgents) / (2 * Math.PI);
                 foreach (var agente in agentNpcs.Select((value, index) => new { value, index }))
                 {
                     // Use x.value and x.index in here
