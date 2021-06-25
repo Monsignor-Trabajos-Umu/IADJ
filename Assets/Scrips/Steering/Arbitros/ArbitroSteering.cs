@@ -60,7 +60,7 @@ public abstract class ArbitroSteering : MonoBehaviour
         foreach (var keyValuePair in savedWeightDictionary)
             keyValuePair.Key.weight = keyValuePair.Value;
     }
-
+    // Le digo a mi steering goToTarget que tenemos que ir a un objetivo
     public void SetNewTarget(Vector3 newPoint) => goToTarget.NewTarget(newPoint);
 
     private Steering GetGoToTargetSteering() => goToTarget.GetSteering(agent);
@@ -82,15 +82,16 @@ public abstract class ArbitroSteering : MonoBehaviour
     }
 
 
+    // Quitamos decimales al float
     protected static Steering RoundSteering(Steering steering)
     {
         //Debug.Log($"PreFiltre {steering.lineal} {steering.angular}");
-        // No tiene sentido 0,000001 de aceleracion
-        steering.lineal.x = (float) Math.Round(steering.lineal.x, 6);
-        steering.lineal.z = (float) Math.Round(steering.lineal.z, 6);
+        // No tiene sentido 0,0000000001 de aceleracion
+        steering.lineal.x = (float) Math.Round(steering.lineal.x, 8);
+        steering.lineal.z = (float) Math.Round(steering.lineal.z, 8);
 
-        // Para los angulos con dos decimales es mas que suficiente
-        steering.angular = (float) Math.Round(steering.angular, 2);
+        // Para los angulos con tres decimales es mas que suficiente
+        steering.angular = (float) Math.Round(steering.angular, 3);
         //Debug.Log($"Post {steering.lineal} {steering.angular}");
         return steering;
     }

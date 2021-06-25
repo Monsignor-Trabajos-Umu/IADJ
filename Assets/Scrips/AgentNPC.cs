@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class AgentNPC : Agent
 {
-    private bool alreadyWaiting; // Si estoy esperando para mandar un mensaje al controlador
+    // Actuadores
+
+    [SerializeField] private BaseActuator actuator;
 
 
     // Steerings
     public ArbitroSteering arbitro; // Asigna mis steerings.
+
+    // Estados
     public CAction cAction = CAction.None; //  Action para las acciones
 
     // Controller
@@ -21,18 +25,12 @@ public class AgentNPC : Agent
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     public int mejorTerreno = 0;
+    private Formation needToRemakeFormacion;
     public int peorTerreno = 1;
-
     public bool selected; // Si estoy seleccionado
-
-    // Estados
     public State state = State.Normal; // State para las ordenes
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
-    private bool InFormation => formation != null; // Si estoy en formacion
-
-    // Actuadores
-
-    [SerializeField] private BaseActuator actuator;
+    public bool InFormation => formation != null; // Si estoy en formacion
 
 
     protected override void Start()
@@ -41,7 +39,8 @@ public class AgentNPC : Agent
         if (actuator == null)
             actuator = gameObject.AddComponent(typeof(FilterActuator)) as FilterActuator;
         SaveOriginalColor();
-        controlador = GameObject.FindGameObjectWithTag("controlador").GetComponent<Controlador>();
+        controlador = GameObject.FindGameObjectWithTag("controlador")
+            .GetComponent<Controlador>();
 
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<ArbitroSteering>();
@@ -137,7 +136,6 @@ public class AgentNPC : Agent
         }
     }
 
-
     #endregion
 
 
@@ -232,6 +230,7 @@ public class AgentNPC : Agent
     }
 
 
+    // Semaforo MoveABitBeforeWaiting
     private bool willWait;
 
     public void MoveABitBeforeWaiting()
@@ -245,22 +244,25 @@ public class AgentNPC : Agent
             Debug.Log($"Will wait in {secondsToWait} seconds ");
             yield return new WaitForSeconds(secondsToWait);
             Debug.Log("Im waiting");
-            ChangeState(State.Waiting); // Pasados X segundos nos esperamos a los soldados.
+            ChangeState(State
+                .Waiting); // Pasados X segundos nos esperamos a los soldados.
             willWait = false;
         }
 
         StartCoroutine(Timer(5));
     }
 
+    //Semaforo AllInPositionWaitABitMore
+    private bool waitingSoldiers;
 
     public void AllInPositionWaitABitMore()
     {
         if (!formation.ImLeader(this)) throw new Exception("No eres el líder");
-        if (alreadyWaiting) return; // Si ya estamos esperando no hacemos nada
+        if (waitingSoldiers) return; // Si ya estamos esperando no hacemos nada
 
         IEnumerator Timer(float secondsToWait)
         {
-            alreadyWaiting = true;
+            waitingSoldiers = true;
             //Print the time of when the function is first called.
             Debug.Log($"Will move in {secondsToWait} seconds");
 
@@ -272,8 +274,9 @@ public class AgentNPC : Agent
             controlador
                 .ActionFinished(this);
             // Le decimos al controlador que la accion ya esta terminada
-            formation?.WaitForSoldiers(); // Le decimos a la formacion que espere a los soldados
-            alreadyWaiting = false;
+            formation
+                ?.WaitForSoldiers(); // Le decimos a la formacion que espere a los soldados
+            waitingSoldiers = false;
         }
 
         StartCoroutine(Timer(10));
@@ -290,7 +293,7 @@ public class AgentNPC : Agent
     private void UpdateAccelerated(Steering steering, float time)
     {
         //OrientationToVector() devuelve el vector hacia donde apunta
-        var act = actuator.Act(steering,this);
+        var act = actuator.Act(steering, this);
 
         //Debug.Log($"PreFiltre {vVelocidad} {rotacion}");
         if (act.lineal == new Vector3(0, 0, 0))
@@ -357,6 +360,7 @@ public class AgentNPC : Agent
 
     protected void Update()
     {
+        ActualizarVelocidad();
         // Actualiza el color si hay un cambio de estado
         UpdateColor();
         // Si estamos esperando nos quedamos quietos
@@ -374,9 +378,18 @@ public class AgentNPC : Agent
 
     #region Actions
 
-    public void GoToTarget(Vector3 newPoint)
+    /**
+     * Voy a una posicion
+     * Si hay agentes en formacion y sin formacion la disolvemos
+     * Controller -> GoToTarget -> arbitro
+     */
+    public void GoToTarget(Vector3 newPoint, bool mixed)
     {
-        
+        // Si hay mezcla de en formación y fuera de ella rompemos formación;
+
+        if (InFormation && mixed)
+            formation.DissolveFormation();
+
 
         if (InFormation)
             if (formation.ImSoldier(this))
@@ -387,7 +400,8 @@ public class AgentNPC : Agent
                 return;
             }
 
-        // Soy el boss 
+
+        // Soy el boss o no estoy en formacion
         ChangeState(State.Action);
         ChangeAction(CAction.GoToTarget);
         arbitro.SetNewTarget(newPoint);
@@ -398,23 +412,33 @@ public class AgentNPC : Agent
     {
         ChangeAction(CAction.None);
         ChangeState(State.Waiting);
-        StartCoroutine(WaitBeforeFinishing(5));
+        WaitAtTarget();
     }
 
+    // Semaforo WaitBeforeFinishing
+    // // Si estoy esperando para mandar un mensaje al controlador
+    private bool alreadyWaiting;
 
-    private IEnumerator WaitBeforeFinishing(float secondsToWait)
+    private void WaitAtTarget()
     {
-        alreadyWaiting = true;
-        //Print the time of when the function is first called.
-        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+        if (alreadyWaiting) return;
 
-        yield return new WaitForSeconds(secondsToWait);
+        IEnumerator WaitBeforeFinishing(float secondsToWait)
+        {
+            alreadyWaiting = true;
+            //Print the time of when the function is first called.
+            Debug.Log($"Will move in {secondsToWait} seconds | WaitAtTarget");
 
-        //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-        ChangeState(State.Normal); 
-        controlador.ActionFinished(this);
-        alreadyWaiting = false;
+            yield return new WaitForSeconds(secondsToWait);
+
+            //After we have waited 5 seconds print the time again.
+            Debug.Log("Im moving | WaitAtTarget");
+            ChangeState(State.Normal);
+            controlador.ActionFinished(this);
+            alreadyWaiting = false;
+        }
+
+        StartCoroutine(WaitBeforeFinishing(5));
     }
 
     #endregion
@@ -476,7 +500,8 @@ public class AgentNPC : Agent
             cuartel = GameObject.FindWithTag("baseAzul");
 
         //Hacemos que spawnee al lado de su base
-        gameObject.transform.position = cuartel.transform.position + new Vector3(0, 0, -50);
+        gameObject.transform.position =
+            cuartel.transform.position + new Vector3(0, 0, -50);
         //Recuperamos su vida
         vida = vidaMaxima;
         //Hacemos que vuelva a ser visible

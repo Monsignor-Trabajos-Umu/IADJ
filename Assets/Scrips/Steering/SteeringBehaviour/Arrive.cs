@@ -22,7 +22,7 @@ public class Arrive : SteeringBehaviour
         float targetRadius = (float)miAgente.rInterior;
         float slowRadius = (float)miAgente.RExterior;
 
-        float timeToTarget = Time.fixedDeltaTime;
+        float timeToTarget = Time.deltaTime;
 
         // Empty Stering
         this.steering = new Steering(0, new Vector3(0, 0, 0));
@@ -47,12 +47,12 @@ public class Arrive : SteeringBehaviour
 
         steering.lineal = targetVelocity - miAgente.vVelocidad;
         steering.lineal /= timeToTarget;
-        // Si vamos muy rapido la normalizamos
-        //if (steering.lineal.magnitude > maxAccelerarion)
-        //{
-        //    steering.lineal.Normalize();
-        //    steering.lineal *= maxAccelerarion;
-        //}
+        //Si vamos muy rapido la normalizamos
+        if (steering.lineal.magnitude > maxAccelerarion)
+        {
+            steering.lineal.Normalize();
+            steering.lineal *= maxAccelerarion;
+        }
 
         steering.angular = 0;
         return this.steering;

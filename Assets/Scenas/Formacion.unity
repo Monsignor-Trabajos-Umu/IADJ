@@ -550,6 +550,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -559,7 +560,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &160494252
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -837,6 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 1
 --- !u!4 &214873769
 Transform:
   m_ObjectHideFlags: 0
@@ -1687,7 +1688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   border: 10
-  speed: 5
+  mouse: 0
+  speed: 10
 --- !u!114 &532658118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3010,7 +3012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853189309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76.7, y: 8.23, z: 79.3}
+  m_LocalPosition: {x: 44, y: 5, z: 76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 17705009}
@@ -3075,6 +3077,7 @@ MonoBehaviour:
   aInterior: 1
   debug: 0
   rInterior: 3
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -3084,7 +3087,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!114 &853189313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5400,6 +5402,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -5409,7 +5412,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1322178457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6583,6 +6585,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -6592,7 +6595,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1503490892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8348,6 +8350,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -8357,7 +8360,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1801314614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10146,6 +10148,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -10155,7 +10158,6 @@ MonoBehaviour:
   peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &2122945416
 BoxCollider:
   m_ObjectHideFlags: 0
