@@ -44,5 +44,6 @@ public class GoTarget : SteeringBehaviour
     {
         this.targetPosition = newTarget;
         this.targetExists = true;
+        Debug.Log($"Going to Target {newTarget}");
     }
 }

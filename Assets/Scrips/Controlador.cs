@@ -6,15 +6,23 @@ using UnityEngine;
 public class Controlador : MonoBehaviour
 {
     private CAction action;
-    public HashSet<AgentNPC> GetSelected { get; private set; }
+    [SerializeField] private bool debug;
+
+    [SerializeField] private HashSet<AgentNPC> GetSelected { get; set; }
 
     // Builders
-    private void Awake() => GetSelected = new HashSet<AgentNPC>(); //Creamos la lista de seleccionados
+    private void Awake() =>
+        GetSelected = new HashSet<AgentNPC>(); //Creamos la lista de seleccionados
 
     //Hemos terminado la acción
     public void Done() => action = CAction.None;
 
-    public void ActionFinished(AgentNPC agent) => RemoveFromSelected(agent);
+    // La accion ha terminado
+    public void ActionFinished(AgentNPC agent)
+    {
+        PrintIfDebug($"{agent.name} ha terminado");
+        //RemoveFromSelected(agent);
+    }
 
     public void AddOrRemoveFromSelected(AgentNPC agent)
     {
@@ -29,7 +37,7 @@ public class Controlador : MonoBehaviour
     {
         if (GetSelected.Contains(agent)) return;
         GetSelected.Add(agent);
-        Debug.Log("seleccionados: " + GetSelected.Count);
+        PrintIfDebug("seleccionados: " + GetSelected.Count);
         agent.AddToSelected();
     }
 
@@ -38,13 +46,13 @@ public class Controlador : MonoBehaviour
         if (!GetSelected.Contains(agent)) return;
         GetSelected.Remove(agent);
         agent.RemoveFromSelected();
-        Debug.Log($"Quitar seleccionados: {GetSelected.Count}");
+        PrintIfDebug($"Quitar seleccionados: {GetSelected.Count}");
     }
 
     private void RemoveAndResetFromSelected(AgentNPC agent)
     {
         RemoveFromSelected(agent);
-        Debug.Log($"Reset estado: {agent.name}");
+        PrintIfDebug($"Reset estado: {agent.name}");
         agent.ResetStateAction();
     }
 
@@ -56,6 +64,7 @@ public class Controlador : MonoBehaviour
             .ForEach(agent => agent.ChangeState(State.Waiting));
     }
 
+    // Vamos a una posición del raton
     private void GotoMousePosition()
     {
         // Damos una orden cuando levantemos el botón del ratón.
@@ -67,19 +76,71 @@ public class Controlador : MonoBehaviour
             // Si lo que golpea es un punto del terreno entonces da la orden a todas las unidades NPC
             if (hitInfo.collider != null && hitInfo.collider.CompareTag("ground"))
             {
-                var newTarget = hitInfo.point;
+                var center = hitInfo.point;
 
-                foreach (var agente in GetSelected.Where(agente => agente.state == State.Waiting))
-                    // Llamamos al Action del Agente
-                    agente.GoToTarget(newTarget);
+                var agentsNpc =
+                    GetSelected.Where(agente => agente.state == State.Waiting).ToList();
+                var numberOfAgents = agentsNpc.Count();
+
+
+                if (numberOfAgents <= 0) return;
+
+                // Nos piden que si hay mezcla de agentes sin formaciones y con formaciones
+                // Disolvamos la formacion. Por eso vemos si hay de los dos
+                // Primero vemos si hay formaciones
+                var inFormation = 0;
+                var alone = 0;
+                var mixed = false;
+                foreach (var agentNpc in agentsNpc)
+                {
+                    switch (agentNpc.InFormation)
+                    {
+                        case true:
+                            inFormation++;
+                            break;
+                        case false:
+                            alone++;
+                            break;
+                    }
+
+                    mixed = inFormation > 0 && alone > 0;
+                    if (mixed) break;
+                }
+
+
+                // Tenemos que colocar a los agentes al rededor de un punto para ello
+                // Calculamos cuanto serioa mas menos la circurferencia
+                // Todos los personajes tienen el mismo tamaño
+                var sizeBox = agentsNpc.First().GetComponent<BoxCollider>().size;
+                var agentDiameter = (sizeBox.x > sizeBox.y ? sizeBox.x : sizeBox.y) * 2;
+
+
+                // Extra a ojo para que no colicionen a los lados
+                agentDiameter *= 2;
+
+                var radio = agentDiameter * numberOfAgents / (2 * Math.PI);
+                foreach (var agente in agentsNpc.Select((value, index) =>
+                    new {value, index}))
+                {
+                    // Use x.value and x.index in here
+                    var angle = (float) (agente.index * (2 * Math.PI / numberOfAgents));
+                    var x = (float) (center.x + Mathf.Cos(angle) * radio);
+                    var z = (float) (center.z + Mathf.Sin(angle) * radio);
+                    var newTarget = new Vector3(x, center.y, +z);
+                    PrintIfDebug($"{agente.index} to {newTarget}");
+
+                    agente.value.GoToTarget(newTarget, mixed);
+                }
+
+
                 Done();
             }
     }
 
 
-    private static void MakeLine(List<AgentNPC> selected)
+    private void MakeLine(List<AgentNPC> selected)
     {
-        Debug.Log("Formando Cuadrado");
+        PrintIfDebug("Formando Cuadrado");
         selected.ForEach(agent =>
         {
             agent.ResetStateAction();
@@ -88,7 +149,7 @@ public class Controlador : MonoBehaviour
 
         var leader = selected[0];
         var soldiers = selected.GetRange(1, 4);
-        var formation = new Formation(leader);
+        var formation = new Formation(leader, debug);
 
         // Left 
 
@@ -103,9 +164,9 @@ public class Controlador : MonoBehaviour
     }
 
 
-    private static void MakeCross(List<AgentNPC> selected)
+    private void MakeCross(List<AgentNPC> selected)
     {
-        Debug.Log("Formando Cuadrado");
+        PrintIfDebug("Formando Cuadrado");
         selected.ForEach(agent =>
         {
             agent.ResetStateAction();
@@ -114,7 +175,7 @@ public class Controlador : MonoBehaviour
 
         var leader = selected[0];
         var soldiers = selected.GetRange(1, 4);
-        var formation = new Formation(leader);
+        var formation = new Formation(leader, debug);
 
         // Left 
 
@@ -196,9 +257,6 @@ public class Controlador : MonoBehaviour
 
         if (action != 0)
             MakeAction();
-
-
-         
     }
 
     public int GetTerrainLayer(Vector3 worldPos, Terrain t)
@@ -208,4 +266,9 @@ public class Controlador : MonoBehaviour
         index = scriptTerreno.GetainTexture(worldPos, t);
         return index;
     }
+
+    private void PrintIfDebug(string text)
+    {
+        if(debug) Debug.Log(text);
+    } 
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1016489455}
-  m_IndirectSpecularColor: {r: 0.18263894, g: 0.22835018, b: 0.30714685, a: 1}
+  m_IndirectSpecularColor: {r: 0.4513539, g: 0.5009361, b: 0.5728107, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -550,6 +550,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -836,6 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 1
 --- !u!4 &214873769
 Transform:
   m_ObjectHideFlags: 0
@@ -1685,8 +1687,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508ae6a032c4040428713e84629b1e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 853189312}
-  SmoothFactor: 0.5
+  border: 10
+  mouse: 0
+  speed: 10
 --- !u!114 &532658118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1760,7 +1763,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 70.5
+  field of view: 71
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1785,13 +1788,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532658116}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 76.6, y: 15.3, z: 54.9}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 46, y: 25.6, z: 34.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &544297308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3009,7 +3012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853189309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76.7, y: 8.23, z: 79.3}
+  m_LocalPosition: {x: 44, y: 5, z: 76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 17705009}
@@ -3042,6 +3045,9 @@ MonoBehaviour:
   useReferee: 1
   weight: 1
   distance: 0
+  direction: {x: 0, y: 0, z: 0}
+  targetSpeed: 0
+  targetVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &853189312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3071,6 +3077,7 @@ MonoBehaviour:
   aInterior: 1
   debug: 0
   rInterior: 3
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -5311,7 +5318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322178450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 74.4, y: 8.23, z: 55.49}
+  m_LocalPosition: {x: 74, y: 8.23, z: 55.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 777495267}
@@ -5395,6 +5402,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -6577,6 +6585,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -8341,6 +8350,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
@@ -10138,6 +10148,7 @@ MonoBehaviour:
   aInterior: 0.5
   debug: 0
   rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
