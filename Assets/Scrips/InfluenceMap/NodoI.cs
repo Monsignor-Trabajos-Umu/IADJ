@@ -9,7 +9,8 @@ public class NodoI
     public Color color; //Color del nodo (para saber a que bando pertenece)
     public Vector3 worldPosition; //Posicion en el mundo
 
-    
+    #region Contrutores
+
     public NodoI()
     {
         valor = 0;
@@ -46,6 +47,9 @@ public class NodoI
         y = ypos;
         calcularColor();
     }
+
+    #endregion
+   
     public NodoI(Vector3 worldPos, int xpos, int ypos)
     {
         valor = 0;
@@ -54,6 +58,7 @@ public class NodoI
         worldPosition = worldPos;
         calcularColor();
     }
+
     //Dado el valor del nodo, ajusta la tonalidad del color
     public void calcularColor()
     {
@@ -61,4 +66,7 @@ public class NodoI
         else if (valor < 0) color = Color.red; //Casilla controlada por el equipo rojo
         else color = Color.white; //Casilla sin controlar
     }
+
+
+   
 }

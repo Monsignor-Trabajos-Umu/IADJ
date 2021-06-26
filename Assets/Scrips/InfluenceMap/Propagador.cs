@@ -1,33 +1,30 @@
 using UnityEngine;
-using System.Collections;
 
 public interface IPropagator
 {
     NodoI GridPosition { get; }
     int Value { get; }
+    int Radio { get; }
 }
 
 public class Propagador : MonoBehaviour, IPropagator
 {
-    [SerializeField]
-    int influencia;
-    public int Value { get { return influencia; } }
+    [SerializeField,Range(0,10)] private int radio;
 
-    [SerializeField]
-    InfluenceMapControl mapa;
+    [SerializeField] private int influencia;
 
-    public NodoI GridPosition
-    {
-        get
-        {
-            return mapa.GetGridPosition(transform.position);
-        }
-    }
+    [SerializeField] private InfluenceMapControl mapa;
+
+    public int Value => influencia;
+    public int Radio => radio;
+
+
+    public NodoI GridPosition => mapa.GetGridPosition(transform.position);
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-        if (mapa != null && mapa.gameObject.activeSelf) 
+        if (mapa != null && mapa.gameObject.activeSelf)
             mapa.RegisterPropagator(this);
     }
 }

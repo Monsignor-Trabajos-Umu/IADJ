@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,27 +60,31 @@ public class InfluenceGrid : MonoBehaviour
     }
 
 
-    public List<NodoI> GetNeigbours(NodoI node)
+    public List<NodoI> GetNeighbors(NodoI node,int radio)
     {
-        var neightBours = new List<NodoI>();
-        for (var x = -1; x <= 1; x++)
-            for (var z = -1; z <= 1; z++)
+        // Calculamos el radio en casillas al rededor del punto
+
+         
+        var neighbors = new List<NodoI>();
+
+        for (var x = -radio; x <= radio; x++)
+            for (var z = -radio; z <= radio; z++)
             {
                 if (x == 0 && z == 0) continue;
                 // pNeigboursX/Z son las posiciones en el grid de los nodos
-                var pNeigboursX = node.x + x;
-                var pNeigboursZ = node.y + z;
+                var pNeighborsX = node.x + x;
+                var pNeighborsY = node.y + z;
                 // Ahora hay que comprobar que esos nodos existen
                 // Es decir que estan dentro del grid
-                if (pNeigboursX >= 0 && pNeigboursX < gridSizeX &&
-                    pNeigboursZ >= 0 && pNeigboursZ < gridSizeZ)
+                if (pNeighborsX >= 0 && pNeighborsX < gridSizeX &&
+                    pNeighborsY >= 0 && pNeighborsY < gridSizeZ)
                 {
-                    var nodo = getGrid[pNeigboursX, pNeigboursZ];
-                    neightBours.Add(nodo);
+                    var nodo = getGrid[pNeighborsX, pNeighborsY];
+                    neighbors.Add(nodo);
                 }
             }
 
-        return neightBours;
+        return neighbors;
     }
 
     //Obtiene el NodoI de la esquina inferior derecha
