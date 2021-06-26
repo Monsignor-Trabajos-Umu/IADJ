@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AgentNPC : Agent
+public class AgentNpc : Agent
 {
     // Actuadores
 

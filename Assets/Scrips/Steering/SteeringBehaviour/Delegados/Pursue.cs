@@ -4,7 +4,7 @@ public class Pursue : Seek
 {
     [SerializeField] [Range(0.0f, 10.0f)] private float maxPrediction;
 
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         // Vamos a  crear un nuevo target en la posicion donde estaria nuestro target
         var direction = target.transform.position - miAgente.transform.position;

@@ -5,26 +5,29 @@ using UnityEngine;
 
 public class GridChungo : MonoBehaviour
 {
-    private int gridSizeX, gridSizeZ;
-    [SerializeField] private float gridWorldSizeX;
-    [SerializeField] private float gridWorldSizeZ;
+    protected int gridSizeX, gridSizeZ;
+    [SerializeField] protected float gridWorldSizeX;
+    [SerializeField] protected float gridWorldSizeZ;
     //Booleano para saber si el terreno es el de Unity o no.
     [SerializeField] public Terrain terreno;
 
-    private float nodeDiameter;
-    [SerializeField] private float nodeRaidus;
-    [SerializeField] private LayerMask paredesLayerMask;
+    protected float nodeDiameter;
+    [SerializeField] protected float nodeRaidus;
+    [SerializeField] protected LayerMask paredesLayerMask;
 
 
     public List<Node> path = new List<Node>();
 
     //Uso un array en vez de una lista porque es mas rapido buscar
-    [field: SerializeField] public Node[,] getGrid { get; set; }
+    [field: SerializeField] public Node[,] GetGrid { get; protected set; }
 
-    [SerializeField] private bool debug;
+    [SerializeField] protected bool debug;
 
-    public void Awake()
+    public void EnableDebug() => debug = true; 
+
+    private void Awake()
     {
+        Debug.Log("Loading  GridChungo");
         nodeDiameter = nodeRaidus * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSizeX / nodeDiameter);
         gridSizeZ = Mathf.RoundToInt(gridWorldSizeZ / nodeDiameter);
@@ -37,7 +40,7 @@ public class GridChungo : MonoBehaviour
     private void CreateGrid()
     {
         // Creamos el array de Nodes
-        this.getGrid = new Node[gridSizeX, gridSizeZ];
+        this.GetGrid = new Node[gridSizeX, gridSizeZ];
         var pInicial = transform.position - Vector3.right * gridWorldSizeX / 2 -
                        Vector3.forward * gridWorldSizeZ / 2;
 
@@ -61,9 +64,13 @@ public class GridChungo : MonoBehaviour
             {
                 pared = Physics.CheckSphere(worldPoint, nodeRaidus, paredesLayerMask);
             }
-            this.getGrid[x, z] = new Node(pared, worldPoint, x, z);
+            this.GetGrid[x, z] = new Node(pared, worldPoint, x, z);
         }
     }
+
+
+
+
 
     //Obtenemos nodo a partir de un vector posicion
     public Node GetNodeFromWorldPoint(Vector3 worldPosition)
@@ -76,7 +83,7 @@ public class GridChungo : MonoBehaviour
 
         var x = Mathf.RoundToInt((gridSizeX - 1) * pX);
         var z = Mathf.RoundToInt((gridSizeZ - 1) * pZ);
-        return getGrid[x, z];
+        return GetGrid[x, z];
     }
 
     public Vector3 GetWorldPointFromNode(Node nodo)
@@ -99,7 +106,7 @@ public class GridChungo : MonoBehaviour
                 if (pNeigboursX >= 0 && pNeigboursX < gridSizeX &&
                     pNeigboursZ >= 0 && pNeigboursZ < gridSizeZ)
                 {
-                    var nodo = getGrid[pNeigboursX, pNeigboursZ];
+                    var nodo = GetGrid[pNeigboursX, pNeigboursZ];
                     if (!nodo.pared) neightBours.Add(nodo);
                 }
             }
@@ -107,13 +114,13 @@ public class GridChungo : MonoBehaviour
         return neightBours;
     }
 
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         if (!debug) return;
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSizeX, 1, gridWorldSizeZ));
         //Debug.Log("Path size " + path.Count);
-        if (getGrid != null)
-            foreach (var n in getGrid)
+        if (GetGrid != null)
+            foreach (var n in GetGrid)
             {
                 Gizmos.color = n.pared ? Color.red : Color.white;
                 if (path != null)

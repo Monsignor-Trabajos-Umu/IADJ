@@ -8,23 +8,23 @@ public class Controlador : MonoBehaviour
     private CAction action;
     [SerializeField] private bool debug;
 
-    [SerializeField] private HashSet<AgentNPC> GetSelected { get; set; }
+    [SerializeField] private HashSet<AgentNpc> GetSelected { get; set; }
 
     // Builders
     private void Awake() =>
-        GetSelected = new HashSet<AgentNPC>(); //Creamos la lista de seleccionados
+        GetSelected = new HashSet<AgentNpc>(); //Creamos la lista de seleccionados
 
     //Hemos terminado la acción
     public void Done() => action = CAction.None;
 
     // La accion ha terminado
-    public void ActionFinished(AgentNPC agent)
+    public void ActionFinished(AgentNpc agent)
     {
         PrintIfDebug($"{agent.name} ha terminado");
         //RemoveFromSelected(agent);
     }
 
-    public void AddOrRemoveFromSelected(AgentNPC agent)
+    public void AddOrRemoveFromSelected(AgentNpc agent)
     {
         if (GetSelected.Contains(agent))
             RemoveFromSelected(agent);
@@ -33,7 +33,7 @@ public class Controlador : MonoBehaviour
     }
 
 
-    public void AddToSelected(AgentNPC agent)
+    public void AddToSelected(AgentNpc agent)
     {
         if (GetSelected.Contains(agent)) return;
         GetSelected.Add(agent);
@@ -41,7 +41,7 @@ public class Controlador : MonoBehaviour
         agent.AddToSelected();
     }
 
-    public void RemoveFromSelected(AgentNPC agent)
+    public void RemoveFromSelected(AgentNpc agent)
     {
         if (!GetSelected.Contains(agent)) return;
         GetSelected.Remove(agent);
@@ -49,7 +49,7 @@ public class Controlador : MonoBehaviour
         PrintIfDebug($"Quitar seleccionados: {GetSelected.Count}");
     }
 
-    private void RemoveAndResetFromSelected(AgentNPC agent)
+    private void RemoveAndResetFromSelected(AgentNpc agent)
     {
         RemoveFromSelected(agent);
         PrintIfDebug($"Reset estado: {agent.name}");
@@ -138,7 +138,7 @@ public class Controlador : MonoBehaviour
     }
 
 
-    private void MakeLine(List<AgentNPC> selected)
+    private void MakeLine(List<AgentNpc> selected)
     {
         PrintIfDebug("Formando Cuadrado");
         selected.ForEach(agent =>
@@ -164,7 +164,7 @@ public class Controlador : MonoBehaviour
     }
 
 
-    private void MakeCross(List<AgentNPC> selected)
+    private void MakeCross(List<AgentNpc> selected)
     {
         PrintIfDebug("Formando Cuadrado");
         selected.ForEach(agent =>

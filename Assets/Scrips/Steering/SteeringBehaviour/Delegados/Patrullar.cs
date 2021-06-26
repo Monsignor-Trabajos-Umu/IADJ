@@ -6,8 +6,8 @@ public class Patrullar : GoTarget
 {
     [SerializeField]
     public List<GameObject> objetivos;
-    AgentNPC objetivo;
-    public override Steering GetSteering(AgentNPC miAgente)
+    AgentNpc objetivo;
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         foreach (GameObject v in objetivos)
         {

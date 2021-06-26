@@ -12,7 +12,7 @@ public class WallAvoidance1B : Seek
     [SerializeField, Range(1,40)]  private float lookAhead=1;
     
 
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         // Calculamos el target para delegarlo a seek
         this.steering = new Steering(0, new Vector3(0, 0, 0));

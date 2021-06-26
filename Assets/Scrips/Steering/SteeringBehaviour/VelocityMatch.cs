@@ -5,7 +5,7 @@ using System;
 
 public class VelocityMatch : SteeringBehaviour
 {
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
 
         float maxAccelerarion = miAgente.mAcceleration;

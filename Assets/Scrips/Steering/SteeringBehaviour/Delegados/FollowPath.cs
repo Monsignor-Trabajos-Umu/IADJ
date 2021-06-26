@@ -8,7 +8,7 @@ public class FollowPath : Arrive
     public float radio;
     public int currentNode = 0;
     // Se presupone que target tiene un path
-    public override Steering GetSteering(AgentNPC agent)
+    public override Steering GetSteering(AgentNpc agent)
     {
 
         Patheable patheable = target.GetComponent<Patheable>() as Patheable;

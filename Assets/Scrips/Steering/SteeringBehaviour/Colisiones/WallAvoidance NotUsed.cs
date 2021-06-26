@@ -16,7 +16,7 @@ public class WallAvoidance : Seek
         steeringGroup = SteeringGroup.Collision;
     }
 
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         // Calculamos el target para delegarlo a seek
         steering = new Steering(0, new Vector3(0, 0, 0));

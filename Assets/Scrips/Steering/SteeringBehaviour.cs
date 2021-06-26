@@ -22,7 +22,7 @@ public abstract class SteeringBehaviour : MonoBehaviour
 
 
     //Calcula el Steering para el agente dado en funcion del comportamiento deseado
-    public abstract Steering GetSteering(AgentNPC agent);
+    public abstract Steering GetSteering(AgentNpc agent);
 
     public void UseCustomDirectionAndRotation(Vector3 predictedDirection,
         float predictedRotation = 0f)

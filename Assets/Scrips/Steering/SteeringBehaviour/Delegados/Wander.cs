@@ -43,7 +43,7 @@ public class Wander : Align
     private float wanderPrivateCounter = 0;
     private Vector3 targetPoint;
     private bool targetExists = false;
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         float wanderWaitCounter = wanderWait * 60;
         this.timeToTarget = wanderWait;

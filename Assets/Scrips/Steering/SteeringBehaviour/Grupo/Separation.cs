@@ -10,7 +10,7 @@ public class Separation : SteeringBehaviour
     float threshold;
     [SerializeField]
     float decayCoefficient;
-    public override Steering GetSteering(AgentNPC agent)
+    public override Steering GetSteering(AgentNpc agent)
     {
         Steering steering = new Steering(0, new Vector3(0, 0, 0));
         foreach (Agent target in targets)

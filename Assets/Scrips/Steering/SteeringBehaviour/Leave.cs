@@ -7,7 +7,7 @@ public class Leave : SteeringBehaviour
 
 
 
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         float maxAccelerarion = miAgente.mAcceleration;
         float maxSpeed = miAgente.mVelocity;

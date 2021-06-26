@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arquero : AgentNPC
+public class Arquero : AgentNpc
 {
     private Chebychev heuristica;
     protected override void Start()

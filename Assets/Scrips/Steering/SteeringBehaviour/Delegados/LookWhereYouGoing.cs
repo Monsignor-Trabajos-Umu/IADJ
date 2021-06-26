@@ -7,7 +7,7 @@ public class LookWhereYouGoing : Align
 {
 
     // Quiero que mi agente mire hacia delante es decir hacia donde tiene su vector velocidad
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         steering = new Steering(0, new Vector3(0, 0, 0));
         // Vamos a crear un nuevo target en la posicion donde estaria nuestro target

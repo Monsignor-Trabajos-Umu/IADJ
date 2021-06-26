@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class ArbitroSteering : MonoBehaviour
 {
-    protected AgentNPC agent; //Mi agenteNPC que llama al getSteering
+    protected AgentNpc agent; //Mi agenteNPC que llama al getSteering
 
     [SerializeField] protected bool debug = false; //Debug flag
     
@@ -22,7 +22,7 @@ public abstract class ArbitroSteering : MonoBehaviour
     // Usamos Awake para crer los steering necesarios antes de cualquier Start
     protected virtual void Awake()
     {
-        agent = GetComponent<AgentNPC>();
+        agent = GetComponent<AgentNpc>();
         // Creamos los steering necesarios
         formationOffset = gameObject.AddComponent<FormationOffset>();
         goToTarget = gameObject.AddComponent<GoTarget>();

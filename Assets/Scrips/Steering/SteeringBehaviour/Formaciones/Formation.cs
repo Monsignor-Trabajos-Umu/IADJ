@@ -6,17 +6,17 @@ using UnityEngine;
 public class Formation
 {
     private bool deletingFormation;
-    private Dictionary<AgentNPC, bool> formationDone;
+    private Dictionary<AgentNpc, bool> formationDone;
     public bool formationReady;
-    public AgentNPC leader;
-    public Dictionary<AgentNPC, Steering> soldiers; // Solados y su poscion relativa con respecto al lider.
+    public AgentNpc leader;
+    public Dictionary<AgentNpc, Steering> soldiers; // Solados y su poscion relativa con respecto al lider.
     private bool debug;
     
-    public Formation(AgentNPC leader,bool debug=false)
+    public Formation(AgentNpc leader,bool debug=false)
     {
         this.leader = leader;
-        soldiers = new Dictionary<AgentNPC, Steering>();
-        formationDone = new Dictionary<AgentNPC, bool>();
+        soldiers = new Dictionary<AgentNpc, Steering>();
+        formationDone = new Dictionary<AgentNpc, bool>();
         this.debug = debug;
     }
     
@@ -56,7 +56,7 @@ public class Formation
     }
 
     // Obtiene la posicion globlal de agente npc
-    public Steering GetGlobalPosition(AgentNPC agente)
+    public Steering GetGlobalPosition(AgentNpc agente)
     {
         var relativePosition = soldiers[agente];
         relativePosition.lineal = leader.transform.TransformPoint(relativePosition.lineal);
@@ -64,7 +64,7 @@ public class Formation
     }
 
     // Obtiene el rango del del lider
-    private FormationRank GetRank(AgentNPC agente)
+    private FormationRank GetRank(AgentNpc agente)
     {
         if (agente == leader) return FormationRank.Leader;
         if (soldiers.Keys.Contains(agente)) return FormationRank.Soldier;
@@ -72,20 +72,20 @@ public class Formation
     }
 
 
-    public bool ImLeader(AgentNPC agentNpc)
+    public bool ImLeader(AgentNpc agentNpc)
     {
         if (agentNpc == null) return false;
         return GetRank(agentNpc) == FormationRank.Leader;
     }
 
-    public bool ImSoldier(AgentNPC agentNpc)
+    public bool ImSoldier(AgentNpc agentNpc)
     {
         if (agentNpc == null) return false;
         return GetRank(agentNpc) == FormationRank.Soldier;
     }
 
     // Cuando todos estén en posición le decimos al líder que se espere para moverse.
-    public void ImInPosition(AgentNPC agentNpc)
+    public void ImInPosition(AgentNpc agentNpc)
     {
         formationDone[agentNpc] = true;
 
@@ -97,7 +97,7 @@ public class Formation
 
     // El soldado no esta en posición
 
-    public void ImNotInPosition(AgentNPC agentNpc) =>formationDone[agentNpc] = false;
+    public void ImNotInPosition(AgentNpc agentNpc) =>formationDone[agentNpc] = false;
 
 
     // Los solados ya no están en posición porque el líder se ha movido
@@ -111,12 +111,12 @@ public class Formation
 
     private bool IsFormationDone() => !formationDone.Values.Contains(false);
 
-    public List<AgentNPC> GetRest(AgentNPC agentNpc)
+    public List<AgentNpc> GetRest(AgentNpc agentNpc)
     {
         // Se supone que esta en la formacion
 
         if (ImLeader(agentNpc)) return soldiers.Keys.ToList();
-        var resto = new List<AgentNPC> {leader};
+        var resto = new List<AgentNpc> {leader};
         resto.AddRange(soldiers.Keys.Where(npc => npc != agentNpc));
 
         return resto;

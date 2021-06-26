@@ -799,6 +799,7 @@ GameObject:
   - component: {fileID: 507646454}
   - component: {fileID: 507646453}
   - component: {fileID: 507646452}
+  - component: {fileID: 507646456}
   - component: {fileID: 507646451}
   - component: {fileID: 507646450}
   - component: {fileID: 507646449}
@@ -872,7 +873,7 @@ MonoBehaviour:
         - id: 2
         abortOnConditionChanged: 1
     00000002:
-      type: {class: AttackMode, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      type: {class: DefenseMode, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
         graphPosition:
           serializedVersion: 2
@@ -1045,6 +1046,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507646446}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &507646456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507646446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151b64430fed76c409605b8867dd855f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 0}
+  seeker: {fileID: 0}
+  target: {fileID: 0}
 --- !u!1 &516079743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,7 +1348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSizeX: 1000
   gridWorldSizeZ: 1000
-  mostrarMapa: 1
+  mostrarMapa: 0
   nodeRaidus: 15
 --- !u!1 &713581633
 GameObject:
@@ -2429,6 +2445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1614586659}
   - component: {fileID: 1614586658}
+  - component: {fileID: 1614586660}
   m_Layer: 0
   m_Name: GridMap
   m_TagString: Untagged
@@ -2470,6 +2487,27 @@ Transform:
   m_Father: {fileID: 1562519803}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1614586660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614586657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3acc6e91879fab84ebfa1b6b79996a4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridWorldSizeX: 1000
+  gridWorldSizeZ: 1000
+  terreno: {fileID: 0}
+  nodeRaidus: 15
+  paredesLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  debug: 0
+  grid: {fileID: 1614586658}
 --- !u!1001 &1653948559
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class Align : SteeringBehaviour
             return mapped;
         }
     }
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
 
         float maxAngularAcceleration = miAgente.mAngularAcceleration;

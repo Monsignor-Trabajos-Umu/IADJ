@@ -4,5 +4,5 @@ public abstract class BaseActuator : MonoBehaviour
 {
     public abstract Steering Act(Steering steering);
 
-    public abstract Steering Act(Steering steering, AgentNPC agenteNPC);
+    public abstract Steering Act(Steering steering, AgentNpc agenteNPC);
 }

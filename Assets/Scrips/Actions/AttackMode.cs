@@ -8,11 +8,11 @@ namespace Assets.Scrips.Actions
     public class AttackMode: Conditional
     {
 
-        private AgentNPC agente;
+        private AgentNpc agente;
 
         protected override void OnAwake()
         {
-            agente = gameObject.GetComponent<AgentNPC>();
+            agente = gameObject.GetComponent<AgentNpc>();
             Debug.Log($"Mi base {agente.name}");
         }
 

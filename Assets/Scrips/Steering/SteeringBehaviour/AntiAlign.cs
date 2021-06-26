@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AntiAlign : SteeringBehaviour
 {
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         float maxAngularAcceleration = miAgente.mAngularAcceleration;
         float maxRotation = miAgente.mRotation;

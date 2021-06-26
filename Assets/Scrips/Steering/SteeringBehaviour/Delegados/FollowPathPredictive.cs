@@ -10,7 +10,7 @@ public class FollowPathPredictive : Arrive
     public int currentNode = 0;
     public double predictTime = 0.1;
     // Se presupone que target tiene un path
-    public override Steering GetSteering(AgentNPC agent)
+    public override Steering GetSteering(AgentNpc agent)
     {
 
         Patheable patheable = target.GetComponent<Patheable>() as Patheable;

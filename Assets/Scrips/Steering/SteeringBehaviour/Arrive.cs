@@ -12,7 +12,7 @@ public class Arrive : SteeringBehaviour
     [SerializeField] private float targetSpeed;
     [SerializeField] private Vector3 targetVelocity;
 
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
 
         float maxAccelerarion = miAgente.mAcceleration;

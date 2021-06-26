@@ -26,7 +26,7 @@ public class Pathfinding : MonoBehaviour
 
     private void Start()
     {
-        foreach (var node in grid.getGrid)
+        foreach (var node in grid.GetGrid)
             if (!node.pared)
             {
                 node.hCost = heuristic.GetH(node, targetNode);

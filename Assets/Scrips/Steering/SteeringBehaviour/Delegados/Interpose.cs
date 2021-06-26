@@ -16,7 +16,7 @@ public class Interpose : Arrive
         //target.GetComponent<MeshRenderer>().enabled = false;
     }
 
-    public override Steering GetSteering(AgentNPC agent)
+    public override Steering GetSteering(AgentNpc agent)
     {
         //Si no tenemos los parámetros devolvemos un steering básico
         if (agenteA == agenteB || agenteA == null || agenteB == null) return new Steering();
@@ -49,7 +49,7 @@ public class Interpose : Arrive
             Gizmos.DrawSphere(midPoint, 2);
 
             Gizmos.color = Color.white;
-            Vector3 v = gameObject.GetComponent<AgentNPC>().OrientationToVector();
+            Vector3 v = gameObject.GetComponent<AgentNpc>().OrientationToVector();
             Gizmos.DrawLine(transform.position, transform.position + v);
         }
     }

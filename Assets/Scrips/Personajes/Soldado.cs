@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soldado : AgentNPC
+public class Soldado : AgentNpc
 {
     private Manhattan heuristica;
     protected override void Start()

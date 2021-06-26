@@ -7,7 +7,7 @@ public class UnitSelection : MonoBehaviour
     public RectTransform selectionBox;
     public LayerMask unidLayerMask;
 
-    private List<AgentNPC> unidades = new List<AgentNPC>();
+    private List<AgentNpc> unidades = new List<AgentNpc>();
     private Vector2 posicionInicial;
     private Camera cam;
 

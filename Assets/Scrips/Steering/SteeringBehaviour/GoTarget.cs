@@ -8,7 +8,7 @@ public class GoTarget : SteeringBehaviour
 
     public Vector3 targetPosition;
     public bool targetExists =false;
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         this.steering = new Steering(0, new Vector3(0, 0, 0));
         if (!targetExists)

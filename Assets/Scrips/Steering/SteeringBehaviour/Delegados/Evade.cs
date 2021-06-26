@@ -7,7 +7,7 @@ public class Evade : Flee
 {
 
     public float maxPrediction;
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         // Vamosa  crear un nuevo target en la posicion donde estaria nuestro target
         Vector3 direction = target.transform.position - miAgente.transform.position;

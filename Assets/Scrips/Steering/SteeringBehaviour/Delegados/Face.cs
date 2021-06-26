@@ -6,7 +6,7 @@ using System;
 public class Face : Align
 {
     // Quiero que mi agente mire hacia mi target
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         this.customRotation = (float)miAgente.MinAngleToRotate(target.gameObject);
         this.useCustom = true;

@@ -10,5 +10,5 @@ public class FilterActuator : BaseActuator
         return steering;
     }
 
-    public override Steering Act(Steering steering, AgentNPC agenteNPC) => Act(steering);
+    public override Steering Act(Steering steering, AgentNpc agenteNPC) => Act(steering);
 }

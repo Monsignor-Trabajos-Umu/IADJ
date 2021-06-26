@@ -34,7 +34,7 @@ public class LRTA : Arrive
         startNode = grid.GetNodeFromWorldPoint(transform.position);
         targetNode = grid.GetNodeFromWorldPoint(objetivo.position);
         todosLosNodos = new List<Node>();
-        foreach (var node in grid.getGrid)
+        foreach (var node in grid.GetGrid)
             if (!node.pared)
             {
                 node.hCost = heuristic.GetH(node, targetNode);
@@ -106,7 +106,7 @@ public class LRTA : Arrive
         return Vector3.Distance(nodeA.worldPosition, nodeB.worldPosition);
     }
 
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         var currentPosition = miAgente.transform.position;
         var currentNode = grid.GetNodeFromWorldPoint(currentPosition);

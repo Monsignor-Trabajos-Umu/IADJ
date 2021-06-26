@@ -9,7 +9,7 @@ public class Alignment : SteeringBehaviour
     [SerializeField]
     float threshold;
 
-    public override Steering GetSteering(AgentNPC agent)
+    public override Steering GetSteering(AgentNpc agent)
     {
         var count = 0;
         Steering steering = new Steering(0, new Vector3(0, 0, 0));

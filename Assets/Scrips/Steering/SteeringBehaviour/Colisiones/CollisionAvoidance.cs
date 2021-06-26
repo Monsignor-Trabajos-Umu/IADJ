@@ -16,7 +16,7 @@ public class CollisionAvoidance : SteeringBehaviour
         colisiones = new List<Agent>();
     }
 
-    public override Steering GetSteering(AgentNPC miAgente)
+    public override Steering GetSteering(AgentNpc miAgente)
     {
         colisiones = FindObjectsOfType<Agent>().Where(agent =>agent!= miAgente ).ToList();
 

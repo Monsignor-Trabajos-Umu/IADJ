@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tanque : AgentNPC
+public class Tanque : AgentNpc
 {
     private Euclidea heuristica;
     // Start is called before the first frame update

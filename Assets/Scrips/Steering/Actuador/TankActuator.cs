@@ -12,7 +12,7 @@ public class TankActuator : BaseActuator
 
     //steering indica el vector hacia donde esta el destino
     //direccion indica hacia donde se mira
-    public override Steering Act(Steering steering, AgentNPC agenteNPC)
+    public override Steering Act(Steering steering, AgentNpc agenteNPC)
     {
         Steering acted = new Steering(0, new Vector3(0, 0, 0));
         

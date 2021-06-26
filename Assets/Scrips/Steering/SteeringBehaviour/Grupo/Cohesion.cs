@@ -9,7 +9,7 @@ public class Cohesion : Seek
     List<Agent> targets;
     [SerializeField]
     float threshold;
-    public override Steering GetSteering(AgentNPC agent)
+    public override Steering GetSteering(AgentNpc agent)
     {
         Steering steering = new Steering(0, new Vector3(0, 0, 0));
         var count = 0;
