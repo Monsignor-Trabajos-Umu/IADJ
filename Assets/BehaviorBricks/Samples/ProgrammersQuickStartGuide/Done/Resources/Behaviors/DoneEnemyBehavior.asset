@@ -86,7 +86,7 @@ MonoBehaviour:
     <ConditionEvalNode id=\"10\" />\r\n        </nodes>\r\n      </_nodes>\r\n     
     <_selectedNode>\r\n        <ActionNode id=\"9\" />\r\n      </_selectedNode>\r\n   
     </BehaviorTree>\r\n    <RepeatDecorator id=\"1\">\r\n      <_data>\r\n       
-    <data breakpoint=\"0\" selected=\"False\" position=\"530.375 134.5\" name=\"Repeat\"
+    <data breakpoint=\"0\" selected=\"True\" position=\"530.375 134.5\" name=\"Repeat\"
     description=\"Repeats the execution of its child node\" cardinality=\"1\" hasParent=\"False\">\r\n         
     <BehaviorTree id=\"0\" />\r\n          <RepeatDecorator id=\"1\" />\r\n       
     </data>\r\n      </_data>\r\n    </RepeatDecorator>\r\n    <PrioritySelectorNode

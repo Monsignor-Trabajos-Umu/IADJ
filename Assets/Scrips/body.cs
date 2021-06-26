@@ -9,6 +9,7 @@ public class Body : MonoBehaviour
 
 
 
+
     private GameObject currentHat;
     public int daño = 2; //daño de la unidad por hit. Por defecto vale 2
     private GameObject fatherHats;
@@ -19,10 +20,10 @@ public class Body : MonoBehaviour
     public float mAngularAcceleration;
 
     // Escalar 
-    public float masa;
+    //public float masa;
     public float mRotation;
     public float mVelocity;
-    public float baseVelocity;
+    protected float baseVelocity;
     // Visual clues
     private Color originalBandColor;
     private Color originalColor;
@@ -66,7 +67,7 @@ public class Body : MonoBehaviour
         }
         catch (Exception)
         {
-            Debug.LogWarning("No hay hats ");
+            Debug.LogWarning($"{name} No hay hats ");
         }
     }
 

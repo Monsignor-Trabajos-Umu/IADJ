@@ -533,11 +533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 0
   mRotation: 90
   mVelocity: 2
   rotacion: 0
@@ -546,9 +544,11 @@ MonoBehaviour:
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 0.5
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 1
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
@@ -556,8 +556,6 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!65 &160494252
@@ -3060,11 +3058,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 0
   mRotation: 90
   mVelocity: 2
   rotacion: 0
@@ -3073,9 +3069,11 @@ MonoBehaviour:
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 0.5
   aInterior: 1
   debug: 0
+  exterior: 0
   rInterior: 3
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
@@ -3083,8 +3081,6 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!114 &853189313
@@ -5385,11 +5381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 0
   mRotation: 90
   mVelocity: 0
   rotacion: 0
@@ -5398,9 +5392,11 @@ MonoBehaviour:
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 0.5
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 1
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
@@ -5408,8 +5404,6 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!65 &1322178457
@@ -6568,11 +6562,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 0
   mRotation: 90
   mVelocity: 2
   rotacion: 0
@@ -6581,9 +6573,11 @@ MonoBehaviour:
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 0.5
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 1
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
@@ -6591,8 +6585,6 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!65 &1503490892
@@ -8333,11 +8325,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 0
   mRotation: 90
   mVelocity: 2
   rotacion: 0
@@ -8346,9 +8336,11 @@ MonoBehaviour:
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 0.5
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 1
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
@@ -8356,8 +8348,6 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!65 &1801314614
@@ -10131,11 +10121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 0
   mRotation: 90
   mVelocity: 2
   rotacion: 0
@@ -10144,9 +10132,11 @@ MonoBehaviour:
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 0.5
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 1
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
@@ -10154,8 +10144,6 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!65 &2122945416

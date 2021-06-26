@@ -14,12 +14,12 @@ public class InfluenceGrid : MonoBehaviour
     [SerializeField] private float nodeRaidus;
 
     public List<NodoI> path = new List<NodoI>();
-
     [field: SerializeField] public NodoI[,] getGrid { get; set; }
 
 
     public void Awake()
     {
+
         nodeDiameter = nodeRaidus * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSizeX / nodeDiameter);
         gridSizeZ = Mathf.RoundToInt(gridWorldSizeZ / nodeDiameter);

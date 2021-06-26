@@ -111,12 +111,12 @@ public class Controlador : MonoBehaviour
                 // Tenemos que colocar a los agentes al rededor de un punto para ello
                 // Calculamos cuanto serioa mas menos la circurferencia
                 // Todos los personajes tienen el mismo tamaño
-                var sizeBox = agentsNpc.First().GetComponent<BoxCollider>().size;
-                var agentDiameter = (sizeBox.x > sizeBox.y ? sizeBox.x : sizeBox.y) * 2;
+                var sizeBox = agentsNpc.First().RExterior;
+                var agentDiameter = sizeBox * 2;
 
 
                 // Extra a ojo para que no colicionen a los lados
-                agentDiameter *= 2;
+                agentDiameter *= 1.1;
 
                 var radio = agentDiameter * numberOfAgents / (2 * Math.PI);
                 foreach (var agente in agentsNpc.Select((value, index) =>

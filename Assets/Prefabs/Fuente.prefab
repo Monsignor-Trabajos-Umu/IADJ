@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 9582892}
   - component: {fileID: 6558578}
   - component: {fileID: 6508768}
+  - component: {fileID: -8835811862945720863}
   m_Layer: 0
-  m_Name: PumpJack
+  m_Name: Fuente
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,6 +80,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0337658, y: 3.3892279, z: 1}
   m_Center: {x: -0.5801923, y: 2.0646138, z: 0}
+--- !u!114 &-8835811862945720863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622a4388f3622aa4096f3c272c41713a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radioCuracion: 10
+  curaSeg: 0.05
 --- !u!1 &157534
 GameObject:
   m_ObjectHideFlags: 0
