@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scrips.Actions;
 using UnityEngine;
 
 public class Base : Agent
 {
+    [SerializeField] private Modo modo = Modo.Ataque;
+
     protected override void Start()
     {
         // No hay movimiento
@@ -19,6 +22,7 @@ public class Base : Agent
         alcance = 0;
         daño = 0;
 
+        Debug.Log(modo);
 
 
 

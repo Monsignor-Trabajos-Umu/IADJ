@@ -1,24 +1,31 @@
-using UnityEngine;
- 
-using Pada1.BBCore;           // Code attributes
-using Pada1.BBCore.Framework; // ConditionBase
- 
-[Condition("Nuevas/CheckMode")]
-[Help("Checks whether it is night. It searches for the first light labeled with " +
-      "the 'MainLight' tag, and looks for its DayNightCycle script, returning the" +
-      "informed state. If no light is found, false is returned.")]
-public class CheckMode : ConditionBase
+using Pada1.BBCore;
+using Pada1.BBCore.Framework;
+using UnityEngine; // Code attributes
+
+// ConditionBase
+
+
+namespace Assets.Scrips.Actions
 {
-    public override bool Check()
+    [Condition("Nuevas/CheckMode")]
+    [Help("Comprueba si el modo es de ataque o defensa")]
+    public class CheckMode : BasePrimitiveAction
     {
-        GameObject light = GameObject.FindGameObjectWithTag("MainLight");
-        if (light != null)
+        [InParam("equipo")] [Help("Tag de la base")]
+        public string equipo; //baseRojo
+
+        [OutParam("modo")] [Help("Modo de la base")]
+        public Modo modo;
+
+        public override bool Check()
         {
-            //DayNightCycle dnc = light.GetComponent<DayNightCycle>();
-            //if (dnc != null)
-            //    return dnc.isNight;
+            var objeto = GameObject.FindGameObjectWithTag(equipo);
+            if (objeto != null)
+            {
+               objeto.GetComponent<>()
+            }
+
+            return false;
         }
- 
-        return false;
-    }
-} // class IsNightCondition
+    } // class IsNightCondition
+}
