@@ -18,12 +18,35 @@ public class AStar : MonoBehaviour
         // Activamos el debug
 
         //grid.EnableDebug();
+
+        var cp = transform.position;
+        var co = cp + Vector3.right * 50;
+
+        GetPath(cp, co);
+    }
+
+    public List<Node> GetPath(Vector3 startPos, Vector3 targetPos)
+    {
+        // Calculamos el path
+        FindPath(startPos,targetPos);
+
+
+
+        return grid.path;
     }
 
     private void FindPath(Vector3 startPos, Vector3 targetPos)
     {
+        // Borramos el path anterior
+        grid.path.Clear(); 
+
+
         var startNode = grid.GetNodeFromWorldPoint(startPos);
         var targetNode = grid.GetNodeFromWorldPoint(targetPos);
+
+        Debug.Log(startNode);
+        Debug.Log(targetNode);
+
 
         var openSet = new List<Node>();
         var closedSet = new HashSet<Node>();
@@ -33,14 +56,14 @@ public class AStar : MonoBehaviour
         {
             var node = openSet[0];
             for (var i = 1; i < openSet.Count; i++)
-                if (openSet[i].fCost < node.fCost || openSet[i].fCost == node.fCost)
+                if (openSet[i].fCost < node.fCost || Mathf.Approximately(openSet[i].fCost , node.fCost))
                     if (openSet[i].hCost < node.hCost)
                         node = openSet[i];
 
             openSet.Remove(node);
             closedSet.Add(node);
 
-            if (node == targetNode)
+            if (Equals(node, targetNode))
             {
                 RetracePath(startNode, targetNode);
                 return;
@@ -69,7 +92,7 @@ public class AStar : MonoBehaviour
         var path = new List<Node>();
         var currentNode = endNode;
 
-        while (currentNode != startNode)
+        while (!Equals(currentNode, startNode))
         {
             path.Add(currentNode);
             currentNode = currentNode.parent;
@@ -80,13 +103,10 @@ public class AStar : MonoBehaviour
         grid.path = path;
     }
 
-    private int GetDistance(Node nodeA, Node nodeB)
+    private static float GetDistance(Node nodeA, Node nodeB)
     {
-        var dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
-        var dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
-
-        if (dstX > dstY)
-            return 14 * dstY + 10 * (dstX - dstY);
-        return 14 * dstX + 10 * (dstY - dstX);
+        var pA = nodeA.worldPosition;
+        var pB = nodeB.worldPosition;
+        return Vector3.Distance(pA, pB);
     }
 }
