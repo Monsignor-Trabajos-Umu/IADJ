@@ -2,10 +2,10 @@
 
 public class Manhattan : Heuristic
 {
-    public override float GetH(Node node,Node objetivo)
+    public override float GetH(CustomNode customNode,CustomNode objetivo)
     {
-        var dx = Mathf.Abs(node.gridX - objetivo.gridX);
-        var dy = Mathf.Abs(node.gridY - objetivo.gridY);
+        var dx = Mathf.Abs(customNode.gridX - objetivo.gridX);
+        var dy = Mathf.Abs(customNode.gridY - objetivo.gridY);
 
         return (float) 1 * (dx + dy);
     }

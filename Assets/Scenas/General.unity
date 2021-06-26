@@ -754,9 +754,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radio: 0
   influencia: 5
   mapa: {fileID: 589110567}
-  personaje: {fileID: 471666431}
 --- !u!114 &471666431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,61 +838,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 507646446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 422fb6956201c7944ae2113a1a53b0b8, type: 3}
+  m_Script: {fileID: 11500000, guid: bbdc14eea9651417792898b3298a5cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTasksPerTick: 500
-  behavior: {fileID: 11400000, guid: 0cc2bcda08413044bb3f1d28e3b01096, type: 2}
-  paused: 0
-  restartWhenFinished: 0
-  blackboard:
-    intParams: 
-    intParamsNames: []
-    intParamsLostDefaultValue: 
-    boolParams: 00
-    boolParamsNames: [valueA]
-    boolParamsLostDefaultValue: 
-    floatParams: []
-    floatParamsNames: []
-    floatParamsLostDefaultValue: 
-    stringParams: []
-    stringParamsNames: []
-    stringParamsLostDefaultValue: 
-    colorParams: []
-    colorParamsNames: []
-    colorParamsLostDefaultValue: 
-    objectParams: []
-    objectParamsNames: []
-    objectParamsLostDefaultValue: 
-    layerMaskParams: []
-    layerMaskParamsNames: []
-    layerMaskParamsLostDefaultValue: 
-    enumParamsNames: []
-    enumParamsLostDefaultValue: 
-    vector2Params: []
-    vector2ParamsNames: []
-    vector2ParamsLostDefaultValue: 
-    vector3Params: []
-    vector3ParamsNames: []
-    vector3ParamsLostDefaultValue: 
-    vector4Params: []
-    vector4ParamsNames: []
-    vector4ParamsLostDefaultValue: 
-    rectParams: []
-    rectParamsNames: []
-    rectParamsLostDefaultValue: 
-    animationCurveParams: []
-    animationCurveParamsNames: []
-    animationCurveParamsLostDefaultValue: 
-    boundsParams: []
-    boundsParamsNames: []
-    boundsParamsLostDefaultValue: 
-    gradientParams: []
-    gradientParamsNames: []
-    gradientParamsLostDefaultValue: 
-    quaternionParams: []
-    quaternionParamsNames: []
-    quaternionParamsLostDefaultValue: 
+  root:
+    id: 0
+  updateType: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Root, ns: UniBT, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        description: 
+        child:
+          id: 1
+    00000001:
+      type: {class: , ns: , asm: }
 --- !u!114 &507646449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,9 +872,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radio: 0
   influencia: -2
   mapa: {fileID: 589110567}
-  personaje: {fileID: 507646451}
 --- !u!114 &507646450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,9 +1202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radio: 0
   influencia: -5
   mapa: {fileID: 589110567}
-  personaje: {fileID: 576995633}
 --- !u!114 &576995633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1267,6 +1234,7 @@ MonoBehaviour:
   debug: 1
   exterior: 1
   rInterior: 2
+  modo: 0
 --- !u!1 &589110566
 GameObject:
   m_ObjectHideFlags: 0

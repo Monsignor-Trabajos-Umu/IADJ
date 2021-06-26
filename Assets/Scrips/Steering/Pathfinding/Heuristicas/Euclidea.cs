@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Euclidea : Heuristic
 {
-    public override float GetH(Node node,Node objetivo)
+    public override float GetH(CustomNode customNode,CustomNode objetivo)
     {
-        return Vector3.Distance(node.worldPosition, objetivo.worldPosition);
+        return Vector3.Distance(customNode.worldPosition, objetivo.worldPosition);
     }
 }

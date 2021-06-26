@@ -7,19 +7,19 @@ public class Pathfinding : MonoBehaviour
     [SerializeField] private GridChungo grid;
 
     [SerializeField] private Heuristic heuristic;
-    private Node startNode;
+    private CustomNode startCustomNode;
 
     [SerializeField] private Transform target;
-    private Node targetNode;
+    private CustomNode targetCustomNode;
 
-    private List<Node> todosLosNodos;
+    private List<CustomNode> todosLosNodos;
 
     private void Awake()
     {
-        startNode = grid.GetNodeFromWorldPoint(transform.position);
-        targetNode = grid.GetNodeFromWorldPoint(target.position);
+        startCustomNode = grid.GetNodeFromWorldPoint(transform.position);
+        targetCustomNode = grid.GetNodeFromWorldPoint(target.position);
         Debug.Log("Transfrom pathfinding" + transform.position);
-        todosLosNodos = new List<Node>();
+        todosLosNodos = new List<CustomNode>();
     }
 
 
@@ -28,13 +28,13 @@ public class Pathfinding : MonoBehaviour
         foreach (var node in grid.getGrid)
             if (!node.pared)
             {
-                node.hCost = heuristic.GetH(node, targetNode);
+                node.hCost = heuristic.GetH(node, targetCustomNode);
                 todosLosNodos.Add(node);
             }
 
         Debug.Log("Numero nodos ->" + todosLosNodos.Count);
-        Debug.Log("Nodo Entrada ->" + startNode);
-        Debug.Log("Nodo salida ->" + targetNode);
+        Debug.Log("Nodo Entrada ->" + startCustomNode);
+        Debug.Log("Nodo salida ->" + targetCustomNode);
         CalculatePath();
     }
 
@@ -42,15 +42,15 @@ public class Pathfinding : MonoBehaviour
     private void CalculatePath()
     {
         //Avanzo al primer nodo
-        var nodoActual = startNode;
-        Debug.Log("Avanzo a  ->" + startNode);
+        var nodoActual = startCustomNode;
+        Debug.Log("Avanzo a  ->" + startCustomNode);
         grid.path.Add(nodoActual);
-        todosLosNodos.Remove(startNode);
+        todosLosNodos.Remove(startCustomNode);
 
         // Flag por si tarda mucho
         var count = 0;
         //Mientras que queden nodos en el open
-        while (nodoActual != targetNode )
+        while (nodoActual != targetCustomNode )
         {
             count++;
             // Cogemos los vecinos
@@ -79,8 +79,8 @@ public class Pathfinding : MonoBehaviour
      * --------------------------------------------------
      * Tambien podemos obtener su transfor y usar vector3Distance
      */
-    private float GetDistance(Node nodeA, Node nodeB)
+    private float GetDistance(CustomNode customNodeA, CustomNode customNodeB)
     {
-        return Vector3.Distance(nodeA.worldPosition, nodeB.worldPosition);
+        return Vector3.Distance(customNodeA.worldPosition, customNodeB.worldPosition);
     }
 }

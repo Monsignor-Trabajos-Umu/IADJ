@@ -15,10 +15,10 @@ public class GridChungo : MonoBehaviour
     [SerializeField] private LayerMask paredesLayerMask;
 
 
-    public List<Node> path = new List<Node>();
+    public List<CustomNode> path = new List<CustomNode>();
 
     //Uso un array en vez de una lista porque es mas rapido buscar
-    [field: SerializeField] public Node[,] getGrid { get; set; }
+    [field: SerializeField] public CustomNode[,] getGrid { get; set; }
 
     [SerializeField] private bool debug;
 
@@ -36,7 +36,7 @@ public class GridChungo : MonoBehaviour
     private void CreateGrid()
     {
         // Creamos el array de Nodes
-        this.getGrid = new Node[gridSizeX, gridSizeZ];
+        this.getGrid = new CustomNode[gridSizeX, gridSizeZ];
         var pInicial = transform.position - Vector3.right * gridWorldSizeX / 2 -
                        Vector3.forward * gridWorldSizeZ / 2;
 
@@ -60,12 +60,12 @@ public class GridChungo : MonoBehaviour
             {
                 pared = Physics.CheckSphere(worldPoint, nodeRaidus, paredesLayerMask);
             }
-            this.getGrid[x, z] = new Node(pared, worldPoint, x, z);
+            this.getGrid[x, z] = new CustomNode(pared, worldPoint, x, z);
         }
     }
 
     //Obtenemos nodo a partir de un vector posicion
-    public Node GetNodeFromWorldPoint(Vector3 worldPosition)
+    public CustomNode GetNodeFromWorldPoint(Vector3 worldPosition)
     {
         // Le sumo la mitad por si es negativo
         var pX = (worldPosition.x + gridWorldSizeX / 2) / gridWorldSizeX;
@@ -78,21 +78,21 @@ public class GridChungo : MonoBehaviour
         return getGrid[x, z];
     }
 
-    public Vector3 GetWorldPointFromNode(Node nodo)
+    public Vector3 GetWorldPointFromNode(CustomNode nodo)
     {
         return nodo.worldPosition;
     }
 
-    public List<Node> GetNeigbours(Node node)
+    public List<CustomNode> GetNeigbours(CustomNode customNode)
     {
-        var neightBours = new List<Node>();
+        var neightBours = new List<CustomNode>();
         for (var x = -1; x <= 1; x++)
             for (var z = -1; z <= 1; z++)
             {
                 if (x == 0 && z == 0) continue;
                 // pNeigboursX/Z son las posiciones en el grid de los nodos
-                var pNeigboursX = node.gridX + x;
-                var pNeigboursZ = node.gridY + z;
+                var pNeigboursX = customNode.gridX + x;
+                var pNeigboursZ = customNode.gridY + z;
                 // Ahora hay que comprobar que esos nodos existen
                 // Es decir que estan dentro del grid
                 if (pNeigboursX >= 0 && pNeigboursX < gridSizeX &&
