@@ -33,6 +33,17 @@ public class InfluenceMap
         }
     }
 
+    public void SetInfluence(NodoI nodo, int value,int radio)
+    {
+        // Ponemos el central
+        SetInfluence(nodo, value);
+        // Influimos a los que estan al rededor
+        var vecinos = grid.GetNeighbors(nodo,radio);
+        vecinos.ForEach(i => SetInfluence(i, value));
+        
+
+    }
+
     public void SetInfluence(int x, int y, int value)
     {
         if (x < ancho && y < alto)
@@ -48,18 +59,23 @@ public class InfluenceMap
 
     public void Propagate()
     {
-        UpdatePropagators();
-        UpdatePropagation();
+        UpdatePropagators(); //Casilla y area donde estoy
+        UpdatePropagation(); // Propaga en cruz
     }
 
+    // Propaga en una area alrededor
     void UpdatePropagators()
     {
         foreach (IPropagator p in propagadores)
         {
-            SetInfluence(p.GridPosition, p.Value);
+            SetInfluence(p.GridPosition, p.Value,p.Radio);
+
+            // Ponemos la influencia en un area al 
+
         }
     }
 
+    // Propaga en cruz
     void UpdatePropagation()
     {
         NodoI bottomRight = grid.getBottomRight();

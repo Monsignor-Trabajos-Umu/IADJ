@@ -9,7 +9,7 @@ public class MassSpawner : MonoBehaviour
 {
     ///<value>The gameobject that will be respawned</value>
     public GameObject prefab;
-    ///<value>Area where the Gameobjects will move</value>
+    ///<value>Radio where the Gameobjects will move</value>
     public GameObject wanderArea;
 
     ///<value>Times that The GameObject spawn</value>

@@ -35,16 +35,18 @@ MonoBehaviour:
     id=\"5\" />\r\n            </child>\r\n          </GuardAndNode>\r\n        </elem>\r\n     
     </children>\r\n      <inputParams />\r\n      <outputParams />\r\n      <localParams
     />\r\n    </PrioritySelectorNode>\r\n    <ConditionEvalNode id=\"7\" policy=\"ATOMIC_CHECK\"
-    name=\"Basic/CheckMouseButton\">\r\n      <inputParams />\r\n      <outputParams
-    />\r\n      <localParams />\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"3\"
-    action=\"Physics/FromMouseToWorld\">\r\n      <inputParams>\r\n        <inputValues>\r\n         
-    <entry name=\"camera\" type=\"UnityEngine.Camera\" isBlackboard=\"True\" blackboard=\"camera\"
-    />\r\n          <entry name=\"mask\" type=\"UnityEngine.LayerMask\" isBlackboard=\"True\"
-    blackboard=\"mask\" />\r\n        </inputValues>\r\n      </inputParams>\r\n     
-    <outputParams>\r\n        <outputValues>\r\n          <entry name=\"selectedPosition\"
-    type=\"UnityEngine.Vector3\" isBlackboard=\"True\" blackboard=\"selectedPosition\"
-    />\r\n        </outputValues>\r\n      </outputParams>\r\n      <localParams
-    />\r\n    </ActionNode>\r\n    <ConditionEvalNode id=\"8\" policy=\"ATOMIC_CHECK\"
+    name=\"Basic/CheckMouseButton\">\r\n      <inputParams>\r\n        <inputValues>\r\n         
+    <entry name=\"button\" type=\"BBCore.Conditions.CheckMouseButton+MouseButton\"
+    isBlackboard=\"False\" value=\"left\" />\r\n        </inputValues>\r\n      </inputParams>\r\n     
+    <outputParams />\r\n      <localParams />\r\n    </ConditionEvalNode>\r\n   
+    <ActionNode id=\"3\" action=\"Physics/FromMouseToWorld\">\r\n      <inputParams>\r\n       
+    <inputValues>\r\n          <entry name=\"camera\" type=\"UnityEngine.Camera\"
+    isBlackboard=\"True\" blackboard=\"camera\" />\r\n          <entry name=\"mask\"
+    type=\"UnityEngine.LayerMask\" isBlackboard=\"True\" blackboard=\"mask\" />\r\n       
+    </inputValues>\r\n      </inputParams>\r\n      <outputParams>\r\n        <outputValues>\r\n         
+    <entry name=\"selectedPosition\" type=\"UnityEngine.Vector3\" isBlackboard=\"True\"
+    blackboard=\"selectedPosition\" />\r\n        </outputValues>\r\n      </outputParams>\r\n     
+    <localParams />\r\n    </ActionNode>\r\n    <ConditionEvalNode id=\"8\" policy=\"ATOMIC_CHECK\"
     name=\"AlwaysTrue\">\r\n      <inputParams />\r\n      <outputParams />\r\n     
     <localParams />\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"5\" action=\"Navigation/MoveToPosition\">\r\n     
     <inputParams>\r\n        <inputValues>\r\n          <entry name=\"target\" type=\"UnityEngine.Vector3\"
