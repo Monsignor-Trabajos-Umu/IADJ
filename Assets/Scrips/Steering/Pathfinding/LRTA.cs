@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scrips.Steering.Pathfinding;
 using UnityEngine;
 
 public class LRTA : Arrive
@@ -12,51 +13,51 @@ public class LRTA : Arrive
 
     [SerializeField] private Transform objetivo;
 
-    private CustomNode startCustomNode;
-    private CustomNode targetCustomNode;
+    private Node startNode;
+    private Node targetNode;
 
 
-    private CustomNode tempObjetive;
+    private Node tempObjetive;
 
-    private List<CustomNode> todosLosNodos;
-
-    private void Awake()
-    {
-        startCustomNode = grid.GetNodeFromWorldPoint(transform.position);
-        targetCustomNode = grid.GetNodeFromWorldPoint(objetivo.position);
-        Debug.Log("Inicio LRTA:" + transform.position);
-        todosLosNodos = new List<CustomNode>();
-    }
+    private List<Node> todosLosNodos;
 
 
     private void Start()
     {
-        startCustomNode = grid.GetNodeFromWorldPoint(transform.position);
-        targetCustomNode = grid.GetNodeFromWorldPoint(objetivo.position);
-        todosLosNodos = new List<CustomNode>();
+        //Awake ^^
+        startNode = grid.GetNodeFromWorldPoint(transform.position);
+        targetNode = grid.GetNodeFromWorldPoint(objetivo.position);
+        Debug.Log("Inicio LRTA:" + transform.position);
+        todosLosNodos = new List<Node>();
+
+
+        startNode = grid.GetNodeFromWorldPoint(transform.position);
+        targetNode = grid.GetNodeFromWorldPoint(objetivo.position);
+        todosLosNodos = new List<Node>();
         foreach (var node in grid.getGrid)
             if (!node.pared)
             {
-                node.hCost = heuristic.GetH(node, targetCustomNode);
+                node.hCost = heuristic.GetH(node, targetNode);
                 todosLosNodos.Add(node);
             }
 
         Debug.Log("Numero nodos ->" + todosLosNodos.Count);
-        Debug.Log("Nodo Entrada ->" + startCustomNode);
-        Debug.Log("Nodo salida ->" + targetCustomNode);
+        Debug.Log("Nodo Entrada ->" + startNode);
+        Debug.Log("Nodo salida ->" + targetNode);
 
         // Start values
         useCustom = true;
         atFinalTarget = false;
+
     }
 
-    private bool AtNode(Vector3 aPosition, CustomNode oCustomNode, double error)
+    private bool AtNode(Vector3 aPosition, Node oNode, double error)
     {
         var aNode = grid.GetNodeFromWorldPoint(aPosition);
         // Si el nodo es el mismo d
-        if (aNode.Equals(oCustomNode)) return true;
+        if (aNode.Equals(oNode)) return true;
         // Si estamos en el margen error
-        return (oCustomNode.worldPosition - aPosition).magnitude < error;
+        return (oNode.worldPosition - aPosition).magnitude < error;
     }
 
 
@@ -66,18 +67,18 @@ public class LRTA : Arrive
         if (atFinalTarget) return true;
         
         // Si mi actual es mi objetivo ya hemos llegado
-        atFinalTarget = AtNode(aPosition, targetCustomNode, error);
+        atFinalTarget = AtNode(aPosition, targetNode, error);
         return atFinalTarget;
     }
 
 
-    private CustomNode CalculatePathToTargetNode(CustomNode actual)
+    private Node CalculatePathToTargetNode(Node actual)
     {
         //Avanzo al primer nodo
 
 
         grid.path.Add(actual);
-        // Pudo revisitar un nodo ya visitado todosLosNodos.Remove(startCustomNode);
+        // Pudo revisitar un nodo ya visitado todosLosNodos.Remove(startNode);
         //Mientras que queden nodos en el open
         var neigbours = grid.GetNeigbours(actual);
         // Actualizamos el gCost de los vecinos
@@ -100,9 +101,9 @@ public class LRTA : Arrive
      * --------------------------------------------------
      * Tambien podemos obtener su transfor y usar vector3Distance
      */
-    private float GetDistance(CustomNode customNodeA, CustomNode customNodeB)
+    private float GetDistance(Node nodeA, Node nodeB)
     {
-        return Vector3.Distance(customNodeA.worldPosition, customNodeB.worldPosition);
+        return Vector3.Distance(nodeA.worldPosition, nodeB.worldPosition);
     }
 
     public override Steering GetSteering(AgentNPC miAgente)

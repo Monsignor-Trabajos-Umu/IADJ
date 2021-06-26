@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets.Scrips.Steering.Pathfinding;
 using UnityEngine;
 public class Pathfinding : MonoBehaviour
 {
@@ -7,19 +8,19 @@ public class Pathfinding : MonoBehaviour
     [SerializeField] private GridChungo grid;
 
     [SerializeField] private Heuristic heuristic;
-    private CustomNode startCustomNode;
+    private Node startNode;
 
     [SerializeField] private Transform target;
-    private CustomNode targetCustomNode;
+    private Node targetNode;
 
-    private List<CustomNode> todosLosNodos;
+    private List<Node> todosLosNodos;
 
     private void Awake()
     {
-        startCustomNode = grid.GetNodeFromWorldPoint(transform.position);
-        targetCustomNode = grid.GetNodeFromWorldPoint(target.position);
+        startNode = grid.GetNodeFromWorldPoint(transform.position);
+        targetNode = grid.GetNodeFromWorldPoint(target.position);
         Debug.Log("Transfrom pathfinding" + transform.position);
-        todosLosNodos = new List<CustomNode>();
+        todosLosNodos = new List<Node>();
     }
 
 
@@ -28,13 +29,13 @@ public class Pathfinding : MonoBehaviour
         foreach (var node in grid.getGrid)
             if (!node.pared)
             {
-                node.hCost = heuristic.GetH(node, targetCustomNode);
+                node.hCost = heuristic.GetH(node, targetNode);
                 todosLosNodos.Add(node);
             }
 
         Debug.Log("Numero nodos ->" + todosLosNodos.Count);
-        Debug.Log("Nodo Entrada ->" + startCustomNode);
-        Debug.Log("Nodo salida ->" + targetCustomNode);
+        Debug.Log("Nodo Entrada ->" + startNode);
+        Debug.Log("Nodo salida ->" + targetNode);
         CalculatePath();
     }
 
@@ -42,15 +43,15 @@ public class Pathfinding : MonoBehaviour
     private void CalculatePath()
     {
         //Avanzo al primer nodo
-        var nodoActual = startCustomNode;
-        Debug.Log("Avanzo a  ->" + startCustomNode);
+        var nodoActual = startNode;
+        Debug.Log("Avanzo a  ->" + startNode);
         grid.path.Add(nodoActual);
-        todosLosNodos.Remove(startCustomNode);
+        todosLosNodos.Remove(startNode);
 
         // Flag por si tarda mucho
         var count = 0;
         //Mientras que queden nodos en el open
-        while (nodoActual != targetCustomNode )
+        while (nodoActual != targetNode )
         {
             count++;
             // Cogemos los vecinos
@@ -79,8 +80,8 @@ public class Pathfinding : MonoBehaviour
      * --------------------------------------------------
      * Tambien podemos obtener su transfor y usar vector3Distance
      */
-    private float GetDistance(CustomNode customNodeA, CustomNode customNodeB)
+    private float GetDistance(Node nodeA, Node nodeB)
     {
-        return Vector3.Distance(customNodeA.worldPosition, customNodeB.worldPosition);
+        return Vector3.Distance(nodeA.worldPosition, nodeB.worldPosition);
     }
 }
