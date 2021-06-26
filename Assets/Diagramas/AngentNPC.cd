@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Body">
+    <Position X="0.5" Y="6.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AARAMAABBiAAoFBCBAAIIGAAAAAQACAAokgBADQAVCE=</HashCode>
+      <FileName>Assets\Scrips\body.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AgentNPC">
+    <Position X="7.5" Y="11" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAYNOIAgACECJAKCBAAAIAgAQgCAAKREJACAAyEAQgU=</HashCode>
+      <FileName>Assets\Scrips\AgentNPC.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="actuator" />
+      <Field Name="arbitro" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Agent">
+    <Position X="5.5" Y="7" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIEAUAAAAAAECAAEACAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Agent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Arquero">
+    <Position X="8.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAIAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Arquero.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="heuristica" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Soldado">
+    <Position X="10.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAIAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Soldado.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="heuristica" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Tanque">
+    <Position X="13" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAIAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Tanque.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="heuristica" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AgentPlayer">
+    <Position X="4.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\Scrips\AgentPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseActuator">
+    <Position X="11.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Actuador\BaseActuator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FilterActuator">
+    <Position X="9.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Actuador\FilterActuator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TankActuator">
+    <Position X="11.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Actuador\TankActuator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArbitroSteering">
+    <Position X="3.75" Y="12.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BAAEAQCAEAAABQCABECBAMAAAACCAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Arbitros\ArbitroSteering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlenderSteering">
+    <Position X="2.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAgAAAACAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Arbitros\BlenderSteering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrioritySteering">
+    <Position X="4.75" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAABBAAAAAAAAEAAIAEAAAASAAQAAAAAAEAAEEA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Arbitros\PrioritySteering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chebychev" Collapsed="true">
+    <Position X="8.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Pathfinding\Heuristicas\Chebychev.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Manhattan" Collapsed="true">
+    <Position X="10.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Pathfinding\Heuristicas\Manhattan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Euclidea" Collapsed="true">
+    <Position X="12.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Pathfinding\Heuristicas\Euclidea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Heuristic">
+    <Position X="10.5" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Pathfinding\Heuristicas\Heuristic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

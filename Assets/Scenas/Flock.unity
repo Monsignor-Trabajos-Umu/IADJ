@@ -1005,11 +1005,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &101228881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,33 +1149,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 101228886}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &101228888
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4611,11 +4611,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &662022059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4755,33 +4755,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 662022064}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &662022066
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5008,11 +5008,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &671713849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5152,33 +5152,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 671713854}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &671713856
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7895,7 +7895,6 @@ GameObject:
   - component: {fileID: 962575090}
   - component: {fileID: 962575089}
   - component: {fileID: 962575083}
-  - component: {fileID: 962575091}
   m_Layer: 8
   m_Name: Wander
   m_TagString: Untagged
@@ -7915,33 +7914,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 3
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
-  arbitro: {fileID: 962575090}
+  actuator: {fileID: 0}
+  arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!114 &962575083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7951,21 +7950,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 962575081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 683af856a1c44204fa06f17dcf24589b, type: 3}
+  m_Script: {fileID: 11500000, guid: 09415c6f76274fd4094fd2054db7de3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  steeringGroup: 2
+  steeringGroup: 0
   target: {fileID: 0}
-  useReferee: 0
-  weight: 5
-  avoidDistance: 10
-  leftWhiskerSize: 0
-  midWhiskerSize: 0
-  rightWhiskerSize: 0
+  useReferee: 1
+  weight: 1
+  avoidDistance: 3.7
+  leftWhiskerSize: 10
+  rightWhiskerSize: 10
+  angle: 15
 --- !u!65 &962575084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8086,7 +8085,7 @@ MonoBehaviour:
   weight: 1
   wanderRate: 90
   wanderOrientation: 0
-  wanderStep: 9.7
+  wanderStep: 16.2
   wanderWait: 6.7
 --- !u!114 &962575090
 MonoBehaviour:
@@ -8097,7 +8096,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 962575081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
+  m_Script: {fileID: 11500000, guid: d6f417490d9f441458d4b3db139add8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
@@ -8105,27 +8104,11 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringList: []
-  behaviors: []
-  weightFormationOffset: 0
---- !u!114 &962575091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962575081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  steeringList: []
-  behaviors: []
-  weightFormationOffset: 0
+  collisionList: []
+  distanceList: []
+  formationList: []
+  ordenMayor: 0
+  pursuitList: []
 --- !u!1 &964283455
 GameObject:
   m_ObjectHideFlags: 0
@@ -9322,11 +9305,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &1141236128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9466,33 +9449,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 1141236133}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1141236135
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9600,6 +9583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
 --- !u!4 &1146793659
 Transform:
   m_ObjectHideFlags: 0
@@ -9977,8 +9961,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508ae6a032c4040428713e84629b1e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 962575082}
-  SmoothFactor: 0.5
+  border: 0
+  mouse: 0
+  speed: 5
 --- !u!114 &1163767612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10052,7 +10037,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 81
+  field of view: 111.4
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -10077,13 +10062,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163767610}
-  m_LocalRotation: {x: 0.70704234, y: 0.009545748, z: -0.009545748, w: 0.70704234}
-  m_LocalPosition: {x: 51.3, y: 24.1, z: 50.8}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 50, y: 30, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 90, y: 1.547, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1180740111
 GameObject:
   m_ObjectHideFlags: 0
@@ -14018,11 +14003,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &1598824908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14162,33 +14147,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 1598824913}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1598824915
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15437,11 +15422,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &1735347864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15494,33 +15479,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 1735347865}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1735347867
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16963,11 +16948,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &1927042969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17107,33 +17092,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 1927042974}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1927042976
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17560,11 +17545,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &1986607931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17704,33 +17689,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 1986607936}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1986607938
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18330,11 +18315,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &2057972042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18474,33 +18459,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 2057972047}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &2057972049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18727,11 +18712,11 @@ MonoBehaviour:
   steeringGroup: 0
   target: {fileID: 0}
   useReferee: 1
-  weight: 2
-  avoidDistance: 5
+  weight: 10
+  avoidDistance: 7
   leftWhiskerSize: 5
   rightWhiskerSize: 5
-  range: 45
+  angle: 10
 --- !u!114 &2090229424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18871,33 +18856,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
   masa: 0
   mRotation: 90
   mVelocity: 3
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 25
   aInterior: 0.5
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 2090229429}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &2090229431
 BoxCollider:
   m_ObjectHideFlags: 0

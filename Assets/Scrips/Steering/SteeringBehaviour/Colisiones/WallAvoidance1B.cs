@@ -5,11 +5,12 @@ using System;
 
 public class WallAvoidance1B : Seek
 {
-
     // Distancia minima a la pared
-    public float avoidDistance;
+    [SerializeField, Range(0,20)] private float avoidDistance=0;
+
     // Distancia del rayo
-    public float lookAhead;
+    [SerializeField, Range(1,40)]  private float lookAhead=1;
+    
 
     public override Steering GetSteering(AgentNPC miAgente)
     {
@@ -18,8 +19,8 @@ public class WallAvoidance1B : Seek
         Vector3 rayVector = miAgente.vVelocidad;
         rayVector = rayVector.normalized;
         rayVector *= lookAhead;
-
-        Debug.DrawRay(miAgente.transform.position, Quaternion.AngleAxis(30, Vector3.up) * (rayVector.normalized * lookAhead), Color.blue);
+        if(debug)
+            Debug.DrawRay(miAgente.transform.position,  (rayVector.normalized * lookAhead), Color.yellow);
         RaycastHit hit;
         //Debug.DrawRay(miAgente.transform.position, rayVector, Color.blue);
         if (Physics.Raycast(miAgente.transform.position, rayVector, out hit, lookAhead))
@@ -31,8 +32,12 @@ public class WallAvoidance1B : Seek
             this.predictedPosition = hit.point + normalPared * avoidDistance;
             this.usePredicted = true;
             */
-            Debug.DrawLine(miAgente.transform.position, hit.point, Color.red);
-            Debug.DrawRay(hit.point, hit.normal * avoidDistance, Color.green);
+            if (debug)
+            {
+                Debug.DrawLine(miAgente.transform.position, hit.point, Color.red);
+                Debug.DrawRay(hit.point, hit.normal * avoidDistance, Color.green);
+            }
+          
 
             steering = base.GetSteering(miAgente);
 

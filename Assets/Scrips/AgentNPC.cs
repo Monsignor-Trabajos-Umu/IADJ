@@ -6,7 +6,7 @@ public class AgentNPC : Agent
 {
     // Actuadores
 
-    [SerializeField] private BaseActuator actuator;
+    [SerializeField] protected BaseActuator actuator;
 
     // Steerings
     [SerializeField] private ArbitroSteering arbitro; // Asigna mis steerings.
@@ -143,6 +143,7 @@ public class AgentNPC : Agent
      */
     protected override void OnDrawGizmos()
     {
+        base.OnDrawGizmos();
         if (!debug) return;
         //Pintamos el vector de acceleracion
         Gizmos.color = Color.green;

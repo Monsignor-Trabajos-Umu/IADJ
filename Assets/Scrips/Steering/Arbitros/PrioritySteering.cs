@@ -20,7 +20,8 @@ public class PrioritySteering : ArbitroSteering
      *  - Pursuit
      *  - Distance
      *
-     *
+     *  Calcula el blender steering de cada bloque y luego elige uno por prioridad siendo Collision el preferido
+     *  Si el flag de ordenMayor esta activado se voltea la lista
     */
     private const double Epsilon = 0.05;
 
@@ -37,14 +38,9 @@ public class PrioritySteering : ArbitroSteering
     [SerializeField] private List<SteeringBehaviour> pursuitList;
 
 
-    [SerializeField] private SteeringGroup steeringGroupFormationOffset; // Deberia ser Formation
-
     protected override void Awake()
     {
         base.Awake();
-
-        formationOffset.steeringGroup = steeringGroupFormationOffset;
-
 
         //Lista de Steering
         groupDict = new Dictionary<SteeringGroup, Steering>();

@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class WallAvoidance2B : Seek
 {
-    // Distancia minima a la pared
-    public float avoidDistance;
+    // Distancia que nos queremos separar de la pared
+    [SerializeField, Range(0,20)] private float avoidDistance=0;
 
     // Distancia del rayo
-    [SerializeField] private float leftWhiskerSize;
-    [SerializeField] private float rightWhiskerSize;
-    [SerializeField, Range(10,90)] private float range;
+    [SerializeField, Range(1,40)]  private float leftWhiskerSize=1;
+    [SerializeField, Range(1,40)]  private float rightWhiskerSize=1;
+    [SerializeField, Range(10,90)] private float angle=10;
 
     private void Start()
     {
@@ -22,8 +22,8 @@ public class WallAvoidance2B : Seek
         var miAgentePosition = miAgente.transform.position;
         var rayVector = miAgente.vVelocidad.normalized;
 
-        var leftVector = Quaternion.AngleAxis(-range, Vector3.up) * rayVector * leftWhiskerSize;
-        var rightVector = Quaternion.AngleAxis(range, Vector3.up) * rayVector * rightWhiskerSize;
+        var leftVector = Quaternion.AngleAxis(-angle, Vector3.up) * rayVector * leftWhiskerSize;
+        var rightVector = Quaternion.AngleAxis(angle, Vector3.up) * rayVector * rightWhiskerSize;
 
         var leftWhiskerHit = Physics.Raycast(miAgentePosition, leftVector,
             out var leftHit, leftWhiskerSize);
@@ -41,32 +41,65 @@ public class WallAvoidance2B : Seek
                 Color.yellow);
         }
 
-        var newTargetPoint = new Vector3(0, 0, 0);
-        var hitPoint = new Vector3(0, 0, 0);
 
-        var localTarget = new Vector3(0, 0, 0);
+        // No hay hit no hacemos nada
+        if (!leftWhiskerHit && !rightWhiskerHit)
+            return steering;
 
-        if (leftWhiskerHit)
+
+        Vector3 newTargetPoint;
+
+
+        switch (leftWhiskerHit)
         {
-            hitPoint = leftHit.point;
-            newTargetPoint = leftHit.point + leftHit.normal * avoidDistance;
-        }else
-        {
-            if (!rightWhiskerHit)
-                return steering;
-            hitPoint = rightHit.point;
-            newTargetPoint = rightHit.point + rightHit.normal * avoidDistance;
+            // Los dos hacen hit cogemos el punto medio
+            case true when rightWhiskerHit:
+            {
+                var leftPoint = leftHit.point + leftHit.normal * avoidDistance;
+                var rightPoint = rightHit.point + rightHit.normal * avoidDistance;
+                newTargetPoint = (leftPoint + rightPoint) / 2;
+                if (debug)
+                {
+                    // Hit a la paredes
+                    Debug.DrawLine(miAgentePosition, leftHit.point, Color.red);
+                    Debug.DrawLine(miAgentePosition, rightHit.point, Color.red);
+                    
+                    Debug.DrawLine(leftHit.point, newTargetPoint, Color.green);
+                    Debug.DrawLine(rightHit.point, newTargetPoint, Color.green); 
+
+                }
+
+                break;
+            }
+            // Si solo lo hace el izquierdo
+            case true:
+                newTargetPoint = leftHit.point + leftHit.normal * avoidDistance;
+                if (debug)
+                {
+                    // Hit a la Izquierdo
+                    Debug.DrawLine(miAgentePosition, leftHit.point, Color.red);
+                    Debug.DrawLine(leftHit.point, newTargetPoint, Color.green);
+
+                }
+
+                break;
+            // Lo haze el derecho
+            default:
+                newTargetPoint = rightHit.point + rightHit.normal * avoidDistance;
+                if (debug)
+                {
+                    // Hit a la Izquierdo
+                    Debug.DrawLine(miAgentePosition, rightHit.point, Color.red);
+                    Debug.DrawLine(rightHit.point, newTargetPoint, Color.green);
+
+                }
+                break;
         }
 
         UseCustomDirectionAndRotation(newTargetPoint - miAgentePosition);
 
         steering = base.GetSteering(miAgente);
-        if (debug && (leftWhiskerHit || rightWhiskerHit))
-        {
-            // Si hay hit 
-            Debug.DrawLine(hitPoint, newTargetPoint, Color.red); // Hit a la pared
-            Debug.DrawLine(miAgentePosition, hitPoint, Color.green);
-        }
+
 
         return steering;
     }

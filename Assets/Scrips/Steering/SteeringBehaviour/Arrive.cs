@@ -18,9 +18,11 @@ public class Arrive : SteeringBehaviour
         float maxAccelerarion = miAgente.mAcceleration;
         float maxSpeed = miAgente.mVelocity;
 
-        // Radio para llegar al objetivo
-        float targetRadius = (float)miAgente.rInterior;
-        float slowRadius = (float)miAgente.RExterior;
+        // El radio /hitbox de nuestro objetivo mas el nuestro 
+        float targetRadius = (float) (target.rInterior + miAgente.rInterior);
+
+        // La distancia que tenemos que empezar a reducir para no chocarnos
+        float slowRadius = (float) (target.RExterior + miAgente.RExterior);
 
         float timeToTarget = Time.deltaTime;
 

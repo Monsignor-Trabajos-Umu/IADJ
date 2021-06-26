@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class Body : MonoBehaviour
 {
-    public int
-        alcance = 1; //Max de casillas de distancia para golpear. Por defecto vale 1
+    
+    // Propiedades fisicas
+    protected int alcance = 1; //Max de casillas de distancia para golpear. Por defecto vale 1
+
+
 
     private GameObject currentHat;
     public int daño = 2; //daño de la unidad por hit. Por defecto vale 2
@@ -184,6 +187,9 @@ public class Body : MonoBehaviour
         return angle;
     }
 
+    /*
+     *
+     */
     public double MinAngleToRotate(Vector3 pObjeto)
     {
         //Transform.position hace referencia al objeto que lo llama

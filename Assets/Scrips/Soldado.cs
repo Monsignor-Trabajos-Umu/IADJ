@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Soldado : AgentNPC
 {
-    public Manhattan heuristica = new Manhattan();
+    private Manhattan heuristica;
     // Start is called before the first frame update
 
     protected override void Start()
@@ -13,6 +13,7 @@ public class Soldado : AgentNPC
         vida = 100;
         alcance = 1;
         daño = 20;
+        heuristica = new Manhattan();
     }
 
     public Heuristic GetHeuristic() => heuristica;
