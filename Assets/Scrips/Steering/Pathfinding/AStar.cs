@@ -19,16 +19,16 @@ public class AStar : MonoBehaviour
 
     void FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        Node startNode = grid.GetNodeFromWorldPoint(startPos);
-        Node targetNode = grid.GetNodeFromWorldPoint(targetPos);
+        CustomNode startNode = grid.GetNodeFromWorldPoint(startPos);
+        CustomNode targetNode = grid.GetNodeFromWorldPoint(targetPos);
 
-        List<Node> openSet = new List<Node>();
-        HashSet<Node> closedSet = new HashSet<Node>();
+        List<CustomNode> openSet = new List<CustomNode>();
+        HashSet<CustomNode> closedSet = new HashSet<CustomNode>();
         openSet.Add(startNode);
 
         while (openSet.Count > 0)
         {
-            Node node = openSet[0];
+            CustomNode node = openSet[0];
             for (int i = 1; i < openSet.Count; i++)
             {
                 if (openSet[i].fCost < node.fCost || openSet[i].fCost == node.fCost)
@@ -47,14 +47,14 @@ public class AStar : MonoBehaviour
                 return;
             }
 
-            foreach (Node neighbour in grid.GetNeigbours(node))
+            foreach (CustomNode neighbour in grid.GetNeigbours(node))
             {
                 if (neighbour.pared || closedSet.Contains(neighbour))
                 {
                     continue;
                 }
 
-                int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
+                float newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
                 if (newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                 {
                     neighbour.gCost = newCostToNeighbour;
@@ -68,10 +68,10 @@ public class AStar : MonoBehaviour
         }
     }
 
-    void RetracePath(Node startNode, Node endNode)
+    void RetracePath(CustomNode startNode, CustomNode endNode)
     {
-        List<Node> path = new List<Node>();
-        Node currentNode = endNode;
+        List<CustomNode> path = new List<CustomNode>();
+        CustomNode currentNode = endNode;
 
         while (currentNode != startNode)
         {
@@ -84,7 +84,7 @@ public class AStar : MonoBehaviour
 
     }
 
-    int GetDistance(Node nodeA, Node nodeB)
+    int GetDistance(CustomNode nodeA, CustomNode nodeB)
     {
         int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
         int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);

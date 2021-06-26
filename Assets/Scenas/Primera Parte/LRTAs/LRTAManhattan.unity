@@ -184,7 +184,6 @@ MonoBehaviour:
   targetSpeed: 0
   targetVelocity: {x: 0, y: 0, z: 0}
   grid: {fileID: 876882941}
-  heuristic: {fileID: 13563008}
   objetivo: {fileID: 1655373840}
 --- !u!114 &13563010
 MonoBehaviour:
@@ -217,11 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 0
-  masa: 2
   mRotation: 0
   mVelocity: 3
   rotacion: 0
@@ -230,20 +227,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 2
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 13563010}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &13563012
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1061,6 +1058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
 --- !u!4 &390851279
 Transform:
   m_ObjectHideFlags: 0

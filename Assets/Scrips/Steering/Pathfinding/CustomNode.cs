@@ -10,6 +10,7 @@ public class CustomNode
 
     public bool pared;
     public Vector3 worldPosition;
+    public CustomNode parent;
 
     public CustomNode(bool pared, Vector3 worldPosition, int gridX, int gridY)
     {
