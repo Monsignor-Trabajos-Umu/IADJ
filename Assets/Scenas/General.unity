@@ -754,9 +754,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radio: 0
   influencia: 5
   mapa: {fileID: 589110567}
-  personaje: {fileID: 471666431}
 --- !u!114 &471666431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,8 +849,8 @@ MonoBehaviour:
     intParams: 
     intParamsNames: []
     intParamsLostDefaultValue: 
-    boolParams: 00
-    boolParamsNames: [valueA]
+    boolParams: 
+    boolParamsNames: []
     boolParamsLostDefaultValue: 
     floatParams: []
     floatParamsNames: []
@@ -905,9 +905,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radio: 0
   influencia: -2
   mapa: {fileID: 589110567}
-  personaje: {fileID: 507646451}
 --- !u!114 &507646450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,9 +1235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radio: 0
   influencia: -5
   mapa: {fileID: 589110567}
-  personaje: {fileID: 576995633}
 --- !u!114 &576995633
 MonoBehaviour:
   m_ObjectHideFlags: 0
