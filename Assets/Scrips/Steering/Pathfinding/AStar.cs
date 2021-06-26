@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scrips.Steering.Pathfinding;
 using UnityEngine;
 
 public class AStar : MonoBehaviour
@@ -19,16 +20,16 @@ public class AStar : MonoBehaviour
 
     void FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        CustomNode startNode = grid.GetNodeFromWorldPoint(startPos);
-        CustomNode targetNode = grid.GetNodeFromWorldPoint(targetPos);
+        Node startNode = grid.GetNodeFromWorldPoint(startPos);
+        Node targetNode = grid.GetNodeFromWorldPoint(targetPos);
 
-        List<CustomNode> openSet = new List<CustomNode>();
-        HashSet<CustomNode> closedSet = new HashSet<CustomNode>();
+        List<Node> openSet = new List<Node>();
+        HashSet<Node> closedSet = new HashSet<Node>();
         openSet.Add(startNode);
 
         while (openSet.Count > 0)
         {
-            CustomNode node = openSet[0];
+            Node node = openSet[0];
             for (int i = 1; i < openSet.Count; i++)
             {
                 if (openSet[i].fCost < node.fCost || openSet[i].fCost == node.fCost)
@@ -47,7 +48,7 @@ public class AStar : MonoBehaviour
                 return;
             }
 
-            foreach (CustomNode neighbour in grid.GetNeigbours(node))
+            foreach (Node neighbour in grid.GetNeigbours(node))
             {
                 if (neighbour.pared || closedSet.Contains(neighbour))
                 {
@@ -68,10 +69,10 @@ public class AStar : MonoBehaviour
         }
     }
 
-    void RetracePath(CustomNode startNode, CustomNode endNode)
+    void RetracePath(Node startNode, Node endNode)
     {
-        List<CustomNode> path = new List<CustomNode>();
-        CustomNode currentNode = endNode;
+        List<Node> path = new List<Node>();
+        Node currentNode = endNode;
 
         while (currentNode != startNode)
         {
@@ -84,7 +85,7 @@ public class AStar : MonoBehaviour
 
     }
 
-    int GetDistance(CustomNode nodeA, CustomNode nodeB)
+    int GetDistance(Node nodeA, Node nodeB)
     {
         int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
         int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
