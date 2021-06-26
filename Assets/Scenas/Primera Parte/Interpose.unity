@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1670,11 +1670,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
-  listSteerings: []
-  debugSteering:
+  debug: 0
+  finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  steeringList: []
+  behaviors: []
+  weightFormationOffset: 1
 --- !u!114 &674196780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1687,11 +1689,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 30
-  masa: 2
   mRotation: 90
   mVelocity: 4
   rotacion: 0
@@ -1700,19 +1700,18 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 1.5
   aInterior: 1
-  dEbUg: 0
+  debug: 0
+  exterior: 0
   rInterior: 2
-  goToTarget: {fileID: 0}
+  actuator: {fileID: 0}
   arbitro: {fileID: 674196779}
   cAction: 0
-  formationOffset: {fileID: 0}
-  mejorTerreno: 0
-  miSteering:
+  finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!65 &674196781
@@ -1824,14 +1823,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8968033ac2040ed43bc82608bf5f4dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useReferee: 1
-  grupo: 0
-  target: {fileID: 0}
-  weight: 1
+  debug: 1
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debug: 0
+  steeringGroup: 2
+  target: {fileID: 0}
+  useReferee: 1
+  weight: 1
+  distance: 0
+  direction: {x: 0, y: 0, z: 0}
+  targetSpeed: 0
+  targetVelocity: {x: 0, y: 0, z: 0}
   agenteA: {fileID: 1293290573642253}
   agenteB: {fileID: 1252455289}
 --- !u!114 &674196787
@@ -1846,14 +1849,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d909eeef21d1e594d9e3701518fd73fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useReferee: 1
-  grupo: 0
-  target: {fileID: 674196780}
-  weight: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debug: 0
+  steeringGroup: 2
+  target: {fileID: 674196780}
+  useReferee: 1
+  weight: 1
 --- !u!1 &710304747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,6 +2520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
 --- !u!1 &1228286989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,11 +2598,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
-  listSteerings: []
-  debugSteering:
+  debug: 0
+  finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  steeringList: []
+  behaviors: []
+  weightFormationOffset: 1
 --- !u!114 &1252455289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2611,11 +2617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 30
-  masa: 2
   mRotation: 90
   mVelocity: 4
   rotacion: 0
@@ -2624,19 +2628,18 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 4
   aInterior: 4
-  dEbUg: 0
+  debug: 0
+  exterior: 0
   rInterior: 4
-  goToTarget: {fileID: 1252455296}
+  actuator: {fileID: 0}
   arbitro: {fileID: 1252455288}
   cAction: 0
-  formationOffset: {fileID: 0}
-  mejorTerreno: 0
-  miSteering:
+  finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!65 &1252455290
@@ -2748,14 +2751,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useReferee: 1
-  grupo: 0
-  target: {fileID: 0}
-  weight: 10
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debug: 0
+  steeringGroup: 2
+  target: {fileID: 0}
+  useReferee: 1
+  weight: 10
   wanderRate: 110.6
   wanderOrientation: 0
   wanderStep: 40.5
@@ -2772,14 +2775,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da5fa030a8d18d4eb616e1d988ed712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useReferee: 0
-  grupo: 0
-  target: {fileID: 0}
-  weight: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debug: 0
+  steeringGroup: 2
+  target: {fileID: 0}
+  useReferee: 0
+  weight: 1
   targetPosition: {x: 0, y: 0, z: 0}
   targetExists: 0
 --- !u!1 &1407586985
@@ -4438,11 +4441,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 30
-  masa: 2
   mRotation: 90
   mVelocity: 4
   rotacion: 0
@@ -4451,19 +4452,18 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 4
   aInterior: 4
-  dEbUg: 0
+  debug: 0
+  exterior: 0
   rInterior: 4
-  goToTarget: {fileID: 0}
+  actuator: {fileID: 0}
   arbitro: {fileID: 1293290573642254}
   cAction: 0
-  formationOffset: {fileID: 0}
-  mejorTerreno: 0
-  miSteering:
+  finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  peorTerreno: 1
   selected: 0
   state: 0
 --- !u!114 &1293290573642254
@@ -4478,11 +4478,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efda32c711ab95641999f1c6ce66b8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugGreen: 0
-  listSteerings: []
-  debugSteering:
+  debug: 0
+  finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  steeringList: []
+  behaviors: []
+  weightFormationOffset: 1
 --- !u!114 &1293290573642255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4495,14 +4497,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165a9ba9ae6309a4c9e8c30cc3f13b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useReferee: 1
-  grupo: 0
-  target: {fileID: 0}
-  weight: 1
+  debug: 0
   steering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  debug: 0
+  steeringGroup: 2
+  target: {fileID: 0}
+  useReferee: 1
+  weight: 1
   wanderRate: 50
   wanderOrientation: 2
   wanderStep: 18.8
