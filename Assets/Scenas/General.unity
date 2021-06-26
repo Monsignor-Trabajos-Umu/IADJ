@@ -1481,8 +1481,9 @@ MonoBehaviour:
     intParams: 
     intParamsNames: []
     intParamsLostDefaultValue: 
-    boolParams: 
-    boolParamsNames: []
+    boolParams: 00
+    boolParamsNames:
+    - valueA
     boolParamsLostDefaultValue: 
     floatParams: []
     floatParamsNames: []
