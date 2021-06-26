@@ -18,21 +18,55 @@ public class FogMap : InfluenceMap
                 p.Object.GetComponent<MeshRenderer>().enabled = false;
             }
             else
-            { 
+            {
                 p.Object.GetComponent<MeshRenderer>().enabled = true;
+
+                var colliders = Physics.OverlapSphere(p.Object.transform.position, maxPropagacion * p.Radio);
+                //Debug.Log("Numero Colisiones:" + colliders.Length);
+                foreach(var c in colliders)
+                {
+                    var renderer = c.gameObject.GetComponent<MeshRenderer>();
+                    if (renderer != null)
+                        renderer.enabled = true;
+                }
             }
+        }
+    }
+
+    public new void SetInfluence(NodoI nodo, int value)
+    {
+        if (nodo.x < ancho && nodo.y < alto)
+        {
+            grid.getGrid[nodo.x, nodo.y].valor = Mathf.Max(0,value);
         }
     }
 
     public new void SetInfluence(NodoI nodo, int value, int radio)
     {
         // Ponemos el central
-        SetInfluence(nodo, Mathf.Min(0,Mathf.Abs(value)));
+        SetInfluence(nodo, value);
         // Influimos a los que estan al rededor
         var vecinos = grid.GetNeighbors(nodo, radio);
-        vecinos.ForEach(i => SetInfluence(i, Mathf.Min(0, Mathf.Abs(value))));
+        vecinos.ForEach(i => SetInfluence(i, value));
+
+
     }
 
+    public new void SetInfluence(int x, int y, int value)
+    {
+        if (x < ancho && y < alto)
+        {
+            grid.getGrid[x, y].valor = Mathf.Max(0, value);
+        }
+    }
+
+    new void  UpdatePropagators()
+    {
+        foreach (IPropagator p in propagadores)
+        {
+            SetInfluence(p.GridPosition, Mathf.Max(0,p.Value), p.Radio);
+        }
+    } 
     // Propaga en cruz
     protected new void UpdatePropagation()
     {
@@ -44,16 +78,16 @@ public class FogMap : InfluenceMap
             {
                 //Actualizamos la casilla arriba
                 if (pos.x - i >= 0)
-                    grid.getGrid[pos.x - i, pos.y].valor = Mathf.Min(0, Mathf.Abs(p.Value - i));
+                    grid.getGrid[pos.x - i, pos.y].valor = Mathf.Max(0, p.Value - i);
                 //Actualizamos la casilla de abajo
                 if (pos.x + i < bottomRight.x)
-                    grid.getGrid[pos.x + i, pos.y].valor = Mathf.Min(0, Mathf.Abs(p.Value - i));
+                    grid.getGrid[pos.x + i, pos.y].valor = Mathf.Max(0, p.Value - i);
                 //Actualizamos la casilla derecha
                 if (pos.y + i < bottomRight.y)
-                    grid.getGrid[pos.x, pos.y + i].valor = Mathf.Min(0, Mathf.Abs(p.Value - i));
+                    grid.getGrid[pos.x, pos.y + i].valor = Mathf.Max(0, p.Value - i);
                 //Actualizamos la casilla izquierda
                 if (pos.y - i >= 0)
-                    grid.getGrid[pos.x, pos.y - i].valor = Mathf.Min(0, Mathf.Abs(p.Value - i));
+                    grid.getGrid[pos.x, pos.y - i].valor = Mathf.Max(0, p.Value - i);
             }
         }
     }

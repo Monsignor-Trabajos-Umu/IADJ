@@ -54,12 +54,12 @@ public class FogMapControl : MonoBehaviour
 
     void SetInfluence(int x, int y, int value)
     {
-        mapaNiebla.SetInfluence(x, y, value);
+        mapaNiebla.SetInfluence(x, y, Mathf.Max(0,value));
     }
 
     void SetInfluence(NodoI pos, int value)
     {
-        mapaNiebla.SetInfluence(pos, value);
+        mapaNiebla.SetInfluence(pos, Mathf.Max(0, value));
     }
 
 }

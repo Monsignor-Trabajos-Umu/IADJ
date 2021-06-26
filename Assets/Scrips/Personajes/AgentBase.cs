@@ -6,8 +6,11 @@ using UnityEngine;
 public class AgentBase : Agent
 {
     public Modo modo = Modo.Ataque;
+    public bool totalWar = false;
 
     public bool IsAttacking() => modo == Modo.Ataque;
+    public bool IsTotalWar() => totalWar;
+
     protected override void Start()
     {
         // No hay movimiento
@@ -24,8 +27,5 @@ public class AgentBase : Agent
         daño = 0;
 
         Debug.Log(modo);
-
-
-
     }
 }
