@@ -184,6 +184,7 @@ MonoBehaviour:
   targetSpeed: 0
   targetVelocity: {x: 0, y: 0, z: 0}
   grid: {fileID: 876882941}
+  heuristic: {fileID: 13563008}
   objetivo: {fileID: 1655373840}
 --- !u!114 &13563010
 MonoBehaviour:

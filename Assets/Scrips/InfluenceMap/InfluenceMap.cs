@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 public class InfluenceMap
 {
-    List<IPropagator> propagadores = new List<IPropagator>();
+    protected List<IPropagator> propagadores = new List<IPropagator>();
     int ancho, alto;
-    InfluenceGrid grid;
+    protected InfluenceGrid grid;
     //Número de casillas de distancia de influencia
     //Si por ejemplo es 2, un propagador no influyen en más de dos casillas de distancia
-    int maxPropagacion;
+    protected int maxPropagacion;
 
     public float GetValue(int x, int y)
     {
@@ -69,14 +69,11 @@ public class InfluenceMap
         foreach (IPropagator p in propagadores)
         {
             SetInfluence(p.GridPosition, p.Value,p.Radio);
-
-            // Ponemos la influencia en un area al 
-
         }
     }
 
     // Propaga en cruz
-    void UpdatePropagation()
+    protected void UpdatePropagation()
     {
         NodoI bottomRight = grid.getBottomRight();
         foreach (IPropagator p in propagadores)

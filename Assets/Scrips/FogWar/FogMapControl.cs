@@ -1,9 +1,9 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class InfluenceMapControl : MonoBehaviour
+public class FogMapControl : MonoBehaviour
 {
-
     //Distancia máxima a la que se puede propagar
     [SerializeField]
     int propagacion;
@@ -11,7 +11,7 @@ public class InfluenceMapControl : MonoBehaviour
     [SerializeField]
     int frecuenciaUpdate = 3;
 
-    InfluenceMap mapaInfluencia;
+    FogMap mapaNiebla;
 
     [SerializeField]
     InfluenceGrid gridMap;
@@ -24,19 +24,20 @@ public class InfluenceMapControl : MonoBehaviour
 
         Debug.Log(width + " x " + height);
 
-        mapaInfluencia = new InfluenceMap(gridMap, propagacion, width, height);
+        mapaNiebla = new FogMap(gridMap, propagacion, width, height);
 
     }
 
     public void RegisterPropagator(IPropagator p)
     {
-        mapaInfluencia.RegisterPropagator(p);
+        mapaNiebla.RegisterPropagator(p);
     }
 
     public NodoI GetGridPosition(Vector3 pos)
     {
         return gridMap.GetNodeFromWorldPoint(pos);
     }
+
 
     void Awake()
     {
@@ -47,17 +48,18 @@ public class InfluenceMapControl : MonoBehaviour
 
     void PropagationUpdate()
     {
-        mapaInfluencia.Propagate();
+        mapaNiebla.Propagate();
+        mapaNiebla.FogWar();
     }
 
     void SetInfluence(int x, int y, int value)
     {
-        mapaInfluencia.SetInfluence(x, y, value);
+        mapaNiebla.SetInfluence(x, y, value);
     }
 
     void SetInfluence(NodoI pos, int value)
     {
-        mapaInfluencia.SetInfluence(pos, value);
+        mapaNiebla.SetInfluence(pos, value);
     }
 
 }

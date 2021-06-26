@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 235483517}
   - component: {fileID: 235483519}
   - component: {fileID: 235483518}
+  - component: {fileID: 235483520}
   m_Layer: 0
   m_Name: Headband
   m_TagString: Untagged
@@ -347,6 +348,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235483516}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &235483520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235483516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radio: 1
+  influencia: -1
+  mapa: {fileID: 589110567}
+  mapaNiebla: {fileID: 0}
 --- !u!1 &303754049
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,9 +771,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radio: 0
+  radio: 1
   influencia: 5
   mapa: {fileID: 589110567}
+  mapaNiebla: {fileID: 1584114449}
 --- !u!114 &471666431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,9 +926,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9d5aace88f304bb328f63d75e1bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radio: 0
+  radio: 1
   influencia: -2
   mapa: {fileID: 589110567}
+  mapaNiebla: {fileID: 1584114449}
 --- !u!114 &507646450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,6 +1276,7 @@ MonoBehaviour:
   radio: 0
   influencia: -5
   mapa: {fileID: 589110567}
+  mapaNiebla: {fileID: 1584114449}
 --- !u!114 &576995633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,9 +2371,73 @@ Transform:
   m_Children:
   - {fileID: 589110568}
   - {fileID: 1614586659}
+  - {fileID: 1584114447}
   m_Father: {fileID: 1375434925}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1584114446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584114447}
+  - component: {fileID: 1584114448}
+  - component: {fileID: 1584114449}
+  m_Layer: 0
+  m_Name: FogControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1584114447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584114446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1562519803}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1584114448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584114446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd16a8a503c29e4995a1abc0db409d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridWorldSizeX: 1000
+  gridWorldSizeZ: 1000
+  mostrarMapa: 1
+  nodeRaidus: 15
+--- !u!114 &1584114449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584114446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabfd07c65a3eb4da0488e72a70d0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propagacion: 2
+  frecuenciaUpdate: 3
+  gridMap: {fileID: 1584114448}
 --- !u!1 &1587865992
 GameObject:
   m_ObjectHideFlags: 0

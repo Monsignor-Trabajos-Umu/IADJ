@@ -17,7 +17,7 @@ public class AStar : MonoBehaviour
 
         // Activamos el debug
 
-        grid.EnableDebug();
+        //grid.EnableDebug();
     }
 
     private void FindPath(Vector3 startPos, Vector3 targetPos)
