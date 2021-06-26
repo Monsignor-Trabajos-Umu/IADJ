@@ -48,8 +48,6 @@ public class Align : SteeringBehaviour
             // Hago que este entre -180 y 180
             rotation = MapToRange(rotation);
 
-
-
         }
         float rotationSize = Math.Abs(rotation);
         // Si ya estamos mirando no devolvemos stearing

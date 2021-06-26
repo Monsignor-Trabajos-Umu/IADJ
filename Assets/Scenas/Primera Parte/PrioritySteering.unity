@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -261,11 +261,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 0
-  masa: 2
   mRotation: 0
   mVelocity: 3
   rotacion: 0
@@ -274,20 +272,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 2
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 10662505}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &10662507
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2225,11 +2223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 0
-  masa: 2
   mRotation: 0
   mVelocity: 3
   rotacion: 0
@@ -2238,20 +2234,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 2
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 573175536}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &573175538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5840,7 +5836,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1222997643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 683af856a1c44204fa06f17dcf24589b, type: 3}
+  m_Script: {fileID: 11500000, guid: 09415c6f76274fd4094fd2054db7de3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
@@ -5851,10 +5847,10 @@ MonoBehaviour:
   target: {fileID: 0}
   useReferee: 1
   weight: 2
-  avoidDistance: 10
-  leftWhiskerSize: 5
-  midWhiskerSize: 7
-  rightWhiskerSize: 5
+  avoidDistance: 4.5
+  leftWhiskerSize: 2.8
+  rightWhiskerSize: 2.8
+  angle: 20
 --- !u!114 &1222997645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5897,7 +5893,6 @@ MonoBehaviour:
   formationList: []
   ordenMayor: 0
   pursuitList: []
-  steeringGroupFormationOffset: 1
 --- !u!114 &1222997647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5910,11 +5905,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 2
   mRotation: 90
   mVelocity: 3
   rotacion: 0
@@ -5923,20 +5916,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 2
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1222997648
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5985,7 +5978,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6055e2409f3cf174a8a0ba80cd90226b, type: 2}
+  - {fileID: 2100000, guid: 65b34bd0b696fd64c809daa8ff1aac63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7227,7 +7220,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1509169478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 683af856a1c44204fa06f17dcf24589b, type: 3}
+  m_Script: {fileID: 11500000, guid: 09415c6f76274fd4094fd2054db7de3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
@@ -7238,10 +7231,10 @@ MonoBehaviour:
   target: {fileID: 0}
   useReferee: 1
   weight: 2
-  avoidDistance: 10
-  leftWhiskerSize: 5
-  midWhiskerSize: 7
-  rightWhiskerSize: 5
+  avoidDistance: 4.5
+  leftWhiskerSize: 2.8
+  rightWhiskerSize: 2.8
+  angle: 20
 --- !u!114 &1509169481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7273,11 +7266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 2
   mRotation: 90
   mVelocity: 3
   rotacion: 0
@@ -7286,20 +7277,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 2
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 1509169481}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1509169483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9405,11 +9396,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 0
-  masa: 2
   mRotation: 0
   mVelocity: 3
   rotacion: 0
@@ -9418,20 +9407,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 2
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 1931833556}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1931833558
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9969,6 +9958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
 --- !u!4 &2000765001
 Transform:
   m_ObjectHideFlags: 0
@@ -10097,7 +10087,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2055299804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 683af856a1c44204fa06f17dcf24589b, type: 3}
+  m_Script: {fileID: 11500000, guid: 09415c6f76274fd4094fd2054db7de3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
@@ -10108,10 +10098,10 @@ MonoBehaviour:
   target: {fileID: 0}
   useReferee: 1
   weight: 2
-  avoidDistance: 10
-  leftWhiskerSize: 5
-  midWhiskerSize: 7
-  rightWhiskerSize: 5
+  avoidDistance: 4.5
+  leftWhiskerSize: 2.8
+  rightWhiskerSize: 2.8
+  angle: 20
 --- !u!114 &2055299806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10154,7 +10144,6 @@ MonoBehaviour:
   formationList: []
   ordenMayor: 1
   pursuitList: []
-  steeringGroupFormationOffset: 1
 --- !u!114 &2055299808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10167,11 +10156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 45
-  masa: 2
   mRotation: 90
   mVelocity: 3
   rotacion: 0
@@ -10180,20 +10167,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 2
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &2055299809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10242,7 +10229,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6055e2409f3cf174a8a0ba80cd90226b, type: 2}
+  - {fileID: 2100000, guid: 2ebf33c8c66048e4392138d1501e6be3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
