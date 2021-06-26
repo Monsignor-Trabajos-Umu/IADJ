@@ -32,6 +32,12 @@ public class AgentNPC : Agent
     public bool InFormation => formation != null; // Si estoy en formacion
 
 
+    // Para saber si estoy atacando
+    [SerializeField] private AgentBase mybase;
+
+    public bool IsAttacking() => mybase != null && mybase.IsAttacking();
+
+
     protected override void Start()
     {
         base.Start();

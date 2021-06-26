@@ -851,15 +851,50 @@ MonoBehaviour:
       data:
         graphPosition:
           serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
+          x: 230.66667
+          y: 247.33333
+          width: 73.33333
+          height: 76.66666
         description: 
         child:
           id: 1
     00000001:
-      type: {class: , ns: , asm: }
+      type: {class: Selector, ns: UniBT, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 407.33334
+          y: 247.33333
+          width: 177.99997
+          height: 114.66666
+        description: 
+        children:
+        - id: 2
+        abortOnConditionChanged: 1
+    00000002:
+      type: {class: AttackMode, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 675.3333
+          y: 54.666668
+          width: 178
+          height: 114.666664
+        description: 'Estoy en mod ataque '
+        dontReEvaluateOnRunning: 0
+        child:
+          id: 3
+    00000003:
+      type: {class: DebugPrint, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1032
+          y: 98.66666
+          width: 178.66663
+          height: 116.000015
+        description: 
+        waitTime: 0
 --- !u!114 &507646449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,6 +966,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   selected: 0
   state: 0
+  mybase: {fileID: 576995633}
 --- !u!65 &507646452
 BoxCollider:
   m_ObjectHideFlags: 0

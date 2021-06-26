@@ -52,7 +52,7 @@ public class GridChungo : MonoBehaviour
             {
                 var control = FindObjectOfType<Controlador>();
                 int i = control.GetTerrainLayer(worldPoint, terreno);
-                    Debug.Log(i);
+                    //Debug.Log(i);
                 //Se comprueba si es el valor del layer de las montañas
                 if (i == 1)
                     pared = true;

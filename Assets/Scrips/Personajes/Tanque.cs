@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tanque : AgentNPC
 {
-    public Euclidea heuristica = new Euclidea();
+    private Euclidea heuristica;
     // Start is called before the first frame update
 
 
@@ -16,6 +16,7 @@ public class Tanque : AgentNPC
         daño = 5;
         if (actuator == null)
             actuator = gameObject.AddComponent(typeof(TankActuator)) as TankActuator;
+        heuristica = gameObject.AddComponent(typeof(Euclidea)) as Euclidea;
     }
 
     public Heuristic GetHeuristic() => heuristica;

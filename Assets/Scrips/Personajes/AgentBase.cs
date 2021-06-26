@@ -7,6 +7,7 @@ public class AgentBase : Agent
 {
     public Modo modo = Modo.Ataque;
 
+    public bool IsAttacking() => modo == Modo.Ataque;
     protected override void Start()
     {
         // No hay movimiento

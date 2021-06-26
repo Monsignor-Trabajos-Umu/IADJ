@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class Arquero : AgentNPC
 {
-    public Chebychev heuristica = new Chebychev();
-
+    private Chebychev heuristica;
     protected override void Start()
     {
         base.Start();
         vida = 50;
         alcance = 2;
         daño = 10;
+        heuristica = gameObject.AddComponent(typeof(Chebychev)) as Chebychev;
     }
 
 
 
     // Start is called before the first frame update
-    public Heuristic GetHeuristic()
-    {
-        return heuristica;
-    }
+    public Heuristic GetHeuristic() => heuristica;
 }

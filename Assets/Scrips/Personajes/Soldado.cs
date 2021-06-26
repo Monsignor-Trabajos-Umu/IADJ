@@ -21,9 +21,19 @@ public class Soldado : AgentNPC
         daño = 20;
 
 
-
-        heuristica = new Manhattan();
+        heuristica = gameObject.AddComponent(typeof(Manhattan)) as Manhattan;
     }
+    public new void ArrivedToTarget()
+    {
+        ChangeAction(CAction.None);
+        ChangeState(State.Waiting);
+
+
+    } 
 
     public Heuristic GetHeuristic() => heuristica;
+
+
 }
+
+
