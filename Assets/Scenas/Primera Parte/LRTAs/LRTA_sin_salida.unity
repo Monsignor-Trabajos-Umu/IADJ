@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
 --- !u!4 &163324817
 Transform:
   m_ObjectHideFlags: 0
@@ -2364,8 +2365,8 @@ GameObject:
   - component: {fileID: 1723994995}
   - component: {fileID: 1723994994}
   - component: {fileID: 1723994993}
-  - component: {fileID: 1723994992}
   - component: {fileID: 1723994991}
+  - component: {fileID: 1723994992}
   m_Layer: 0
   m_Name: Npc
   m_TagString: Untagged
@@ -2443,11 +2444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 0
-  masa: 2
   mRotation: 0
   mVelocity: 3
   rotacion: 0
@@ -2456,20 +2455,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 2
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 2
+  actuator: {fileID: 0}
   arbitro: {fileID: 1723994993}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1723994995
 BoxCollider:
   m_ObjectHideFlags: 0

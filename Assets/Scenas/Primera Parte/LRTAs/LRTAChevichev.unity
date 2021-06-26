@@ -1131,7 +1131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689556371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.4, y: 1.25, z: -5.2}
+  m_LocalPosition: {x: -8.2, y: 1.25, z: -5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1790,11 +1790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 2
   mAngularAcceleration: 0
-  masa: 2
   mRotation: 0
   mVelocity: 3
   rotacion: 0
@@ -1803,20 +1801,20 @@ MonoBehaviour:
   vida: 2
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 2
-  aInterior: 0
+  margen: 1.1399999856948853
+  mAExterior: 1
+  aInterior: 1
   debug: 0
-  rInterior: 2
+  exterior: 0
+  rInterior: 1
+  actuator: {fileID: 0}
   arbitro: {fileID: 942800398}
   cAction: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
   selected: 0
   state: 0
-  actuator: {fileID: 0}
 --- !u!65 &942800400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1913,7 +1911,7 @@ Transform:
   - {fileID: 522058245}
   - {fileID: 296019970}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &947208196
 GameObject:
@@ -3286,6 +3284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
 --- !u!4 &1718740114
 Transform:
   m_ObjectHideFlags: 0
@@ -3298,7 +3297,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1808588199
 GameObject:

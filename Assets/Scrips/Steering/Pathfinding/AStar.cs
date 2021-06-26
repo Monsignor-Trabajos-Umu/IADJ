@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scrips.Steering.Pathfinding;
 using UnityEngine;
-
 public class AStar : MonoBehaviour
 {
     public Transform seeker, target;
@@ -54,7 +54,7 @@ public class AStar : MonoBehaviour
                     continue;
                 }
 
-                int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
+                int newCostToNeighbour = (int) node.gCost + GetDistance(node, neighbour);
                 if (newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                 {
                     neighbour.gCost = newCostToNeighbour;
