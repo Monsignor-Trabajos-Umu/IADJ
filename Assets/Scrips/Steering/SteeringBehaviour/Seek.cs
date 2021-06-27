@@ -15,7 +15,7 @@ public class Seek : SteeringBehaviour
         steering.lineal = RemoveY(steering.lineal); // Filtramos la y
         steering.lineal.Normalize();
         steering.lineal *= miAgente.mAcceleration;
-
+        
         steering.angular = 0;
         return steering;
     }
