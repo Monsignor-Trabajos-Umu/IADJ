@@ -24,7 +24,7 @@ namespace Assets.Scrips.Actions
 
             if (agente.state == State.Action && agente.cAction == CAction.Retreat) return Status.Running;
 
-            if (agente.state != State.Normal || agente.cAction != CAction.None) return Status.Failure;
+            if (agente.state != State.Waiting || agente.cAction != CAction.None) return Status.Failure;
 
             GameObject target = null;
             float aux = Mathf.Infinity;

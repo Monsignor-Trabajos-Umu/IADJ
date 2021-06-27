@@ -1449,101 +1449,135 @@ MonoBehaviour:
       type: {class: Root, ns: UniBT, asm: Assembly-CSharp}
       data:
         graphPosition:
-          serializedVersion: 2
-          x: 230.66667
-          y: 247.33333
+          x: 146.66667
+          y: 200.66666
           width: 73.33333
-          height: 76.66666
+          height: 76.66667
         description: 
+        <gameObject>k__BackingField: {fileID: 0}
         child:
           id: 1
     00000001:
       type: {class: Selector, ns: UniBT, asm: Assembly-CSharp}
       data:
         graphPosition:
-          serializedVersion: 2
-          x: 402
-          y: 222.66667
-          width: 178
-          height: 138.66666
+          x: 380.66666
+          y: 212
+          width: 178.00003
+          height: 138.66667
         description: 
+        <gameObject>k__BackingField: {fileID: 0}
         children:
         - id: 2
         - id: 3
         abortOnConditionChanged: 1
     00000002:
-      type: {class: AttackMode, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      type: {class: IsAttacking, ns: UniBT.Examples.Scripts.Behavior, asm: Assembly-CSharp}
       data:
         graphPosition:
-          serializedVersion: 2
-          x: 762.6667
-          y: 84
+          x: 735.3333
+          y: -46.666668
           width: 178
           height: 114.666664
         description: 
+        <gameObject>k__BackingField: {fileID: 0}
         dontReEvaluateOnRunning: 0
         child:
           id: 4
+        isRunning: 0
+        enemy: {fileID: 0}
     00000003:
       type: {class: DefenseMode, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
         graphPosition:
-          serializedVersion: 2
-          x: 762.6667
-          y: 361.33334
+          x: 769.3333
+          y: 269.33334
           width: 178
-          height: 114.66669
-        description: 'Estoy en mod ataque '
+          height: 114.66666
+        description: 
+        <gameObject>k__BackingField: {fileID: 0}
         dontReEvaluateOnRunning: 0
         child:
           id: 5
+        isRunning: 0
+        agente: {fileID: 0}
     00000004:
       type: {class: Selector, ns: UniBT, asm: Assembly-CSharp}
       data:
         graphPosition:
-          serializedVersion: 2
-          x: 1068
-          y: 67.33333
+          x: 1020.6667
+          y: -46.666668
+          width: 177.99994
+          height: 138.66667
+        description: 
+        <gameObject>k__BackingField: {fileID: 0}
+        children:
+        - id: 6
+        - id: 7
+        abortOnConditionChanged: 1
+    00000005:
+      type: {class: Defend, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          x: 1170.6666
+          y: 269.33334
+          width: 284.66675
+          height: 116.66666
+        description: 
+        <gameObject>k__BackingField: {fileID: 0}
+        agente: {fileID: 0}
+    00000006:
+      type: {class: IsInjured, ns: Assets.Scrips.Arboles.Conditional, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          x: 1386
+          y: -263.33334
           width: 178
           height: 114.66667
         description: 
-        children:
-        - id: 6
-        abortOnConditionChanged: 1
-    00000005:
-      type: {class: DebugPrint, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
-      data:
-        graphPosition:
-          serializedVersion: 2
-          x: 1156.6666
-          y: 361.33334
-          width: 178.66675
-          height: 116
-        description: 
-        waitTime: 0
-    00000006:
+        <gameObject>k__BackingField: {fileID: 0}
+        dontReEvaluateOnRunning: 0
+        child:
+          id: 8
+        isRunning: 0
+        agente: {fileID: 0}
+    00000007:
       type: {class: CanGoToBase, ns: Assets.Scrips.Arboles.Conditional, asm: Assembly-CSharp}
       data:
         graphPosition:
-          serializedVersion: 2
-          x: 1304.6666
-          y: -90.66667
+          x: 1344
+          y: 66
           width: 178
-          height: 114.666664
+          height: 115.333336
         description: 
+        <gameObject>k__BackingField: {fileID: 0}
         dontReEvaluateOnRunning: 0
         child:
-          id: 7
-    00000007:
+          id: 9
+        isRunning: 0
+        agente: {fileID: 0}
+    00000008:
+      type: {class: Huir, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          x: 1777.3334
+          y: -263.33334
+          width: 305.33337
+          height: 136.66667
+        description: 
+        <gameObject>k__BackingField: {fileID: 0}
+        fuentes: []
+        agente: {fileID: 0}
+    00000009:
       type: {class: AvanzoBase, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
         graphPosition:
-          serializedVersion: 2
-          x: 1550
-          y: -68
+          x: 1777.3334
+          y: 66
           width: 284.66663
-          height: 116.66667
+          height: 116.666664
         description: 
+        <gameObject>k__BackingField: {fileID: 0}
         agente: {fileID: 0}
 --- !u!114 &507646449
 MonoBehaviour:
@@ -1605,12 +1639,12 @@ MonoBehaviour:
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  margen: 1.159999966621399
+  margen: 1.4500000476837158
   mAExterior: 4.78
   aInterior: 3.96
-  debug: 0
-  exterior: 0
-  rInterior: 9.77
+  debug: 1
+  exterior: 1
+  rInterior: 5.73
   mejorTerreno: 3
   peorTerreno: 0
   actuator: {fileID: 0}
@@ -6504,6 +6538,7 @@ MonoBehaviour:
   gridWorldSizeX: 1000
   gridWorldSizeZ: 1000
   terreno: {fileID: 1375434924}
+  nodeDiameter: 0
   nodeRaidus: 15
   paredesLayerMask:
     serializedVersion: 2

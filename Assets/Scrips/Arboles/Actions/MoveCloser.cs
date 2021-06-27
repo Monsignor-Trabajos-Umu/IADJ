@@ -5,7 +5,7 @@ namespace Assets.Scrips.Actions
 {
 
     //Se mueve hacia la base enemiga
-    public class AvanzoBase : UniBT.Action
+    public class MoveCloser : UniBT.Action
     {
        
 

@@ -395,14 +395,14 @@ public class AgentNpc : Agent
             if (indice == mejorTerreno)
             {
                 mVelocity = (float) (baseVelocity * 1.5);
-                Debug.Log("Aumento Velocidad");
+                //Debug.Log("Aumento Velocidad");
             }
             else
             {
                 if (indice == peorTerreno)
                 {
                     mVelocity = (float) (baseVelocity / 1.5);
-                    Debug.Log("Disminuyo Velocidad");
+                    //Debug.Log("Disminuyo Velocidad");
                 }
                 else
                 {
@@ -503,6 +503,7 @@ public class AgentNpc : Agent
 
     #region Actions Segunda parte
 
+    // Condiciones
     public bool IsAttacking() => mybase != null && mybase.IsAttacking();
 
     public bool IsTotalWar() => mybase != null && mybase.IsTotalWar();
@@ -555,6 +556,8 @@ public class AgentNpc : Agent
 
         return false;
     }
+
+    //Acciones como tal
 
 
     //Resetea el estado y los steering especiales si los hubiera
@@ -631,6 +634,7 @@ public class AgentNpc : Agent
 
     public void Huir(GameObject obj)
     {
+
         ChangeState(State.Action);
         ChangeAction(CAction.Retreat);
         var origen = gameObject.transform.position;

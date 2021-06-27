@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scrips.Arboles.Conditional
 {
-    public class CanGoToBase: UniBT.Conditional
+    public class IsFarEnough: UniBT.Conditional
     {
 
         private AgentNpc agente;
