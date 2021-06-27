@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 108227806490301305}
-  m_IndirectSpecularColor: {r: 0.42856044, g: 0.4776683, b: 0.50881827, a: 1}
+  m_IndirectSpecularColor: {r: 0.44971114, g: 0.49977738, b: 0.5756369, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -521,6 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa22cf7daa4d1f4c819c86180321175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
 --- !u!4 &273803929
 Transform:
   m_ObjectHideFlags: 0
@@ -2391,6 +2392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   border: 0
+  mouse: 0
   speed: 0
 --- !u!1 &1808136871
 GameObject:
@@ -2715,11 +2717,12 @@ GameObject:
   - component: {fileID: 1956971806}
   - component: {fileID: 1956971805}
   - component: {fileID: 1956971804}
-  - component: {fileID: 1956971803}
   - component: {fileID: 1956971801}
   - component: {fileID: 1956971800}
   - component: {fileID: 1956971802}
   - component: {fileID: 1956971808}
+  - component: {fileID: 1956971809}
+  - component: {fileID: 1956971803}
   m_Layer: 0
   m_Name: WallFollowing
   m_TagString: Untagged
@@ -2787,6 +2790,7 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 0}
   steeringList: []
   behaviors: []
   weightFormationOffset: 0
@@ -2819,36 +2823,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956971798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 0
-  "da\xF1o": 0
-  mAcceleration: 2
-  mAngularAcceleration: 45
-  masa: 0
-  mRotation: 90
-  mVelocity: 2
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 0
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 25
-  aInterior: 0.5
-  debug: 0
-  rInterior: 2
-  arbitro: {fileID: 1956971801}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
-  actuator: {fileID: 0}
 --- !u!65 &1956971804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2947,6 +2924,48 @@ MonoBehaviour:
   target: {fileID: 0}
   useReferee: 0
   weight: 0.1
+--- !u!114 &1956971809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956971798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 1956971803}
+  arbitro: {fileID: 1956971801}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &1972921556
 GameObject:
   m_ObjectHideFlags: 0
@@ -3298,22 +3317,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7b8755d446ad74f885322bfe675727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 1
   "da\xF1o": 2
   mAcceleration: 5
   mAngularAcceleration: 5
-  masa: 0
   mRotation: 180
   mVelocity: 5
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
   mAExterior: 0
   aInterior: 0
   debug: 0
+  exterior: 0
   rInterior: 4
 --- !u!114 &1293290123713330
 MonoBehaviour:
@@ -3567,7 +3587,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
+  - {fileID: 2100000, guid: 24d747a0dff25ac478d0cb3ecfcd5633, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
