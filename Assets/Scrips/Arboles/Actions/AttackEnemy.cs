@@ -8,7 +8,7 @@ namespace Assets.Scrips.Actions
     public class AttackEnemy : UniBT.Action
     { 
         private AgentNpc agente;
-
+        private AgentNpc enemigo;
         public override void Awake()
         {
             agente = gameObject.GetComponent<AgentNpc>();
@@ -17,17 +17,21 @@ namespace Assets.Scrips.Actions
 
         protected override Status OnUpdate()
         {
+            if (agente.state == State.Action && agente.cAction == CAction.AttackEnemy)
+            {
+                Debug.Log($"Intento atacar {agente.state} - {agente.cAction}");
 
-            if (agente.state == State.Action && agente.cAction == CAction.AttackEnemy) return Status.Running;
-
+                agente.Atacar(enemigo);
+                return Status.Success;
+            }
+        
+            
             if (agente.state != State.Waiting || agente.cAction != CAction.None)  return Status.Failure;
 
             var enemigos = agente.enemigos;
 
-            var enemigo = enemigos.First();
-
             //Siempre hay un objetivo
-
+            enemigo = enemigos.First();
             agente.Atacar(enemigo);
             return Status.Success;
         }

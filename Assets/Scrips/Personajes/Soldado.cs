@@ -17,7 +17,7 @@ public class Soldado : AgentNpc
         mRotation = 90;
 
 
-        //vida = 100;
+        vida = 100;
         alcance = 1; // ataca 2 bloques alrededor
         damage = 20;
 

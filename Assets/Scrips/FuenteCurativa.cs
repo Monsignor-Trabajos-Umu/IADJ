@@ -38,7 +38,7 @@ public class FuenteCurativa : MonoBehaviour
             col.gameObject.GetComponent<Agent>() != null &&
             Mathf.Approximately(col.gameObject.GetComponent<Agent>().velocidad, 0 )).ToList();
 
-        Debug.Log($"OJOOOOO {npcs.Count}");
+        //Debug.Log($"OJOOOOO {npcs.Count}");
 
         npcs.ForEach(npc => { npc.gameObject.GetComponent<Agent>().Curar(curaSeg); });
     }

@@ -31,16 +31,18 @@ public class AgentNpc : Agent
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     [SerializeField] protected int mejorTerreno = 3;
-    [SerializeField] protected int peorTerreno = 0;
 
     // Para saber si estoy atacando
     [SerializeField] private AgentBase mybase;
+    [SerializeField] protected int peorTerreno = 0;
 
     public bool selected; // Si estoy seleccionado
     public State state = State.Normal; // State para las ordenes
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
 
     public bool InFormation => formation != null; // Si estoy en formacion
+
+    private bool Muerto => vida <= 0;
 
 
     // Heuristca
@@ -84,12 +86,9 @@ public class AgentNpc : Agent
                 break;
             case CAction.Forming:
             case CAction.GoingToEnemy:
-                UpdateAccelerated(finalSteering, Time.deltaTime);
-                break;
             case CAction.Defend:
-                UpdateAccelerated(finalSteering, Time.deltaTime);
-                break;
             case CAction.Retreat:
+            case CAction.AttackEnemy:
                 UpdateAccelerated(finalSteering, Time.deltaTime);
                 break;
             default:
@@ -495,7 +494,6 @@ public class AgentNpc : Agent
 
     // Set and update diferent colors.
 
-
     #region Actions Segunda parte
 
     // Condiciones
@@ -513,10 +511,11 @@ public class AgentNpc : Agent
 
     public bool BestTerrain() => CurrentTerrain() == mejorTerreno;
 
- 
-    public bool WorstTerrain() =>CurrentTerrain() == peorTerreno;
 
-    private int CurrentTerrain() => controlador.GetTerrainLayer(transform.position,FindObjectOfType<Terrain>());
+    public bool WorstTerrain() => CurrentTerrain() == peorTerreno;
+
+    private int CurrentTerrain() =>
+        controlador.GetTerrainLayer(transform.position, FindObjectOfType<Terrain>());
 
     // Distancia de Chebyshov
     private int GetDistanceTwoPosition(Transform p1, Transform p2)
@@ -583,35 +582,37 @@ public class AgentNpc : Agent
 
     public bool NearEnemy()
     {
-        var nodoActual = grid.GetNodeFromWorldPoint(transform.position);
-        var vecinos = grid.GetNeigbours(nodoActual, alcance);
+        if (atando) return true; // Estoy atando no hace falta que me calcules cosas
+        enemigos = new HashSet<AgentNpc>();
+        var castRange = grid.nodeRaidus + grid.nodeRaidus * 2 * alcance;
 
-        foreach (var vecino in vecinos)
+        var vecinos = Physics.SphereCastAll(transform.position, castRange, Vector3.up);
+        //DebugPlus.DrawSphere(transform.position, castRange);
+        foreach (var vecinoHit in vecinos)
         {
-           
-              if(  Physics.SphereCast(vecino.worldPosition, grid.nodeRaidus, OrientationToVector(),out var hitEnemigo)
-                  )
-              {
-                  var enemigo = hitEnemigo.collider.gameObject.GetComponent<AgentNpc>();
-
-                  switch (tag)
-                  {
-                      case "equipoRojo" when (enemigo.tag == "baseAzul" || enemigo.tag == "equipoAzul"):
-                      case "equipoAzul" when (enemigo.tag == "baseRoja" || enemigo.tag == "equipoRojo"):
-                          enemigos.Add(enemigo);
-                          break;
-                  }
-              }
+            var enemigo = vecinoHit.collider.gameObject.GetComponent<AgentNpc>();
+            if (enemigo == null) continue;
+            if (enemigo.Muerto) continue; //Esta muerto dejalo
+            switch (tag)
+            {
+                case "equipoRojo"
+                    when enemigo.tag == "baseAzul" || enemigo.tag == "equipoAzul":
+                case "equipoAzul"
+                    when enemigo.tag == "baseRoja" || enemigo.tag == "equipoRojo":
+                    enemigos.Add(enemigo);
+                    break;
+            }
         }
 
+        //Debug.Log($"Enemigos encontrados {enemigos.Count}");
         return enemigos.Count > 0;
     }
 
-    //Acciones como tal
+//Acciones como tal
 
 
-    //Resetea el estado y los steering especiales si los hubiera
-    // En la segunda parte el estado por defecto va a ser waiting
+//Resetea el estado y los steering especiales si los hubiera
+// En la segunda parte el estado por defecto va a ser waiting
     public void ResetStateAndSteering()
     {
         if (state == State.Action)
@@ -625,10 +626,11 @@ public class AgentNpc : Agent
         ChangeState(State.Waiting);
     }
 
-    //Cuantos nodos queremos avanzar de una
-    [SerializeField] [Range(1, 20)] private readonly int step = 10;
+//Cuantos nodos queremos avanzar de una
+    [SerializeField] [Range(1, 20)] private readonly int step =
+        10;
 
-    //Avanzamos hacia la base enemiga step casillas
+//Avanzamos hacia la base enemiga step casillas
     public void GoToEnemyBase()
     {
         ChangeState(State.Action);
@@ -641,7 +643,7 @@ public class AgentNpc : Agent
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearBase);
     }
 
-    // Avanzamos hacia un GameObject X casillas
+// Avanzamos hacia un GameObject X casillas
     public void GoToEnemy(AgentNpc obj)
     {
         ChangeState(State.Action);
@@ -667,53 +669,68 @@ public class AgentNpc : Agent
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearFont);
     }
 
-
-    /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
-    para ir despues al punto de muerte.*/
+/*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
+para ir despues al punto de muerte.*/
     protected void Morir()
     {
+        ResetStateAndSteering(); // Por si acaso
         gameObject.GetComponent<Renderer>().enabled = false;
         StartCoroutine("respawn");
     }
 
-
-
-
-
-
+    private bool atando;
 
     public void Atacar(AgentNpc objetivo)
     {
+        IEnumerator waitBeforeAttack(float secondsToWait, int realDamage)
+        {
+            atando = true;
+            objetivo.RecibirDaño(realDamage);
+            yield return new WaitForSeconds(secondsToWait);
+            atando = false;
+        }
+
+        if (atando) return;
         //Nos acercamos al objetivo hasta estar a el número de casillas necesarias
 
         //Lanzamos el ataque
 
         //Nos quedamos quietos durante un espacio de tiempo por haber atacado. \
 
-        
-        var dBase = (BestTerrain())?damage*2:damage;
+        //Resteamos el estado si lo habia
+        Debug.Log($"Ataco a {objetivo.name}");
+        ChangeState(State.Action);
+        ChangeAction(CAction.AttackEnemy);
 
-        var cDefensa = (objetivo.WorstTerrain())?defensa*2:defensa; 
 
-        if (Mathf.Approximately(Random.value, 1))
-        {
-            dBase *= 2;
-        }
+        var dBase = BestTerrain() ? damage * 2 : damage;
+
+        var cDefensa = objetivo.WorstTerrain() ? defensa * 2 : defensa;
+
+        if (Mathf.Approximately(Random.value, 1)) dBase *= 2;
 
         var realDamage = dBase - cDefensa;
 
-        objetivo.RecibirDaño(realDamage);
+
+        StartCoroutine(waitBeforeAttack(1, realDamage));
 
 
-
+        //Volvemos a resetear por si acaso
+        ResetStateAndSteering();
     }
 
-    //El personaje recibe el damage. Si ese damage deja su vida a 0 o menos, entonces lo mata
-    protected void RecibirDaño(int cantidad)
+//El personaje recibe el damage. Si ese damage deja su vida a 0 o menos, entonces lo mata
+
+
+    private void RecibirDaño(int cantidad)
     {
+        if (Muerto) return;
+
+
         Debug.Log($"{name} ha recibido {cantidad} daño");
         vida -= cantidad;
-        if (vida < 0) Morir();
+
+        if (vida <= 0) Morir();
     }
 
 
@@ -736,7 +753,6 @@ public class AgentNpc : Agent
         yield return new WaitForSeconds(5);
     }
 
-
     public void Defend()
     {
         ChangeState(State.Action);
@@ -749,7 +765,7 @@ public class AgentNpc : Agent
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearMYBase);
     }
 
-    //Se acerca al siguiente punto de interes que no esté conquistado
+//Se acerca al siguiente punto de interes que no esté conquistado
     public void FindEnemy()
     {
         ChangeState(State.Action);
