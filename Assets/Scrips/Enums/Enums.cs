@@ -32,6 +32,7 @@ public enum CAction
 {
     None,
     GoToTarget,
+    GoingToEnemy,
     Forming
 
 }

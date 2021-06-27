@@ -3,6 +3,7 @@ using System.Linq;
 using Assets.Scrips.Steering.Pathfinding;
 using UnityEngine;
 
+
 public class LRTA : Arrive
 {
     private bool atFinalTarget;
@@ -89,7 +90,7 @@ public class LRTA : Arrive
         actual.hCost = minimo.fCost > actual.hCost ? minimo.fCost : actual.hCost;
         // Vamos al nodo objetivo
         var objetivo = minimo;
-        Debug.Log($"Voy de [{actual.gridX},{actual.gridY}] a [{objetivo.gridX},{objetivo.gridY}]");
+        Debug.Log($"Voy de [{actual.gridX},{actual.gridZ}] a [{objetivo.gridX},{objetivo.gridZ}]");
         return objetivo;
     }
 
@@ -121,16 +122,16 @@ public class LRTA : Arrive
             // Si estamos lo suficientemente cerca vamos al siguiente nodo 
             //Vector3.Distance(currentPosition, tempObjetive.worldPosition) <= error
             Debug.Log(
-                $"Estoy\t[{currentNode.gridX},{currentNode.gridY}]");
+                $"Estoy\t[{currentNode.gridX},{currentNode.gridZ}]");
             if (AtNode(currentPosition,tempObjetive,error))
             {
                
                 // Como tenemos un error tenemos que suponer que nuestro nodo actual no es la
                 // posicion sino nuestro objetivo
-                Debug.Log($"He yegado al objetivo a[{tempObjetive.gridX},{tempObjetive.gridY}]");
+                Debug.Log($"He yegado al objetivo a[{tempObjetive.gridX},{tempObjetive.gridZ}]");
                 tempObjetive = CalculatePathToTargetNode(tempObjetive);
             }
-            Debug.Log($"Voy a  [{tempObjetive.gridX},{tempObjetive.gridY}]");
+            Debug.Log($"Voy a  [{tempObjetive.gridX},{tempObjetive.gridZ}]");
             // Sino Vamos al nodo objetivo
             customDirection = tempObjetive.worldPosition - currentPosition;
             return base.GetSteering(miAgente);

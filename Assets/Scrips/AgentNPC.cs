@@ -34,6 +34,7 @@ public class AgentNpc : Agent
 
     // Para saber si estoy atacando
     [SerializeField] private AgentBase mybase;
+    [SerializeField] private AgentBase enemyBase;
 
     public bool IsAttacking() => mybase != null && mybase.IsAttacking();
 
@@ -413,6 +414,16 @@ public class AgentNpc : Agent
 
 
     #region Actions
+
+
+    public void GoToEnemyBase()
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.GoingToEnemy);
+        //arbitro.SetNewTarget();
+    }
+
+
 
     /**
      * Voy a una posicion

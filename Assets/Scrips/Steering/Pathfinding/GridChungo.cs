@@ -98,7 +98,7 @@ public class GridChungo : MonoBehaviour
                 if (x == 0 && z == 0) continue;
                 // pNeigboursX/Z son las posiciones en el grid de los nodos
                 var pNeigboursX = node.gridX + x;
-                var pNeigboursZ = node.gridY + z;
+                var pNeigboursZ = node.gridZ + z;
                 // Ahora hay que comprobar que esos nodos existen
                 // Es decir que estan dentro del grid
                 if (pNeigboursX >= 0 && pNeigboursX < gridSizeX &&
