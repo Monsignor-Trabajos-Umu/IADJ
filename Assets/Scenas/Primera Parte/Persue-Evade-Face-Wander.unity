@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1693,7 +1693,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -1703,17 +1702,22 @@ MonoBehaviour:
   debug: 0
   exterior: 0
   rInterior: 2
+  mejorTerreno: 3
+  peorTerreno: 0
   actuator: {fileID: 456015911}
   arbitro: {fileID: 456015905}
   cAction: 0
-  selected: 0
-  state: 0
+  controlador: {fileID: 0}
+  enemyBase: {fileID: 0}
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 0}
-  enemyBase: {fileID: 0}
   heuristic: {fileID: 0}
+  mybase: {fileID: 0}
+  selected: 0
+  state: 0
+  grid: {fileID: 0}
+  fuenteActual: {fileID: 0}
   step: 10
 --- !u!114 &456015905
 MonoBehaviour:
@@ -2715,7 +2719,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 1
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 1
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -2826,7 +2829,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780550214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -4.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 132880645}
@@ -5405,7 +5408,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
+  - {fileID: 2100000, guid: 424be3af6ad117140887d3e652a89d24, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5475,7 +5478,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -5485,17 +5487,22 @@ MonoBehaviour:
   debug: 0
   exterior: 0
   rInterior: 2
+  mejorTerreno: 3
+  peorTerreno: 0
   actuator: {fileID: 1334032589}
   arbitro: {fileID: 1334032590}
   cAction: 0
-  selected: 0
-  state: 0
+  controlador: {fileID: 0}
+  enemyBase: {fileID: 0}
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 0}
-  enemyBase: {fileID: 0}
   heuristic: {fileID: 0}
+  mybase: {fileID: 0}
+  selected: 0
+  state: 0
+  grid: {fileID: 0}
+  fuenteActual: {fileID: 0}
   step: 10
 --- !u!1 &1341028587
 GameObject:
@@ -7410,7 +7417,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -7420,17 +7426,22 @@ MonoBehaviour:
   debug: 0
   exterior: 0
   rInterior: 2
+  mejorTerreno: 3
+  peorTerreno: 0
   actuator: {fileID: 1890007360}
   arbitro: {fileID: 1890007354}
   cAction: 0
-  selected: 0
-  state: 0
+  controlador: {fileID: 0}
+  enemyBase: {fileID: 0}
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 0}
-  enemyBase: {fileID: 0}
   heuristic: {fileID: 0}
+  mybase: {fileID: 0}
+  selected: 0
+  state: 0
+  grid: {fileID: 0}
+  fuenteActual: {fileID: 0}
   step: 10
 --- !u!114 &1890007354
 MonoBehaviour:
@@ -7500,7 +7511,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
+  - {fileID: 2100000, guid: c0d660c0333c4224098a02ecd84d6232, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8335,7 +8346,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
+  - {fileID: 2100000, guid: 7736e54f52337094aaed82dc43a11e0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8405,27 +8416,31 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
   margen: 1.1
-  mAExterior: 0
-  aInterior: 0
+  mAExterior: 2
+  aInterior: 1.5
   debug: 0
   exterior: 0
   rInterior: 2
+  mejorTerreno: 3
+  peorTerreno: 0
   actuator: {fileID: 2028087826}
   arbitro: {fileID: 2028087818}
   cAction: 0
-  selected: 0
-  state: 0
+  controlador: {fileID: 0}
+  enemyBase: {fileID: 0}
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 0}
-  enemyBase: {fileID: 0}
   heuristic: {fileID: 0}
+  mybase: {fileID: 0}
+  selected: 0
+  state: 0
+  grid: {fileID: 0}
+  fuenteActual: {fileID: 0}
   step: 10
 --- !u!114 &2028087826
 MonoBehaviour:

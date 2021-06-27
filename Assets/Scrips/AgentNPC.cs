@@ -570,7 +570,7 @@ public class AgentNpc : Agent
 
     public bool InPosition()
     {
-        var distance = GetDistanceTwoPosition(transform, nearPosition.transform);
+        var distance = GetDistanceTwoPosition(transform, nearPosition);
 
         return distance == 0;
     }
@@ -666,7 +666,17 @@ public class AgentNpc : Agent
 
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearFont);
     }
-
+    public void Patrullar(Transform pos)
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.GoToTarget);
+        var origen = gameObject.transform.position;
+        var target = pos.position;
+        var rExterior = RExterior;
+        var cH = heuristic;
+        nearPosition = pos;
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, InPosition);
+    }
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
     para ir despues al punto de muerte.*/
