@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scrips.Arboles.Conditional
 {
-    public class AvanzoBase: UniBT.Conditional
+    public class CanGoToBase: UniBT.Conditional
     {
 
         private AgentNpc agente;
@@ -14,6 +14,6 @@ namespace Assets.Scrips.Arboles.Conditional
             Debug.Log($"Mi base {agente.name}");
         }
 
-        protected override bool IsUpdatable() => agente != null && agente.IsAttacking();
+        protected override bool IsUpdatable() => agente != null && agente.CanGoToBase();
     }
 }

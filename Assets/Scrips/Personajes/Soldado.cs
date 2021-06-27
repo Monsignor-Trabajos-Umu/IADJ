@@ -18,7 +18,7 @@ public class Soldado : AgentNpc
 
 
         vida = 100;
-        alcance = 1; // ataaa un bloque al rededor
+        alcance = 2; // ataca 2 bloques alrededor
         daño = 20;
 
 

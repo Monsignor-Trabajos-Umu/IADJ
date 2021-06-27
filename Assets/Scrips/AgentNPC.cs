@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AgentNpc : Agent
 {
@@ -33,7 +34,7 @@ public class AgentNpc : Agent
     public bool selected; // Si estoy seleccionado
     public State state = State.Normal; // State para las ordenes
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
-
+    private GridChungo grid; //Grid para calcular posiciones de los enemigos
 
     public bool InFormation => formation != null; // Si estoy en formacion
 
@@ -67,6 +68,8 @@ public class AgentNpc : Agent
         SaveOriginalColor();
         controlador = GameObject.FindGameObjectWithTag("controlador")
             .GetComponent<Controlador>();
+        grid= GameObject.Find("GridChungo")
+            .GetComponent<GridChungo>();
 
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<ArbitroSteering>();
@@ -521,6 +524,25 @@ public class AgentNpc : Agent
     public bool IsNotRunning() => cAction == CAction.None && state == State.Normal;
 
     public bool IsInjured() => vida < vidaMaxima / 2;
+
+
+    public bool CanGoToBase() => !NearBase();
+
+    public bool NearBase()
+    {
+        var basePosition = grid.GetNodeFromWorldPoint(enemyBase.transform.position);
+        var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+
+
+        var x = basePosition.gridX - currentPosition.gridX;
+        var z = basePosition.gridZ - currentPosition.gridZ;
+
+        var distance = Math.Max(Math.Abs(x), Math.Abs(z));
+
+        return distance <= alcance;
+
+
+    }
 
 
     //Resetea el estado y los steering especiales si los hubiera
