@@ -9,6 +9,8 @@ public class Soldado : AgentNpc
     {
         base.Start();
         // Movimiento
+        peorTerreno = 0;
+        mejorTerreno = 3;
         mAcceleration = 4;
         baseVelocity = 20;
         mAngularAcceleration = 45;

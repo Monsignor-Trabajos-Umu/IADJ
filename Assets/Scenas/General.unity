@@ -123,6 +123,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &39473214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 39473215}
+  m_Layer: 0
+  m_Name: EsquinaInfDer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &39473215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39473214}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -400, y: 0, z: -500}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &87481578
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +172,7 @@ GameObject:
   - component: {fileID: 87481581}
   - component: {fileID: 87481580}
   m_Layer: 0
-  m_Name: A-S-2
+  m_Name: A-S-1
   m_TagString: equipoRojo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,9 +386,12 @@ MonoBehaviour:
   debug: 0
   exterior: 0
   rInterior: 9.77
+  mejorTerreno: 3
+  peorTerreno: 0
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
+  controlador: {fileID: 0}
   enemyBase: {fileID: 471666431}
   finalSteering:
     angular: 0
@@ -800,7 +833,7 @@ Transform:
   - {fileID: 87481579}
   - {fileID: 556534426}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &375294677
 GameObject:
@@ -1384,7 +1417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507646446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 220, y: 10, z: 255}
+  m_LocalPosition: {x: -51, y: 10, z: 242}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 1936591521}
@@ -1552,9 +1585,12 @@ MonoBehaviour:
   debug: 0
   exterior: 0
   rInterior: 9.77
+  mejorTerreno: 3
+  peorTerreno: 0
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
+  controlador: {fileID: 0}
   enemyBase: {fileID: 471666431}
   finalSteering:
     angular: 0
@@ -2459,7 +2495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWorldSizeX: 1000
   gridWorldSizeZ: 1000
-  mostrarMapa: 1
+  mostrarMapa: 0
   nodeRaidus: 15
 --- !u!1 &635345973
 GameObject:
@@ -2845,7 +2881,7 @@ RectTransform:
   m_Children:
   - {fileID: 1155943120}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3058,7 +3094,7 @@ GameObject:
   - component: {fileID: 1026414724}
   - component: {fileID: 1026414727}
   m_Layer: 0
-  m_Name: Camara
+  m_Name: Camera
   m_TagString: equipoRojo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4202,7 +4238,7 @@ Transform:
   - {fileID: 1477057551}
   - {fileID: 863151229}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1424776349
 GameObject:
@@ -4548,9 +4584,12 @@ MonoBehaviour:
   debug: 0
   exterior: 0
   rInterior: 9.77
+  mejorTerreno: 3
+  peorTerreno: 0
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
+  controlador: {fileID: 0}
   enemyBase: {fileID: 0}
   finalSteering:
     angular: 0
@@ -6455,7 +6494,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2047639790
 GameObject:
@@ -6466,9 +6505,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2047639791}
-  - component: {fileID: 2047639792}
   m_Layer: 0
-  m_Name: GridChungo
+  m_Name: Inst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6488,26 +6526,6 @@ Transform:
   m_Father: {fileID: 1562519803}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2047639792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047639790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b934b41aac35b9469d24958d7e509ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridWorldSizeX: 1000
-  gridWorldSizeZ: 1000
-  terreno: {fileID: 1375434924}
-  nodeRaidus: 15
-  paredesLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  debug: 0
 --- !u!1 &2123696516
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 public class AgentNpc : Agent
 {
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
-    [SerializeField] private readonly int mejorTerreno = 0;
+    [SerializeField] protected int mejorTerreno = 3;
 
-    [SerializeField] private readonly int peorTerreno = 1;
+    [SerializeField] protected int peorTerreno = 0;
     // Actuadores
 
     [SerializeField] protected BaseActuator actuator;
@@ -20,7 +20,7 @@ public class AgentNpc : Agent
     [SerializeField] public CAction cAction = CAction.None; //  Action para las acciones
 
     // Controller
-    private Controlador controlador;
+    public Controlador controlador;
     [SerializeField] private AgentBase enemyBase;
     [SerializeField] private Steering finalSteering;
 
@@ -679,24 +679,7 @@ public class AgentNpc : Agent
         var origen = gameObject.transform.position;
         var rExterior = RExterior;
         var cH = this.heuristic;
-        var puntos = GameObject.FindGameObjectsWithTag("puntoInteres");
-        Vector3 target = Vector3.zero;
-        foreach (var p in puntos)
-        {
-            int valor = controlador.getInfluencia(p.transform.position);
-            if((valor <= 0 && tag == "equipoAzul") || (valor >= 0 && tag == "equipoRojo"))
-            {
-                target = p.transform.position;
-                break;
-            }
-            //Si están todos los puntos conquistados avanzamos a la base enemiga
-            if (target == Vector3.zero)
-            {
-                Debug.LogWarning("Sin puntos de interes");
-                target = enemyBase.transform.position;
-            }
-            arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
-        }
+
     }
     #endregion
 }
