@@ -65,6 +65,8 @@ public class AgentNpc : Agent
 
     #region SetColors
 
+    public void SetColorTotalWar() => SetHat(HatsTypes.Police);
+
     private void UpdateColor()
     {
         void SetColorSelected() => SetColor(Color.white);
@@ -78,7 +80,6 @@ public class AgentNpc : Agent
         void SetColorBoss() => SetHat(HatsTypes.Police);
 
         void SetColorSoldier() => SetHat(HatsTypes.CowBoy);
-
 
         // Solo cambiamos el color de la banda 
 

@@ -194,7 +194,7 @@ Transform:
   - {fileID: 805586736}
   - {fileID: 1274951359}
   m_Father: {fileID: 320966533}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &87481581
 MonoBehaviour:
@@ -947,14 +947,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1297666636}
   - {fileID: 576995631}
   - {fileID: 507646447}
   - {fileID: 87481579}
   - {fileID: 556534426}
   - {fileID: 1505766717}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330722285
 GameObject:
@@ -1729,7 +1728,7 @@ Transform:
   - {fileID: 235483517}
   - {fileID: 2046499703}
   m_Father: {fileID: 320966533}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &507646448
 MonoBehaviour:
@@ -1883,7 +1882,7 @@ MonoBehaviour:
   margen: 1.4500000476837158
   mAExterior: 4.78
   aInterior: 3.96
-  debug: 1
+  debug: 0
   exterior: 1
   rInterior: 5.73
   mejorTerreno: 3
@@ -2625,7 +2624,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 320966533}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &556534427
 MonoBehaviour:
@@ -2771,7 +2770,7 @@ Transform:
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 320966533}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &576995632
 MonoBehaviour:
@@ -4433,6 +4432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1297666636}
   - component: {fileID: 1297666635}
+  - component: {fileID: 1297666637}
   m_Layer: 0
   m_Name: Controlador
   m_TagString: controlador
@@ -4464,9 +4464,22 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 320966533}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1297666637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297666634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37be358ae3265ec4096e0962143ef01d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalWar: 0
 --- !u!1 &1322355959
 GameObject:
   m_ObjectHideFlags: 0
@@ -4954,7 +4967,7 @@ Transform:
   - {fileID: 1477057551}
   - {fileID: 863151229}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1424158335
 GameObject:
@@ -5857,7 +5870,7 @@ Transform:
   - {fileID: 366144251}
   - {fileID: 245797057}
   m_Father: {fileID: 320966533}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1505766718
 MonoBehaviour:
@@ -7891,7 +7904,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046499702}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000028088027}
-  m_LocalPosition: {x: 18.563656, y: -0.20706578, z: 77.42714}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.86367893, y: 0.86367893, z: 0.86367893}
   m_Children:
   - {fileID: 516079744}
