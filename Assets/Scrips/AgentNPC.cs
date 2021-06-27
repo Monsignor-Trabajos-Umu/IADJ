@@ -40,21 +40,7 @@ public class AgentNpc : Agent
 
    
 
-    //Comprueba si hay un enemigo en un radio de diez veces el radio exterior
-    public bool NearEnemy()
-    {
-        var coliders =
-            Physics.OverlapSphere(transform.position, (float) (RExterior * 10));
-        foreach (var c in coliders)
-        {
-            if (tag == "equipoRojo" && (c.tag == "baseAzul" || c.tag == "equipoAzul"))
-                return true;
-            if (tag == "equipoAzul" && (c.tag == "baseRoja" || c.tag == "equipoRojo"))
-                return true;
-        }
-
-        return false;
-    }
+   
 
     // Heuristca
     public virtual Heuristic GetHeuristic() => throw new NotImplementedException();
@@ -542,6 +528,30 @@ public class AgentNpc : Agent
         return distance <= alcance;
 
 
+    }
+
+
+    //Comprueba si hay un enemigo en un radio de diez veces el radio exterior
+    public bool NearEnemy()
+    {
+
+        //var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+
+
+        //grid.GetWorldPointFromNode()
+
+
+        var coliders =
+            Physics.OverlapSphere(transform.position, (float) (RExterior * 10));
+        foreach (var c in coliders)
+        {
+            if (tag == "equipoRojo" && (c.tag == "baseAzul" || c.tag == "equipoAzul"))
+                return true;
+            if (tag == "equipoAzul" && (c.tag == "baseRoja" || c.tag == "equipoRojo"))
+                return true;
+        }
+
+        return false;
     }
 
 
