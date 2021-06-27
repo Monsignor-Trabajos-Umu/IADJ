@@ -7946,7 +7946,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
   target: {fileID: 0}
-  useReferee: 0
+  useReferee: 1
   weight: 1
   targetPosition: {x: 0, y: 0, z: 0}
   targetExists: 0
@@ -8100,7 +8100,7 @@ MonoBehaviour:
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
   target: {fileID: 1293290123713329}
-  useReferee: 0
+  useReferee: 1
   weight: 0
 --- !u!1 &1958136636
 GameObject:

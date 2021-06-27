@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -221,8 +221,8 @@ GameObject:
   - component: {fileID: 10662509}
   - component: {fileID: 10662508}
   - component: {fileID: 10662507}
-  - component: {fileID: 10662506}
   - component: {fileID: 10662505}
+  - component: {fileID: 10662504}
   m_Layer: 0
   m_Name: ObjetivoBlender
   m_TagString: Untagged
@@ -230,6 +230,48 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &10662504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10662503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 0
+  mAngularAcceleration: 0
+  mRotation: 0
+  mVelocity: 0
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 0
+  actuator: {fileID: 0}
+  arbitro: {fileID: 0}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!114 &10662505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,46 +288,10 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 0}
   steeringList: []
   behaviors: []
   weightFormationOffset: 0
---- !u!114 &10662506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10662503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "da\xF1o": 2
-  mAcceleration: 2
-  mAngularAcceleration: 0
-  mRotation: 0
-  mVelocity: 3
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 30
-  vida: 2
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  margen: 1.1
-  mAExterior: 2
-  aInterior: 0
-  debug: 0
-  exterior: 0
-  rInterior: 2
-  actuator: {fileID: 0}
-  arbitro: {fileID: 10662505}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
 --- !u!65 &10662507
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2183,8 +2189,8 @@ GameObject:
   - component: {fileID: 573175540}
   - component: {fileID: 573175539}
   - component: {fileID: 573175538}
-  - component: {fileID: 573175537}
   - component: {fileID: 573175536}
+  - component: {fileID: 573175537}
   m_Layer: 0
   m_Name: ObjetivoPriority
   m_TagString: Untagged
@@ -2208,6 +2214,7 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 0}
   steeringList: []
   behaviors: []
   weightFormationOffset: 0
@@ -2220,34 +2227,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 573175535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   "da\xF1o": 2
-  mAcceleration: 2
+  mAcceleration: 0
   mAngularAcceleration: 0
   mRotation: 0
-  mVelocity: 3
+  mVelocity: 0
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 30
-  vida: 2
+  velocidad: 0
+  vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
   margen: 1.1
-  mAExterior: 2
+  mAExterior: 0
   aInterior: 0
   debug: 0
   exterior: 0
-  rInterior: 2
+  rInterior: 0
   actuator: {fileID: 0}
-  arbitro: {fileID: 573175536}
+  arbitro: {fileID: 0}
   cAction: 0
+  selected: 0
+  state: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!65 &573175538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5816,10 +5828,11 @@ GameObject:
   - component: {fileID: 1222997650}
   - component: {fileID: 1222997649}
   - component: {fileID: 1222997648}
-  - component: {fileID: 1222997647}
   - component: {fileID: 1222997646}
   - component: {fileID: 1222997645}
   - component: {fileID: 1222997644}
+  - component: {fileID: 1222997653}
+  - component: {fileID: 1222997647}
   m_Layer: 0
   m_Name: PriorityMenor
   m_TagString: Untagged
@@ -5887,6 +5900,7 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 0}
   steeringList: []
   collisionList: []
   distanceList: []
@@ -5902,34 +5916,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1222997643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1o": 2
-  mAcceleration: 2
-  mAngularAcceleration: 45
-  mRotation: 90
-  mVelocity: 3
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 30
-  vida: 2
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  margen: 1.1
-  mAExterior: 2
-  aInterior: 0
-  debug: 0
-  exterior: 0
-  rInterior: 2
-  actuator: {fileID: 0}
-  arbitro: {fileID: 0}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
 --- !u!65 &1222997648
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6028,6 +6017,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1222997653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222997643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 1222997647}
+  arbitro: {fileID: 1222997646}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &1243905724
 GameObject:
   m_ObjectHideFlags: 0
@@ -7180,10 +7211,11 @@ GameObject:
   - component: {fileID: 1509169485}
   - component: {fileID: 1509169484}
   - component: {fileID: 1509169483}
-  - component: {fileID: 1509169482}
   - component: {fileID: 1509169481}
   - component: {fileID: 1509169479}
   - component: {fileID: 1509169480}
+  - component: {fileID: 1509169488}
+  - component: {fileID: 1509169482}
   m_Layer: 0
   m_Name: Blender
   m_TagString: Untagged
@@ -7208,7 +7240,7 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 10662506}
+  target: {fileID: 10662504}
   useReferee: 1
   weight: 1
 --- !u!114 &1509169480
@@ -7251,6 +7283,7 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 0}
   steeringList: []
   behaviors: []
   weightFormationOffset: 0
@@ -7263,34 +7296,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1509169478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1o": 2
-  mAcceleration: 2
-  mAngularAcceleration: 45
-  mRotation: 90
-  mVelocity: 3
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 30
-  vida: 2
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  margen: 1.1
-  mAExterior: 2
-  aInterior: 0
-  debug: 0
-  exterior: 0
-  rInterior: 2
-  actuator: {fileID: 0}
-  arbitro: {fileID: 1509169481}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
 --- !u!65 &1509169483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7389,6 +7397,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1509169488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509169478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 1509169482}
+  arbitro: {fileID: 1509169481}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &1537081436
 GameObject:
   m_ObjectHideFlags: 0
@@ -9356,8 +9406,8 @@ GameObject:
   - component: {fileID: 1931833560}
   - component: {fileID: 1931833559}
   - component: {fileID: 1931833558}
-  - component: {fileID: 1931833557}
   - component: {fileID: 1931833556}
+  - component: {fileID: 1931833555}
   m_Layer: 0
   m_Name: ObjetivoPriorityMayor
   m_TagString: Untagged
@@ -9365,6 +9415,48 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1931833555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931833554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 0
+  mAngularAcceleration: 0
+  mRotation: 0
+  mVelocity: 0
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 0
+  actuator: {fileID: 0}
+  arbitro: {fileID: 0}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!114 &1931833556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9381,46 +9473,10 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 0}
   steeringList: []
   behaviors: []
   weightFormationOffset: 0
---- !u!114 &1931833557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931833554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "da\xF1o": 2
-  mAcceleration: 2
-  mAngularAcceleration: 0
-  mRotation: 0
-  mVelocity: 3
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 30
-  vida: 2
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  margen: 1.1
-  mAExterior: 2
-  aInterior: 0
-  debug: 0
-  exterior: 0
-  rInterior: 2
-  actuator: {fileID: 0}
-  arbitro: {fileID: 1931833556}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
 --- !u!65 &1931833558
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10067,10 +10123,11 @@ GameObject:
   - component: {fileID: 2055299811}
   - component: {fileID: 2055299810}
   - component: {fileID: 2055299809}
-  - component: {fileID: 2055299808}
   - component: {fileID: 2055299807}
   - component: {fileID: 2055299806}
   - component: {fileID: 2055299805}
+  - component: {fileID: 2055299814}
+  - component: {fileID: 2055299808}
   m_Layer: 0
   m_Name: PriorityMayor
   m_TagString: Untagged
@@ -10119,7 +10176,7 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 1931833557}
+  target: {fileID: 1931833555}
   useReferee: 1
   weight: 1
 --- !u!114 &2055299807
@@ -10138,6 +10195,7 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 0}
   steeringList: []
   collisionList: []
   distanceList: []
@@ -10153,34 +10211,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2055299804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1o": 2
-  mAcceleration: 2
-  mAngularAcceleration: 45
-  mRotation: 90
-  mVelocity: 3
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 30
-  vida: 2
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  margen: 1.1
-  mAExterior: 2
-  aInterior: 0
-  debug: 0
-  exterior: 0
-  rInterior: 2
-  actuator: {fileID: 0}
-  arbitro: {fileID: 0}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
 --- !u!65 &2055299809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10279,6 +10312,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2055299814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055299804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 2055299808}
+  arbitro: {fileID: 2055299807}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &2071354141
 GameObject:
   m_ObjectHideFlags: 0
