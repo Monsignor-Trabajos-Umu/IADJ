@@ -34,4 +34,14 @@ public class FuenteCurativa : MonoBehaviour
             }
         }
     }
+    private void OnDrawGizmos() // Gizmo: una línea en la dirección del objetivo
+    {
+        Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, (float) radioCuracion);
+      
+      
+            
+    }
+
+
 }

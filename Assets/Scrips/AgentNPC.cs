@@ -512,7 +512,7 @@ public class AgentNpc : Agent
 
     public bool IsInjured() => vida < vidaMaxima / 2;
 
-
+    public bool NotHealing() => !NearFont();
     public bool CanGoToBase() => !NearBase();
 
     public bool NearBase()
@@ -552,21 +552,23 @@ public class AgentNpc : Agent
     }
 
 
+    [SerializeField] private FuenteCurativa fuenteActual; // Fuente a la que voy yendo
+
     public bool NearFont()
     {
-        return false;
-        //var basePosition = grid.GetNodeFromWorldPoint(enemyBase.transform.position);
-        //var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+        if (fuenteActual == null) return false;
+        var basePosition = grid.GetNodeFromWorldPoint(fuenteActual.transform.position);
+        var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
 
 
-        //var x = basePosition.gridX - currentPosition.gridX;
-        //var z = basePosition.gridZ - currentPosition.gridZ;
+        var x = basePosition.gridX - currentPosition.gridX;
+        var z = basePosition.gridZ - currentPosition.gridZ;
 
-        //var distance = Math.Max(Math.Abs(x), Math.Abs(z));
+        var distance = Math.Max(Math.Abs(x), Math.Abs(z));
 
-        //distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
-        
-        //return distance < alcance;
+        distance -= (int)Math.Ceiling(fuenteActual.radioCuracion / grid.nodeDiameter);
+
+        return distance < alcance;
 
 
     }
@@ -677,6 +679,7 @@ public class AgentNpc : Agent
         var target = obj.transform.position;
         var rExterior = RExterior;
         var cH = heuristic;
+        fuenteActual = obj.GetComponent<FuenteCurativa>();
 
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearFont);
     }

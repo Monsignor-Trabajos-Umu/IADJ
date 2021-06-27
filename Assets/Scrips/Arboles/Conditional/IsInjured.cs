@@ -16,6 +16,6 @@ namespace Assets.Scrips.Arboles.Conditional
             Debug.Log($"Mi base {agente.name}");
         }
 
-        protected override bool IsUpdatable() => agente != null && agente.IsInjured();
+        protected override bool IsUpdatable() => agente != null && agente.IsInjured() && agente.NotHealing();
     }
 }

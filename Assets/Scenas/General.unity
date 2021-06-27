@@ -308,6 +308,8 @@ MonoBehaviour:
   mybase: {fileID: 576995633}
   selected: 0
   state: 0
+  fuenteActual: {fileID: 0}
+  step: 10
 --- !u!65 &87481585
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1718,7 +1720,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507646446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 262, y: 10, z: 242}
+  m_LocalPosition: {x: 262, y: 10, z: -245}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 1936591521}
@@ -1898,6 +1900,8 @@ MonoBehaviour:
   mybase: {fileID: 576995633}
   selected: 0
   state: 1
+  fuenteActual: {fileID: 0}
+  step: 5
 --- !u!65 &507646452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5560,6 +5564,8 @@ MonoBehaviour:
   mybase: {fileID: 471666431}
   selected: 0
   state: 0
+  fuenteActual: {fileID: 0}
+  step: 10
 --- !u!65 &1477057557
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6054,6 +6060,8 @@ MonoBehaviour:
   mybase: {fileID: 576995633}
   selected: 0
   state: 1
+  fuenteActual: {fileID: 0}
+  step: 10
 --- !u!65 &1505766723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7161,7 +7169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622a4388f3622aa4096f3c272c41713a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radioCuracion: 3
+  radioCuracion: 60
   curaSeg: 0.05
 --- !u!1 &1873308834
 GameObject:
