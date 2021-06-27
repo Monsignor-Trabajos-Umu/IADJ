@@ -8,7 +8,6 @@ namespace Assets.Scrips.Steering.Pathfinding.A
         // Steering para movernos y girar
         [SerializeField] private Arrive arrive;
         [SerializeField] private Vector3 currentTarget;
-        [SerializeField] private Vector3[] dPath;
 
 
         // [SerializeField] private int nodesCovered;
@@ -18,7 +17,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
 
         // Valores para el GetSteering
-        [SerializeField] private bool moving;
+        [SerializeField] public bool moving;
         [SerializeField] private int nodesToCover;
 
 
@@ -27,16 +26,12 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
         //Lista con los puntos donde ir
         [SerializeField] private Vector3[] path;
+        [SerializeField] private int targetIndex;
 
-        // Area para saber si hemos llegado\
+        // Area para saber si hemos llegado
         [SerializeField] private double radioTarget;
         [SerializeField] private Seek seek;
 
-
-        //Debug
-        //[SerializeField] protected bool debug;
-        [SerializeField] private int targetIndex;
-        [SerializeField] private Agent targetV;
 
         // Use this for initialization
         private void Start()
@@ -44,8 +39,6 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             arrive = gameObject.AddComponent<Arrive>();
             seek = gameObject.AddComponent<Seek>();
             lookWhereYouGoing = gameObject.AddComponent<LookWhereYouGoing>();
-            StartMoving(nodesToCover, origen.transform.position,
-                targetV.transform.position, 40, heuristic);
         }
 
         public override global::Steering GetSteering(AgentNpc agent)
@@ -59,6 +52,8 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             {
                 Debug.Log($"{agent.name} ha llegado al objetivo");
                 moving = false;
+
+                agent.GoToEnemyBaseEnded();
                 return steering;
             }
 
@@ -107,9 +102,9 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
         private void OnPathFound(Vector3[] newPath, bool pathSuccessful)
         {
+            Debug.Log($"Path Calculado pathSuccessful {pathSuccessful}");
             if (!pathSuccessful) return;
 
-            dPath = newPath;
             path = newPath.Take(nodesToCover).ToArray();
             moving = true;
             targetIndex = 0;
@@ -118,16 +113,16 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
         protected override void OnDrawGizmos()
         {
-            if (!debug || dPath == null) return;
-            for (var i = targetIndex; i < dPath.Length; i++)
+            if (!debug || path == null || !moving) return;
+            for (var i = targetIndex; i < path.Length; i++)
             {
                 Gizmos.color = Color.black;
-                Gizmos.DrawCube(dPath[i], Vector3.one);
+                Gizmos.DrawCube(path[i], Vector3.one);
 
                 if (i == targetIndex)
-                    Gizmos.DrawLine(transform.position, dPath[i]);
+                    Gizmos.DrawLine(transform.position, path[i]);
                 else
-                    Gizmos.DrawLine(dPath[i - 1], dPath[i]);
+                    Gizmos.DrawLine(path[i - 1], path[i]);
             }
         }
     }

@@ -1076,7 +1076,6 @@ GameObject:
   - component: {fileID: 507646456}
   - component: {fileID: 507646449}
   - component: {fileID: 507646448}
-  - component: {fileID: 507646457}
   m_Layer: 0
   m_Name: A-S-1
   m_TagString: equipoRojo
@@ -1173,16 +1172,16 @@ MonoBehaviour:
         child:
           id: 5
     00000004:
-      type: {class: DebugPrint, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      type: {class: AvanzoBase, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
         graphPosition:
           serializedVersion: 2
           x: 1156.6666
-          y: 84
-          width: 178.66675
-          height: 116.00001
+          y: -126.66667
+          width: 284.66675
+          height: 116.66667
         description: 
-        waitTime: 0
+        agente: {fileID: 0}
     00000005:
       type: {class: DebugPrint, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
@@ -1226,6 +1225,7 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 507646456}
   steeringList: []
   behaviors: []
   weightFormationOffset: 1
@@ -1262,15 +1262,15 @@ MonoBehaviour:
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
+  selected: 0
+  state: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
   mybase: {fileID: 576995633}
-  enemyBase: {fileID: 0}
+  enemyBase: {fileID: 471666431}
   heuristic: {fileID: 0}
-  step: 0
+  step: 10
 --- !u!65 &507646452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1371,30 +1371,16 @@ MonoBehaviour:
   weight: 1
   arrive: {fileID: 0}
   currentTarget: {x: 0, y: 0, z: 0}
-  dPath: []
   enemyBasePosition: {x: 0, y: 0, z: 0}
-  heuristic: {fileID: 507646457}
+  heuristic: {fileID: 0}
   lookWhereYouGoing: {fileID: 0}
   moving: 0
-  nodesToCover: 20
+  nodesToCover: 5
   origen: {fileID: 507646451}
   path: []
-  radioTarget: 0
-  seek: {fileID: 0}
   targetIndex: 0
-  targetV: {fileID: 576995633}
---- !u!114 &507646457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 507646446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de31ac7d108c69748a63dbd26b86bb9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  radioTarget: 1.3
+  seek: {fileID: 0}
 --- !u!1 &510715300
 GameObject:
   m_ObjectHideFlags: 0
@@ -3432,6 +3418,7 @@ MonoBehaviour:
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
+  aSteering: {fileID: 0}
   steeringList: []
   behaviors: []
   weightFormationOffset: 1
@@ -3468,11 +3455,11 @@ MonoBehaviour:
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
+  selected: 0
+  state: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  selected: 0
-  state: 0
   mybase: {fileID: 471666431}
   enemyBase: {fileID: 0}
   heuristic: {fileID: 0}

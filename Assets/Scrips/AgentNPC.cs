@@ -12,7 +12,10 @@ public class AgentNpc : Agent
     [SerializeField] private ArbitroSteering arbitro; // Asigna mis steerings.
 
     // Estados
-    [SerializeField] private CAction cAction = CAction.None; //  Action para las acciones
+    [SerializeField] public CAction cAction = CAction.None; //  Action para las acciones
+    public bool selected; // Si estoy seleccionado
+    public State state = State.Normal; // State para las ordenes
+    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
 
     // Controller
     private Controlador controlador;
@@ -26,9 +29,7 @@ public class AgentNpc : Agent
     [SerializeField] private readonly int mejorTerreno = 0;
     [SerializeField] private readonly int peorTerreno = 1;
 
-    public bool selected; // Si estoy seleccionado
-    public State state = State.Normal; // State para las ordenes
-    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
+
     public bool InFormation => formation != null; // Si estoy en formacion
 
 
@@ -39,7 +40,8 @@ public class AgentNpc : Agent
     public bool IsAttacking() => mybase != null && mybase.IsAttacking();
 
     public bool IsTotalWar() => mybase != null && mybase.IsTotalWar();
-    
+
+    public bool IsNotRunning() => cAction == CAction.None && state == State.Normal;
 
     public bool IsInjured() => vida < (vidaMaxima / 2);
    // Heuristca
@@ -58,6 +60,8 @@ public class AgentNpc : Agent
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<ArbitroSteering>();
         finalSteering = new Steering(0, new Vector3(0, 0, 0));
+
+        
     }
 
 
@@ -102,6 +106,9 @@ public class AgentNpc : Agent
                     case CAction.Forming:
                         SetColorForming();
                         break;
+                    case CAction.GoingToEnemy:
+                        SetHat(HatsTypes.Magician);
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -142,6 +149,7 @@ public class AgentNpc : Agent
                 UpdateNoAccelerated(finalSteering, Time.deltaTime);
                 break;
             case CAction.Forming:
+            case CAction.GoingToEnemy:
                 UpdateAccelerated(finalSteering, Time.deltaTime);
                 break;
             default:
@@ -415,12 +423,22 @@ public class AgentNpc : Agent
 
     #region Actions
     //Cuantos nodos queremos avanzar de una
-    [SerializeField, Range(1, 20)] private int step;
+    [SerializeField, Range(1, 20)] private int step=10;
     public void GoToEnemyBase()
     {
         ChangeState(State.Action);
         ChangeAction(CAction.GoingToEnemy);
-        arbitro.SetNewTargetAvanzoBase(step,transform.position,enemyBase.transform.position,enemyBase.RExterior,GetHeuristic());
+        var origen = gameObject.transform.position;
+        var target = enemyBase.transform.position;
+        var rExterior = enemyBase.RExterior;
+        var cH = this.heuristic;
+
+        arbitro.SetNewTargetAvanzoBase(step,origen,target,rExterior,cH);
+    }
+
+    public void GoToEnemyBaseEnded()
+    {
+        ResetStateAction();
     }
 
 

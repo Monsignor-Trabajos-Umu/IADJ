@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class ArbitroSteering : MonoBehaviour
 {
     protected AgentNpc agent; //Mi agenteNPC que llama al getSteering
-    private ASteering aSteering; // Go to target a*
+  
 
     [SerializeField] protected bool debug = false; //Debug flag
 
@@ -17,6 +17,7 @@ public abstract class ArbitroSteering : MonoBehaviour
 
     // SteeringBehaviour necesarios
     private GoTarget goToTarget; // Go to target
+    [SerializeField] protected ASteering aSteering; // Go to target a*
 
     private Dictionary<SteeringBehaviour, float> savedWeightDictionary;
 
@@ -30,6 +31,7 @@ public abstract class ArbitroSteering : MonoBehaviour
         // Creamos los steering necesarios
         formationOffset = gameObject.AddComponent<FormationOffset>();
         goToTarget = gameObject.AddComponent<GoTarget>();
+    
 
         // Añadimos los Steering a la lista
         steeringList = new List<SteeringBehaviour> {formationOffset};

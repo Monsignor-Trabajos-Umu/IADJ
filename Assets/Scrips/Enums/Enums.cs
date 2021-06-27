@@ -42,6 +42,7 @@ public enum State
     Normal,
     Waiting,
     Action,
+    Ended,
     
 }
 

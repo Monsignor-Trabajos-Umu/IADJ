@@ -4,15 +4,18 @@ using UniBT.Examples.Scripts;
 using UnityEngine;
 
 //Comprueba si el agenteNPC se encuentra por debajo del 50% de su vida máxima
-public class IsInjured : Conditional
+namespace Assets.Scrips.Arboles.Conditional
 {
-    private AgentNpc agente;
-
-    protected override void OnAwake()
+    public class IsInjured : UniBT.Conditional
     {
-        agente = gameObject.GetComponent<AgentNpc>();
-        Debug.Log($"Mi base {agente.name}");
-    }
+        private AgentNpc agente;
 
-    protected override bool IsUpdatable() => agente != null && agente.IsInjured();
+        protected override void OnAwake()
+        {
+            agente = gameObject.GetComponent<AgentNpc>();
+            Debug.Log($"Mi base {agente.name}");
+        }
+
+        protected override bool IsUpdatable() => agente != null && agente.IsInjured();
+    }
 }
