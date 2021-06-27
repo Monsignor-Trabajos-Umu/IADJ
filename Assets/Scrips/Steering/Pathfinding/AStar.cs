@@ -29,7 +29,7 @@ public class AStar : MonoBehaviour
 
         grid = Instantiate(gridChungoPrefab, parent).GetComponent<GridChungo>();
 
-        grid.name = $"{gridChungoPrefab} - {agenteNpc.name}";
+        grid.name = $"GridMap - {agenteNpc.name}";
 
         influeceMap = GameObject.Find("InfluenceController")
             .GetComponent<InfluenceMapControl>();
@@ -167,15 +167,15 @@ public class AStar : MonoBehaviour
         // Es decir la heuristic no puede sobrepasar a la real
         var extra = AliadoNadaEnemigo(nodeB) switch  
         {  
-            -1 => 0, // Enemigo
-            0 => -1, // 0 nada
-            1 => -2, // Aliado
+            -1 => 1, // Enemigo coste se mantiene
+            0 => 0.9, // No hay nada es preferible ir por aqui
+            1 => 0.7, // Aliado muy preferible ir por aqui
 
             _ => throw new ArgumentOutOfRangeException()
         };
 
         if(debug) Debug.Log(h);
-        return h ;
+        return (float) (extra * h) ;
 
     } 
 }
