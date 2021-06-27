@@ -6,8 +6,8 @@ namespace Assets.Scrips.Actions
     //Se mueve hacia el punto de interes más cercano no conquistado.
     //Si todos están conquistados, se mueve hacia la base enemiga.
     public class FindEnemy : UniBT.Action
-    {
-        [SerializeField] private AgentNpc agente;
+    { 
+        private AgentNpc agente;
 
         public override void Awake()
         {
@@ -41,7 +41,7 @@ namespace Assets.Scrips.Actions
                 Debug.LogWarning("Todo conquistado");
                 return Status.Failure;
             }
-            agente.GoTo(target);
+            agente.GoToEnemy(target);
             return Status.Success;
         }
 

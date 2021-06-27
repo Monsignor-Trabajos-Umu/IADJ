@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scrips.Steering.Pathfinding.A
@@ -32,6 +33,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
         [SerializeField] private Seek seek;
         [SerializeField] private int targetIndex;
 
+        [SerializeField] private Func<bool> checkCloser;
 
         // Use this for initialization
         private void Start()
@@ -43,17 +45,16 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
         public override global::Steering GetSteering(AgentNpc agent)
         {
+            Debug.Log(targetIndex);
             steering = new global::Steering(0, new Vector3(0, 0, 0));
             if (!moving) return steering;
             //Vemos si nos nos quedan nodos o que estamos ya al lado de la base
-            if (targetIndex - 1 == path.Length || agent.NearBase() ||
-                Vector3.Distance(agent.transform.position, path[targetIndex]) <=
-                agent.rInterior)
+            if (targetIndex == path.Length -1 || checkCloser())
             {
                 Debug.Log($"{agent.name} ha llegado al objetivo");
                 moving = false;
 
-                agent.GoToEnemyBaseEnded();
+                agent.ResetStateAndSteering();
                 return steering;
             }
 
@@ -93,10 +94,12 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
         public void StartMoving(int _nodes, Vector3 origen, Vector3 target,
             double _radioTarget,
-            Heuristic heuristic)
+            Heuristic heuristic,
+            Func<bool> _checkCloser)
         {
             radioTarget = _radioTarget;
             nodesToCover = _nodes;
+            checkCloser = _checkCloser;
             PathRequestManagerA.RequestPath(origen, target, heuristic, OnPathFound);
         }
 

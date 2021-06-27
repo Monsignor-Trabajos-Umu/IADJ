@@ -9,7 +9,7 @@ namespace Assets.Scrips.Actions
     {
        
 
-        [SerializeField] private AgentNpc agente;
+        private AgentNpc agente;
 
         public override void Awake()
         {
