@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4513533, g: 0.500935, b: 0.57280976, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2636,10 +2636,11 @@ GameObject:
   - component: {fileID: 501266438}
   - component: {fileID: 501266437}
   - component: {fileID: 501266436}
-  - component: {fileID: 501266435}
   - component: {fileID: 501266434}
   - component: {fileID: 501266433}
   - component: {fileID: 501266432}
+  - component: {fileID: 501266441}
+  - component: {fileID: 501266435}
   m_Layer: 0
   m_Name: AgentCube_Blue (2)
   m_TagString: Untagged
@@ -2664,7 +2665,7 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 0}
+  target: {fileID: 2135229751}
   useReferee: 1
   weight: 1
 --- !u!114 &501266433
@@ -2720,35 +2721,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 501266431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
-  "da\xF1o": 2
-  mAcceleration: 5
-  mAngularAcceleration: 45
-  masa: 2
-  mRotation: 180
-  mVelocity: 5
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 5
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
-  debug: 1
-  rInterior: 4
-  arbitro: {fileID: 501266434}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
 --- !u!65 &501266436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2846,6 +2821,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
+--- !u!114 &501266441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501266431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 501266435}
+  arbitro: {fileID: 501266434}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &501932179
 GameObject:
   m_ObjectHideFlags: 0
@@ -3441,10 +3458,11 @@ GameObject:
   - component: {fileID: 592189711}
   - component: {fileID: 592189710}
   - component: {fileID: 592189709}
-  - component: {fileID: 592189708}
   - component: {fileID: 592189707}
   - component: {fileID: 592189706}
   - component: {fileID: 592189705}
+  - component: {fileID: 592189714}
+  - component: {fileID: 592189708}
   m_Layer: 0
   m_Name: AgentCube_Blue (3)
   m_TagString: Untagged
@@ -3469,7 +3487,7 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 0}
+  target: {fileID: 2135229751}
   useReferee: 1
   weight: 1
 --- !u!114 &592189706
@@ -3525,35 +3543,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 592189704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
-  "da\xF1o": 2
-  mAcceleration: 5
-  mAngularAcceleration: 45
-  masa: 2
-  mRotation: 180
-  mVelocity: 5
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 5
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
-  debug: 1
-  rInterior: 4
-  arbitro: {fileID: 592189707}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
 --- !u!65 &592189709
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3651,6 +3643,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
+--- !u!114 &592189714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592189704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 592189708}
+  arbitro: {fileID: 592189707}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &610734318
 GameObject:
   m_ObjectHideFlags: 0
@@ -4748,9 +4782,10 @@ GameObject:
   - component: {fileID: 798301936}
   - component: {fileID: 798301935}
   - component: {fileID: 798301934}
-  - component: {fileID: 798301933}
   - component: {fileID: 798301932}
   - component: {fileID: 798301930}
+  - component: {fileID: 798301933}
+  - component: {fileID: 798301931}
   m_Layer: 0
   m_Name: AgentCube_Blue (1)
   m_TagString: Untagged
@@ -4775,9 +4810,21 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 856084978}
+  target: {fileID: 856084984}
   useReferee: 1
   weight: 1
+--- !u!114 &798301931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798301929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &798301932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4807,35 +4854,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 798301929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
   "da\xF1o": 2
   mAcceleration: 5
   mAngularAcceleration: 45
-  masa: 2
-  mRotation: 90
+  mRotation: 180
   mVelocity: 5
+  baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   velocidad: 0
-  vida: 5
+  vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
   debug: 0
-  rInterior: 4
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 798301931}
   arbitro: {fileID: 798301932}
   cAction: 0
+  selected: 0
+  state: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!65 &798301934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5027,8 +5078,9 @@ GameObject:
   - component: {fileID: 856084981}
   - component: {fileID: 856084980}
   - component: {fileID: 856084979}
-  - component: {fileID: 856084978}
   - component: {fileID: 856084977}
+  - component: {fileID: 856084984}
+  - component: {fileID: 856084978}
   m_Layer: 0
   m_Name: PuntoOeste
   m_TagString: Untagged
@@ -5065,35 +5117,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 856084976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
-  "da\xF1o": 2
-  mAcceleration: 0
-  mAngularAcceleration: 0
-  masa: 2
-  mRotation: 0
-  mVelocity: 0
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 3
-  vida: 5
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
-  debug: 0
-  rInterior: 4
-  arbitro: {fileID: 856084977}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
 --- !u!65 &856084979
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5191,6 +5217,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
+--- !u!114 &856084984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856084976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 856084978}
+  arbitro: {fileID: 856084977}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &864182322
 GameObject:
   m_ObjectHideFlags: 0
@@ -9122,9 +9190,10 @@ GameObject:
   - component: {fileID: 1445614138}
   - component: {fileID: 1445614137}
   - component: {fileID: 1445614136}
-  - component: {fileID: 1445614135}
   - component: {fileID: 1445614134}
   - component: {fileID: 1445614133}
+  - component: {fileID: 1445614141}
+  - component: {fileID: 1445614135}
   m_Layer: 0
   m_Name: AgentCube_Blue (7)
   m_TagString: Untagged
@@ -9149,7 +9218,7 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 856084978}
+  target: {fileID: 856084984}
   useReferee: 1
   weight: 1
 --- !u!114 &1445614134
@@ -9181,35 +9250,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1445614132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
-  "da\xF1o": 2
-  mAcceleration: 5
-  mAngularAcceleration: 45
-  masa: 2
-  mRotation: 90
-  mVelocity: 5
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 5
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
-  debug: 0
-  rInterior: 4
-  arbitro: {fileID: 1445614134}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
 --- !u!65 &1445614136
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9307,6 +9350,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1445614141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445614132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 1445614135}
+  arbitro: {fileID: 1445614134}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &1455172699
 GameObject:
   m_ObjectHideFlags: 0
@@ -9320,10 +9405,11 @@ GameObject:
   - component: {fileID: 1455172706}
   - component: {fileID: 1455172705}
   - component: {fileID: 1455172704}
-  - component: {fileID: 1455172703}
   - component: {fileID: 1455172702}
   - component: {fileID: 1455172701}
   - component: {fileID: 1455172700}
+  - component: {fileID: 1455172709}
+  - component: {fileID: 1455172703}
   m_Layer: 0
   m_Name: AgentCube_Blue (4)
   m_TagString: Untagged
@@ -9348,7 +9434,7 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 0}
+  target: {fileID: 2135229751}
   useReferee: 1
   weight: 1
 --- !u!114 &1455172701
@@ -9404,35 +9490,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455172699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
-  "da\xF1o": 2
-  mAcceleration: 5
-  mAngularAcceleration: 45
-  masa: 2
-  mRotation: 180
-  mVelocity: 5
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 5
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
-  debug: 1
-  rInterior: 4
-  arbitro: {fileID: 1455172702}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
 --- !u!65 &1455172704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9530,6 +9590,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
+--- !u!114 &1455172709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455172699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 1455172703}
+  arbitro: {fileID: 1455172702}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &1469749750
 GameObject:
   m_ObjectHideFlags: 0
@@ -9868,9 +9970,10 @@ GameObject:
   - component: {fileID: 1497162480}
   - component: {fileID: 1497162479}
   - component: {fileID: 1497162478}
-  - component: {fileID: 1497162477}
   - component: {fileID: 1497162476}
   - component: {fileID: 1497162475}
+  - component: {fileID: 1497162483}
+  - component: {fileID: 1497162477}
   m_Layer: 0
   m_Name: AgentCube_Blue (6)
   m_TagString: Untagged
@@ -9895,7 +9998,7 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 856084978}
+  target: {fileID: 856084984}
   useReferee: 1
   weight: 1
 --- !u!114 &1497162476
@@ -9927,35 +10030,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1497162474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
-  "da\xF1o": 2
-  mAcceleration: 5
-  mAngularAcceleration: 45
-  masa: 2
-  mRotation: 90
-  mVelocity: 5
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 5
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
-  debug: 0
-  rInterior: 4
-  arbitro: {fileID: 1497162476}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
 --- !u!65 &1497162478
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10053,6 +10130,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1497162483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497162474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 1497162477}
+  arbitro: {fileID: 1497162476}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &1508750883
 GameObject:
   m_ObjectHideFlags: 0
@@ -10939,9 +11058,10 @@ GameObject:
   - component: {fileID: 1726047286}
   - component: {fileID: 1726047285}
   - component: {fileID: 1726047284}
-  - component: {fileID: 1726047283}
   - component: {fileID: 1726047282}
   - component: {fileID: 1726047281}
+  - component: {fileID: 1726047289}
+  - component: {fileID: 1726047283}
   m_Layer: 0
   m_Name: AgentCube_Blue (5)
   m_TagString: Untagged
@@ -10966,7 +11086,7 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 856084978}
+  target: {fileID: 856084984}
   useReferee: 1
   weight: 1
 --- !u!114 &1726047282
@@ -10998,35 +11118,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1726047280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
-  "da\xF1o": 2
-  mAcceleration: 5
-  mAngularAcceleration: 45
-  masa: 2
-  mRotation: 90
-  mVelocity: 5
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 5
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
-  debug: 0
-  rInterior: 4
-  arbitro: {fileID: 1726047282}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
 --- !u!65 &1726047284
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11124,6 +11218,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1726047289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726047280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 1726047283}
+  arbitro: {fileID: 1726047282}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &1731567457
 GameObject:
   m_ObjectHideFlags: 0
@@ -14575,6 +14711,7 @@ GameObject:
   - component: {fileID: 2135229752}
   - component: {fileID: 2135229750}
   - component: {fileID: 2135229751}
+  - component: {fileID: 2135229757}
   m_Layer: 0
   m_Name: PuntoEste
   m_TagString: Untagged
@@ -14632,8 +14769,8 @@ MonoBehaviour:
   debug: 0
   exterior: 0
   rInterior: 2
-  actuator: {fileID: 0}
-  arbitro: {fileID: 0}
+  actuator: {fileID: 2135229757}
+  arbitro: {fileID: 2135229750}
   cAction: 0
   selected: 0
   state: 0
@@ -14741,6 +14878,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
+--- !u!114 &2135229757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135229749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2667882577406500167
 Transform:
   m_ObjectHideFlags: 0
@@ -15373,10 +15522,11 @@ GameObject:
   - component: {fileID: 3061497078866788688}
   - component: {fileID: 3039176639996909319}
   - component: {fileID: 3039176639996909323}
-  - component: {fileID: 3038182833133005833}
   - component: {fileID: 3038182833133005834}
   - component: {fileID: 3038182833133005835}
   - component: {fileID: 3038182833133005836}
+  - component: {fileID: 3038182833133005837}
+  - component: {fileID: 3038182833133005833}
   m_Layer: 0
   m_Name: AgentCube_Blue
   m_TagString: Untagged
@@ -15393,35 +15543,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3038182833133005832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049130579c43fda41aa459bfbacda81a, type: 3}
+  m_Script: {fileID: 11500000, guid: d02d235e8152a154bae313982553eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alcance: 2
-  "da\xF1o": 2
-  mAcceleration: 5
-  mAngularAcceleration: 45
-  masa: 2
-  mRotation: 180
-  mVelocity: 5
-  rotacion: 0
-  vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
-  vida: 5
-  vidaMaxima: 100
-  vVelocidad: {x: 0, y: 0, z: 0}
-  mAExterior: 4
-  aInterior: 2
-  debug: 1
-  rInterior: 4
-  arbitro: {fileID: 3038182833133005834}
-  cAction: 0
-  finalSteering:
-    angular: 0
-    lineal: {x: 0, y: 0, z: 0}
-  mejorTerreno: 0
-  peorTerreno: 1
-  selected: 0
-  state: 0
 --- !u!114 &3038182833133005834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15483,9 +15607,51 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 0}
+  target: {fileID: 2135229751}
   useReferee: 1
   weight: 1
+--- !u!114 &3038182833133005837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038182833133005832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 2
+  mAcceleration: 5
+  mAngularAcceleration: 45
+  mRotation: 180
+  mVelocity: 5
+  baseVelocity: 0
+  rotacion: 0
+  vAceleracion: {x: 0, y: 0, z: 0}
+  velocidad: 0
+  vida: 100
+  vidaMaxima: 100
+  vVelocidad: {x: 0, y: 0, z: 0}
+  margen: 1.1
+  mAExterior: 0
+  aInterior: 0
+  debug: 0
+  exterior: 0
+  rInterior: 2
+  actuator: {fileID: 3038182833133005833}
+  arbitro: {fileID: 3038182833133005834}
+  cAction: 0
+  selected: 0
+  state: 0
+  finalSteering:
+    angular: 0
+    lineal: {x: 0, y: 0, z: 0}
+  mybase: {fileID: 0}
+  enemyBase: {fileID: 0}
+  heuristic: {fileID: 0}
+  step: 10
 --- !u!1 &3038568614945587198
 GameObject:
   m_ObjectHideFlags: 0
