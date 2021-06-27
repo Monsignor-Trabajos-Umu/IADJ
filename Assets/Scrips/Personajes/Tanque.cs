@@ -19,5 +19,5 @@ public class Tanque : AgentNpc
         heuristica = gameObject.AddComponent(typeof(Euclidea)) as Euclidea;
     }
 
-    public Heuristic GetHeuristic() => heuristica;
+    public override Heuristic GetHeuristic() => heuristica;
 }

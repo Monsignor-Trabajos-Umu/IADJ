@@ -21,9 +21,7 @@ public class GridChungo : MonoBehaviour
     //Uso un array en vez de una lista porque es mas rapido buscar
     [field: SerializeField] public Node[,] GetGrid { get; protected set; }
 
-    [SerializeField] protected bool debug;
-
-    public void EnableDebug() => debug = true; 
+    [SerializeField] public bool debug=false;
 
     private void Awake()
     {
@@ -114,7 +112,7 @@ public class GridChungo : MonoBehaviour
         return neightBours;
     }
 
-    protected void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if (!debug) return;
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSizeX, 1, gridWorldSizeZ));

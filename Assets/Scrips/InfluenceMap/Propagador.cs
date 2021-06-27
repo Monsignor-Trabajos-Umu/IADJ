@@ -21,6 +21,8 @@ public class Propagador : MonoBehaviour, IPropagator
     public int Radio => radio;
     public GameObject Object => this.gameObject;
 
+    public bool Positive() => influencia > 0;
+
     public NodoI GridPosition => mapa.GetGridPosition(transform.position);
 
     // Use this for initialization

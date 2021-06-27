@@ -38,8 +38,12 @@ public class AgentNpc : Agent
     public bool IsAttacking() => mybase != null && mybase.IsAttacking();
 
     public bool IsTotalWar() => mybase != null && mybase.IsTotalWar();
+    
 
     public bool IsInjured() => vida < (vidaMaxima / 2);
+   // Heuristca
+    public virtual Heuristic GetHeuristic() => throw new System.NotImplementedException();
+    [SerializeField] protected Manhattan heuristic;
 
     protected override void Start()
     {

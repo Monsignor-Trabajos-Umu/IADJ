@@ -12,10 +12,7 @@ public class InfluenceMap
     //Si por ejemplo es 2, un propagador no influyen en más de dos casillas de distancia
     protected int maxPropagacion;
 
-    public float GetValue(int x, int y)
-    {
-        return grid.getGrid[x, y].valor;
-    }
+    public float GetValue(int x, int y) => grid.getGrid[x, y].valor;
 
     public InfluenceMap(InfluenceGrid g, int distancia, int w, int h)
     {

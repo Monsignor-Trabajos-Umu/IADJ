@@ -17,5 +17,5 @@ public class Arquero : AgentNpc
 
 
     // Start is called before the first frame update
-    public Heuristic GetHeuristic() => heuristica;
+    public override Heuristic GetHeuristic() => heuristica;
 }

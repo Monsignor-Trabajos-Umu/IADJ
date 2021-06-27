@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Soldado : AgentNpc
 {
-    private Manhattan heuristica;
+   
     protected override void Start()
     {
         base.Start();
@@ -21,7 +21,7 @@ public class Soldado : AgentNpc
         daño = 20;
 
 
-        heuristica = gameObject.AddComponent(typeof(Manhattan)) as Manhattan;
+        heuristic = gameObject.AddComponent(typeof(Manhattan)) as Manhattan;
     }
     public new void ArrivedToTarget()
     {
@@ -31,7 +31,7 @@ public class Soldado : AgentNpc
 
     } 
 
-    public Heuristic GetHeuristic() => heuristica;
+    public override Heuristic GetHeuristic() => heuristic;
 
 
 }

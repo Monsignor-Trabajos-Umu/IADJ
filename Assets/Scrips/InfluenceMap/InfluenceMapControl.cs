@@ -50,4 +50,8 @@ public class InfluenceMapControl : MonoBehaviour
     {
         mapaInfluencia.SetInfluence(pos, value);
     }
+
+
+    public float GetInfluence(int x, int y) => mapaInfluencia.GetValue(x, y);
+    
 }
