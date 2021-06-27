@@ -172,12 +172,12 @@ GameObject:
   - component: {fileID: 87481581}
   - component: {fileID: 87481580}
   m_Layer: 0
-  m_Name: A-S-1
+  m_Name: A-S-2
   m_TagString: equipoRojo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &87481579
 Transform:
   m_ObjectHideFlags: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   radio: 1
   influencia: -2
   mapa: {fileID: 589110567}
-  mapaNiebla: {fileID: 1584114449}
+  mapaNiebla: {fileID: 0}
 --- !u!114 &87481582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,7 +1266,7 @@ MonoBehaviour:
   radio: 1
   influencia: 5
   mapa: {fileID: 589110567}
-  mapaNiebla: {fileID: 1584114449}
+  mapaNiebla: {fileID: 0}
 --- !u!114 &471666431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1417,7 +1417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507646446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -51, y: 10, z: 242}
+  m_LocalPosition: {x: 262, y: 10, z: 242}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 1936591521}
@@ -1498,16 +1498,18 @@ MonoBehaviour:
         child:
           id: 5
     00000004:
-      type: {class: AvanzoBase, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      type: {class: Selector, ns: UniBT, asm: Assembly-CSharp}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 1156.6666
-          y: -126.66667
-          width: 284.66675
-          height: 116.66667
+          x: 1068
+          y: 67.33333
+          width: 178
+          height: 114.66667
         description: 
-        agente: {fileID: 0}
+        children:
+        - id: 6
+        abortOnConditionChanged: 1
     00000005:
       type: {class: DebugPrint, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
@@ -1519,6 +1521,30 @@ MonoBehaviour:
           height: 116
         description: 
         waitTime: 0
+    00000006:
+      type: {class: CanGoToBase, ns: Assets.Scrips.Arboles.Conditional, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1304.6666
+          y: -90.66667
+          width: 178
+          height: 114.666664
+        description: 
+        dontReEvaluateOnRunning: 0
+        child:
+          id: 7
+    00000007:
+      type: {class: AvanzoBase, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1550
+          y: -68
+          width: 284.66663
+          height: 116.66667
+        description: 
+        agente: {fileID: 0}
 --- !u!114 &507646449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,7 +1560,7 @@ MonoBehaviour:
   radio: 1
   influencia: -2
   mapa: {fileID: 589110567}
-  mapaNiebla: {fileID: 1584114449}
+  mapaNiebla: {fileID: 0}
 --- !u!114 &507646450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2402,7 +2428,7 @@ MonoBehaviour:
   radio: 1
   influencia: -5
   mapa: {fileID: 589110567}
-  mapaNiebla: {fileID: 1584114449}
+  mapaNiebla: {fileID: 0}
 --- !u!114 &576995633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5120,74 +5146,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 589110568}
-  - {fileID: 1584114447}
   - {fileID: 2047639791}
   m_Father: {fileID: 1970294821}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1584114446
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1584114447}
-  - component: {fileID: 1584114448}
-  - component: {fileID: 1584114449}
-  m_Layer: 0
-  m_Name: FogControl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1584114447
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584114446}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1562519803}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1584114448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584114446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdd16a8a503c29e4995a1abc0db409d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridWorldSizeX: 1000
-  gridWorldSizeZ: 1000
-  mostrarMapa: 1
-  nodeRaidus: 15
---- !u!114 &1584114449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584114446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dabfd07c65a3eb4da0488e72a70d0cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  propagacion: 2
-  frecuenciaUpdate: 3
-  gridMap: {fileID: 1584114448}
 --- !u!1 &1587865992
 GameObject:
   m_ObjectHideFlags: 0
@@ -6505,8 +6467,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2047639791}
+  - component: {fileID: 2047639792}
   m_Layer: 0
-  m_Name: Inst
+  m_Name: GridChungo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6524,8 +6487,28 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1562519803}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047639792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047639790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b934b41aac35b9469d24958d7e509ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridWorldSizeX: 1000
+  gridWorldSizeZ: 1000
+  terreno: {fileID: 1375434924}
+  nodeRaidus: 15
+  paredesLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  debug: 0
 --- !u!1 &2123696516
 GameObject:
   m_ObjectHideFlags: 0

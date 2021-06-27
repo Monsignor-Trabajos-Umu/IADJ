@@ -46,7 +46,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             steering = new global::Steering(0, new Vector3(0, 0, 0));
             if (!moving) return steering;
             //Vemos si nos nos quedan nodos o que estamos ya al lado de la base
-            if (targetIndex == path.Length-1 || agent.NearBase())
+            if (targetIndex == path.Length || agent.NearBase())
             {
                 Debug.Log($"{agent.name} ha llegado al objetivo");
                 moving = false;
