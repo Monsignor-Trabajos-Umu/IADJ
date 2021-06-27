@@ -526,9 +526,8 @@ public class AgentNpc : Agent
         var distance = Math.Max(Math.Abs(x), Math.Abs(z));
 
         distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
-        Debug.Log(distance);
-
-        return distance <= alcance;
+        
+        return distance < alcance;
 
 
     }
