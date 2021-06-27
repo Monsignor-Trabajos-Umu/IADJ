@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AgentNpc : Agent
 {
+    //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
+    [SerializeField] protected int mejorTerreno = 3;
+
+    [SerializeField] protected int peorTerreno = 0;
     // Actuadores
 
     [SerializeField] protected BaseActuator actuator;
@@ -13,55 +18,32 @@ public class AgentNpc : Agent
 
     // Estados
     [SerializeField] public CAction cAction = CAction.None; //  Action para las acciones
-    public bool selected; // Si estoy seleccionado
-    public State state = State.Normal; // State para las ordenes
-    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
 
     // Controller
-    private Controlador controlador;
+    public Controlador controlador;
+    [SerializeField] private AgentBase enemyBase;
     [SerializeField] private Steering finalSteering;
 
     // Formaciones
     [SerializeField] private Formation formation;
-
-
-    //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
-    [SerializeField] private readonly int mejorTerreno = 0;
-    [SerializeField] private readonly int peorTerreno = 1;
-
-
-    public bool InFormation => formation != null; // Si estoy en formacion
+    [SerializeField] protected Manhattan heuristic;
 
 
     // Para saber si estoy atacando
     [SerializeField] private AgentBase mybase;
-    [SerializeField] private AgentBase enemyBase;
+    public bool selected; // Si estoy seleccionado
+    public State state = State.Normal; // State para las ordenes
+    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
+    private GridChungo grid; //Grid para calcular posiciones de los enemigos
 
-    public bool IsAttacking() => mybase != null && mybase.IsAttacking();
+    public bool InFormation => formation != null; // Si estoy en formacion
 
-    public bool IsTotalWar() => mybase != null && mybase.IsTotalWar();
-
-    public bool IsNotRunning() => cAction == CAction.None && state == State.Normal;
-
-    public bool IsInjured() => vida < (vidaMaxima / 2);
    
-    //Comprueba si hay un enemigo en un radio de diez veces el radio exterior
-    public bool NearEnemy()
-    {
-        var coliders = Physics.OverlapSphere(this.transform.position, (float)(RExterior *10));
-        foreach(var c in coliders)
-        {
-            if (tag == "equipoRojo" && (c.tag == "baseAzul" || c.tag == "equipoAzul"))
-                return true;
-            if (tag == "equipoAzul" && (c.tag == "baseRoja" || c.tag == "equipoRojo"))
-                return true;
-        }
-        return false;
-    }
+
+   
 
     // Heuristca
-    public virtual Heuristic GetHeuristic() => throw new System.NotImplementedException();
-    [SerializeField] protected Manhattan heuristic;
+    public virtual Heuristic GetHeuristic() => throw new NotImplementedException();
 
 
     protected override void Start()
@@ -72,12 +54,12 @@ public class AgentNpc : Agent
         SaveOriginalColor();
         controlador = GameObject.FindGameObjectWithTag("controlador")
             .GetComponent<Controlador>();
+        grid= GameObject.Find("GridChungo")
+            .GetComponent<GridChungo>();
 
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<ArbitroSteering>();
         finalSteering = new Steering(0, new Vector3(0, 0, 0));
-
-        
     }
 
 
@@ -413,14 +395,14 @@ public class AgentNpc : Agent
             if (indice == mejorTerreno)
             {
                 mVelocity = (float) (baseVelocity * 1.5);
-                Debug.Log("Aumento Velocidad");
+                //Debug.Log("Aumento Velocidad");
             }
             else
             {
                 if (indice == peorTerreno)
                 {
                     mVelocity = (float) (baseVelocity / 1.5);
-                    Debug.Log("Disminuyo Velocidad");
+                    //Debug.Log("Disminuyo Velocidad");
                 }
                 else
                 {
@@ -450,41 +432,6 @@ public class AgentNpc : Agent
 
 
     #region Actions
-    //Cuantos nodos queremos avanzar de una
-    [SerializeField, Range(1, 20)] private int step=10;
-    public void GoToEnemyBase()
-    {
-        ChangeState(State.Action);
-        ChangeAction(CAction.GoingToEnemy);
-        var origen = gameObject.transform.position;
-        var target = enemyBase.transform.position;
-        var rExterior = enemyBase.RExterior;
-        var cH = this.heuristic;
-
-        arbitro.SetNewTargetAvanzoBase(step,origen,target,rExterior,cH);
-    }
-
-    public void GoTo(GameObject obj)
-    {
-        ChangeState(State.Action);
-        ChangeAction(CAction.GoToTarget);
-        var origen = gameObject.transform.position;
-        var target = obj.transform.position;
-        var rExterior = this.RExterior;
-        var cH = this.heuristic;
-
-        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
-    }
-
-
-
-
-    public void GoToEnemyBaseEnded()
-    {
-        ResetStateAction();
-    }
-
-
 
     /**
      * Voy a una posicion
@@ -556,6 +503,131 @@ public class AgentNpc : Agent
 
     #region Actions Segunda parte
 
+    // Condiciones
+    public bool IsAttacking() => mybase != null && mybase.IsAttacking();
+
+    public bool IsTotalWar() => mybase != null && mybase.IsTotalWar();
+
+    public bool IsNotRunning() => cAction == CAction.None && state == State.Normal;
+
+    public bool IsInjured() => vida < vidaMaxima / 2;
+
+
+    public bool CanGoToBase() => !NearBase();
+
+    public bool NearBase()
+    {
+        var basePosition = grid.GetNodeFromWorldPoint(enemyBase.transform.position);
+        var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+
+
+        var x = basePosition.gridX - currentPosition.gridX;
+        var z = basePosition.gridZ - currentPosition.gridZ;
+
+        var distance = Math.Max(Math.Abs(x), Math.Abs(z));
+
+        distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
+        
+        return distance < alcance;
+
+
+    }
+
+
+    public bool NearFont()
+    {
+        var basePosition = grid.GetNodeFromWorldPoint(enemyBase.transform.position);
+        var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+
+
+        var x = basePosition.gridX - currentPosition.gridX;
+        var z = basePosition.gridZ - currentPosition.gridZ;
+
+        var distance = Math.Max(Math.Abs(x), Math.Abs(z));
+
+        distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
+        
+        return distance < alcance;
+
+
+    }
+
+
+
+    //Comprueba si hay un enemigo en un radio de diez veces el radio exterior
+    public bool NearEnemy()
+    {
+
+        //var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+
+
+        //grid.GetWorldPointFromNode()
+
+
+        var coliders =
+            Physics.OverlapSphere(transform.position, (float) (RExterior * 10));
+        foreach (var c in coliders)
+        {
+            if (tag == "equipoRojo" && (c.tag == "baseAzul" || c.tag == "equipoAzul"))
+                return true;
+            if (tag == "equipoAzul" && (c.tag == "baseRoja" || c.tag == "equipoRojo"))
+                return true;
+        }
+
+        return false;
+    }
+
+    //Acciones como tal
+
+
+    //Resetea el estado y los steering especiales si los hubiera
+    // En la segunda parte el estado por defecto va a ser waiting
+    public void ResetStateAndSteering()
+    {
+        if (state == State.Action)
+            arbitro.CancelSteeringAction(cAction);
+
+
+        ChangeAction(CAction.None);
+        ChangeState(State.Waiting);
+    }
+
+    //Cuantos nodos queremos avanzar de una
+    [SerializeField] [Range(1, 20)] private readonly int step = 10;
+
+    //Avanzamos hacia la base enemiga step casillas
+    public void GoToEnemyBase()
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.GoingToEnemy);
+        var origen = gameObject.transform.position;
+        var target = enemyBase.transform.position;
+        var rExterior = enemyBase.RExterior;
+        var cH = heuristic;
+
+        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
+    }
+
+    // Avanzamos hacia un GameObject X casillas
+    public void GoTo(GameObject obj)
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.GoingToEnemy);
+        var origen = gameObject.transform.position;
+        var target = obj.transform.position;
+        var rExterior = RExterior;
+        var cH = heuristic;
+
+        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
+    }
+
+
+    public void GoToEnemyBaseEnded()
+    {
+        ResetStateAndSteering();
+    }
+
+
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
     para ir despues al punto de muerte.*/
     protected void Morir()
@@ -582,12 +654,13 @@ public class AgentNpc : Agent
 
     public void Huir(GameObject obj)
     {
+
         ChangeState(State.Action);
         ChangeAction(CAction.Retreat);
         var origen = gameObject.transform.position;
         var target = obj.transform.position;
-        var rExterior = this.RExterior;
-        var cH = this.heuristic;
+        var rExterior = RExterior;
+        var cH = heuristic;
 
         arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
     }
@@ -619,7 +692,7 @@ public class AgentNpc : Agent
         var origen = gameObject.transform.position;
         var target = mybase.transform.position;
         var rExterior = mybase.RExterior;
-        var cH = this.heuristic;
+        var cH = heuristic;
 
         arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
     }
@@ -632,24 +705,7 @@ public class AgentNpc : Agent
         var origen = gameObject.transform.position;
         var rExterior = RExterior;
         var cH = this.heuristic;
-        var puntos = GameObject.FindGameObjectsWithTag("puntoInteres");
-        Vector3 target = Vector3.zero;
-        foreach (var p in puntos)
-        {
-            int valor = controlador.getInfluencia(p.transform.position);
-            if((valor <= 0 && tag == "equipoAzul") || (valor >= 0 && tag == "equipoRojo"))
-            {
-                target = p.transform.position;
-                break;
-            }
-            //Si están todos los puntos conquistados avanzamos a la base enemiga
-            if (target == Vector3.zero)
-            {
-                Debug.LogWarning("Sin puntos de interes");
-                target = enemyBase.transform.position;
-            }
-            arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
-        }
+
     }
     #endregion
 }

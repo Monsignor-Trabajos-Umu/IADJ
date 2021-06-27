@@ -26,11 +26,11 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
         //Lista con los puntos donde ir
         [SerializeField] private Vector3[] path;
-        [SerializeField] private int targetIndex;
 
         // Area para saber si hemos llegado
         [SerializeField] private double radioTarget;
         [SerializeField] private Seek seek;
+        [SerializeField] private int targetIndex;
 
 
         // Use this for initialization
@@ -45,10 +45,10 @@ namespace Assets.Scrips.Steering.Pathfinding.A
         {
             steering = new global::Steering(0, new Vector3(0, 0, 0));
             if (!moving) return steering;
-            //Vemos si nos nos quedan nodos o que estamos ya al lado
-            if (targetIndex == path.Length-1 ||
-                Vector3.Distance(agent.transform.position, path[path.Length-1]) <
-                radioTarget/2)
+            //Vemos si nos nos quedan nodos o que estamos ya al lado de la base
+            if (targetIndex - 1 == path.Length || agent.NearBase() ||
+                Vector3.Distance(agent.transform.position, path[targetIndex]) <=
+                agent.rInterior)
             {
                 Debug.Log($"{agent.name} ha llegado al objetivo");
                 moving = false;
@@ -98,6 +98,16 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             radioTarget = _radioTarget;
             nodesToCover = _nodes;
             PathRequestManagerA.RequestPath(origen, target, heuristic, OnPathFound);
+        }
+
+        public void CancelPath()
+        {
+            Debug.Log("Cancelando path");
+
+            if (!moving) return;
+            moving = false;
+            path = null;
+            targetIndex = 0;
         }
 
         private void OnPathFound(Vector3[] newPath, bool pathSuccessful)

@@ -23,8 +23,25 @@ namespace Assets.Scrips.Actions
             if (agente.state != State.Normal || agente.cAction != CAction.None) return Status.Failure;
 
             Debug.Log($"{agente.name} Buscando Enemigos");
-            agente.FindEnemy();
 
+            var puntos = GameObject.FindGameObjectsWithTag("puntoInteres");
+            GameObject target = null;
+            foreach (var p in puntos)
+            {
+                int valor = agente.controlador.getInfluencia(p.transform.position);
+                if ((valor <= 0 && agente.tag == "equipoAzul") || (valor >= 0 && agente.tag == "equipoRojo"))
+                {
+                    target = p;
+                    break;
+                }
+            }
+            //Si no hay puntos que conquistar no hacemos nada
+            if (target == null)
+            {
+                Debug.LogWarning("Todo conquistado");
+                return Status.Failure;
+            }
+            agente.GoTo(target);
             return Status.Success;
         }
 

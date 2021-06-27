@@ -71,6 +71,8 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
                             if (!openSet.Contains(neighbor))
                                 openSet.Add(neighbor);
+                            else 
+                                openSet.UpdateItem(neighbor);
                         }
                     }
                 }

@@ -9,6 +9,8 @@ public class Soldado : AgentNpc
     {
         base.Start();
         // Movimiento
+        peorTerreno = 0;    
+        mejorTerreno = 3;
         mAcceleration = 4;
         baseVelocity = 20;
         mAngularAcceleration = 45;
@@ -16,7 +18,7 @@ public class Soldado : AgentNpc
 
 
         vida = 100;
-        alcance = 1; // ataaa un bloque al rededor
+        alcance = 1; // ataca 2 bloques alrededor
         daño = 20;
 
 

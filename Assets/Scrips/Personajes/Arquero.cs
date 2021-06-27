@@ -8,6 +8,8 @@ public class Arquero : AgentNpc
     protected override void Start()
     {
         base.Start();
+        peorTerreno = 3;
+        mejorTerreno = 4;
         vida = 50;
         alcance = 2;
         daño = 10;

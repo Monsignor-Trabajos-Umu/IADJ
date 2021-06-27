@@ -11,7 +11,7 @@ public class GridChungo : MonoBehaviour
     //Booleano para saber si el terreno es el de Unity o no.
     [SerializeField] public Terrain terreno;
 
-    protected float nodeDiameter;
+    public float nodeDiameter;
     [SerializeField] protected float nodeRaidus;
     [SerializeField] protected LayerMask paredesLayerMask;
 
@@ -111,6 +111,32 @@ public class GridChungo : MonoBehaviour
 
         return neightBours;
     }
+
+
+
+    public List<Node> GetNeigbours(Node node,int range)
+    {
+        var neightBours = new List<Node>();
+        for (var x = -range; x <= range; x++)
+        for (var z = -range; z <= range; z++)
+        {
+            if (x == 0 && z == 0) continue;
+            // pNeigboursX/Z son las posiciones en el grid de los nodos
+            var pNeigboursX = node.gridX + x;
+            var pNeigboursZ = node.gridZ + z;
+            // Ahora hay que comprobar que esos nodos existen
+            // Es decir que estan dentro del grid
+            if (pNeigboursX >= 0 && pNeigboursX < gridSizeX &&
+                pNeigboursZ >= 0 && pNeigboursZ < gridSizeZ)
+            {
+                var nodo = GetGrid[pNeigboursX, pNeigboursZ];
+                if (!nodo.pared) neightBours.Add(nodo);
+            }
+        }
+
+        return neightBours;
+    }
+
 
     protected virtual void OnDrawGizmos()
     {

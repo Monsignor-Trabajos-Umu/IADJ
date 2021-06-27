@@ -24,7 +24,7 @@ namespace Assets.Scrips.Actions
 
             if (agente.state == State.Action && agente.cAction == CAction.Retreat) return Status.Running;
 
-            if (agente.state != State.Normal || agente.cAction != CAction.None) return Status.Failure;
+            if (agente.state != State.Waiting || agente.cAction != CAction.None) return Status.Failure;
 
             GameObject target = null;
             float aux = Mathf.Infinity;
@@ -37,11 +37,20 @@ namespace Assets.Scrips.Actions
                     target = p;
                 }
             }
+
             if(target == null)
             {
                 Debug.Log($"{agente.name} No se encontró ninguna fuente");
                 return Status.Failure;
-            } 
+            }
+
+
+
+            if (Vector3.Distance(target.transform.position, agente.transform.position) <= agente.RExterior)
+            {
+                Debug.Log($"{agente.name} Estamos al lado de la fuente");
+                return Status.Success;
+            }
             Debug.Log($"{agente.name} Huyendo a la fuente más cercana");
             agente.Huir(target);
 

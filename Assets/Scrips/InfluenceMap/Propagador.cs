@@ -10,7 +10,7 @@ public interface IPropagator
 
 public class Propagador : MonoBehaviour, IPropagator
 {
-    [SerializeField,Range(0,10)] private int radio;
+    [SerializeField,Range(0,10)] public int radio;
 
     [SerializeField] private int influencia;
 
