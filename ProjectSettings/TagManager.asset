@@ -7,6 +7,12 @@ TagManager:
   - controlador
   - pReferencia1
   - ground
+  - puntoInteres
+  - puntoCurativo
+  - baseAzul
+  - equipoRojo
+  - baseRoja
+  - equipoAzul
   layers:
   - Default
   - TransparentFX

@@ -34,6 +34,7 @@ public enum CAction
     GoToTarget,
     GoingToEnemy,
     Retreat,
+    Defend,
     Forming
 
 }

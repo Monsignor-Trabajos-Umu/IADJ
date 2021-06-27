@@ -44,9 +44,25 @@ public class AgentNpc : Agent
     public bool IsNotRunning() => cAction == CAction.None && state == State.Normal;
 
     public bool IsInjured() => vida < (vidaMaxima / 2);
-   // Heuristca
+   
+    //Comprueba si hay un enemigo en un radio de diez veces el radio exterior
+    public bool NearEnemy()
+    {
+        var coliders = Physics.OverlapSphere(this.transform.position, (float)(RExterior *10));
+        foreach(var c in coliders)
+        {
+            if (tag == "equipoRojo" && (c.tag == "baseAzul" || c.tag == "equipoAzul"))
+                return true;
+            if (tag == "equipoAzul" && (c.tag == "baseRoja" || c.tag == "equipoRojo"))
+                return true;
+        }
+        return false;
+    }
+
+    // Heuristca
     public virtual Heuristic GetHeuristic() => throw new System.NotImplementedException();
     [SerializeField] protected Manhattan heuristic;
+
 
     protected override void Start()
     {
@@ -109,6 +125,12 @@ public class AgentNpc : Agent
                     case CAction.GoingToEnemy:
                         SetHat(HatsTypes.Magician);
                         break;
+                    case CAction.Defend:
+                        SetHat(HatsTypes.Police);
+                        break;
+                    case CAction.Retreat:
+                        SetHat(HatsTypes.Crown);
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -150,6 +172,12 @@ public class AgentNpc : Agent
                 break;
             case CAction.Forming:
             case CAction.GoingToEnemy:
+                UpdateAccelerated(finalSteering, Time.deltaTime);
+                break;
+            case CAction.Defend:
+                UpdateAccelerated(finalSteering, Time.deltaTime);
+                break;
+            case CAction.Retreat:
                 UpdateAccelerated(finalSteering, Time.deltaTime);
                 break;
             default:
@@ -439,7 +467,7 @@ public class AgentNpc : Agent
     public void GoTo(GameObject obj)
     {
         ChangeState(State.Action);
-        ChangeAction(CAction.GoingToEnemy);
+        ChangeAction(CAction.GoToTarget);
         var origen = gameObject.transform.position;
         var target = obj.transform.position;
         var rExterior = this.RExterior;
@@ -447,6 +475,9 @@ public class AgentNpc : Agent
 
         arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
     }
+
+
+
 
     public void GoToEnemyBaseEnded()
     {
@@ -549,22 +580,16 @@ public class AgentNpc : Agent
         if (vida < 0) Morir();
     }
 
-    //Se busca la fuente mas cercana para ir hacia ella
-    protected void Huir()
+    public void Huir(GameObject obj)
     {
-        var fuentes = GameObject.FindGameObjectsWithTag("puntoCurativo");
-        var distanciaMinima = Mathf.Infinity;
-        GameObject fuenteProxima;
-        foreach (var fuente in fuentes)
-        {
-            var aux = fuente.transform.position - transform.position;
-            if (distanciaMinima > aux.magnitude)
-            {
-                distanciaMinima = aux.magnitude;
-                fuenteProxima = fuente;
-            }
-        }
-        //Aplicar un Pathfinding a una casilla al lado de una fuente próxima
+        ChangeState(State.Action);
+        ChangeAction(CAction.Retreat);
+        var origen = gameObject.transform.position;
+        var target = obj.transform.position;
+        var rExterior = this.RExterior;
+        var cH = this.heuristic;
+
+        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
     }
 
     private IEnumerator respawn()
@@ -584,6 +609,19 @@ public class AgentNpc : Agent
         //Hacemos que vuelva a ser visible
         gameObject.GetComponent<Renderer>().enabled = true;
         yield return new WaitForSeconds(5);
+    }
+
+
+    public void Defend()
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.Defend);
+        var origen = gameObject.transform.position;
+        var target = mybase.transform.position;
+        var rExterior = mybase.RExterior;
+        var cH = this.heuristic;
+
+        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
     }
 
     #endregion

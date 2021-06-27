@@ -43,7 +43,7 @@ namespace Assets.Scrips.Actions
                 return Status.Failure;
             } 
             Debug.Log($"{agente.name} Huyendo a la fuente más cercana");
-            agente.GoTo(target);
+            agente.Huir(target);
 
             return Status.Success;
         }
