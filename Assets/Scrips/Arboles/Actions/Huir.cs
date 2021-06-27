@@ -1,33 +1,57 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using Pada1.BBCore;           // Code attributes
-//using Pada1.BBCore.Tasks;     // TaskStatus
-//using Pada1.BBCore.Framework; // BasePrimitiveAction
+using UniBT;
+using UnityEngine;
 
-//[Action("MyActions/Huir")]
-//[Help("Huye hacia la fuente curativa más cercana")]
-//public class Huir : BasePrimitiveAction
-//{
-//    [InParam("npcPoint")]
-//    public Transform position;
-//    // Main class method, invoked by the execution engine.
-//    public override TaskStatus OnUpdate()
-//    {
+namespace Assets.Scrips.Actions
+{
 
-//        var fuentes = GameObject.FindGameObjectsWithTag("puntoCurativo");
+    //Se mueve hacia la base enemiga
+    public class Huir : UniBT.Action
+    {
 
-//        var aux = Mathf.Infinity;
-//        GameObject fuente;
-//        foreach (GameObject f in fuentes)
-//        {
-//            if (Vector3.Distance(position.position, f.transform.position) < aux){
-//                fuente = f;
-//            }
-//        }
-//        //TODO Mover el personaje a la fuente
-        
-//        return TaskStatus.COMPLETED;
 
-//    } // OnUpdate
-//}
+        [SerializeField] private GameObject[] fuentes;
+        [SerializeField] private AgentNpc agente;
+
+        public override void Awake()
+        {
+            fuentes = GameObject.FindGameObjectsWithTag("puntoCurativo");
+            agente = gameObject.GetComponent<AgentNpc>();
+        }
+
+
+        protected override Status OnUpdate()
+        {
+
+            if (agente.state == State.Action && agente.cAction == CAction.Retreat) return Status.Running;
+
+            if (agente.state != State.Normal || agente.cAction != CAction.None) return Status.Failure;
+
+            GameObject target = null;
+            float aux = Mathf.Infinity;
+            foreach(var p in fuentes)
+            {
+                var distance = Vector3.Distance(p.transform.position, gameObject.transform.position);
+                if (aux > distance)
+                {
+                    aux = distance;
+                    target = p;
+                }
+            }
+            if(target == null)
+            {
+                Debug.Log($"{agente.name} No se encontró ninguna fuente");
+                return Status.Failure;
+            } 
+            Debug.Log($"{agente.name} Huyendo a la fuente más cercana");
+            agente.GoTo(target);
+
+            return Status.Success;
+        }
+
+        // abort when the parent conditional changed on previous status is running.
+        public override void Abort()
+        {
+            agente.ResetStateAction();
+        }
+    }
+}

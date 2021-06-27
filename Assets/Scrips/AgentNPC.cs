@@ -436,6 +436,18 @@ public class AgentNpc : Agent
         arbitro.SetNewTargetAvanzoBase(step,origen,target,rExterior,cH);
     }
 
+    public void GoTo(GameObject obj)
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.GoingToEnemy);
+        var origen = gameObject.transform.position;
+        var target = obj.transform.position;
+        var rExterior = this.RExterior;
+        var cH = this.heuristic;
+
+        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
+    }
+
     public void GoToEnemyBaseEnded()
     {
         ResetStateAction();
