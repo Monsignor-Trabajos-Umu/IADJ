@@ -56,6 +56,12 @@ public class Controlador : MonoBehaviour
         agent.ResetStateAction();
     }
 
+    public int getInfluencia(Vector3 posicion)
+    {
+        var influenceController = GameObject.FindGameObjectWithTag("mapaInfluencia");
+        var influenceMap = influenceController.GetComponent<InfluenceMapControl>();
+        return influenceMap.GetGridPosition(posicion).valor;
+    }
 
     private void SetWaiting()
     {

@@ -624,5 +624,32 @@ public class AgentNpc : Agent
         arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
     }
 
+    //Se acerca al siguiente punto de interes que no esté conquistado
+    public void FindEnemy()
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.GoToTarget);
+        var origen = gameObject.transform.position;
+        var rExterior = RExterior;
+        var cH = this.heuristic;
+        var puntos = GameObject.FindGameObjectsWithTag("puntoInteres");
+        Vector3 target = Vector3.zero;
+        foreach (var p in puntos)
+        {
+            int valor = controlador.getInfluencia(p.transform.position);
+            if((valor <= 0 && tag == "equipoAzul") || (valor >= 0 && tag == "equipoRojo"))
+            {
+                target = p.transform.position;
+                break;
+            }
+            //Si están todos los puntos conquistados avanzamos a la base enemiga
+            if (target == Vector3.zero)
+            {
+                Debug.LogWarning("Sin puntos de interes");
+                target = enemyBase.transform.position;
+            }
+            arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
+        }
+    }
     #endregion
 }

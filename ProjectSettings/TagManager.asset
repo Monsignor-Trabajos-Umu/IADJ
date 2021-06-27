@@ -13,6 +13,7 @@ TagManager:
   - equipoRojo
   - baseRoja
   - equipoAzul
+  - mapaInfluencia
   layers:
   - Default
   - TransparentFX
