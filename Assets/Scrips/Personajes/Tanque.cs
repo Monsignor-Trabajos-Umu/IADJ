@@ -11,6 +11,8 @@ public class Tanque : AgentNpc
     protected override void Start()
     {
         base.Start();
+        peorTerreno = 4;
+        mejorTerreno = 2;
         vida = 250;
         alcance = 1;
         daño = 5;
