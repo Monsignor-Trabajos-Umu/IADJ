@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class AgentNpc : Agent
+public abstract class AgentNpc : Agent
 {
     // Actuadores
 
@@ -156,10 +156,13 @@ public class AgentNpc : Agent
                         SetColorForming();
                         break;
                     case CAction.GoingToEnemy:
-                        SetHat(HatsTypes.Magician);
+                        SetHat(HatsTypes.Police);
+                        break;
+                        case CAction.AttackEnemy: 
+                            SetHat(HatsTypes.Viking);
                         break;
                     case CAction.Defend:
-                        SetHat(HatsTypes.Police);
+                        SetHat(HatsTypes.Pajama);
                         break;
                     case CAction.Retreat:
                         SetHat(HatsTypes.Crown);
@@ -582,7 +585,7 @@ public class AgentNpc : Agent
 
     public bool NearEnemy()
     {
-        if (atando) return true; // Estoy atando no hace falta que me calcules cosas
+        if (atacando) return true; // Estoy atacando no hace falta que me calcules cosas
         enemigos = new HashSet<AgentNpc>();
         var castRange = grid.nodeRaidus + grid.nodeRaidus * 2 * alcance;
 
@@ -678,46 +681,20 @@ para ir despues al punto de muerte.*/
         StartCoroutine("respawn");
     }
 
-    private bool atando;
+    protected bool atacando;
 
-    public void Atacar(AgentNpc objetivo)
+
+    protected  IEnumerator WaitBeforeAttack(float secondsToWait, int realDamage, AgentNpc objetivo,ParticleSystem particles)
     {
-        IEnumerator waitBeforeAttack(float secondsToWait, int realDamage)
-        {
-            atando = true;
-            objetivo.RecibirDaño(realDamage);
-            yield return new WaitForSeconds(secondsToWait);
-            atando = false;
-        }
-
-        if (atando) return;
-        //Nos acercamos al objetivo hasta estar a el número de casillas necesarias
-
-        //Lanzamos el ataque
-
-        //Nos quedamos quietos durante un espacio de tiempo por haber atacado. \
-
-        //Resteamos el estado si lo habia
-        Debug.Log($"Ataco a {objetivo.name}");
-        ChangeState(State.Action);
-        ChangeAction(CAction.AttackEnemy);
-
-
-        var dBase = BestTerrain() ? damage * 2 : damage;
-
-        var cDefensa = objetivo.WorstTerrain() ? defensa * 2 : defensa;
-
-        if (Mathf.Approximately(Random.value, 1)) dBase *= 2;
-
-        var realDamage = dBase - cDefensa;
-
-
-        StartCoroutine(waitBeforeAttack(1, realDamage));
-
-
-        //Volvemos a resetear por si acaso
+        atacando = true;
+        particles.Play();
+        objetivo.RecibirDaño(realDamage);
+        yield return new WaitForSeconds(secondsToWait);
         ResetStateAndSteering();
+        atacando = false;
     }
+
+    protected internal abstract void Atacar(AgentNpc objetivo);
 
 //El personaje recibe el damage. Si ese damage deja su vida a 0 o menos, entonces lo mata
 

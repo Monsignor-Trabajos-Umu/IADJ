@@ -16,6 +16,10 @@ public class Arquero : AgentNpc
         heuristica = gameObject.AddComponent(typeof(Chebychev)) as Chebychev;
     }
 
+    protected internal override void Atacar(AgentNpc objetivo)
+    {
+        throw new System.NotImplementedException();
+    }
 
 
     // Start is called before the first frame update

@@ -34,6 +34,33 @@ public class Soldado : AgentNpc
 
     public override Heuristic GetHeuristic() => heuristic;
 
+    protected internal override void Atacar(AgentNpc objetivo)
+    {
+        if (atacando) return;
+        //Nos acercamos al objetivo hasta estar a el número de casillas necesarias
+
+        //Lanzamos el ataque
+
+        //Nos quedamos quietos durante un espacio de tiempo por haber atacado. \
+
+        //Resteamos el estado si lo habia
+        Debug.Log($"Ataco a {objetivo.name}");
+        ChangeState(State.Action);
+        ChangeAction(CAction.AttackEnemy);
+
+
+        var dBase = BestTerrain() ? damage * 2 : damage;
+
+        var cDefensa = objetivo.WorstTerrain() ? defensa * 2 : defensa;
+
+        if (Mathf.Approximately(Random.value, 1)) dBase *= 2;
+
+        var realDamage = dBase - cDefensa;
+
+        var paticles = objetivo.transform.Find("ShellExplosion").gameObject.GetComponent<ParticleSystem>();
+        StartCoroutine(base.WaitBeforeAttack(1, realDamage,objetivo,paticles));
+    }
+
 
 }
 
