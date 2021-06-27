@@ -533,10 +533,9 @@ public class AgentNpc : Agent
 
     }
 
-
-    public bool NearFont()
+    public bool NearMYBase()
     {
-        var basePosition = grid.GetNodeFromWorldPoint(enemyBase.transform.position);
+        var basePosition = grid.GetNodeFromWorldPoint(mybase.transform.position);
         var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
 
 
@@ -548,6 +547,26 @@ public class AgentNpc : Agent
         distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
         
         return distance < alcance;
+
+
+    }
+
+
+    public bool NearFont()
+    {
+        return false;
+        //var basePosition = grid.GetNodeFromWorldPoint(enemyBase.transform.position);
+        //var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+
+
+        //var x = basePosition.gridX - currentPosition.gridX;
+        //var z = basePosition.gridZ - currentPosition.gridZ;
+
+        //var distance = Math.Max(Math.Abs(x), Math.Abs(z));
+
+        //distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
+        
+        //return distance < alcance;
 
 
     }
@@ -593,7 +612,7 @@ public class AgentNpc : Agent
     }
 
     //Cuantos nodos queremos avanzar de una
-    [SerializeField] [Range(1, 20)] private readonly int step = 10;
+    [SerializeField] [Range(1, 20)] private int step = 10;
 
     //Avanzamos hacia la base enemiga step casillas
     public void GoToEnemyBase()
@@ -605,11 +624,11 @@ public class AgentNpc : Agent
         var rExterior = enemyBase.RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearBase);
     }
 
     // Avanzamos hacia un GameObject X casillas
-    public void GoTo(GameObject obj)
+    public void GoToEnemy(GameObject obj)
     {
         ChangeState(State.Action);
         ChangeAction(CAction.GoingToEnemy);
@@ -618,14 +637,11 @@ public class AgentNpc : Agent
         var rExterior = RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearEnemy);
     }
 
 
-    public void GoToEnemyBaseEnded()
-    {
-        ResetStateAndSteering();
-    }
+
 
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
@@ -662,7 +678,7 @@ public class AgentNpc : Agent
         var rExterior = RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearFont);
     }
 
     private IEnumerator respawn()
@@ -694,7 +710,7 @@ public class AgentNpc : Agent
         var rExterior = mybase.RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetAvanzoBase(step, origen, target, rExterior, cH);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearMYBase);
     }
 
     //Se acerca al siguiente punto de interes que no esté conquistado

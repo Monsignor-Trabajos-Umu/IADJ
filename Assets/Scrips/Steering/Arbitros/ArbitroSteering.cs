@@ -74,8 +74,8 @@ public abstract class ArbitroSteering : MonoBehaviour
 
     #region Acciones arboles y segunda parte
 
-    public void SetNewTargetAvanzoBase(int _nodes, Vector3 origen, Vector3 target,double radioExterior,
-        Heuristic heuristic) => aSteering.StartMoving(_nodes, origen, target,radioExterior, heuristic);
+    public void SetNewTargetWithA(int _nodes, Vector3 origen, Vector3 target,double radioExterior,
+        Heuristic heuristic,Func<bool> checkCloser) => aSteering.StartMoving(_nodes, origen, target,radioExterior, heuristic,checkCloser);
 
 
     public void CancelSteeringAction(CAction action)
@@ -86,9 +86,8 @@ public abstract class ArbitroSteering : MonoBehaviour
             case CAction.GoToTarget: // No se van a dar no hago nada
                 break;
             case CAction.GoingToEnemy: // Estoy haciendo un aSteering
-                aSteering.CancelPath();
-                break;
             case CAction.Retreat:
+                aSteering.CancelPath();
                 break;
             case CAction.Defend:
                 break;

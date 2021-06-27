@@ -9,8 +9,8 @@ namespace Assets.Scrips.Actions
     {
 
 
-        [SerializeField] private GameObject[] fuentes;
-        [SerializeField] private AgentNpc agente;
+       private GameObject[] fuentes;
+       private AgentNpc agente;
 
         public override void Awake()
         {
