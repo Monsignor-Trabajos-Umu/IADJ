@@ -31,7 +31,7 @@ public class Body : MonoBehaviour
 
     public float rotacion;
     public Vector3 vAceleracion;
-    public float velocidad;
+    public float velocidad => vVelocidad.magnitude;
 
     public double
         vida = 100; //Vida actual. Por defecto se inicializa al valor de la vida máxima
@@ -234,6 +234,7 @@ public class Body : MonoBehaviour
     //Cura una cantidad de vida al personaje si no tiene la vida al máximo
     public void Curar(double cantidad)
     {
+        Debug.Log($"{name} curando");
         if (vida < vidaMaxima) vida += cantidad;
     }
 

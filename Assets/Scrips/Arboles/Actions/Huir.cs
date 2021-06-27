@@ -26,6 +26,10 @@ namespace Assets.Scrips.Actions
 
             if (agente.state != State.Waiting || agente.cAction != CAction.None) return Status.Failure;
 
+
+            if (agente.AlreadyHealing()) return Status.Success;
+
+
             GameObject target = null;
             float aux = Mathf.Infinity;
             foreach(var p in fuentes)

@@ -34,7 +34,7 @@ public class AgentNpc : Agent
     public bool selected; // Si estoy seleccionado
     public State state = State.Normal; // State para las ordenes
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
-    private GridChungo grid; //Grid para calcular posiciones de los enemigos
+    [SerializeField] private GridChungo grid; //Grid para calcular posiciones de los enemigos
 
     public bool InFormation => formation != null; // Si estoy en formacion
 
@@ -54,9 +54,6 @@ public class AgentNpc : Agent
         SaveOriginalColor();
         controlador = GameObject.FindGameObjectWithTag("controlador")
             .GetComponent<Controlador>();
-        grid= GameObject.Find("GridChungo")
-            .GetComponent<GridChungo>();
-
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<ArbitroSteering>();
         finalSteering = new Steering(0, new Vector3(0, 0, 0));
@@ -374,7 +371,7 @@ public class AgentNpc : Agent
 
         //rotacion = (float) Math.Floor(rotacion);
 
-        velocidad = vVelocidad.magnitude;
+        //velocidad = vVelocidad.magnitude;
     }
 
     private void UpdateNoAccelerated(Steering steering, float time)
@@ -513,7 +510,7 @@ public class AgentNpc : Agent
 
     public bool IsInjured() => vida < vidaMaxima / 2;
 
-    public bool NotHealing() => !NearFont();
+    public bool AlreadyHealing() => NearFont();
     public bool CanGoToBase() => !NearBase();
 
     public bool NearBase()
@@ -608,6 +605,10 @@ public class AgentNpc : Agent
     {
         if (state == State.Action)
             arbitro.CancelSteeringAction(cAction);
+
+        vVelocidad = Vector3.zero;
+        vAceleracion = Vector3.zero;
+
 
 
         ChangeAction(CAction.None);

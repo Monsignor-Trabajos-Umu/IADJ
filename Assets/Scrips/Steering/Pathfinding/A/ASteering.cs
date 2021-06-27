@@ -45,7 +45,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
         public override global::Steering GetSteering(AgentNpc agent)
         {
-            Debug.Log(targetIndex);
+            //Debug.Log(targetIndex);
             steering = new global::Steering(0, new Vector3(0, 0, 0));
             if (!moving) return steering;
             //Vemos si nos nos quedan nodos o que estamos ya al lado de la base

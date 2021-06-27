@@ -284,7 +284,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -308,6 +307,7 @@ MonoBehaviour:
   mybase: {fileID: 576995633}
   selected: 0
   state: 0
+  grid: {fileID: 0}
   fuenteActual: {fileID: 0}
   step: 10
 --- !u!65 &87481585
@@ -918,8 +918,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622a4388f3622aa4096f3c272c41713a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radioCuracion: 100
   curaSeg: 0.05
+  multiplier: 0
+  radioCuracion: 100
 --- !u!1 &320966532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,7 +1590,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 300
   vidaMaxima: 300
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -1875,7 +1875,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 40
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -1899,6 +1898,7 @@ MonoBehaviour:
   mybase: {fileID: 576995633}
   selected: 0
   state: 1
+  grid: {fileID: 2047639792}
   fuenteActual: {fileID: 0}
   step: 5
 --- !u!65 &507646452
@@ -2808,7 +2808,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -5553,7 +5552,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -5577,6 +5575,7 @@ MonoBehaviour:
   mybase: {fileID: 471666431}
   selected: 0
   state: 0
+  grid: {fileID: 0}
   fuenteActual: {fileID: 0}
   step: 10
 --- !u!65 &1477057557
@@ -6049,7 +6048,6 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 40
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
@@ -6073,6 +6071,7 @@ MonoBehaviour:
   mybase: {fileID: 576995633}
   selected: 0
   state: 1
+  grid: {fileID: 0}
   fuenteActual: {fileID: 0}
   step: 10
 --- !u!65 &1505766723
@@ -7182,8 +7181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622a4388f3622aa4096f3c272c41713a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radioCuracion: 60
   curaSeg: 0.05
+  multiplier: 5.68
+  radioCuracion: 16.82
 --- !u!1 &1873308834
 GameObject:
   m_ObjectHideFlags: 0
