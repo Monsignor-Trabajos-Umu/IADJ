@@ -72,10 +72,32 @@ public abstract class ArbitroSteering : MonoBehaviour
 
     private Steering GetGoToTargetSteering() => goToTarget.GetSteering(agent);
 
-    #region Acciones arboles
+    #region Acciones arboles y segunda parte
 
     public void SetNewTargetAvanzoBase(int _nodes, Vector3 origen, Vector3 target,double radioExterior,
         Heuristic heuristic) => aSteering.StartMoving(_nodes, origen, target,radioExterior, heuristic);
+
+
+    public void CancelSteeringAction(CAction action)
+    {
+        switch (action)
+        {
+            case CAction.None:
+            case CAction.GoToTarget: // No se van a dar no hago nada
+                break;
+            case CAction.GoingToEnemy: // Estoy haciendo un aSteering
+                aSteering.CancelPath();
+                break;
+            case CAction.Retreat:
+                break;
+            case CAction.Defend:
+                break;
+            case CAction.Forming:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(action), action, null);
+        }
+    }
 
     #endregion
 

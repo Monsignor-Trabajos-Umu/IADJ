@@ -100,6 +100,16 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             PathRequestManagerA.RequestPath(origen, target, heuristic, OnPathFound);
         }
 
+        public void CancelPath()
+        {
+            Debug.Log($"Cancelando path");
+
+            if(!moving) return;
+            moving = false;
+            path = null;
+            targetIndex = 0;
+        }
+
         private void OnPathFound(Vector3[] newPath, bool pathSuccessful)
         {
             Debug.Log($"Path Calculado pathSuccessful {pathSuccessful}");

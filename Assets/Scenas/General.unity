@@ -1386,7 +1386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507646446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -243.1, y: 10, z: -357.4}
+  m_LocalPosition: {x: 220, y: 10, z: 255}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 1936591521}
@@ -1557,15 +1557,14 @@ MonoBehaviour:
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
-  selected: 0
-  state: 0
+  enemyBase: {fileID: 471666431}
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 576995633}
-  enemyBase: {fileID: 471666431}
   heuristic: {fileID: 0}
-  step: 10
+  mybase: {fileID: 576995633}
+  selected: 0
+  state: 1
 --- !u!65 &507646452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2883,7 +2882,7 @@ GameObject:
   - component: {fileID: 931631472}
   - component: {fileID: 931631471}
   m_Layer: 0
-  m_Name: A-S-1 (1)
+  m_Name: A-S-2
   m_TagString: equipoRojo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3100,15 +3099,14 @@ MonoBehaviour:
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
-  selected: 0
-  state: 0
+  enemyBase: {fileID: 471666431}
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 576995633}
-  enemyBase: {fileID: 471666431}
   heuristic: {fileID: 0}
-  step: 10
+  mybase: {fileID: 576995633}
+  selected: 0
+  state: 1
 --- !u!65 &931631476
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4573,15 +4571,14 @@ MonoBehaviour:
   actuator: {fileID: 0}
   arbitro: {fileID: 0}
   cAction: 0
-  selected: 0
-  state: 0
+  enemyBase: {fileID: 0}
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 471666431}
-  enemyBase: {fileID: 0}
   heuristic: {fileID: 0}
-  step: 0
+  mybase: {fileID: 471666431}
+  selected: 0
+  state: 0
 --- !u!65 &1477057557
 BoxCollider:
   m_ObjectHideFlags: 0
