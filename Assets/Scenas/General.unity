@@ -921,6 +921,7 @@ MonoBehaviour:
   curaSeg: 0.05
   multiplier: 0
   radioCuracion: 100
+  debug: 0
 --- !u!1 &320966532
 GameObject:
   m_ObjectHideFlags: 0
@@ -7181,9 +7182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622a4388f3622aa4096f3c272c41713a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curaSeg: 0.05
+  curaSeg: 1.559999942779541
   multiplier: 5.68
   radioCuracion: 16.82
+  debug: 0
 --- !u!1 &1873308834
 GameObject:
   m_ObjectHideFlags: 0
