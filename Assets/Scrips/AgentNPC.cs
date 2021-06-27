@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 public class AgentNpc : Agent
 {
-    //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
-    [SerializeField] protected int mejorTerreno = 3;
-
-    [SerializeField] protected int peorTerreno = 0;
     // Actuadores
 
     [SerializeField] protected BaseActuator actuator;
@@ -26,21 +23,25 @@ public class AgentNpc : Agent
 
     // Formaciones
     [SerializeField] private Formation formation;
+
+    [SerializeField]
+    private GridChungo grid; //Grid para calcular posiciones de los enemigos
+
     [SerializeField] protected Manhattan heuristic;
 
+    //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
+    [SerializeField] protected int mejorTerreno = 3;
+    [SerializeField] protected int peorTerreno = 0;
 
     // Para saber si estoy atacando
     [SerializeField] private AgentBase mybase;
+
     public bool selected; // Si estoy seleccionado
     public State state = State.Normal; // State para las ordenes
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
-    [SerializeField] private GridChungo grid; //Grid para calcular posiciones de los enemigos
 
     public bool InFormation => formation != null; // Si estoy en formacion
 
-   
-
-   
 
     // Heuristca
     public virtual Heuristic GetHeuristic() => throw new NotImplementedException();
@@ -57,6 +58,59 @@ public class AgentNpc : Agent
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<ArbitroSteering>();
         finalSteering = new Steering(0, new Vector3(0, 0, 0));
+    }
+
+
+    private void OnMouseDown() => controlador.AddOrRemoveFromSelected(this);
+
+
+    #region Steering
+
+    private void ApplySteering()
+    {
+        if (state != State.Action)
+        {
+            UpdateAccelerated(finalSteering, Time.deltaTime);
+            return;
+        }
+
+
+        switch (cAction)
+        {
+            case CAction.None:
+                break;
+            case CAction.GoToTarget:
+                UpdateNoAccelerated(finalSteering, Time.deltaTime);
+                break;
+            case CAction.Forming:
+            case CAction.GoingToEnemy:
+                UpdateAccelerated(finalSteering, Time.deltaTime);
+                break;
+            case CAction.Defend:
+                UpdateAccelerated(finalSteering, Time.deltaTime);
+                break;
+            case CAction.Retreat:
+                UpdateAccelerated(finalSteering, Time.deltaTime);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    #endregion
+
+
+    /*
+     * Modo debug
+     */
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        if (!debug) return;
+        //Pintamos el vector de acceleracion
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, finalSteering.lineal);
+        //Gizmos.DrawRay(transform.position, steering.lineal);
     }
 
 
@@ -127,59 +181,6 @@ public class AgentNpc : Agent
     }
 
     #endregion
-
-
-    private void OnMouseDown() => controlador.AddOrRemoveFromSelected(this);
-
-
-    #region Steering
-
-    private void ApplySteering()
-    {
-        if (state != State.Action)
-        {
-            UpdateAccelerated(finalSteering, Time.deltaTime);
-            return;
-        }
-
-
-        switch (cAction)
-        {
-            case CAction.None:
-                break;
-            case CAction.GoToTarget:
-                UpdateNoAccelerated(finalSteering, Time.deltaTime);
-                break;
-            case CAction.Forming:
-            case CAction.GoingToEnemy:
-                UpdateAccelerated(finalSteering, Time.deltaTime);
-                break;
-            case CAction.Defend:
-                UpdateAccelerated(finalSteering, Time.deltaTime);
-                break;
-            case CAction.Retreat:
-                UpdateAccelerated(finalSteering, Time.deltaTime);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    #endregion
-
-
-    /*
-     * Modo debug
-     */
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        if (!debug) return;
-        //Pintamos el vector de acceleracion
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, finalSteering.lineal);
-        //Gizmos.DrawRay(transform.position, steering.lineal);
-    }
 
 
     #region Estados
@@ -398,14 +399,10 @@ public class AgentNpc : Agent
             else
             {
                 if (indice == peorTerreno)
-                {
                     mVelocity = (float) (baseVelocity / 1.5);
-                    //Debug.Log("Disminuyo Velocidad");
-                }
+                //Debug.Log("Disminuyo Velocidad");
                 else
-                {
                     mVelocity = baseVelocity;
-                }
             }
         }
     }
@@ -509,44 +506,49 @@ public class AgentNpc : Agent
     public bool IsNotRunning() => cAction == CAction.None && state == State.Normal;
 
     public bool IsInjured() => vida < vidaMaxima / 2;
+    public bool IsCloserToEnemy() => NearEnemy();
 
     public bool AlreadyHealing() => NearFont();
     public bool CanGoToBase() => !NearBase();
 
-    public bool NearBase()
+    public bool BestTerrain() => CurrentTerrain() == mejorTerreno;
+
+ 
+    public bool WorstTerrain() =>CurrentTerrain() == peorTerreno;
+
+    private int CurrentTerrain() => controlador.GetTerrainLayer(transform.position,FindObjectOfType<Terrain>());
+
+    // Distancia de Chebyshov
+    private int GetDistanceTwoPosition(Transform p1, Transform p2)
     {
-        var basePosition = grid.GetNodeFromWorldPoint(enemyBase.transform.position);
-        var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+        var basePosition = grid.GetNodeFromWorldPoint(p1.position);
+        var currentPosition = grid.GetNodeFromWorldPoint(p2.position);
 
 
         var x = basePosition.gridX - currentPosition.gridX;
         var z = basePosition.gridZ - currentPosition.gridZ;
 
-        var distance = Math.Max(Math.Abs(x), Math.Abs(z));
-
-        distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
-        
-        return distance < alcance;
-
-
+        return Math.Max(Math.Abs(x), Math.Abs(z));
     }
+
+    public bool NearBase()
+    {
+        var distance = GetDistanceTwoPosition(transform, enemyBase.transform);
+
+
+        distance -= (int) Math.Ceiling(rInterior / grid.nodeRaidus);
+
+        return distance < alcance;
+    }
+
 
     public bool NearMYBase()
     {
-        var basePosition = grid.GetNodeFromWorldPoint(mybase.transform.position);
-        var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+        var distance = GetDistanceTwoPosition(transform, mybase.transform);
 
+        distance -= (int) Math.Ceiling(rInterior / grid.nodeRaidus);
 
-        var x = basePosition.gridX - currentPosition.gridX;
-        var z = basePosition.gridZ - currentPosition.gridZ;
-
-        var distance = Math.Max(Math.Abs(x), Math.Abs(z));
-
-        distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
-        
         return distance < alcance;
-
-
     }
 
 
@@ -555,45 +557,54 @@ public class AgentNpc : Agent
     public bool NearFont()
     {
         if (fuenteActual == null) return false;
-        var basePosition = grid.GetNodeFromWorldPoint(fuenteActual.transform.position);
-        var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
 
+        var distance = GetDistanceTwoPosition(transform, fuenteActual.transform);
 
-        var x = basePosition.gridX - currentPosition.gridX;
-        var z = basePosition.gridZ - currentPosition.gridZ;
-
-        var distance = Math.Max(Math.Abs(x), Math.Abs(z));
-
-        distance -= (int)Math.Ceiling(fuenteActual.radioCuracion / grid.nodeDiameter);
+        distance -= (int) Math.Ceiling(fuenteActual.radioCuracion / grid.nodeRaidus);
 
         return distance < alcance;
+    }
 
+    // Fuente a la que voy yendo
+    [SerializeField] private Transform nearPosition;
 
+    public bool InPosition()
+    {
+        var distance = GetDistanceTwoPosition(transform, nearPosition.transform);
+
+        return distance == 0;
     }
 
 
-
     //Comprueba si hay un enemigo en un radio de diez veces el radio exterior
+    // Si lo hay lo0 mete un una lista de enemigos
+
+    [SerializeField] public HashSet<AgentNpc> enemigos;
+
     public bool NearEnemy()
     {
+        var nodoActual = grid.GetNodeFromWorldPoint(transform.position);
+        var vecinos = grid.GetNeigbours(nodoActual, alcance);
 
-        //var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
-
-
-        //grid.GetWorldPointFromNode()
-
-
-        var coliders =
-            Physics.OverlapSphere(transform.position, (float) (RExterior * 10));
-        foreach (var c in coliders)
+        foreach (var vecino in vecinos)
         {
-            if (tag == "equipoRojo" && (c.tag == "baseAzul" || c.tag == "equipoAzul"))
-                return true;
-            if (tag == "equipoAzul" && (c.tag == "baseRoja" || c.tag == "equipoRojo"))
-                return true;
+           
+              if(  Physics.SphereCast(vecino.worldPosition, grid.nodeRaidus, OrientationToVector(),out var hitEnemigo)
+                  )
+              {
+                  var enemigo = hitEnemigo.collider.gameObject.GetComponent<AgentNpc>();
+
+                  switch (tag)
+                  {
+                      case "equipoRojo" when (enemigo.tag == "baseAzul" || enemigo.tag == "equipoAzul"):
+                      case "equipoAzul" when (enemigo.tag == "baseRoja" || enemigo.tag == "equipoRojo"):
+                          enemigos.Add(enemigo);
+                          break;
+                  }
+              }
         }
 
-        return false;
+        return enemigos.Count > 0;
     }
 
     //Acciones como tal
@@ -610,13 +621,12 @@ public class AgentNpc : Agent
         vAceleracion = Vector3.zero;
 
 
-
         ChangeAction(CAction.None);
         ChangeState(State.Waiting);
     }
 
     //Cuantos nodos queremos avanzar de una
-    [SerializeField] [Range(1, 20)] private int step = 10;
+    [SerializeField] [Range(1, 20)] private readonly int step = 10;
 
     //Avanzamos hacia la base enemiga step casillas
     public void GoToEnemyBase()
@@ -628,11 +638,11 @@ public class AgentNpc : Agent
         var rExterior = enemyBase.RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearBase);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearBase);
     }
 
     // Avanzamos hacia un GameObject X casillas
-    public void GoToEnemy(GameObject obj)
+    public void GoToEnemy(AgentNpc obj)
     {
         ChangeState(State.Action);
         ChangeAction(CAction.GoingToEnemy);
@@ -641,11 +651,21 @@ public class AgentNpc : Agent
         var rExterior = RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearEnemy);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearEnemy);
     }
 
+    public void Huir(GameObject obj)
+    {
+        ChangeState(State.Action);
+        ChangeAction(CAction.Retreat);
+        var origen = gameObject.transform.position;
+        var target = obj.transform.position;
+        var rExterior = RExterior;
+        var cH = heuristic;
+        fuenteActual = obj.GetComponent<FuenteCurativa>();
 
-
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearFont);
+    }
 
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
@@ -656,35 +676,46 @@ public class AgentNpc : Agent
         StartCoroutine("respawn");
     }
 
-    protected void Atacar(GameObject objetivo)
+
+
+
+
+
+
+    public void Atacar(AgentNpc objetivo)
     {
         //Nos acercamos al objetivo hasta estar a el número de casillas necesarias
 
         //Lanzamos el ataque
 
-        //Nos quedamos quietos durante un espacio de tiempo por haber atacado. 
+        //Nos quedamos quietos durante un espacio de tiempo por haber atacado. \
+
+        
+        var dBase = (BestTerrain())?damage*2:damage;
+
+        var cDefensa = (objetivo.WorstTerrain())?defensa*2:defensa; 
+
+        if (Mathf.Approximately(Random.value, 1))
+        {
+            dBase *= 2;
+        }
+
+        var realDamage = dBase - cDefensa;
+
+        objetivo.RecibirDaño(realDamage);
+
+
+
     }
 
-    //El personaje recibe el daño. Si ese daño deja su vida a 0 o menos, entonces lo mata
-    protected void RecibirDaño(float cantidad)
+    //El personaje recibe el damage. Si ese damage deja su vida a 0 o menos, entonces lo mata
+    protected void RecibirDaño(int cantidad)
     {
+        Debug.Log($"{name} ha recibido {cantidad} daño");
         vida -= cantidad;
         if (vida < 0) Morir();
     }
 
-    public void Huir(GameObject obj)
-    {
-
-        ChangeState(State.Action);
-        ChangeAction(CAction.Retreat);
-        var origen = gameObject.transform.position;
-        var target = obj.transform.position;
-        var rExterior = RExterior;
-        var cH = heuristic;
-        fuenteActual = obj.GetComponent<FuenteCurativa>();
-
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearFont);
-    }
 
     private IEnumerator respawn()
     {
@@ -715,7 +746,7 @@ public class AgentNpc : Agent
         var rExterior = mybase.RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,NearMYBase);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearMYBase);
     }
 
     //Se acerca al siguiente punto de interes que no esté conquistado
@@ -725,8 +756,8 @@ public class AgentNpc : Agent
         ChangeAction(CAction.GoToTarget);
         var origen = gameObject.transform.position;
         var rExterior = RExterior;
-        var cH = this.heuristic;
-
+        var cH = heuristic;
     }
+
     #endregion
 }

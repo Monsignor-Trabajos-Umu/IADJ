@@ -12,7 +12,7 @@ public class Arquero : AgentNpc
         mejorTerreno = 4;
         vida = 50;
         alcance = 2;
-        daño = 10;
+        damage = 10;
         heuristica = gameObject.AddComponent(typeof(Chebychev)) as Chebychev;
     }
 

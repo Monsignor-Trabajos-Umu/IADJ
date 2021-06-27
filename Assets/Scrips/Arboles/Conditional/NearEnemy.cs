@@ -15,6 +15,6 @@ namespace Assets.Scrips.Arboles.Conditional
             agente = gameObject.GetComponent<AgentNpc>();
         }
 
-        protected override bool IsUpdatable() => agente != null && agente.NearEnemy();
+        protected override bool IsUpdatable() => agente != null && agente.IsCloserToEnemy();
     }
 }

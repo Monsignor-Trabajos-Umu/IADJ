@@ -33,6 +33,7 @@ public enum CAction
     None,
     GoToTarget,
     GoingToEnemy,
+    AttackEnemy,
     Retreat,
     Defend,
     Forming

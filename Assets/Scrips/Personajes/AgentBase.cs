@@ -24,7 +24,7 @@ public class AgentBase : Agent
         vida = 300;
         vidaMaxima = 300;
         alcance = 0;
-        daño = 0;
+        damage = 0;
 
         Debug.Log(modo);
     }

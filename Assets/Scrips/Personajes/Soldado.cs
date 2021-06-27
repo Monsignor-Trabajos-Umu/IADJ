@@ -19,7 +19,7 @@ public class Soldado : AgentNpc
 
         //vida = 100;
         alcance = 1; // ataca 2 bloques alrededor
-        daño = 20;
+        damage = 20;
 
 
         heuristic = gameObject.AddComponent(typeof(Manhattan)) as Manhattan;

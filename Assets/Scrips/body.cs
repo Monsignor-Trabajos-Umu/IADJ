@@ -11,7 +11,8 @@ public class Body : MonoBehaviour
 
 
     private GameObject currentHat;
-    public int daño = 2; //daño de la unidad por hit. Por defecto vale 2
+    public int damage = 2; //damage de la unidad por hit. Por defecto vale 2
+    public int defensa = 1;
     private GameObject fatherHats;
     private GameObject headBands;
 
