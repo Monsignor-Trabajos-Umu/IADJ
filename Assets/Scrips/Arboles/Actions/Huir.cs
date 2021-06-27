@@ -37,11 +37,20 @@ namespace Assets.Scrips.Actions
                     target = p;
                 }
             }
+
             if(target == null)
             {
                 Debug.Log($"{agente.name} No se encontró ninguna fuente");
                 return Status.Failure;
-            } 
+            }
+
+
+
+            if (Vector3.Distance(target.transform.position, agente.transform.position) <= agente.RExterior)
+            {
+                Debug.Log($"{agente.name} Estamos al lado de la fuente");
+                return Status.Success;
+            }
             Debug.Log($"{agente.name} Huyendo a la fuente más cercana");
             agente.Huir(target);
 

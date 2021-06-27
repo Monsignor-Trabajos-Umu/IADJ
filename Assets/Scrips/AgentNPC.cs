@@ -534,6 +534,26 @@ public class AgentNpc : Agent
     }
 
 
+    public bool NearFont()
+    {
+        var basePosition = grid.GetNodeFromWorldPoint(enemyBase.transform.position);
+        var currentPosition = grid.GetNodeFromWorldPoint(transform.position);
+
+
+        var x = basePosition.gridX - currentPosition.gridX;
+        var z = basePosition.gridZ - currentPosition.gridZ;
+
+        var distance = Math.Max(Math.Abs(x), Math.Abs(z));
+
+        distance -= (int) Math.Ceiling(rInterior / grid.nodeDiameter);
+        
+        return distance < alcance;
+
+
+    }
+
+
+
     //Comprueba si hay un enemigo en un radio de diez veces el radio exterior
     public bool NearEnemy()
     {
