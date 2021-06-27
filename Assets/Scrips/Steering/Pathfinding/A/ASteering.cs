@@ -1,73 +1,134 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scrips.Steering.Pathfinding.A
 {
     public class ASteering : SteeringBehaviour
     {
-
-        // A para calcular
-        [SerializeField] private AStar aStar;
-
         // Steering para movernos y girar
         [SerializeField] private Arrive arrive;
-        [SerializeField] private Seek seek;
+        [SerializeField] private Vector3 currentTarget;
+        [SerializeField] private Vector3[] dPath;
+
+
+        // [SerializeField] private int nodesCovered;
+        [SerializeField] private Vector3 enemyBasePosition;
+        [SerializeField] private Heuristic heuristic;
         [SerializeField] private LookWhereYouGoing lookWhereYouGoing;
 
 
         // Valores para el GetSteering
-        [SerializeField] private bool moving=false;
+        [SerializeField] private bool moving;
         [SerializeField] private int nodesToCover;
-       // [SerializeField] private int nodesCovered;
-        [SerializeField] private Vector3 enemyBasePosition;
-        
-        [SerializeField] private Queue<Node> nodes; // Cola con los nodos 
-        [SerializeField] private Node currentTarget;
+
+
+        // Debug can be deleted
+        [SerializeField] private Agent origen;
+
+        //Lista con los puntos donde ir
+        [SerializeField] private Vector3[] path;
+
+        // Area para saber si hemos llegado\
+        [SerializeField] private double radioTarget;
+        [SerializeField] private Seek seek;
+
+
+        //Debug
+        //[SerializeField] protected bool debug;
+        [SerializeField] private int targetIndex;
+        [SerializeField] private Agent targetV;
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             arrive = gameObject.AddComponent<Arrive>();
             seek = gameObject.AddComponent<Seek>();
-            aStar = gameObject.GetComponent<AStar>();
-
+            lookWhereYouGoing = gameObject.AddComponent<LookWhereYouGoing>();
+            StartMoving(nodesToCover, origen.transform.position,
+                targetV.transform.position, 40, heuristic);
         }
 
         public override global::Steering GetSteering(AgentNpc agent)
         {
             steering = new global::Steering(0, new Vector3(0, 0, 0));
-
             if (!moving) return steering;
-
-
-            // Nos estamos moviendo
-            // Queremos ir hacia la base enemiga y movernos x casillas
-            //Optimo no es
-            nodes = aStar.GetPath(agent.transform.position, enemyBasePosition,nodesToCover);
-            var target = nodes.Dequeue();
-
-            if (nodes.Count == 0)
+            //Vemos si nos nos quedan nodos o que estamos ya al lado
+            if (targetIndex == path.Length-1 ||
+                Vector3.Distance(agent.transform.position, path[path.Length-1]) <
+                radioTarget/2)
             {
-                // Es el ultimo
-                arrive.UseCustomDirectionAndRotation(target.worldPosition);
-
+                Debug.Log($"{agent.name} ha llegado al objetivo");
+                moving = false;
+                return steering;
             }
 
-            return steering;
+            //Nos quedan nodos vemos ahora cual es nuestro objetivo
 
+            var currentPosition = agent.transform.position;
+            var radio = agent.rInterior;
+
+            var targetPosition = path[targetIndex];
+
+
+            // Si esta los suficientemente lejos nos acercamos
+            if (Vector3.Distance(agent.transform.position, targetPosition) >= radio)
+            {
+                // Estamos en el penultimo vamos a hacer un Arrive al ultimo
+                if (targetIndex + 1 == path.Length)
+                {
+                    arrive.UseCustomDirectionAndRotation(targetPosition -
+                                                         currentPosition);
+                    steering = arrive.GetSteering(agent);
+                }
+                else
+                {
+                    // Si no hacemos un seek
+                    seek.UseCustomDirectionAndRotation(targetPosition - currentPosition);
+                    steering = seek.GetSteering(agent);
+                }
+            }
+
+            // Si estamos lo suficientemente cerca vamos al siguiente nodo 
+            if (Vector3.Distance(currentPosition, targetPosition) <= radio)
+                targetIndex++;
+
+            steering.angular = lookWhereYouGoing.GetSteering(agent).angular;
+            return steering;
+        }
+
+        public void StartMoving(int _nodes, Vector3 origen, Vector3 target,
+            double _radioTarget,
+            Heuristic heuristic)
+        {
+            radioTarget = _radioTarget;
+            nodesToCover = _nodes;
+            PathRequestManagerA.RequestPath(origen, target, heuristic, OnPathFound);
+        }
+
+        private void OnPathFound(Vector3[] newPath, bool pathSuccessful)
+        {
+            if (!pathSuccessful) return;
+
+            dPath = newPath;
+            path = newPath.Take(nodesToCover).ToArray();
+            moving = true;
+            targetIndex = 0;
         }
 
 
-
-        public void StartMoving(int nodes,Vector3 targetPosition)
+        protected override void OnDrawGizmos()
         {
-            moving = true;
-            this.nodesToCover = nodes;
-            //nodesCovered = 0;
-            this.enemyBasePosition = targetPosition;
+            if (!debug || dPath == null) return;
+            for (var i = targetIndex; i < dPath.Length; i++)
+            {
+                Gizmos.color = Color.black;
+                Gizmos.DrawCube(dPath[i], Vector3.one);
 
-
+                if (i == targetIndex)
+                    Gizmos.DrawLine(transform.position, dPath[i]);
+                else
+                    Gizmos.DrawLine(dPath[i - 1], dPath[i]);
+            }
         }
     }
 }

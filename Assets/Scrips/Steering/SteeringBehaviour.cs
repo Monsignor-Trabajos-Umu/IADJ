@@ -20,7 +20,6 @@ public abstract class SteeringBehaviour : MonoBehaviour
     public float weight = 1f;
 
 
-
     //Calcula el Steering para el agente dado en funcion del comportamiento deseado
     public abstract Steering GetSteering(AgentNpc agent);
 

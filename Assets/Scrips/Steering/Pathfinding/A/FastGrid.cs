@@ -16,7 +16,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
         [SerializeField] private LayerMask paredesLayerMask;
 
 
-        public List<NodeHeaped> path = new List<NodeHeaped>();
+         private List<NodeHeaped> path = new List<NodeHeaped>();
 
         //Booleano para saber si el terreno es el de Unity o no.
         [SerializeField] private Terrain terreno;

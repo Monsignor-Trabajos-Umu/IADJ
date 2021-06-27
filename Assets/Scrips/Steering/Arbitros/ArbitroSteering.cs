@@ -1,23 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scrips.Steering.Pathfinding.A;
 using UnityEngine;
 
 public abstract class ArbitroSteering : MonoBehaviour
 {
     protected AgentNpc agent; //Mi agenteNPC que llama al getSteering
+    private ASteering aSteering; // Go to target a*
 
     [SerializeField] protected bool debug = false; //Debug flag
-    
+
     [SerializeField] protected Steering finalSteering;
 
     protected FormationOffset formationOffset; // Me dice mi posicion si es formacion
 
     // SteeringBehaviour necesarios
     private GoTarget goToTarget; // Go to target
+
     private Dictionary<SteeringBehaviour, float> savedWeightDictionary;
 
-    [SerializeField] protected List<SteeringBehaviour> steeringList; // Lista con todos los steering
+    [SerializeField]
+    protected List<SteeringBehaviour> steeringList; // Lista con todos los steering
 
     // Usamos Awake para crer los steering necesarios antes de cualquier Start
     protected virtual void Awake()
@@ -60,17 +64,26 @@ public abstract class ArbitroSteering : MonoBehaviour
         foreach (var keyValuePair in savedWeightDictionary)
             keyValuePair.Key.weight = keyValuePair.Value;
     }
+
     // Le digo a mi steering goToTarget que tenemos que ir a un objetivo
     public void SetNewTarget(Vector3 newPoint) => goToTarget.NewTarget(newPoint);
 
     private Steering GetGoToTargetSteering() => goToTarget.GetSteering(agent);
+
+    #region Acciones arboles
+
+    public void SetNewTargetAvanzoBase(int _nodes, Vector3 origen, Vector3 target,double radioExterior,
+        Heuristic heuristic) => aSteering.StartMoving(_nodes, origen, target,radioExterior, heuristic);
+
+    #endregion
 
 
     protected abstract Steering GetSteering();
 
     public Steering GetFinalSteering(State state, CAction cAction)
     {
-        if (state == State.Action && cAction == CAction.GoToTarget) return GetGoToTargetSteering();
+        if (state == State.Action && cAction == CAction.GoToTarget)
+            return GetGoToTargetSteering();
         return GetSteering();
     }
 

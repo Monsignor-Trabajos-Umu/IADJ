@@ -10,8 +10,7 @@ public class Soldado : AgentNpc
         base.Start();
         // Movimiento
         mAcceleration = 4;
-        mVelocity = baseVelocity =  5;
-
+        baseVelocity = 20;
         mAngularAcceleration = 45;
         mRotation = 90;
 

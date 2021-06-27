@@ -23,7 +23,7 @@ public class Body : MonoBehaviour
     //public float masa;
     public float mRotation;
     public float mVelocity;
-    protected float baseVelocity;
+    [SerializeField] protected float baseVelocity;
     // Visual clues
     private Color originalBandColor;
     private Color originalColor;

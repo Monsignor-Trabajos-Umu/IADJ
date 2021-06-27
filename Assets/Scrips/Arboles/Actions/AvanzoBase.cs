@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace Assets.Scrips.Actions
 {
+
+    //Se mueve hacia la base enemiga
     public class AvanzoBase : UniBT.Action
     {
        
@@ -17,18 +19,15 @@ namespace Assets.Scrips.Actions
 
         protected override Status OnUpdate()
         {
-            
-            //if (elapsedTime < waitTime) return Status.Running;
-            //agente.
-
-            //elapsedTime = 0.0f;
+            agente.GoToEnemyBase(); 
+           
             return Status.Success;
         }
 
         // abort when the parent conditional changed on previous status is running.
         public override void Abort()
         {
-           
+           agente.ResetStateAction();
         }
     }
 }

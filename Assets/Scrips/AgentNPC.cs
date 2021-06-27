@@ -414,13 +414,13 @@ public class AgentNpc : Agent
 
 
     #region Actions
-
-
+    //Cuantos nodos queremos avanzar de una
+    [SerializeField, Range(1, 20)] private int step;
     public void GoToEnemyBase()
     {
         ChangeState(State.Action);
         ChangeAction(CAction.GoingToEnemy);
-        //arbitro.SetNewTarget();
+        arbitro.SetNewTargetAvanzoBase(step,transform.position,enemyBase.transform.position,enemyBase.RExterior,GetHeuristic());
     }
 
 
