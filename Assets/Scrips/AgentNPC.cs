@@ -597,7 +597,7 @@ public abstract class AgentNpc : Agent
         var castRange = grid.nodeRaidus + grid.nodeRaidus * 2 * alcance;
 
         var vecinos = Physics.SphereCastAll(transform.position, castRange, Vector3.up);
-        //DebugPlus.DrawSphere(transform.position, castRange);
+        if(debug) DebugPlus.DrawSphere(transform.position, castRange);
         foreach (var vecinoHit in vecinos)
         {
             var enemigo = vecinoHit.collider.gameObject.GetComponent<Agent>();

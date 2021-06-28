@@ -26,6 +26,6 @@ public class AgentBase : Agent
         alcance = 0;
         damage = 0;
 
-        Debug.Log(modo);
+        //Debug.Log(modo);
     }
 }

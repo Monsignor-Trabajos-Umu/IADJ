@@ -17,7 +17,7 @@ public class InfluenceMapControl : MonoBehaviour
         var width = (int) gridMap.gridWorldSizeX;
         var height = (int) gridMap.gridWorldSizeZ;
 
-        Debug.Log(width + " x " + height);
+        //Debug.Log(width + " x " + height);
 
         mapaInfluencia = new InfluenceMap(gridMap, propagacion, width, height);
     }

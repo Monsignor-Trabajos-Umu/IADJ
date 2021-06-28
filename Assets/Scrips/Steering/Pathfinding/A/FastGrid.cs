@@ -30,7 +30,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
         private void Awake()
         {
-            Debug.Log("Loading  GridChungo");
+           if(debug) Debug.Log("Loading  GridChungo");
             nodeDiameter = nodeRaidus * 2;
             gridSizeX = Mathf.RoundToInt(gridWorldSizeX / nodeDiameter);
             gridSizeZ = Mathf.RoundToInt(gridWorldSizeZ / nodeDiameter);

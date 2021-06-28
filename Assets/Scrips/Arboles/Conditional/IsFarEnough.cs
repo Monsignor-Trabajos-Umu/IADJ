@@ -11,7 +11,7 @@ namespace Assets.Scrips.Arboles.Conditional
         protected override void OnAwake()
         {
             agente = gameObject.GetComponent<AgentNpc>();
-            Debug.Log($"Mi base {agente.name}");
+            //Debug.Log($"Mi base {agente.name}");
         }
 
         protected override bool IsUpdatable() => agente != null && agente.CanGoToBase();

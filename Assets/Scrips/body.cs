@@ -88,7 +88,7 @@ public class Body : MonoBehaviour
         originalColor = GetComponent<Renderer>().material.color;
         originalBandColor = headBands.GetComponent<Renderer>().material
             .color;
-        Debug.Log($"Color original {originalColor} Banda {originalBandColor}");
+        //Debug.Log($"Color original {originalColor} Banda {originalBandColor}");
     }
 
     protected void ResetVisualStatus()

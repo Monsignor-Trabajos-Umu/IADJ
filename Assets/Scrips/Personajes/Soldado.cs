@@ -24,13 +24,6 @@ public class Soldado : AgentNpc
 
         heuristic = gameObject.AddComponent(typeof(Manhattan)) as Manhattan;
     }
-    public new void ArrivedToTarget()
-    {
-        ChangeAction(CAction.None);
-        ChangeState(State.Waiting);
-
-
-    } 
 
     public override Heuristic GetHeuristic() => heuristic;
 

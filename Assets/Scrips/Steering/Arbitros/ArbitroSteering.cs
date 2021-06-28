@@ -75,7 +75,9 @@ public abstract class ArbitroSteering : MonoBehaviour
     #region Acciones arboles y segunda parte
 
     public void SetNewTargetWithA(int _nodes, Vector3 origen, Vector3 target,double radioExterior,
-        Heuristic heuristic,Func<bool> checkCloser) => aSteering.StartMoving(_nodes, origen, target,radioExterior, heuristic,checkCloser);
+        Heuristic heuristic,Func<bool> checkCloser)
+    =>aSteering.StartMoving(_nodes, origen, target,radioExterior, heuristic,checkCloser);
+    
 
 
     public void CancelSteeringAction(CAction action)
