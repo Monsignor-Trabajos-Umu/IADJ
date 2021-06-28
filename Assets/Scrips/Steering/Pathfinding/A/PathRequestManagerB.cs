@@ -19,10 +19,10 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             _instance = this;
         }
 
-        public static void RequestPath(Vector3 pathStart, Vector3 pathEnd,Heuristic heuristic,
+        public static void RequestPath(Vector3 pathStart, Vector3 pathEnd,Heuristic heuristic,AgentNpc agente,
             Action<Vector3[], bool> callback)
         {
-            var newRequest = new PathRequest(pathStart, pathEnd,heuristic, callback);
+            var newRequest = new PathRequest(pathStart, pathEnd,heuristic,agente, callback);
             _instance.pathRequestQueue.Enqueue(newRequest);
             _instance.TryProcessNext();
         }
@@ -34,7 +34,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
                 currentPathRequest = pathRequestQueue.Dequeue();
                 isProcessingPath = true;
                 pathfinding.StartFindPath(currentPathRequest.pathStart,
-                    currentPathRequest.pathEnd,currentPathRequest.heuristic);
+                    currentPathRequest.pathEnd,currentPathRequest.heuristic,currentPathRequest.agente);
             }
         }
 
@@ -49,14 +49,17 @@ namespace Assets.Scrips.Steering.Pathfinding.A
         {
             public readonly Vector3 pathStart;
             public readonly Vector3 pathEnd;
+
             public readonly Heuristic heuristic;
+            public readonly AgentNpc agente;
             public readonly Action<Vector3[], bool> callback;
 
-            public PathRequest(Vector3 _start, Vector3 _end,Heuristic _heuristic,
+            public PathRequest(Vector3 _start, Vector3 _end,Heuristic _heuristic,AgentNpc _agente,
                 Action<Vector3[], bool> _callback)
             {
                 pathStart = _start;
                 pathEnd = _end;
+                agente = _agente;
                 heuristic = _heuristic;
                 callback = _callback;
             }

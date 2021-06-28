@@ -32,9 +32,9 @@ public abstract class AgentNpc : Agent
     // Para saber si estoy atacando
     [SerializeField] private AgentBase mybase;
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
-    [SerializeField] protected int mejorTerreno = 3;
+    [SerializeField] public int mejorTerreno = 3;
     [SerializeField] protected int cobertura;
-    [SerializeField] protected int peorTerreno = 0;
+    [SerializeField] public int peorTerreno = 0;
  
 
     [Header("Formaciones")]
@@ -529,7 +529,6 @@ public abstract class AgentNpc : Agent
     public bool WorstTerrain() => CurrentTerrain() == peorTerreno;
     private int CurrentTerrain() =>
         controlador.GetTerrainLayer(transform.position, FindObjectOfType<Terrain>());
-
     public bool UnderMyDomain(int value) => (tag == "equipoRojo") ? value < 0 : value > 0;
 
     // Distancia de Chebyshov
@@ -732,7 +731,7 @@ public abstract class AgentNpc : Agent
         var rExterior = enemyBase.RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearBase);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,this, NearBase);
     }
 
     // Avanzamos hacia un GameObject X casillas
@@ -745,7 +744,7 @@ public abstract class AgentNpc : Agent
         var rExterior = RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearLandPoint);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,this, NearLandPoint);
     }
 
     public void Huir(GameObject obj)
@@ -758,7 +757,7 @@ public abstract class AgentNpc : Agent
         var cH = heuristic;
         fuenteActual = obj.GetComponent<FuenteCurativa>();
 
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearFont);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,this, NearFont);
     }
 
     [SerializeField] public GameObject[] puntosPatrulla;
@@ -823,7 +822,7 @@ public abstract class AgentNpc : Agent
         var rExterior = mybase.RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearMYBase);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH,this, NearMYBase);
     }
 
 //Se acerca al siguiente punto de interes que no esté conquistado
