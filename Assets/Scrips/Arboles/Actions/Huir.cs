@@ -24,8 +24,8 @@ namespace Assets.Scrips.Actions
 
             if (agente.state == State.Action && agente.cAction == CAction.Retreat) return Status.Running;
 
-            if (agente.state != State.Waiting || agente.cAction != CAction.None) return Status.Failure;
-
+            //if (agente.state != State.Waiting || agente.cAction != CAction.None) return Status.Failure;
+            // Puede que Me tenga que curar y ta estaba en movimiento.
 
             if (agente.AlreadyHealing()) return Status.Success;
 

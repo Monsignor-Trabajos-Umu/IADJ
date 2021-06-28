@@ -24,10 +24,7 @@ namespace Assets.Scrips.Actions
                 agente.Atacar(enemigo);
                 return Status.Success;
             }
-        
             
-            if (agente.state != State.Waiting || agente.cAction != CAction.None)  return Status.Failure;
-
             var enemigos = agente.enemigos;
 
             //Siempre hay un objetivo

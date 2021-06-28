@@ -18,6 +18,7 @@ public class Soldado : AgentNpc
 
 
         vida = 100;
+        vidaMaxima = 100;
         alcance = 1; // ataca 2 bloques alrededor
         damage = 20;
 
