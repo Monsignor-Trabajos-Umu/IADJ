@@ -556,10 +556,7 @@ public abstract class AgentNpc : Agent
 
     private bool NearBase()
     {
-        var distance = GetDistanceTwoPosition(transform, enemyBase.transform);
-
-
-        return distance <= alcance || GetDistanceRayCast(enemyBase);
+        return GetDistanceRayCast(enemyBase);
     }
 
 

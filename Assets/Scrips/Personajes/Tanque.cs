@@ -17,8 +17,6 @@ public class Tanque : AgentNpc
         baseVelocity = 20;
         mAngularAcceleration = 45;
         mRotation = 90;
-
-
         peorTerreno = 4;
         mejorTerreno = 2;
         vida = vidaMaxima;
