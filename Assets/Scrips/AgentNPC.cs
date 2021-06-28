@@ -8,40 +8,45 @@ using Random = UnityEngine.Random;
 public abstract class AgentNpc : Agent
 {
     // Actuadores
-
+    [Header("Actuador")]
     [SerializeField] protected BaseActuator actuator;
 
     // Steerings
+    [Header("Steerings")]
     [SerializeField] private ArbitroSteering arbitro; // Asigna mis steerings.
-
-    // Estados
-    [SerializeField] public CAction cAction = CAction.None; //  Action para las acciones
-
-    // Controller
-    public Controlador controlador;
-    [SerializeField] private AgentBase enemyBase;
     [SerializeField] private Steering finalSteering;
 
+
+    // Estados
+    [Header("Estados")]
+    [SerializeField] public CAction cAction = CAction.None; //  Action para las acciones
+    public bool selected; // Si estoy seleccionado
+    public State state = State.Normal; // State para las ordenes
+    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
+
+    // Controller
+    [Header("Controlador")]
+    public Controlador controlador;
+    [Header("Bases")]
+    [SerializeField] private AgentBase enemyBase;
+    // Para saber si estoy atacando
+    [SerializeField] private AgentBase mybase;
+    //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
+    [SerializeField] protected int mejorTerreno = 3;
+    [SerializeField] protected int peorTerreno = 0;
+ 
+
+    [Header("Formaciones")]
     // Formaciones
     [SerializeField] private Formation formation;
+    public bool InFormation => formation != null; // Si estoy en formacion
 
     [SerializeField]
     public GridChungo grid; //Grid para calcular posiciones de los enemigos
 
     [SerializeField] protected Heuristic heuristic;
 
-    //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
-    [SerializeField] protected int mejorTerreno = 3;
 
-    // Para saber si estoy atacando
-    [SerializeField] private AgentBase mybase;
-    [SerializeField] protected int peorTerreno = 0;
-
-    public bool selected; // Si estoy seleccionado
-    public State state = State.Normal; // State para las ordenes
-    private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
-
-    public bool InFormation => formation != null; // Si estoy en formacion
 
 
     // Heuristca
@@ -570,14 +575,14 @@ public abstract class AgentNpc : Agent
 
     [SerializeField] private FuenteCurativa fuenteActual; // Fuente a la que voy yendo
 
-    public bool NearFont()
+    private bool NearFont()
     {
         if (fuenteActual == null) return false;
 
-        // var npcs = Physics.OverlapSphere(transform.position, fuenteActual.radioCuracion).
-        //     Contains(npc=> npc.gameObject.GetComponent<AgentNpc>() == this);
-        return false;
-        
+        var npcs = Physics.OverlapSphere(fuenteActual.transform.position, fuenteActual.radioCuracion)
+            .Select(col => col.gameObject.GetComponent<AgentNpc>()).Contains(this as AgentNpc);;
+        return npcs;
+
     }
 
     // Fuente a la que voy yendo

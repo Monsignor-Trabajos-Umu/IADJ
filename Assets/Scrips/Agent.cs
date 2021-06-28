@@ -2,21 +2,14 @@ using UnityEngine;
 
 public class Agent : Body
 {
+    [Header("Margenes")]
     [SerializeField,Range(1,5)] private double margen = 1.1;
     [SerializeField] private double mAExterior = 0;
 
     //Angulos
     [SerializeField] public double aInterior;
-
-    [SerializeField] protected bool debug = false;
-    [SerializeField] protected bool exterior = false;
-    
     //Radio
     [SerializeField] public double rInterior;
-
-
-    public double RExterior => rInterior * margen;
-
     public double AExterior
     {
         get
@@ -25,6 +18,14 @@ public class Agent : Body
             return aTemp < mAExterior ? mAExterior : aTemp;
         }
     }
+    public double RExterior => rInterior * margen;
+    [Header("Debug")]
+    [SerializeField] protected bool debug = false;
+    [SerializeField] protected bool exterior = false;
+    
+
+
+   
 
     //Daño
     public bool Muerto => vida <= 0;

@@ -23,9 +23,11 @@ public class Tanque : AgentNpc
         mejorTerreno = 2;
         vida = vidaMaxima;
         alcance = 3;
+
         damage = 5;
-        if (actuator == null)
-            actuator = gameObject.AddComponent(typeof(TankActuator)) as TankActuator;
+        defensa = 2;
+        //if (actuator == null)
+        //    actuator = gameObject.AddComponent(typeof(TankActuator)) as TankActuator;
         heuristic = gameObject.AddComponent(typeof(Euclidea)) as Euclidea;
     }
 

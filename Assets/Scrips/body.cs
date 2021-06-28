@@ -7,16 +7,15 @@ public class Body : MonoBehaviour
     // Propiedades fisicas
     protected int alcance = 1; //Max de casillas de distancia para golpear. Por defecto vale 1
 
-
-
-
-    private GameObject currentHat;
+    [Header("Daño")]
     public int damage = 2; //damage de la unidad por hit. Por defecto vale 2
     public int defensa = 1;
+
+    private GameObject currentHat;
     private GameObject fatherHats;
     private GameObject headBands;
 
-
+    [Header("Movimiento")]
     public float mAcceleration;
     public float mAngularAcceleration;
 
