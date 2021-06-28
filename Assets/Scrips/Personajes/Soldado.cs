@@ -23,7 +23,7 @@ public class Soldado : AgentNpc
         damage = 20;
 
 
-        heuristic = gameObject.AddComponent(typeof(Manhattan)) as Manhattan;
+        heuristic = gameObject.AddComponent(typeof(Euclidea)) as Euclidea;
     }
 
     public override Heuristic GetHeuristic() => heuristic;

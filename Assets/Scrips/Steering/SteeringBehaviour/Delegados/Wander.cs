@@ -48,19 +48,27 @@ public class Wander : Align
         float wanderWaitCounter = wanderWait * 60;
         this.timeToTarget = wanderWait;
 
-        if (targetExists && wanderPrivateCounter <= wanderWaitCounter)
+        if (targetExists  && wanderPrivateCounter <= wanderWaitCounter)
         {
+            if (Vector3.Distance(targetPoint, miAgente.transform.position) <= (float) miAgente.RExterior)
+            {
+                targetExists = false;
+            }
+
             // Calculo la minima rotacion para llegar a ese punto ,
             // si puede que sea rebundante pero mentalmente me resulta mas claro.
-            this.customRotation = (float)miAgente.MinAngleToRotate(this.targetPoint);
+            this.customRotation = (float)miAgente.MinAngleToRotate(targetPoint);
             this.useCustom = true;
             steering = base.GetSteering(miAgente);
-            steering.lineal = miAgente.mAcceleration * miAgente.OrientationToVector();
+
+            steering.lineal = this.targetPoint - miAgente.transform.position;
+            steering.lineal = RemoveY(steering.lineal); // Filtramos la y
+            steering.lineal.Normalize();
+            steering.lineal *= miAgente.mAcceleration;
             wanderPrivateCounter++;
 
             return steering;
         }
-
 
         // Calculamos la orientacion y un nuevo punto
 
@@ -94,7 +102,10 @@ public class Wander : Align
         steering = base.GetSteering(miAgente);
 
 
-        steering.lineal = miAgente.mAcceleration * miAgente.OrientationToVector();
+        steering.lineal = this.targetPoint - miAgente.transform.position;
+        steering.lineal = RemoveY(steering.lineal); // Filtramos la y
+        steering.lineal.Normalize();
+        steering.lineal *= miAgente.mAcceleration;
         targetExists = true;
         wanderPrivateCounter = 0;
 

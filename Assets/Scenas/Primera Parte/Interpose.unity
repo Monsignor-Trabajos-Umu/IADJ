@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: a863de839a86c8743b7d1ac813aa0f0c,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1793,9 +1794,9 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
+  weight: 1
   target: {fileID: 0}
   useReferee: 1
-  weight: 1
   distance: 0
   direction: {x: 0, y: 0, z: 0}
   targetSpeed: 0
@@ -1819,9 +1820,9 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
-  target: {fileID: 0}
-  useReferee: 1
   weight: 1
+  target: {fileID: 1293290573642253}
+  useReferee: 1
 --- !u!114 &674196788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1846,7 +1847,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1o": 2
+  damage: 2
+  defensa: 1
   mAcceleration: 5
   mAngularAcceleration: 45
   mRotation: 180
@@ -1854,28 +1856,38 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
   margen: 1.1
   mAExterior: 0
   aInterior: 0
+  rInterior: 2
   debug: 0
   exterior: 0
-  rInterior: 2
+  baseAzul: 0
   actuator: {fileID: 674196788}
   arbitro: {fileID: 674196779}
-  cAction: 0
-  selected: 0
-  state: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 0}
+  cAction: 0
+  selected: 0
+  state: 0
+  controladoMaquina: 0
+  controlador: {fileID: 0}
   enemyBase: {fileID: 0}
+  mybase: {fileID: 0}
+  mejorTerreno: 3
+  cobertura: 0
+  peorTerreno: 0
+  grid: {fileID: 0}
   heuristic: {fileID: 0}
-  step: 10
+  segundaParte: 0
+  fuenteActual: {fileID: 0}
+  nearPosition: {fileID: 0}
+  landPoint: {fileID: 0}
+  puntosPatrulla: []
 --- !u!1 &710304747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,9 +2764,9 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
+  weight: 10
   target: {fileID: 0}
   useReferee: 1
-  weight: 10
   wanderRate: 110.6
   wanderOrientation: 0
   wanderStep: 40.5
@@ -2776,9 +2788,9 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
+  weight: 1
   target: {fileID: 0}
   useReferee: 0
-  weight: 1
   targetPosition: {x: 0, y: 0, z: 0}
   targetExists: 0
 --- !u!114 &1252455297
@@ -2793,7 +2805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1o": 2
+  damage: 2
+  defensa: 1
   mAcceleration: 5
   mAngularAcceleration: 45
   mRotation: 180
@@ -2801,28 +2814,38 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
   margen: 1.1
   mAExterior: 0
   aInterior: 0
+  rInterior: 2
   debug: 0
   exterior: 0
-  rInterior: 2
+  baseAzul: 0
   actuator: {fileID: 1252455289}
   arbitro: {fileID: 1252455288}
-  cAction: 0
-  selected: 0
-  state: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 0}
+  cAction: 0
+  selected: 0
+  state: 0
+  controladoMaquina: 0
+  controlador: {fileID: 0}
   enemyBase: {fileID: 0}
+  mybase: {fileID: 0}
+  mejorTerreno: 3
+  cobertura: 0
+  peorTerreno: 0
+  grid: {fileID: 0}
   heuristic: {fileID: 0}
-  step: 10
+  segundaParte: 0
+  fuenteActual: {fileID: 0}
+  nearPosition: {fileID: 0}
+  landPoint: {fileID: 0}
+  puntosPatrulla: []
 --- !u!1 &1407586985
 GameObject:
   m_ObjectHideFlags: 0
@@ -4480,7 +4503,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16dffbe76de5bd4bb16c5f4bbbb9c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1o": 2
+  damage: 2
+  defensa: 1
   mAcceleration: 5
   mAngularAcceleration: 45
   mRotation: 180
@@ -4488,28 +4512,38 @@ MonoBehaviour:
   baseVelocity: 0
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
-  velocidad: 0
   vida: 100
   vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
   margen: 1.1
   mAExterior: 0
   aInterior: 0
+  rInterior: 2
   debug: 0
   exterior: 0
-  rInterior: 2
+  baseAzul: 0
   actuator: {fileID: 1293290573642256}
   arbitro: {fileID: 1293290573642254}
-  cAction: 0
-  selected: 0
-  state: 0
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
-  mybase: {fileID: 0}
+  cAction: 0
+  selected: 0
+  state: 0
+  controladoMaquina: 0
+  controlador: {fileID: 0}
   enemyBase: {fileID: 0}
+  mybase: {fileID: 0}
+  mejorTerreno: 3
+  cobertura: 0
+  peorTerreno: 0
+  grid: {fileID: 0}
   heuristic: {fileID: 0}
-  step: 10
+  segundaParte: 0
+  fuenteActual: {fileID: 0}
+  nearPosition: {fileID: 0}
+  landPoint: {fileID: 0}
+  puntosPatrulla: []
 --- !u!114 &1293290573642254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4547,9 +4581,9 @@ MonoBehaviour:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   steeringGroup: 2
+  weight: 1
   target: {fileID: 0}
   useReferee: 1
-  weight: 1
   wanderRate: 50
   wanderOrientation: 2
   wanderStep: 18.8

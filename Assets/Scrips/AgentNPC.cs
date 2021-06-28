@@ -49,7 +49,8 @@ public abstract class AgentNpc : Agent
     [SerializeField] protected Heuristic heuristic;
 
 
-
+    [Header("Falgs")]
+    [SerializeField] private bool segundaParte;
 
     // Heuristca
     public virtual Heuristic GetHeuristic() => throw new NotImplementedException();
@@ -435,10 +436,12 @@ public abstract class AgentNpc : Agent
         finalSteering = arbitro.GetFinalSteering(state, cAction);
         ActualizarVelocidad();
         // Si estamos controlado por el usuario
+        if(!segundaParte) return;
+
         if (!controladoMaquina)
         {
 
-            //Compruebo si tengo enemigos al rededor y ataco Vamos a permitir atacar en movimiento
+            //Compruebo si tengo enemigos alrededor y ataco Vamos a permitir atacar en movimiento
             if (IsCloserToEnemy())
             {
                 var enemigo = enemigos.Last();

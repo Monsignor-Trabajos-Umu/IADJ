@@ -26,7 +26,7 @@ public class Tanque : AgentNpc
         defensa = 2;
         //if (actuator == null)
         //    actuator = gameObject.AddComponent(typeof(TankActuator)) as TankActuator;
-        heuristic = gameObject.AddComponent(typeof(Euclidea)) as Euclidea;
+        heuristic = gameObject.AddComponent(typeof(Manhattan)) as Manhattan;
     }
 
     protected internal override void Atacar(Agent objetivo)
