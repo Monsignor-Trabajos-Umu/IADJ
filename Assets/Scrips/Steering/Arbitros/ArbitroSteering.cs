@@ -89,6 +89,7 @@ public abstract class ArbitroSteering : MonoBehaviour
             case CAction.AttackEnemy: // No hacemos nada si cancelamos
                 break;
             case CAction.GoingToEnemy: // Estoy haciendo un aSteering
+            case CAction.GoingToLandPoint:
             case CAction.Retreat:
                 aSteering.CancelPath();
                 break;

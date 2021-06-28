@@ -598,7 +598,7 @@ public abstract class AgentNpc : Agent
 
         //Busco el que tengan mayor influencia enemiga
         // Positvo
-        float influencia = float.MinValue;
+        //float influencia = 0;
         var puntos = GameObject.FindGameObjectsWithTag("puntoInteres");
         foreach (var punto in puntos)
         {
@@ -609,8 +609,7 @@ public abstract class AgentNpc : Agent
 
             var actual = current.valor + vecinos.Sum(nodo => nodo.valor);
 
-            if (!UnderMyDomain(actual) &&
-                Mathf.Abs(influencia) < Math.Abs(actual))
+            if (!UnderMyDomain(actual))
             {
                 landPoint = punto;
             } 
@@ -618,8 +617,6 @@ public abstract class AgentNpc : Agent
 
         }
 
-
-            
         //Si no hay puntos que conquistar vamos a uno random
         if (landPoint == null)
         {
@@ -730,15 +727,18 @@ public abstract class AgentNpc : Agent
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearFont);
     }
 
-    public void Patrullar(Transform pos)
+    [SerializeField] GameObject[] puntosPatrulla;
+    public void Patrullar(int index)
     {
         ChangeState(State.Action);
         ChangeAction(CAction.GoToTarget);
+        puntosPatrulla = GameObject.FindGameObjectsWithTag("Patrulla");
+        int pos = index % puntosPatrulla.Length;
         var origen = gameObject.transform.position;
-        var target = pos.position;
+        var target = puntosPatrulla[pos].transform.position;
         var rExterior = RExterior;
         var cH = heuristic;
-        nearPosition = pos;
+        nearPosition = puntosPatrulla[pos].transform;
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, InPosition);
     }
 
@@ -767,7 +767,6 @@ public abstract class AgentNpc : Agent
 
     protected internal abstract void Atacar(Agent objetivo);
 
-//El personaje recibe el damage. Si ese damage deja su vida a 0 o menos, entonces lo mata
 
 
     private IEnumerator Respawn()

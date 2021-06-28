@@ -9,13 +9,12 @@ namespace Assets.Scrips.Actions
     public class Patrullar : UniBT.Action
     {
         private AgentNpc agente;
-        public GameObject[] points;
-        public int index;
+        private int index;
 
         public override void Awake()
         {
             agente = gameObject.GetComponent<AgentNpc>();
-            points = GameObject.FindGameObjectsWithTag("Patrulla");
+            index = 0;
         }
 
         protected override Status OnUpdate()
@@ -23,15 +22,16 @@ namespace Assets.Scrips.Actions
 
             if (agente.state == State.Action && agente.cAction == CAction.GoToTarget) return Status.Running;
 
-            if (agente.state != State.Waiting || agente.cAction != CAction.None) return Status.Failure;
-
-            
-            if (points.Length <= 0)
+            if (agente.state != State.Normal || agente.cAction != CAction.None)
+            {
+                Debug.Log($"{agente.state} Fallo");
                 return Status.Failure;
-            var p = points[index];
+            }
+
             Debug.Log($"{agente.name} Patrullando");
-            agente.Patrullar(p.transform);
-            index = (index + 1) % points.Length;
+            agente.Patrullar(index);
+            Debug.Log($"{agente.name} Llego al punto de patrulla");
+            index += 1;
             return Status.Success;
         }
 
