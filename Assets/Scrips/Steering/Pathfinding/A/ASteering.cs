@@ -7,32 +7,32 @@ namespace Assets.Scrips.Steering.Pathfinding.A
     public class ASteering : SteeringBehaviour
     {
         // Steering para movernos y girar
+        [Header("Steerings")]
         [SerializeField] private Arrive arrive;
-        [SerializeField] private Vector3 currentTarget;
+        [SerializeField] private LookWhereYouGoing lookWhereYouGoing;
+        [SerializeField] private Seek seek;
 
 
+        [Header("Nodos")]
+        [SerializeField] private int nodesToCover;
+        //Lista con los puntos donde ir
+        [SerializeField] private Vector3[] path;
         // [SerializeField] private int nodesCovered;
         [SerializeField] private Vector3 enemyBasePosition;
         [SerializeField] private Heuristic heuristic;
-        [SerializeField] private LookWhereYouGoing lookWhereYouGoing;
+     
 
 
         // Valores para el GetSteering
+        [Header("Status")]
         [SerializeField] public bool moving;
-        [SerializeField] private int nodesToCover;
-
-
-        // Debug can be deleted
-        [SerializeField] private Agent origen;
-
-        //Lista con los puntos donde ir
-        [SerializeField] private Vector3[] path;
+        [SerializeField] private Vector3 currentTarget;
+       
 
         // Area para saber si hemos llegado
+        [Header("Radios")]
         [SerializeField] private double radioTarget;
-        [SerializeField] private Seek seek;
         [SerializeField] private int targetIndex;
-
         [SerializeField] private Func<bool> checkCloser;
 
         // Use this for initialization

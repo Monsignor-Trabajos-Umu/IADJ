@@ -5,19 +5,21 @@ public abstract class SteeringBehaviour : MonoBehaviour
     // Usamos estas dos variables para evitarnos modificar el transform
     protected Vector3 customDirection;
     protected float customRotation;
-
+    [Header("Debug")]
     [SerializeField] protected bool debug = false;
 
+    [Header("Steerings")]
     public Steering steering;
 
     // Peso y grupo para los árbitros
+    [Header("Arbitros")]
     public SteeringGroup steeringGroup = SteeringGroup.Pursuit;
-
-
-    public Agent target; // Target si existe
-    protected bool useCustom;
-    public bool useReferee; // Flag para que mi arbitros lo tengan en cuenta
     public float weight = 1f;
+    public Agent target; // Target si existe
+    public bool useReferee; // Flag para que mi arbitros lo tengan en cuenta
+
+
+    protected bool useCustom;
 
 
     //Calcula el Steering para el agente dado en funcion del comportamiento deseado
