@@ -4,7 +4,7 @@ public class InfluenceMapControl : MonoBehaviour
 {
     [SerializeField] private readonly int frecuenciaUpdate = 3;
 
-    [SerializeField] private InfluenceGrid gridMap;
+    [SerializeField] public InfluenceGrid gridMap;
 
     private InfluenceMap mapaInfluencia;
 

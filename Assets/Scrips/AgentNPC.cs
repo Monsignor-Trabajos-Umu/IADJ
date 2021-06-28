@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class AgentNpc : Agent
 {
@@ -25,7 +26,7 @@ public abstract class AgentNpc : Agent
     [SerializeField] private Formation formation;
 
     [SerializeField]
-    private GridChungo grid; //Grid para calcular posiciones de los enemigos
+    public GridChungo grid; //Grid para calcular posiciones de los enemigos
 
     [SerializeField] protected Heuristic heuristic;
 
@@ -87,6 +88,7 @@ public abstract class AgentNpc : Agent
             case CAction.Defend:
             case CAction.Retreat:
             case CAction.AttackEnemy:
+            case CAction.GoingToLandPoint:
                 UpdateAccelerated(finalSteering, Time.deltaTime);
                 break;
             default:
@@ -164,6 +166,9 @@ public abstract class AgentNpc : Agent
                         break;
                     case CAction.Retreat:
                         SetHat(HatsTypes.Crown);
+                        break;
+                    case CAction.GoingToLandPoint:
+                        SetHat(HatsTypes.Miner);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -509,14 +514,15 @@ public abstract class AgentNpc : Agent
 
     public bool AlreadyHealing() => NearFont();
     public bool CanGoToBase() => !NearBase();
+    public bool CanGoToLandPoint() => !NearLandPoint();
 
     public bool BestTerrain() => CurrentTerrain() == mejorTerreno;
 
-
     public bool WorstTerrain() => CurrentTerrain() == peorTerreno;
-
     private int CurrentTerrain() =>
         controlador.GetTerrainLayer(transform.position, FindObjectOfType<Terrain>());
+
+    public bool UnderMyDomain(int value) => (tag == "equipoRojo") ? value < 0 : value > 0;
 
     // Distancia de Chebyshov
     private int GetDistanceTwoPosition(Transform p1, Transform p2)
@@ -582,6 +588,51 @@ public abstract class AgentNpc : Agent
         var distance = GetDistanceTwoPosition(transform, nearPosition);
 
         return distance == 0;
+    }
+    [SerializeField] public GameObject landPoint=null;
+    public bool NearLandPoint()
+    {
+        Debug.Log($"{name} Buscando puntos de interest");
+
+        var iGrid = controlador.GetInfluenceMap();
+
+        //Busco el que tengan mayor influencia enemiga
+        // Positvo
+        float influencia = float.MinValue;
+        var puntos = GameObject.FindGameObjectsWithTag("puntoInteres");
+        foreach (var punto in puntos)
+        {
+            var current =
+                iGrid.GetNodeFromWorldPoint(punto.transform.position);
+
+            var vecinos = iGrid.GetNeighbors(current, alcance);
+
+            var actual = current.valor + vecinos.Sum(nodo => nodo.valor);
+
+            if (!UnderMyDomain(actual) &&
+                Mathf.Abs(influencia) < Math.Abs(actual))
+            {
+                landPoint = punto;
+            } 
+
+
+        }
+
+
+            
+        //Si no hay puntos que conquistar vamos a uno random
+        if (landPoint == null)
+        {
+               
+            var index = (int)(Random.value * puntos.Length) % puntos.Length;
+            landPoint = puntos[index];
+            Debug.LogWarning($"Todo conquistado vamos a {landPoint.name}");
+        }
+
+
+        var distance = GetDistanceTwoPosition(transform,landPoint.transform);
+        return distance  <= alcance;
+         
     }
 
 
@@ -654,16 +705,16 @@ public abstract class AgentNpc : Agent
     }
 
     // Avanzamos hacia un GameObject X casillas
-    public void GoToEnemy(AgentNpc obj)
+    public void GoToEpicPoint(GameObject obj)
     {
         ChangeState(State.Action);
-        ChangeAction(CAction.GoingToEnemy);
+        ChangeAction(CAction.GoingToLandPoint);
         var origen = gameObject.transform.position;
         var target = obj.transform.position;
         var rExterior = RExterior;
         var cH = heuristic;
 
-        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearEnemy);
+        arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearLandPoint);
     }
 
     public void Huir(GameObject obj)

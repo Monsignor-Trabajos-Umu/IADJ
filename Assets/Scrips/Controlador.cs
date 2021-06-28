@@ -63,6 +63,15 @@ public class Controlador : MonoBehaviour
         return influenceMap.GetGridPosition(posicion).valor;
     }
 
+    public InfluenceGrid GetInfluenceMap()
+    {
+        var influenceController = GameObject.FindGameObjectWithTag("mapaInfluencia");
+        var influenceMap = influenceController.GetComponent<InfluenceMapControl>();
+        return influenceMap.gridMap;
+    }
+
+
+
     private void SetWaiting()
     {
         GetSelected.Where(agente => agente.selected)
