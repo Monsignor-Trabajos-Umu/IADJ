@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Assets.Scrips.Actions;
 using UnityEngine;
 using SCT;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class ScriptableTextHelper : MonoBehaviour
@@ -27,10 +28,12 @@ public class ScriptableTextHelper : MonoBehaviour
         {
             GUI.TextField(
                 new Rect(20 + 80 + 50 , Screen.height - 70, 100, 40),"Ha Ganado el rojo");
+             SceneManager.LoadScene(2);
         }else if (baseRoja.vida <= 0)
         {
             GUI.TextField(
                 new Rect(20 + 80 + 50 , Screen.height - 70, 100, 40),"Ha Ganado el azul");
+            SceneManager.LoadScene(1);
 
         }
 
