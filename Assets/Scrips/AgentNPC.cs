@@ -27,12 +27,13 @@ public abstract class AgentNpc : Agent
     // Controller
     [Header("Controlador")]
     public Controlador controlador;
-    [Header("Bases")]
+    [Header("Bases y terrenos")]
     [SerializeField] private AgentBase enemyBase;
     // Para saber si estoy atacando
     [SerializeField] private AgentBase mybase;
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     [SerializeField] protected int mejorTerreno = 3;
+    [SerializeField] protected int cobertura;
     [SerializeField] protected int peorTerreno = 0;
  
 
@@ -522,6 +523,7 @@ public abstract class AgentNpc : Agent
     public bool CanGoToBase() => !NearBase();
     public bool CanGoToLandPoint() => !NearLandPoint();
 
+    public bool InCover() => CurrentTerrain() == cobertura;
     public bool BestTerrain() => CurrentTerrain() == mejorTerreno;
 
     public bool WorstTerrain() => CurrentTerrain() == peorTerreno;
