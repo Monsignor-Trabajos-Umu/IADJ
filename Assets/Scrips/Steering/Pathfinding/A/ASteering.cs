@@ -65,14 +65,14 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 
             var targetPosition = path[targetIndex];
 
-
+            steering.angular = lookWhereYouGoing.GetSteering(agent).angular;
 
             // o que estamos ya al lado de la base
             if (checkCloser())
             {
                 arrive.UseCustomDirectionAndRotation(targetPosition -
                                                      currentPosition);
-                steering = arrive.GetSteering(agent);
+                steering.lineal = arrive.GetSteering(agent).lineal;
                 if (steering.lineal == Vector3.zero)
                 {
                     Debug.Log($"{agent.name} Haciendo seek objetivo final");
@@ -93,13 +93,13 @@ namespace Assets.Scrips.Steering.Pathfinding.A
                 {
                     arrive.UseCustomDirectionAndRotation(targetPosition -
                                                          currentPosition);
-                    steering = arrive.GetSteering(agent);
+                    steering.lineal = arrive.GetSteering(agent).lineal;
                 }
                 else
                 {
                     // Si no hacemos un seek
                     seek.UseCustomDirectionAndRotation(targetPosition - currentPosition);
-                    steering = seek.GetSteering(agent);
+                    steering.lineal = seek.GetSteering(agent).lineal;
                 }
             }
 
@@ -107,7 +107,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             if (Vector3.Distance(currentPosition, targetPosition) <= radio)
                 targetIndex++;
 
-            steering.angular = lookWhereYouGoing.GetSteering(agent).angular;
+          
             return steering;
         }
 

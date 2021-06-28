@@ -27,7 +27,7 @@ public abstract class AgentNpc : Agent
     [SerializeField]
     private GridChungo grid; //Grid para calcular posiciones de los enemigos
 
-    [SerializeField] protected Manhattan heuristic;
+    [SerializeField] protected Heuristic heuristic;
 
     //Los valores de las LayerMask para el mejor y el peor terreno de la unidad 
     [SerializeField] protected int mejorTerreno = 3;
