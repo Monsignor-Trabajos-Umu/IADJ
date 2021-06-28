@@ -744,11 +744,14 @@ public abstract class AgentNpc : Agent
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
     para ir despues al punto de muerte.*/
+    private bool checkMorir = false;
     protected override void Morir()
     {
-        ResetStateAndSteering(); // Por si acaso
-        gameObject.GetComponent<Renderer>().enabled = false;
+        if (checkMorir) return;
+        checkMorir = true;
+
         StartCoroutine(Respawn());
+        
     }
 
     protected bool atacando;
@@ -771,7 +774,11 @@ public abstract class AgentNpc : Agent
 
     private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(2);
+        ResetStateAndSteering(); // Por si acaso
+        UpdateColor();
+        gameObject.GetComponent<Renderer>().enabled = false;
+        
+        yield return new WaitForSeconds(10);
         GameObject cuartel;
         if (tag == "equipoRojo")
             cuartel = GameObject.FindWithTag("baseRoja");
@@ -783,9 +790,9 @@ public abstract class AgentNpc : Agent
             cuartel.transform.position + new Vector3(0, 0, -50);
         //Recuperamos su vida
         vida = vidaMaxima;
-        //Hacemos que vuelva a ser visible
+        //Hacemos que vuelva a ser visible    
         gameObject.GetComponent<Renderer>().enabled = true;
-        yield return new WaitForSeconds(5);
+        checkMorir = false;
     }
 
     public void Defend()
