@@ -7,7 +7,7 @@ public class InfluenceMap
 {
     protected List<IPropagator> propagadores = new List<IPropagator>();
     protected int ancho, alto;
-    protected InfluenceGrid grid;
+    public InfluenceGrid grid;
     //Número de casillas de distancia de influencia
     //Si por ejemplo es 2, un propagador no influyen en más de dos casillas de distancia
     protected int maxPropagacion;

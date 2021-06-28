@@ -21,7 +21,7 @@ namespace Assets.Scrips.Actions
 
             if (agente.state == State.Action && agente.cAction == CAction.Defend) return Status.Running;
 
-            if (agente.state != State.Normal || agente.cAction != CAction.None) return Status.Failure;
+            //if (agente.state != State.Normal || agente.cAction != CAction.None) return Status.Failure;
 
             Debug.Log($"{agente.name} Defiendo mi base");
             agente.Defend();
