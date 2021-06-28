@@ -194,19 +194,33 @@ MonoBehaviour:
         child:
           id: 1
     00000001:
-      type: {class: Sequence, ns: UniBT, asm: Assembly-CSharp}
+      type: {class: Selector, ns: UniBT, asm: Assembly-CSharp}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 193
-          y: 224
+          x: 242
+          y: 198
           width: 178
-          height: 117
+          height: 141
         description: 
         children:
         - id: 2
+        - id: 3
         abortOnConditionChanged: 1
     00000002:
+      type: {class: NearEnemy, ns: Assets.Scrips.Arboles.Conditional, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 356
+          y: -26
+          width: 178
+          height: 117
+        description: 
+        dontReEvaluateOnRunning: 0
+        child:
+          id: 4
+    00000003:
       type: {class: Patrullar, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
         graphPosition:
@@ -214,6 +228,16 @@ MonoBehaviour:
           x: 501
           y: 175
           width: 94
+          height: 98
+        description: 
+    00000004:
+      type: {class: AttackEnemy, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 604
+          y: -40
+          width: 122
           height: 98
         description: 
 --- !u!114 &17055396
@@ -7387,7 +7411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &728459733
 MonoBehaviour:
   m_ObjectHideFlags: 0
