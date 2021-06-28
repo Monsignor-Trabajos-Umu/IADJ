@@ -35,10 +35,9 @@ public class Agent : Body
     }
 
 
-    public void RecibirDaño(int cantidad)
+    public void RecibirDaño(double cantidad)
     {
         if (Muerto) return;
-
 
         Debug.Log($"{name} ha recibido {cantidad} daño");
         vida -= cantidad;

@@ -39,23 +39,16 @@ public class Tanque : AgentNpc
         //Nos quedamos quietos durante un espacio de tiempo por haber atacado. \
 
         //Resteamos el estado si lo habia
-        Debug.Log($"Ataco a {objetivo.name}");
+        if(debug) Debug.Log($"Ataco a {objetivo.name}");
         ChangeState(State.Action);
         ChangeAction(CAction.AttackEnemy);
 
 
-        var dBase = BestTerrain() ? damage * 2 : damage;
-
-        int cDefensa = defensa;
-        if (objetivo is AgentNpc temp)
-        {
-            cDefensa = temp.WorstTerrain() ? defensa * 2 : defensa;
-        }
+        var dBase = BestTerrain() ? damage * 1.5 : damage;
         
+        if (Random.value <= 0.1) dBase *= 2;
 
-        if (Mathf.Approximately(Random.value, 1)) dBase *= 2;
-
-        var realDamage = dBase - cDefensa;
+        var realDamage = dBase ;
 
         var paticles = objetivo.transform.Find("TankExplosion").gameObject.GetComponent<ParticleSystem>();
         StartCoroutine(base.WaitBeforeAttack(1, realDamage,objetivo,paticles));
