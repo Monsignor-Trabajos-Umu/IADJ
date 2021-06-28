@@ -754,12 +754,21 @@ public abstract class AgentNpc : Agent
     protected bool atacando;
 
 
-    protected IEnumerator WaitBeforeAttack(float secondsToWait, int realDamage,
+    protected IEnumerator WaitBeforeAttack(float secondsToWait, double realDamage,
         Agent objetivo, ParticleSystem particles)
     {
         atacando = true;
         particles.Play();
-        objetivo.RecibirDaño(realDamage);
+
+        int cDefensa = defensa;
+        if (BestTerrain())
+            cDefensa *=  2;
+        else if(WorstTerrain())
+            cDefensa /= 2;
+
+        double finalDamage = realDamage - cDefensa;
+
+        objetivo.RecibirDaño(finalDamage);
         yield return new WaitForSeconds(secondsToWait);
         ResetStateAndSteering();
         atacando = false;
