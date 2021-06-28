@@ -7,6 +7,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
 {
     public class PathFindingA : MonoBehaviour
     {
+
         [SerializeField] private readonly bool debug = false;
 
         //Si soy las casillas negativas en mi mapa de influencia
@@ -19,11 +20,12 @@ namespace Assets.Scrips.Steering.Pathfinding.A
         [SerializeField] private PathRequestManagerA requestManagerA;
 
 
-        
+        [SerializeField] private AgentNpc agente;
 
 
-        public void StartFindPath(Vector3 startPos, Vector3 targetPos,Heuristic heuristic)
+        public void StartFindPath(Vector3 startPos, Vector3 targetPos,Heuristic heuristic,AgentNpc _agente)
         {
+            this.agente = _agente;
             StartCoroutine(FindPath(startPos, targetPos,heuristic));
         }
 
@@ -122,6 +124,31 @@ namespace Assets.Scrips.Steering.Pathfinding.A
         }
 
 
+        // 1 aliado
+        // 0 nada
+        // -1 enemigo
+        private int MejorPeorTerreno(NodeHeaped nodeB)
+        {
+
+            var position = nodeB.worldPosition;
+
+            var terreno = agente.controlador.GetTerrainLayer(position,
+                FindObjectOfType<Terrain>());
+
+            if (terreno == agente.mejorTerreno)
+            {
+                return 1;
+            }
+            if (terreno == agente.peorTerreno)
+            {
+                return -1;
+            }
+
+            return 0;
+
+        }
+
+
         private float GetDistance(NodeHeaped nodeA, NodeHeaped nodeB,Heuristic heuristic)
         {
             var h = heuristic.GetH(nodeA, nodeB);
@@ -132,7 +159,7 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             // -1 enemigo
             // h(n) debe ser menor que h*(n) 
             // Es decir la heuristic no puede sobrepasar a la real
-            var extra = AliadoNadaEnemigo(nodeB) switch
+            var extraInf = AliadoNadaEnemigo(nodeB) switch
             {
                 -1 => 1, // Enemigo coste se mantiene
                 0 => 0.9, // No hay nada es preferible ir por aqui
@@ -141,8 +168,20 @@ namespace Assets.Scrips.Steering.Pathfinding.A
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            if (debug) Debug.Log(h);
-            return (float) (h);
+            var extraTerreno = MejorPeorTerreno(nodeB) switch
+            {
+                -1 => 1, // Peor terreno se mantiene
+                0 => 0.9, // No es el peor mejor por aqui
+                1 => 0.7, // Mejor terreno
+
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+
+            var final = h * extraInf*extraTerreno;
+
+            if (debug) Debug.Log(final);
+            return (float) (final);
         }
     }
 }

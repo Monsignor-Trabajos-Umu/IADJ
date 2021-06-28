@@ -114,12 +114,13 @@ namespace Assets.Scrips.Steering.Pathfinding.A
         public void StartMoving(int _nodes, Vector3 origen, Vector3 target,
             double _radioTarget,
             Heuristic heuristic,
+            AgentNpc agente,
             Func<bool> _checkCloser)
         {
             radioTarget = _radioTarget;
             nodesToCover = _nodes;
             checkCloser = _checkCloser;
-            PathRequestManagerA.RequestPath(origen, target, heuristic, OnPathFound);
+            PathRequestManagerA.RequestPath(origen, target, heuristic,agente, OnPathFound);
         }
 
         public void CancelPath()
