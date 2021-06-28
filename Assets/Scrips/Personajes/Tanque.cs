@@ -21,7 +21,7 @@ public class Tanque : AgentNpc
 
         peorTerreno = 4;
         mejorTerreno = 2;
-        vida = 250;
+        vida = vidaMaxima;
         alcance = 3;
         damage = 5;
         if (actuator == null)

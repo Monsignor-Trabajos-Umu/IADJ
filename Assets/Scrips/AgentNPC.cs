@@ -59,6 +59,7 @@ public abstract class AgentNpc : Agent
         //usar GetComponents<>() para cargar el arbitro del personaje
         arbitro = GetComponent<ArbitroSteering>();
         finalSteering = new Steering(0, new Vector3(0, 0, 0));
+
     }
 
 
@@ -511,7 +512,7 @@ public abstract class AgentNpc : Agent
 
     public bool IsInjured() => vida < vidaMaxima / 2;
     public bool IsCloserToEnemy() => NearEnemy();
-
+    public bool IsNotDead() => !Muerto;
     public bool AlreadyHealing() => NearFont();
     public bool CanGoToBase() => !NearBase();
     public bool CanGoToLandPoint() => !NearLandPoint();
@@ -744,13 +745,10 @@ public abstract class AgentNpc : Agent
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
     para ir despues al punto de muerte.*/
-    private bool checkMorir = false;
     protected override void Morir()
     {
-        if (checkMorir) return;
-        checkMorir = true;
-
-        StartCoroutine(Respawn());
+        atacando = false;
+        mybase.Dead(this, 5);
         
     }
 
@@ -781,29 +779,7 @@ public abstract class AgentNpc : Agent
     protected internal abstract void Atacar(Agent objetivo);
 
 
-
-    private IEnumerator Respawn()
-    {
-        ResetStateAndSteering(); // Por si acaso
-        UpdateColor();
-        gameObject.GetComponent<Renderer>().enabled = false;
-        
-        yield return new WaitForSeconds(10);
-        GameObject cuartel;
-        if (tag == "equipoRojo")
-            cuartel = GameObject.FindWithTag("baseRoja");
-        else
-            cuartel = GameObject.FindWithTag("baseAzul");
-
-        //Hacemos que spawnee al lado de su base
-        gameObject.transform.position =
-            cuartel.transform.position + new Vector3(0, 0, -50);
-        //Recuperamos su vida
-        vida = vidaMaxima;
-        //Hacemos que vuelva a ser visible    
-        gameObject.GetComponent<Renderer>().enabled = true;
-        checkMorir = false;
-    }
+    
 
     public void Defend()
     {

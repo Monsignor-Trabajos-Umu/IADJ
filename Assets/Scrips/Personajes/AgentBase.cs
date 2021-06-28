@@ -28,4 +28,26 @@ public class AgentBase : Agent
 
         //Debug.Log(modo);
     }
+    public void Dead(AgentNpc npc, float respawnTime) 
+        => StartCoroutine(Respawn(npc, respawnTime));
+    private IEnumerator Respawn(AgentNpc obj, float respawnTime)
+    {
+        obj.gameObject.SetActive(false);
+        
+        yield return new WaitForSeconds(respawnTime);
+        GameObject cuartel;
+        if (tag == "equipoRojo")
+            cuartel = GameObject.FindWithTag("baseRoja");
+        else
+            cuartel = GameObject.FindWithTag("baseAzul");
+
+        //Hacemos que spawnee al lado de su base
+        obj.transform.position =
+            cuartel.transform.position + new Vector3(0, 0, -50);
+        //Hacemos que vuelva a ser visible    
+        obj.gameObject.SetActive(true);
+        //Recuperamos su vida
+        obj.vida = obj.vidaMaxima;
+        obj.ResetStateAndSteering(); // Por si acaso
+    }
 }

@@ -188,14 +188,27 @@ MonoBehaviour:
       data:
         graphPosition:
           serializedVersion: 2
-          x: 110
-          y: 131
+          x: -112
+          y: 135
           width: 73
           height: 77
         description: 
         child:
           id: 1
     00000001:
+      type: {class: IsNotDead, ns: Assets.Scrips.Arboles.Conditional, asm: Assembly-CSharp}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1
+          y: 175
+          width: 178
+          height: 117
+        description: 
+        dontReEvaluateOnRunning: 0
+        child:
+          id: 2
+    00000002:
       type: {class: Selector, ns: UniBT, asm: Assembly-CSharp}
       data:
         graphPosition:
@@ -206,10 +219,10 @@ MonoBehaviour:
           height: 141
         description: 
         children:
-        - id: 2
         - id: 3
+        - id: 4
         abortOnConditionChanged: 1
-    00000002:
+    00000003:
       type: {class: NearEnemy, ns: Assets.Scrips.Arboles.Conditional, asm: Assembly-CSharp}
       data:
         graphPosition:
@@ -221,8 +234,8 @@ MonoBehaviour:
         description: 
         dontReEvaluateOnRunning: 0
         child:
-          id: 4
-    00000003:
+          id: 5
+    00000004:
       type: {class: Patrullar, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
         graphPosition:
@@ -232,7 +245,7 @@ MonoBehaviour:
           width: 94
           height: 98
         description: 
-    00000004:
+    00000005:
       type: {class: AttackEnemy, ns: Assets.Scrips.Actions, asm: Assembly-CSharp}
       data:
         graphPosition:
@@ -332,7 +345,7 @@ MonoBehaviour:
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   vida: 100
-  vidaMaxima: 100
+  vidaMaxima: 10
   vVelocidad: {x: 0, y: 0, z: 0}
   margen: 1.5099999904632568
   mAExterior: 10
@@ -344,14 +357,14 @@ MonoBehaviour:
   arbitro: {fileID: 0}
   cAction: 0
   controlador: {fileID: 0}
-  enemyBase: {fileID: 471666431}
+  enemyBase: {fileID: 576995633}
   finalSteering:
     angular: 0
     lineal: {x: 0, y: 0, z: 0}
   grid: {fileID: 2047639792}
   heuristic: {fileID: 0}
   mejorTerreno: 3
-  mybase: {fileID: 576995633}
+  mybase: {fileID: 471666431}
   peorTerreno: 0
   selected: 0
   state: 1
@@ -1825,7 +1838,7 @@ Transform:
   - {fileID: 2037864210}
   - {fileID: 1785888284}
   m_Father: {fileID: 1096358572}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &483543776
 ParticleSystemRenderer:
@@ -8536,10 +8549,10 @@ Transform:
   - {fileID: 1096358560}
   - {fileID: 215402014}
   - {fileID: 239542402}
-  - {fileID: 483543775}
-  - {fileID: 1179759928}
   - {fileID: 2009471732}
+  - {fileID: 1179759928}
   - {fileID: 1188210697}
+  - {fileID: 483543775}
   m_Father: {fileID: 320966533}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10715,7 +10728,7 @@ MonoBehaviour:
         child:
           id: 1
     00000001:
-      type: {class: TotalWarMode, ns: '', asm: Assembly-CSharp}
+      type: {class: TotalWarMode, ns: , asm: Assembly-CSharp}
       data:
         graphPosition:
           serializedVersion: 2
