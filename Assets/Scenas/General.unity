@@ -146,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &17055394
 Transform:
   m_ObjectHideFlags: 0
@@ -345,7 +345,7 @@ MonoBehaviour:
   rotacion: 0
   vAceleracion: {x: 0, y: 0, z: 0}
   vida: 100
-  vidaMaxima: 10
+  vidaMaxima: 100
   vVelocidad: {x: 0, y: 0, z: 0}
   margen: 1.5099999904632568
   mAExterior: 10

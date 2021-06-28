@@ -574,11 +574,10 @@ public abstract class AgentNpc : Agent
     {
         if (fuenteActual == null) return false;
 
-        var distance = GetDistanceTwoPosition(transform, fuenteActual.transform);
-
-        distance -= (int) Math.Ceiling(fuenteActual.radioCuracion / grid.nodeRaidus);
-
-        return distance <= alcance;
+        // var npcs = Physics.OverlapSphere(transform.position, fuenteActual.radioCuracion).
+        //     Contains(npc=> npc.gameObject.GetComponent<AgentNpc>() == this);
+        return false;
+        
     }
 
     // Fuente a la que voy yendo
