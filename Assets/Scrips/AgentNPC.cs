@@ -668,6 +668,36 @@ public abstract class AgentNpc : Agent
         return enemigos.Count > 0;
     }
 
+    public bool IsSourrounded()
+    {
+        
+        enemigos = new HashSet<Agent>();
+        int allys = 1; //Número de aliados contándonos a nosotros
+        int enemies = 0; //Número de enemigos
+        var castRange = grid.nodeRaidus + grid.nodeRaidus * 2 * alcance;
+
+        var vecinos = Physics.SphereCastAll(transform.position, castRange, Vector3.up);
+        if (debug) DebugPlus.DrawSphere(transform.position, castRange);
+        foreach (var vecinoHit in vecinos)
+        {
+            var enemigo = vecinoHit.collider.gameObject.GetComponent<Agent>();
+            if (enemigo == null) continue;
+            if (enemigo.Muerto) continue; //Esta muerto dejalo
+            switch (tag)
+            {
+                case "equipoRojo"
+                    when enemigo.tag == "baseAzul" || enemigo.tag == "equipoAzul":
+                    allys++;
+                    break;
+                case "equipoAzul"
+                    when enemigo.tag == "baseRoja" || enemigo.tag == "equipoRojo":
+                    enemigos.Add(enemigo);
+                    enemies++;
+                    break;
+            }
+        }
+        return allys < enemies;
+    }
 //Acciones como tal
 
 
