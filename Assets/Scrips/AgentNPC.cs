@@ -23,6 +23,7 @@ public abstract class AgentNpc : Agent
     public bool selected; // Si estoy seleccionado
     public State state = State.Normal; // State para las ordenes
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
+    public bool controladoMaquina;
 
     // Controller
     [Header("Controlador")]
@@ -433,6 +434,17 @@ public abstract class AgentNpc : Agent
     {
         finalSteering = arbitro.GetFinalSteering(state, cAction);
         ActualizarVelocidad();
+        // Si estamos controlado por el usuario
+        if (!controladoMaquina)
+        {
+
+            //Compruebo si tengo enemigos al rededor y ataco Vamos a permitir atacar en movimiento
+            if (IsCloserToEnemy())
+            {
+                var enemigo = enemigos.Last();
+                this.Atacar(enemigo);
+            }
+        }
     }
 
     #endregion
@@ -511,7 +523,7 @@ public abstract class AgentNpc : Agent
 
     // Condiciones
     public bool IsAttacking() => mybase != null && mybase.IsAttacking();
-
+    public bool IsDefending() => mybase != null && mybase.IsDefending();
     public bool IsTotalWar() => mybase != null && mybase.IsTotalWar();
 
     public bool IsNotRunning() => cAction == CAction.None && state == State.Normal;
@@ -521,6 +533,7 @@ public abstract class AgentNpc : Agent
     public bool IsNotDead() => !Muerto;
     public bool AlreadyHealing() => NearFont();
     public bool CanGoToBase() => !NearBase();
+    public bool CanGoToMyBase() => !GetDistanceRayCast(mybase);
     public bool CanGoToLandPoint() => !NearLandPoint();
 
     public bool InCover() => CurrentTerrain() == cobertura;

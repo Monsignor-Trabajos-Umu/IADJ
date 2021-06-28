@@ -23,9 +23,8 @@ public class Agent : Body
     [SerializeField] protected bool debug = false;
     [SerializeField] protected bool exterior = false;
     
-
-
-   
+    [Header("Base Azul")]
+    [SerializeField] public bool baseAzul;
 
     //Daño
     public bool Muerto => vida <= 0;

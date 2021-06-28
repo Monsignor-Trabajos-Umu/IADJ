@@ -2,7 +2,8 @@
     public enum Modo
     {
         Ataque,
-        Defensa
+        Defensa,
+        TotalWar
     }
 
 }

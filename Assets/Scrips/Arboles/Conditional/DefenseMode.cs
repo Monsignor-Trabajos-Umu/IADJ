@@ -5,9 +5,17 @@ using UnityEngine;
 
 namespace Assets.Scrips.Actions
 {
-    public class DefenseMode: AttackMode
+    public class DefenseMode: Conditional
     {
 
-        protected override bool IsUpdatable() => !base.IsUpdatable();
+        private AgentNpc agente;
+
+        protected override void OnAwake()
+        {
+            agente = gameObject.GetComponent<AgentNpc>();
+            Debug.Log($"Mi base {agente.name}");
+        }
+
+        protected override bool IsUpdatable() => agente != null && agente.IsDefending();
     }
 }

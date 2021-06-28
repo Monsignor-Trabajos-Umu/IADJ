@@ -6,10 +6,10 @@ using UnityEngine;
 public class AgentBase : Agent
 {
     public Modo modo = Modo.Ataque;
-    public bool totalWar = false;
 
+    public bool IsDefending() => modo == Modo.Defensa;
     public bool IsAttacking() => modo == Modo.Ataque;
-    public bool IsTotalWar() => totalWar;
+    public bool IsTotalWar() => modo == Modo.TotalWar;
 
     protected override void Start()
     {

@@ -1,58 +1,65 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Assets.Scrips.Actions;
 using UnityEngine;
 using SCT;
+using Random = UnityEngine.Random;
 
 public class ScriptableTextHelper : MonoBehaviour
 {
-    [Header("Setup")]
-    [SerializeField] private ScriptableTextDisplay m_scriptableTextDisplay = null;
-    [SerializeField] private ScriptableTextTypeList m_scriptableTextTypeList = null;
-    [SerializeField] private Camera m_camera = null;
 
-    [Header("Settings")]
-    [SerializeField] private float m_ticTime = 0.5f;
-    [SerializeField] private string m_text = "12345";
+    [Header("Bases")] 
+    [SerializeField] private GuerraTotal guerraTotal;
+    [SerializeField] private AgentBase baseAzul;
+    [SerializeField] private AgentBase baseRoja;
+
 
     [Header("Randomize On Horizontal Axis")] [SerializeField]
     private Vector2 m_range = new Vector2(-5, 5);
     
     private void OnGUI()
     {
-        GUI.Box(new Rect(0, Screen.height - 100, 250, 100), "Helper");
-        if(GUI.Button(new Rect(20,Screen.height - 70,80,40),"Start"))
+        GUI.Box(new Rect(0, Screen.height - 100, 400, 100), "Helper");
+
+
+        if (baseAzul.vida <= 0)
         {
-            StartCoroutine(StartTic());
-        }
-        if (GUI.Button(new Rect(20+80+50, Screen.height - 70, 80, 40), "Stop"))
+            GUI.TextField(
+                new Rect(20 + 80 + 50 , Screen.height - 70, 100, 40),"Ha Ganado el rojo");
+        }else if (baseRoja.vida <= 0)
         {
-            StopAllCoroutines();
-            m_scriptableTextDisplay.DisableAll();
+            GUI.TextField(
+                new Rect(20 + 80 + 50 , Screen.height - 70, 100, 40),"Ha Ganado el azul");
+
         }
+
+        if(GUI.Button(new Rect(20,Screen.height - 70,80,40),"GuerraTotal"))
+        {
+            if(baseAzul.modo == Modo.TotalWar || baseRoja.modo == Modo.TotalWar) return;
+            guerraTotal.ActivateTotalWar();
+        }
+        if (GUI.Button(new Rect(20+80+50, Screen.height - 70, 80, 40), "Ataca"))
+        {
+            baseAzul.modo = Modo.Ataque;
+        }
+        if(GUI.Button(new Rect(20+80+50+80+50,Screen.height - 70,80,40),"Defiende"))
+        {
+            baseAzul.modo = Modo.Defensa;
+        }
+
+        var mode = baseAzul.modo;
+        string salida = mode switch
+        {
+            Modo.Ataque => "Modo Ataque",
+            Modo.Defensa => "Modo Defensa",
+            Modo.TotalWar => "Modo Guerra total",
+            _ => ""
+        };
+        GUI.TextField(
+            new Rect(20 + 80 + 50 + 80 + 50 + 80 + 50, Screen.height - 70, 80, 40),
+            salida);
     }
 
-    private void HelperClass()
-    {
-        for (int i = 0; i < m_scriptableTextTypeList.ListSize; i++)
-        {
-            var rndPos = m_camera.transform.forward + new Vector3(Random.Range(m_range.x, m_range.y), 0, 0);
-            rndPos.y = 0;
-
-            if (m_scriptableTextDisplay.TextTypeList.ScriptableTextTyps[i].StackValues == true)
-            {
-                m_scriptableTextDisplay.InitializeStackingScriptableText(i, rndPos, m_text, "Test" + i);
-            }
-            else
-            {
-                m_scriptableTextDisplay.InitializeScriptableText(i, rndPos, m_text);
-            }
-        }
-    }
-
-    private IEnumerator StartTic()
-    {
-        HelperClass();
-        yield return new WaitForSeconds(m_ticTime);
-        StartCoroutine(StartTic());
-    }
+    
 }
