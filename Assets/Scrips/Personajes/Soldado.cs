@@ -34,7 +34,7 @@ public class Soldado : AgentNpc
 
     public override Heuristic GetHeuristic() => heuristic;
 
-    protected internal override void Atacar(AgentNpc objetivo)
+    protected internal override void Atacar(Agent objetivo)
     {
         if (atacando) return;
         //Nos acercamos al objetivo hasta estar a el número de casillas necesarias
@@ -51,7 +51,12 @@ public class Soldado : AgentNpc
 
         var dBase = BestTerrain() ? damage * 2 : damage;
 
-        var cDefensa = objetivo.WorstTerrain() ? defensa * 2 : defensa;
+        int cDefensa = defensa;
+        if (objetivo is AgentNpc temp)
+        {
+            cDefensa = temp.WorstTerrain() ? defensa * 2 : defensa;
+        }
+        
 
         if (Mathf.Approximately(Random.value, 1)) dBase *= 2;
 

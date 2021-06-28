@@ -16,7 +16,7 @@ public class Arquero : AgentNpc
         heuristica = gameObject.AddComponent(typeof(Chebychev)) as Chebychev;
     }
 
-    protected internal override void Atacar(AgentNpc objetivo)
+    protected internal override void Atacar(Agent objetivo)
     {
         throw new System.NotImplementedException();
     }

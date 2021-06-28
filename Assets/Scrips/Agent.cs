@@ -26,6 +26,27 @@ public class Agent : Body
         }
     }
 
+    //Daño
+    public bool Muerto => vida <= 0;
+
+    protected virtual void Morir()
+    {
+        Debug.Log("Win win");
+    }
+
+
+    public void RecibirDaño(int cantidad)
+    {
+        if (Muerto) return;
+
+
+        Debug.Log($"{name} ha recibido {cantidad} daño");
+        vida -= cantidad;
+
+        if (vida <= 0) Morir();
+    }
+
+
     // Builders
 
     public Agent NotSoShallowCopy()

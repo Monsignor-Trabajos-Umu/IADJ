@@ -48,8 +48,8 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             //Debug.Log(targetIndex);
             steering = new global::Steering(0, new Vector3(0, 0, 0));
             if (!moving) return steering;
-            //Vemos si nos nos quedan nodos o que estamos ya al lado de la base
-            if (targetIndex == path.Length -1 || checkCloser())
+                //Vemos si nos nos quedan nodos
+            if (targetIndex == path.Length -1)
             {
                 Debug.Log($"{agent.name} ha llegado al objetivo");
                 moving = false;
@@ -64,6 +64,25 @@ namespace Assets.Scrips.Steering.Pathfinding.A
             var radio = agent.rInterior;
 
             var targetPosition = path[targetIndex];
+
+
+
+            // o que estamos ya al lado de la base
+            if (checkCloser())
+            {
+                arrive.UseCustomDirectionAndRotation(targetPosition -
+                                                     currentPosition);
+                steering = arrive.GetSteering(agent);
+                if (steering.lineal == Vector3.zero)
+                {
+                    Debug.Log($"{agent.name} Haciendo seek objetivo final");
+                    moving = false;
+
+                    agent.ResetStateAndSteering();
+                    return steering;
+                }
+            }
+
 
 
             // Si esta los suficientemente lejos nos acercamos

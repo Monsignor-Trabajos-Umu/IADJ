@@ -21,7 +21,7 @@ public class Tanque : AgentNpc
         heuristica = gameObject.AddComponent(typeof(Euclidea)) as Euclidea;
     }
 
-    protected internal override void Atacar(AgentNpc objetivo)
+    protected internal override void Atacar(Agent objetivo)
     {
         throw new System.NotImplementedException();
     }

@@ -8,7 +8,7 @@ namespace Assets.Scrips.Actions
     public class AttackEnemy : UniBT.Action
     { 
         private AgentNpc agente;
-        private AgentNpc enemigo;
+        private Agent enemigo;
         public override void Awake()
         {
             agente = gameObject.GetComponent<AgentNpc>();

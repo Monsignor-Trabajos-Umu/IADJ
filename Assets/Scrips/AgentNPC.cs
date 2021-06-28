@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public abstract class AgentNpc : Agent
 {
@@ -41,8 +41,6 @@ public abstract class AgentNpc : Agent
     private bool stateChanged; // Mi estado ha cambiado recargar color y sombrero
 
     public bool InFormation => formation != null; // Si estoy en formacion
-
-    private bool Muerto => vida <= 0;
 
 
     // Heuristca
@@ -158,8 +156,8 @@ public abstract class AgentNpc : Agent
                     case CAction.GoingToEnemy:
                         SetHat(HatsTypes.Police);
                         break;
-                        case CAction.AttackEnemy: 
-                            SetHat(HatsTypes.Viking);
+                    case CAction.AttackEnemy:
+                        SetHat(HatsTypes.Viking);
                         break;
                     case CAction.Defend:
                         SetHat(HatsTypes.Pajama);
@@ -533,14 +531,23 @@ public abstract class AgentNpc : Agent
         return Math.Max(Math.Abs(x), Math.Abs(z));
     }
 
-    public bool NearBase()
+    private bool GetDistanceRayCast(Agent target)
+    {
+        var castRange = grid.nodeRaidus + grid.nodeRaidus * 2 * alcance;
+
+        var vecinos = Physics.SphereCastAll(transform.position, castRange, Vector3.up);
+        return vecinos
+            .Select(raycastHit => raycastHit.collider.gameObject.GetComponent<Agent>())
+            .Any(enemigo => enemigo == target);
+    }
+
+
+    private bool NearBase()
     {
         var distance = GetDistanceTwoPosition(transform, enemyBase.transform);
 
 
-        distance -= (int) Math.Ceiling(rInterior / grid.nodeRaidus);
-
-        return distance < alcance;
+        return distance <= alcance || GetDistanceRayCast(enemyBase);
     }
 
 
@@ -548,9 +555,9 @@ public abstract class AgentNpc : Agent
     {
         var distance = GetDistanceTwoPosition(transform, mybase.transform);
 
-        distance -= (int) Math.Ceiling(rInterior / grid.nodeRaidus);
+        distance -= (int) Math.Floor(rInterior / grid.nodeRaidus);
 
-        return distance < alcance;
+        return distance <= alcance;
     }
 
 
@@ -564,7 +571,7 @@ public abstract class AgentNpc : Agent
 
         distance -= (int) Math.Ceiling(fuenteActual.radioCuracion / grid.nodeRaidus);
 
-        return distance < alcance;
+        return distance <= alcance;
     }
 
     // Fuente a la que voy yendo
@@ -581,19 +588,19 @@ public abstract class AgentNpc : Agent
     //Comprueba si hay un enemigo en un radio de diez veces el radio exterior
     // Si lo hay lo0 mete un una lista de enemigos
 
-    [SerializeField] public HashSet<AgentNpc> enemigos;
+    [SerializeField] public HashSet<Agent> enemigos;
 
-    public bool NearEnemy()
+    private bool NearEnemy()
     {
         if (atacando) return true; // Estoy atacando no hace falta que me calcules cosas
-        enemigos = new HashSet<AgentNpc>();
+        enemigos = new HashSet<Agent>();
         var castRange = grid.nodeRaidus + grid.nodeRaidus * 2 * alcance;
 
         var vecinos = Physics.SphereCastAll(transform.position, castRange, Vector3.up);
         //DebugPlus.DrawSphere(transform.position, castRange);
         foreach (var vecinoHit in vecinos)
         {
-            var enemigo = vecinoHit.collider.gameObject.GetComponent<AgentNpc>();
+            var enemigo = vecinoHit.collider.gameObject.GetComponent<Agent>();
             if (enemigo == null) continue;
             if (enemigo.Muerto) continue; //Esta muerto dejalo
             switch (tag)
@@ -629,11 +636,11 @@ public abstract class AgentNpc : Agent
         ChangeState(State.Waiting);
     }
 
-//Cuantos nodos queremos avanzar de una
+    //Cuantos nodos queremos avanzar de una
     [SerializeField] [Range(1, 20)] private readonly int step =
         10;
 
-//Avanzamos hacia la base enemiga step casillas
+    //Avanzamos hacia la base enemiga step casillas
     public void GoToEnemyBase()
     {
         ChangeState(State.Action);
@@ -646,7 +653,7 @@ public abstract class AgentNpc : Agent
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearBase);
     }
 
-// Avanzamos hacia un GameObject X casillas
+    // Avanzamos hacia un GameObject X casillas
     public void GoToEnemy(AgentNpc obj)
     {
         ChangeState(State.Action);
@@ -671,6 +678,7 @@ public abstract class AgentNpc : Agent
 
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearFont);
     }
+
     public void Patrullar(Transform pos)
     {
         ChangeState(State.Action);
@@ -685,17 +693,18 @@ public abstract class AgentNpc : Agent
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
     para ir despues al punto de muerte.*/
-    protected void Morir()
+    protected override void Morir()
     {
         ResetStateAndSteering(); // Por si acaso
         gameObject.GetComponent<Renderer>().enabled = false;
-        StartCoroutine("respawn");
+        StartCoroutine(Respawn());
     }
 
     protected bool atacando;
 
 
-    protected  IEnumerator WaitBeforeAttack(float secondsToWait, int realDamage, AgentNpc objetivo,ParticleSystem particles)
+    protected IEnumerator WaitBeforeAttack(float secondsToWait, int realDamage,
+        Agent objetivo, ParticleSystem particles)
     {
         atacando = true;
         particles.Play();
@@ -705,24 +714,12 @@ public abstract class AgentNpc : Agent
         atacando = false;
     }
 
-    protected internal abstract void Atacar(AgentNpc objetivo);
+    protected internal abstract void Atacar(Agent objetivo);
 
 //El personaje recibe el damage. Si ese damage deja su vida a 0 o menos, entonces lo mata
 
 
-    private void RecibirDaño(int cantidad)
-    {
-        if (Muerto) return;
-
-
-        Debug.Log($"{name} ha recibido {cantidad} daño");
-        vida -= cantidad;
-
-        if (vida <= 0) Morir();
-    }
-
-
-    private IEnumerator respawn()
+    private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(2);
         GameObject cuartel;

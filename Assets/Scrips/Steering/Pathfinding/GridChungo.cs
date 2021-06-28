@@ -11,7 +11,7 @@ public class GridChungo : MonoBehaviour
     //Booleano para saber si el terreno es el de Unity o no.
     [SerializeField] public Terrain terreno;
 
-    private float nodeDiameter;
+    public float nodeDiameter;
     [SerializeField] public float nodeRaidus;
     [SerializeField] protected LayerMask paredesLayerMask;
 
