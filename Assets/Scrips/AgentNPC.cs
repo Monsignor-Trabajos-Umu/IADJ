@@ -727,8 +727,8 @@ public abstract class AgentNpc : Agent
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, NearFont);
     }
 
-    [SerializeField] GameObject[] puntosPatrulla;
-    public void Patrullar(int index)
+    [SerializeField] public GameObject[] puntosPatrulla;
+    /*public void Patrullar(int index)
     {
         ChangeState(State.Action);
         ChangeAction(CAction.GoToTarget);
@@ -740,7 +740,7 @@ public abstract class AgentNpc : Agent
         var cH = heuristic;
         nearPosition = puntosPatrulla[pos].transform;
         arbitro.SetNewTargetWithA(step, origen, target, rExterior, cH, InPosition);
-    }
+    }*/
 
     /*Deja Invisible al personaje y lo hace reaparecer en base tras un tiempo
     para ir despues al punto de muerte.*/

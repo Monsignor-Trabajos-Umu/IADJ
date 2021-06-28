@@ -20,18 +20,13 @@ namespace Assets.Scrips.Actions
         protected override Status OnUpdate()
         {
 
-            if (agente.state == State.Action && agente.cAction == CAction.GoToTarget) return Status.Running;
+            if (agente.state == State.Action && agente.cAction == CAction.GoingToLandPoint) return Status.Running;
 
-            if (agente.state != State.Normal || agente.cAction != CAction.None)
-            {
-                Debug.Log($"{agente.state} Fallo");
-                return Status.Failure;
-            }
-
+            var target = agente.puntosPatrulla[index];
             Debug.Log($"{agente.name} Patrullando");
-            agente.Patrullar(index);
+            agente.GoToEpicPoint(target);
             Debug.Log($"{agente.name} Llego al punto de patrulla");
-            index += 1;
+            index = (index + 1)% agente.puntosPatrulla.Length;
             return Status.Success;
         }
 
