@@ -43,21 +43,12 @@ public class Soldado : AgentNpc
         ChangeAction(CAction.AttackEnemy);
 
 
-        var dBase = BestTerrain() ? damage * 2 : damage;
+        double dBase = BestTerrain() ? damage * 2 : damage;
 
-        int cDefensa = defensa;
-        if (objetivo is AgentNpc temp)
-        {
-            cDefensa = temp.WorstTerrain() ? defensa * 2 : defensa;
-        }
-        
-
-        if (Mathf.Approximately(Random.value, 1)) dBase *= 2;
-
-        var realDamage = dBase - cDefensa;
+        if (Random.value <= 0.1) dBase *= 2;
 
         var paticles = objetivo.transform.Find("ShellExplosion").gameObject.GetComponent<ParticleSystem>();
-        StartCoroutine(base.WaitBeforeAttack(1, realDamage,objetivo,paticles));
+        StartCoroutine(base.WaitBeforeAttack(1, dBase,objetivo,paticles));
     }
 
 

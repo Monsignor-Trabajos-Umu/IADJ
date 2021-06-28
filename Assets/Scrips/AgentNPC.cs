@@ -761,10 +761,11 @@ public abstract class AgentNpc : Agent
         particles.Play();
 
         int cDefensa = defensa;
-        if (BestTerrain())
-            cDefensa *=  2;
-        else if(WorstTerrain())
-            cDefensa /= 2;
+        if(objetivo is AgentNpc)
+            if (BestTerrain())
+                cDefensa *=  2;
+            else if(WorstTerrain())
+                cDefensa /= 2;
 
         double finalDamage = realDamage - cDefensa;
 
