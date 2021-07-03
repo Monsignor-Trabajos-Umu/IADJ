@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Formation">
+    <Position X="4.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAIIABAAAABAgMACQCAAAAAAABAAgAAAECAAABAIAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Formaciones\Formation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="leader" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="soldiers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="FormationOffset">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAIAAAAQCQAAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Formaciones\FormationOffset.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="formation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AgentNpc" Collapsed="true">
+    <Position X="8.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIYNvIAhRG8KZCOTJgAgYgiAQgKgMqJGJBKQC2FISkU=</HashCode>
+      <FileName>Assets\Scrips\AgentNPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Steering">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAEBAAAAAAAAAAAAAAAAAAABBAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Steering.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

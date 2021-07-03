@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SteeringBehaviour">
+    <Position X="11.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEIgEAQAAAABIAIACAAAAAAAACgQAgAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scrips.Steering.Pathfinding.A.ASteering" Collapsed="true">
+    <Position X="3.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAkQAAAACAIACAgAACKAAAAABICQAAJACAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\Pathfinding\A\ASteering.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="arrive" />
+      <Field Name="seek" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CollisionAvoidance" Collapsed="true">
+    <Position X="5.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABCAAAAAACAAAAAAAAACCAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Colisiones\CollisionAvoidance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormationOffset" Collapsed="true">
+    <Position X="7.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAIAAAAQCQAAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Formaciones\FormationOffset.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="align" />
+      <Field Name="arrive" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Alignment" Collapsed="true">
+    <Position X="10" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAACACAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Grupo\Alignment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Separation" Collapsed="true">
+    <Position X="13.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAASACAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Grupo\Separation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Leave">
+    <Position X="13" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Leave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Seek" Collapsed="true">
+    <Position X="4.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Seek.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VelocityMatch">
+    <Position X="15.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\VelocityMatch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WallAvoidance" Collapsed="true">
+    <Position X="11.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECAAAACAAEAAAAAAAAAiAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Colisiones\WallAvoidance NotUsed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WallAvoidance1B" Collapsed="true">
+    <Position X="13.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAACCAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Colisiones\WallAvoidance1B.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WallAvoidance2B" Collapsed="true">
+    <Position X="15.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECAAAAAAAEAAAAAAAAAiAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Colisiones\WallAvoidance2B.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WallFollowing" Collapsed="true">
+    <Position X="9.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACCAAAAAABAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Colisiones\WallFollowing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WallFollowingCircular" Collapsed="true">
+    <Position X="7.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECAAAAAAAAAAAACIAAAiAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Colisiones\WallFollowingCircular.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pursue" Collapsed="true">
+    <Position X="5.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Delegados\Pursue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cohesion" Collapsed="true">
+    <Position X="3.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAACACAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Grupo\Cohesion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Arrive" Collapsed="true">
+    <Position X="11.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAIIAAAAAAAAAAAEACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Arrive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Align" Collapsed="true">
+    <Position X="8.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAACAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scrips\Steering\SteeringBehaviour\Align.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
