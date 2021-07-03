@@ -1,6 +1,9 @@
 # Proyecto para IA PARA EL DESARROLLO DE JUEGOS 
 
-La pr·ctica consistir· en implementar algunos elementos de inteligencia artificial. En
-un primer bloque se desarrollar·n los elementos asociados a movimiento. En otro bloque se
-mostrar·n elementos de IA t·ctica y estratÈgica en un entorno de juego de guerra en tiempo
+La pr√°ctica consistir√° en implementar algunos elementos de inteligencia artificial. En
+un primer bloque se desarrollar√°n los elementos asociados a movimiento. En otro bloque se
+mostrar√°n elementos de IA t√°ctica y estrat√©gica en un entorno de juego de guerra en tiempo
 real.
+
+## Presentacion
+[](https://docs.google.com/presentation/d/1n_7wSddYcswW7Xy9c2gyFCzkSZfnnGiQ1en5IUcNDVs/edit?usp=sharing)
